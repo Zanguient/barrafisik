@@ -44,7 +44,7 @@ namespace BarraFisik.Application.App
 
         public IEnumerable<ClienteViewModel> GetAll()
         {
-            return Mapper.Map<IEnumerable<Cliente>, IEnumerable<ClienteViewModel>>(_clienteService.GetAll());
+            return Mapper.Map<IEnumerable<Cliente>, IEnumerable<ClienteViewModel>>(_clienteService.GetClientes());
         }
 
         public void Update(ClienteViewModel clienteViewModel)

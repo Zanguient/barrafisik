@@ -1,4 +1,5 @@
-﻿using BarraFisik.Domain.Entities;
+﻿using System.Collections.Generic;
+using BarraFisik.Domain.Entities;
 using BarraFisik.Domain.ValueObjects;
 
 namespace BarraFisik.Domain.Interfaces.Services
@@ -6,5 +7,6 @@ namespace BarraFisik.Domain.Interfaces.Services
     public interface IClienteService : IServiceBase<Cliente>
     {
         ValidationResult AdicionarCliente(Cliente cliente);
+        IEnumerable<Cliente> GetClientes();
     }
 }

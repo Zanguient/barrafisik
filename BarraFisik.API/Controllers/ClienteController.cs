@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using BarraFisik.Application.Interfaces;
 using BarraFisik.Application.ViewModels;
+using BarraFisik.API.Filters;
 
 namespace BarraFisik.API.Controllers
 {
@@ -19,6 +20,7 @@ namespace BarraFisik.API.Controllers
 
         [HttpGet]
         [Route("clientes")]
+        [GzipCompression]
         public async Task<HttpResponseMessage> GetClientes()
         {
             var result = _clienteApp.GetAll();

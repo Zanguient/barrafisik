@@ -1,11 +1,13 @@
 ﻿using BarraFisik.Application.App;
 using BarraFisik.Application.Interfaces;
 using BarraFisik.Domain.Interfaces.Repository;
+using BarraFisik.Domain.Interfaces.Repository.ReadOnly;
 using BarraFisik.Domain.Interfaces.Services;
 using BarraFisik.Domain.Services;
 using BarraFisik.Infra.Data.Context;
 using BarraFisik.Infra.Data.Interfaces;
 using BarraFisik.Infra.Data.Repository;
+using BarraFisik.Infra.Data.Repository.ReadOnly;
 using BarraFisik.Infra.Data.UoW;
 using Ninject.Modules;
 
@@ -26,6 +28,9 @@ namespace BarraFisik.Inra.CrossCutting.IoC
             //Data Repos
             Bind(typeof (IRepositoryBase<>)).To(typeof (RepositoryBase<,>));
             Bind<IClienteRepository>().To<ClienteRepository>();
+
+            //Data Repos Read Only
+            Bind<IClienteRepositoryReadOnly>().To<ClienteRepositoryReadOnly>();
 
             //DataConfig
             Bind(typeof(IContextManager<>)).To(typeof(ContextManager<>));
