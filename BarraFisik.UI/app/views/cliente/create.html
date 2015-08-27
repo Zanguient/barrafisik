@@ -1,0 +1,189 @@
+﻿<!-- start: PAGE TITLE -->
+<section id="page-title">
+    <div class="row">
+        <div class="col-sm-8">
+            <h1 class="mainTitle">Cadatrar Cliente</h1>
+            <span class="mainDescription">Formulário de cadastro do cliente.</span>
+        </div>
+        <div ncy-breadcrumb></div>
+    </div>
+</section>
+<!-- end: PAGE TITLE -->
+<!-- start: FORM VALIDATION -->
+<div class="container-fluid container-fullw bg-white">
+    <div class="row">
+        <div class="col-md-12">
+            <ul>
+                <li ng-repeat="error in vm.errors" class="text-danger">{{error}}</li>
+            </ul>
+
+            <span class="symbol required"> Campos Obrigatórios</span>
+
+            <form name="Form" id="form1" novalidate ng-submit="form.submit(Form)">
+                <div class="row">
+
+                    <div class="col-md-6">
+                        <fieldset>
+                            <legend>
+                                Dados do Cliente
+                            </legend>
+                            <div class="form-group" ng-class="{'has-error':Form.nome.$dirty && Form.nome.$invalid, 'has-success':Form.nome.$valid}">
+                                <label class="control-label">
+                                    Nome <span class="symbol required"></span>
+                                </label>
+                                <input type="text" placeholder="Nome Completo" class="form-control" name="nome" ng-model="cliente.Nome" required />
+                                <span class="error text-small block" ng-if="Form.nome.$dirty && Form.nome.$invalid">Informe o Nome</span>
+                            </div>
+
+                            <div class="form-group" ng-class="{'has-error':Form.endereco.$dirty && Form.endereco.$invalid, 'has-success':Form.endereco.$valid}">
+                                <label class="control-label">
+                                    Endereço <span class="symbol required"></span>
+                                </label>
+                                <input type="text" placeholder="Endereço" class="form-control" name="endereco" ng-model="cliente.Endereco" required />
+                                <span class="error text-small block" ng-if="Form.endereco.$dirty && Form.endereco.$invalid">Informe o Endereço</span>
+                            </div>
+
+                            <div class="form-group" ng-class="{'has-error':Form.cpf.$dirty && Form.cpf.$invalid, 'has-success':Form.cpf.$valid}">
+                                <label class="control-label">
+                                    CPF <span class="symbol required"></span>
+                                </label>
+                                <input type="text" placeholder="___.___.___-__" class="form-control" name="cpf" ng-model="cliente.Cpf" ng-cpf ui-mask="999.999.999-99" required />
+                                <span class="error text-small block" ng-if="Form.cpf.$dirty && Form.cpf.$invalid">Informe um CPF válido</span>
+                            </div>
+
+                            <div class="form-group" ng-class="{'has-error':Form.email.$dirty && Form.email.$invalid, 'has-success':Form.email.$valid}">
+                                <label class="control-label">
+                                    E-mail
+                                </label>
+                                <input type="email" placeholder="E-mail" class="form-control" name="email" ng-model="cliente.email">
+                                <span class="error text-small block" ng-if="Form.email.$error.email">E-mail inválido.</span>
+                            </div>
+
+                            <div class="form-group" ng-class="{'has-error':Form.sexo.$dirty && Form.gender.$invalid, 'has-success':Form.sexo.$valid}">
+                                <label class="control-label block">
+                                    Sexo
+                                </label>
+                                <div class="clip-radio radio-primary">
+                                    <input type="radio" id="feminino" name="sexo" value="F" ng-model="cliente.Sexo">
+                                    <label for="feminino">
+                                        Feminino
+                                    </label>
+                                    <input type="radio" id="masculino" name="sexo" value="M" ng-model="cliente.Sexo">
+                                    <label for="masculino">
+                                        Masculino
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label">
+                                    Telefone
+                                </label>
+                                <input type="text" placeholder="____-____" class="form-control" ui-mask="9999-9999" name="telefone" ng-model="cliente.Telefone">
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label">
+                                    Celular
+                                </label>
+                                <input type="text" placeholder="____-____" class="form-control" ui-mask="9999-9999" name="celular" ng-model="cliente.Celular">
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label">
+                                    RG
+                                </label>
+                                <input type="text" placeholder="Número do RG" class="form-control" name="rg" ng-model="cliente.Rg">
+                            </div>
+
+                            <div class="form-group" ng-class="{'has-error':Form.dtNascimento.$dirty && Form.dtNascimento.$invalid, 'has-success':Form.dtNascimento.$valid}">
+                                <label class="control-label">
+                                    Data de Nascimento <span class="symbol required"></span>
+                                </label>
+                                <input type="date" placeholder="Data de Nascimento" class="form-control" name="dtNascimento" ng-model="cliente.DtNascimento" required>
+                                <span class="error text-small block" ng-if="Form.dtNascimento.$error.date">Data de Nascimento inválida.</span>
+                                <span class="error text-small block" ng-if="Form.dtNascimento.$dirty && Form.dtNascimento.$invalid">Informe a Data de Nascimento</span>
+                            </div>
+
+                            <div class="form-group" ng-class="{'has-error':Form.dtInscricao.$dirty && Form.dtInscricao.$invalid, 'has-success':Form.dtInscricao.$valid}">
+                                <label class="control-label">
+                                    Data de Inscrição <span class="symbol required"></span>
+                                </label>
+                                <input type="date" placeholder="Data de Inscrição" class="form-control" name="dtInscricao" ng-model="cliente.DtInscricao" required>
+                                <span class="error text-small block" ng-if="Form.dtInscricao.$error.date">Data de Inscrição inválida.</span>
+                                <span class="error text-small block" ng-if="Form.dtInscricao.$dirty && Form.dtInscricao.$invalid">Informe a Data de Inscrição</span>
+                            </div>
+
+                            <div class="form-group" ng-class="{'has-error': Form.filhos.$invalid, 'has-success':Form.filhos.$valid}">
+                                <label class="control-label">
+                                    Filhos
+                                </label>
+                                <input type="number" name="filhos" placeholder="Quantitdade de Filhos" class="form-control" ng-model="cliente.QtdFilhos" />
+                                <span class="error text-small block" ng-if="Form.filhos.$error.number">Informe o número de filhos!</span>
+                            </div>
+
+                            <div class="checkbox clip-check check-primary  check-md">
+                                <input type="checkbox" id="ativo" value="false" ng-model="cliente.IsAtivo">
+                                <label for="ativo">
+                                    Ativo
+                                </label>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <div class="col-md-3">
+                        <fieldset>
+                            <legend>
+                                WebCam
+                            </legend>
+                            <a ng-click="toggleWebCam = !toggleWebCam">Ativar/Desativar WebCam</a>
+                            <div ng-if="toggleWebCam">
+                                <webcam class="well-small"
+                                        on-stream="onStream(stream)"
+                                        on-error="onError(err)"
+                                        on-streaming="onSuccess()"
+                                        channel="channel"
+                                        placeholder="'img/ajax-loader.gif'">
+                                    <div class="alert alert-error" ng-show="webcamError">
+                                        <span>Webcam não foi iniciar. Você deu permissão?</span>
+                                    </div>
+                                </webcam>
+                                <button type="button" class="btn btn-large btn-primary" ng-click="makeSnapshot()">Take snapshot!</button>
+                            </div>
+
+                        </fieldset>
+
+                    </div>
+                    <div class="col-md-3">
+                        <fieldset>
+                            <legend>
+                                Foto
+                            </legend>
+                            <div ng-show="cliente.Foto != null">
+                                <canvas id="snapshot" class="well-small"></canvas>
+                                <button type="button" class="btn btn-large btn-primary" ng-click="cliente.Foto = undefined">Apagar Foto</button>
+                            </div>
+                            
+                        </fieldset>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="pull-right">
+                            <button type="submit" class="btn btn-primary">
+                                Submit
+                            </button>
+                            <button type="reset" class="btn btn-primary btn-o" ng-click="form.reset(Form)">
+                                Reset
+                            </button>
+                            <button class="btn btn-default">
+                                checkValid = {{ Form.$valid }}
+                            </button>
+                        </div>
+                    </div>
+                    <!--<pre>{{cliente | json}}</pre>-->
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- end: FORM VALIDATION -->

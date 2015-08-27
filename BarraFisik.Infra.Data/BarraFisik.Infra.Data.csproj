@@ -63,12 +63,18 @@
     <Compile Include="Context\BaseContext.cs" />
     <Compile Include="Context\ContextManager.cs" />
     <Compile Include="EntityConfig\ClienteConfiguration.cs" />
+    <Compile Include="EntityConfig\HorarioConfiguration.cs" />
     <Compile Include="Interfaces\IContextManager.cs" />
     <Compile Include="Interfaces\IDbContext.cs" />
     <Compile Include="Interfaces\IUnitOfWork.cs" />
+    <Compile Include="Migrations\201508272117022_AddTable_Horario.cs" />
+    <Compile Include="Migrations\201508272117022_AddTable_Horario.Designer.cs">
+      <DependentUpon>201508272117022_AddTable_Horario.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\ClienteRepository.cs" />
+    <Compile Include="Repository\HorarioRepository.cs" />
     <Compile Include="Repository\ReadOnly\ClienteRepositoryReadOnly.cs" />
     <Compile Include="Repository\ReadOnly\RepositoryBaseReadOnly.cs" />
     <Compile Include="Repository\RepositoryBase.cs" />
@@ -78,12 +84,16 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\BarraFisik.Domain\BarraFisik.Domain.csproj">
       <Project>{808dd9a4-7926-4ba5-8df8-551c4b1b2dc5}</Project>
       <Name>BarraFisik.Domain</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201508272117022_AddTable_Horario.resx">
+      <DependentUpon>201508272117022_AddTable_Horario.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -43,5 +43,6 @@ namespace BarraFisik.Domain.Services
         {
             return _clienteRepositoryReadOnly.GetAll();
         }
+
     }
 }

@@ -136,6 +136,7 @@
     <Compile Include="App_Start\NinjectScope.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\ClienteController.cs" />
+    <Compile Include="Controllers\HorarioController.cs" />
     <Compile Include="Filters\GzipCompressionAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />

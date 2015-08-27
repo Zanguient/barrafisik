@@ -51,5 +51,7 @@ namespace BarraFisik.Application.ViewModels
         [DisplayName("Ativo")]
         public bool IsAtivo { get; set; }
 
+        public byte[] Foto { get; set; }
+
     }
 }

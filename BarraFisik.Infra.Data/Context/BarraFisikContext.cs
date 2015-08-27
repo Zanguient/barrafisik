@@ -14,6 +14,7 @@ namespace BarraFisik.Infra.Data.Context
         }
 
         public IDbSet<Cliente> Clientes { get; set; }
+        public IDbSet<Horario> Horarios { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -28,7 +29,10 @@ namespace BarraFisik.Infra.Data.Context
             modelBuilder.Properties<string>().Configure(p => p.HasColumnType("varchar"));
             modelBuilder.Properties<string>().Configure(p => p.HasMaxLength(100));
 
+
+            //Model Configuration
             modelBuilder.Configurations.Add(new ClienteConfiguration());
+            modelBuilder.Configurations.Add(new HorarioConfiguration());
 
             base.OnModelCreating(modelBuilder);
         }

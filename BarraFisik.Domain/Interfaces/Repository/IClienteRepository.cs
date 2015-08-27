@@ -4,6 +4,6 @@ namespace BarraFisik.Domain.Interfaces.Repository
 {
     public interface IClienteRepository : IRepositoryBase<Cliente>
     {
-         
+
     }
 }

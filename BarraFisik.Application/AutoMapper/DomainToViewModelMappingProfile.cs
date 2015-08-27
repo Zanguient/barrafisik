@@ -13,6 +13,7 @@ namespace BarraFisik.Application.AutoMapper
         protected override void Configure()
         {
             Mapper.CreateMap<Cliente, ClienteViewModel>();
+            Mapper.CreateMap<Horario, HorarioViewModel>();
         }
     }
 }

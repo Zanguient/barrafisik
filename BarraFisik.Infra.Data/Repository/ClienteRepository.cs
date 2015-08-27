@@ -6,6 +6,6 @@ namespace BarraFisik.Infra.Data.Repository
 {
     public class ClienteRepository : RepositoryBase<Cliente, BarraFisikContext>, IClienteRepository
     {
-         
+
     }
 }

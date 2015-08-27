@@ -20,14 +20,17 @@ namespace BarraFisik.Inra.CrossCutting.IoC
 
             //APP
             Bind<IClienteAppService>().To<ClienteAppService>();
+            Bind<IHorarioAppService>().To<HorarioAppService>();
 
             //Services
             Bind(typeof(IServiceBase<>)).To(typeof(ServiceBase<>));
             Bind<IClienteService>().To<ClienteService>();
+            Bind<IHorarioService>().To<HorarioService>();
 
             //Data Repos
             Bind(typeof (IRepositoryBase<>)).To(typeof (RepositoryBase<,>));
             Bind<IClienteRepository>().To<ClienteRepository>();
+            Bind<IHorarioRepository>().To<HorarioRepository>();
 
             //Data Repos Read Only
             Bind<IClienteRepositoryReadOnly>().To<ClienteRepositoryReadOnly>();

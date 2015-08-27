@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using System;
+using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
@@ -50,6 +51,54 @@ namespace BarraFisik.API.Controllers
                 return Request.CreateResponse(HttpStatusCode.Created, cliente);
             }
             return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
+        }
+
+        [HttpPut]
+        [Route("cliente/desativar/{id:Guid}")]
+        public Task<HttpResponseMessage> DesativarCliente(Guid id)
+        {
+            var cliente = _clienteApp.GetById(id);
+
+            var response = new HttpResponseMessage();
+
+            if (cliente == null)
+            {
+                response = Request.CreateResponse(HttpStatusCode.NotFound);
+            }
+            else
+            {
+                cliente.IsAtivo = false;
+                _clienteApp.Update(cliente);
+                response = Request.CreateResponse(HttpStatusCode.OK, "Cliente Desativado");
+            }
+
+            var tsc = new TaskCompletionSource<HttpResponseMessage>();
+            tsc.SetResult(response);
+            return tsc.Task;
+        }
+
+        [HttpPut]
+        [Route("cliente/ativar/{id:Guid}")]
+        public Task<HttpResponseMessage> AtivarCliente(Guid id)
+        {
+            var cliente = _clienteApp.GetById(id);
+
+            var response = new HttpResponseMessage();
+
+            if (cliente == null)
+            {
+                response = Request.CreateResponse(HttpStatusCode.NotFound);
+            }
+            else
+            {
+                cliente.IsAtivo = true;
+                _clienteApp.Update(cliente);
+                response = Request.CreateResponse(HttpStatusCode.OK, "Cliente Desativado");
+            }
+
+            var tsc = new TaskCompletionSource<HttpResponseMessage>();
+            tsc.SetResult(response);
+            return tsc.Task;
         }
     }
 }
