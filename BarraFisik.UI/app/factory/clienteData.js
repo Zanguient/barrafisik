@@ -13,6 +13,14 @@
             return $http.get(apiUrl+'api/clientes');
         }
 
+        function getCliente(idCliente) {
+            return $http.get(apiUrl + 'api/cliente/' + idCliente);
+        }
+
+        function editCliente(cliente) {
+            return $http.put(apiUrl + 'api/clientes', cliente);
+        }
+
         function addCliente(cliente) {
             return $http.post(apiUrl+'api/clientes', cliente);
         }
@@ -27,7 +35,9 @@
 
         var service = {
             getClientes: getClientes,
+            getCliente: getCliente,
             addCliente: addCliente,
+            editCliente: editCliente,
             desativarCliente: desativarCliente,
             ativarCliente: ativarCliente
         };

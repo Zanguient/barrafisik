@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Linq.Expressions;
 using BarraFisik.Domain.Interfaces.Repository;
@@ -26,7 +27,7 @@ namespace BarraFisik.Infra.Data.Repository
 
         public void Add(TEntity obj)
         {
-            DbSet.Add(obj);
+            DbSet.AddOrUpdate(obj);
         }
 
         public TEntity GetById(Guid id)

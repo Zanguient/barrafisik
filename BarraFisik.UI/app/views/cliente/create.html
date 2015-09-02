@@ -19,7 +19,7 @@
 
             <span class="symbol required"> Campos Obrigatórios</span>
 
-            <form name="Form" id="form1" novalidate ng-submit="form.submit(Form)">
+            <form name="Form" id="form" novalidate ng-submit="form.submit(Form)">
                 <div class="row">
 
                     <div class="col-md-6">
@@ -55,7 +55,7 @@
                                 <label class="control-label">
                                     E-mail
                                 </label>
-                                <input type="email" placeholder="E-mail" class="form-control" name="email" ng-model="cliente.email">
+                                <input type="email" placeholder="E-mail" class="form-control" name="email" ng-model="cliente.Email">
                                 <span class="error text-small block" ng-if="Form.email.$error.email">E-mail inválido.</span>
                             </div>
 
@@ -142,7 +142,7 @@
                                         on-error="onError(err)"
                                         on-streaming="onSuccess()"
                                         channel="channel"
-                                        placeholder="'img/ajax-loader.gif'">
+                                        placeholder="'/assets/images/loading.gif'">
                                     <div class="alert alert-error" ng-show="webcamError">
                                         <span>Webcam não foi iniciar. Você deu permissão?</span>
                                     </div>
@@ -162,26 +162,103 @@
                                 <canvas id="snapshot" class="well-small"></canvas>
                                 <button type="button" class="btn btn-large btn-primary" ng-click="cliente.Foto = undefined">Apagar Foto</button>
                             </div>
-                            
+
+                        </fieldset>
+                    </div>
+                    <div class="col-md-6" ng-show="cliente.IsAtivo == true">
+                        <fieldset>
+                            <legend>
+                                Horário
+                            </legend>
+                            <div class="col-md-9">
+                                <div class="checkbox clip-check check-primary">
+                                    <input type="checkbox" id="segunda" value="false" ng-model="horario.Segunda" ng-change="horario.HSegunda = horario.HSegunda ? '' : horario.HSegunda">
+                                    <label for="segunda">
+                                        Segunda-feira
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" ng-disabled="!horario.Segunda"  ui-mask="99" ng-model="horario.HSegunda">
+                                    <span class="input-group-addon">: 00</span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-9">
+                                <div class="checkbox clip-check check-primary">
+                                    <input type="checkbox" id="terca" value="false" ng-model="horario.Terca" ng-change="horario.HTerca = horario.HTerca ? '' : horario.HTerca">
+                                    <label for="terca">
+                                        Terça-feira
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" ui-mask="99" ng-model="horario.HTerca" ng-disabled="!horario.Terca">
+                                    <span class="input-group-addon">: 00</span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-9">
+                                <div class="checkbox clip-check check-primary">
+                                    <input type="checkbox" id="quarta" value="false" ng-model="horario.Quarta" ng-change="horario.HQuarta = horario.HQuarta ? '' : horario.HQuarta">
+                                    <label for="quarta">
+                                        Quarta-feira
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" ui-mask="99" ng-model="horario.HQuarta" ng-disabled="!horario.Quarta">
+                                    <span class="input-group-addon">: 00</span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-9">
+                                <div class="checkbox clip-check check-primary">
+                                    <input type="checkbox" id="quinta" value="false" ng-model="horario.Quinta" ng-change="horario.HQuinta = horario.HQuinta ? '' : horario.HQuinta">
+                                    <label for="quinta">
+                                        Quinta-feira
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" ui-mask="99" ng-model="horario.HQuinta" ng-disabled="!horario.Quinta">
+                                    <span class="input-group-addon">: 00</span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-9">
+                                <div class="checkbox clip-check check-primary">
+                                    <input type="checkbox" id="sexta" value="false" ng-model="horario.Sexta" ng-change="horario.HSexta = horario.HSexta ? '' : horario.HSexta">
+                                    <label for="sexta">
+                                        Sexta-feira
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" ui-mask="99" ng-model="horario.HSexta" ng-disabled="!horario.Sexta">
+                                    <span class="input-group-addon">: 00</span>
+                                </div>
+                            </div>
+
                         </fieldset>
                     </div>
                 </div>
+
                 <div class="row">
                     <div class="col-md-12">
                         <div class="pull-right">
                             <button type="submit" class="btn btn-primary">
-                                Submit
-                            </button>
-                            <button type="reset" class="btn btn-primary btn-o" ng-click="form.reset(Form)">
-                                Reset
-                            </button>
-                            <button class="btn btn-default">
-                                checkValid = {{ Form.$valid }}
+                                Cadastrar
                             </button>
                         </div>
                     </div>
-                    <!--<pre>{{cliente | json}}</pre>-->
                 </div>
+                <!--<pre>{{cliente | json}}</pre>-->
             </form>
         </div>
     </div>

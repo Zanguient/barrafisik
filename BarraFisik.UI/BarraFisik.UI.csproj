@@ -50,7 +50,11 @@
   <ItemGroup>
     <Content Include="app\controllers\cliente\clienteCreateCtrl.js" />
     <Content Include="app\controllers\cliente\clienteCtrl.js" />
+    <Content Include="app\controllers\cliente\clienteEditCtrl.js" />
+    <Content Include="app\directives\xngFocus.js" />
     <Content Include="app\factory\clienteData.js" />
+    <Content Include="app\factory\horarioData.js" />
+    <Content Include="app\filters\clienteFilters.js" />
     <Content Include="app\views\cliente\clientes.html" />
     <Content Include="app\views\cliente\create.html" />
     <Content Include="app\views\cliente\edit.html" />
@@ -87,6 +91,7 @@
     <Content Include="assets\images\lion-403764_640.jpg" />
     <Content Include="assets\images\lion-565818_640.jpg" />
     <Content Include="assets\images\lion-565820_640.jpg" />
+    <Content Include="assets\images\loading.gif" />
     <Content Include="assets\images\logo.png" />
     <Content Include="assets\images\logo2.png" />
     <Content Include="assets\images\media-user.png" />
@@ -4543,6 +4548,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="assets\images\fotos\" />
     <Folder Include="bower_components\bootstrap-rtl\bootstrap\" />
     <Folder Include="bower_components\checklist-model\test\" />
     <Folder Include="bower_components\flow.js\src\" />

@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using BarraFisik.Application.Interfaces;
+using BarraFisik.Application.ViewModels;
 using BarraFisik.API.Filters;
 
 namespace BarraFisik.API.Controllers
@@ -31,6 +32,38 @@ namespace BarraFisik.API.Controllers
             var tsc = new TaskCompletionSource<HttpResponseMessage>();
             tsc.SetResult(response);
             return await tsc.Task;
+        }
+
+        [HttpPost]
+        [Route("horarios")]
+        public async Task<HttpResponseMessage> Post(HorarioViewModel horario)
+        {
+            _horarioApp.Add(horario);
+            var response = Request.CreateResponse(HttpStatusCode.OK, horario);
+
+            var tsc = new TaskCompletionSource<HttpResponseMessage>();
+            tsc.SetResult(response);
+            return await tsc.Task;
+        }
+
+        [HttpGet]
+        [Route("horarios/cliente/{id:Guid}")]
+        public async Task<HttpResponseMessage> GetHorarioCliente(Guid id)
+        {
+            var result = _horarioApp.GetHorarioCliente(id);
+            var response = Request.CreateResponse(HttpStatusCode.OK, result);
+
+            var tsc = new TaskCompletionSource<HttpResponseMessage>();
+            tsc.SetResult(response);
+            return await tsc.Task;
+        }
+
+        [HttpPut]
+        [Route("horarios")]
+        public HttpResponseMessage Put(HorarioViewModel horario)
+        {
+            _horarioApp.Add(horario);
+            return Request.CreateResponse(HttpStatusCode.OK, "Horario Salvo com Sucesso");
         }
     }
 }

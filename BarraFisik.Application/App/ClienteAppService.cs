@@ -30,7 +30,6 @@ namespace BarraFisik.Application.App
 
             if (!result.IsValid)
                 return DomainToApplicationResult(result);
-            _clienteService.Add(cliente);
 
             Commit();
 
@@ -47,13 +46,20 @@ namespace BarraFisik.Application.App
             return Mapper.Map<IEnumerable<Cliente>, IEnumerable<ClienteViewModel>>(_clienteService.GetClientes());
         }
 
-        public void Update(ClienteViewModel clienteViewModel)
+        public ValidationAppResult Update(ClienteViewModel clienteViewModel)
         {
             var cliente = Mapper.Map<ClienteViewModel, Cliente>(clienteViewModel);
 
+            var result = _clienteService.AtualizarCliente(cliente);
+
             BeginTransaction();
-            _clienteService.Update(cliente);
+
+            if (!result.IsValid)
+                return DomainToApplicationResult(result);
+
             Commit();
+
+            return DomainToApplicationResult(result);
         }
 
         public void Remove(ClienteViewModel clienteViewModel)
@@ -63,6 +69,11 @@ namespace BarraFisik.Application.App
             BeginTransaction();
             _clienteService.Remove(cliente);
             Commit();
+        }
+
+        public ClienteViewModel GetClienteHorario(Guid id)
+        {
+            return Mapper.Map<Cliente, ClienteViewModel>(_clienteService.GetById(id));
         }
 
         public void Dispose()

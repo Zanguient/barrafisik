@@ -2,21 +2,16 @@
     <div class="row">
         <div class="col-sm-8">
             <h1 class="mainTitle">Clientes</h1>
-            <span class="mainDescription">overview & stats</span>
+            <span class="mainDescription">Gerenciamento dos Clientes</span>
         </div>
         <div ncy-breadcrumb></div>
     </div>
 </section>
-<button type="button" class="btn btn-primary btn-wide btn-scroll btn-scroll-top ti-plus" ng-click="openAside('right')">
-    <span>Add to cart</span>
-</button>
 
 <!-- start: INLINE EDIT EXAMPLE -->
 <div class="container-fluid container-fullw">
     <div class="row">
         <div class="col-md-12">
-            <h5 class="over-title margin-bottom-15">Inline <span class="text-bold">edit example</span></h5>
-            <!-- /// controller:  'ngTableCtrl6' -  localtion: assets/js/controllers/ngTableCtrl.js /// -->
             <div>
                 <div class="row margin-bottom-10">
                     <div class="col-md-12">
@@ -25,24 +20,21 @@
                         </button>
                     </div>
                 </div>
-                <strong>Sorting:</strong> {{tableParams.sorting()|json}}
                 <div class="table-responsive">
                     <table ng-table="tableParams" class="table">
                         <tbody ng-repeat="p in $data">
-                            <tr ng-class-odd="'odd'" >
+                            <tr ng-class-odd="'odd'">
                                 <td class="rowTd" data-title="Foto">
-                                    <div ng-if="p.Foto != ''">
-                                        <img src="data:image/png;base64,{{p.Foto}}" class="img-rounded" width="80" height="60"/>
-                                    </div>     
+                                    <img ng-src="{{p.Path}}" class="img-rounded" width="80" height="60" />
                                 </td>
                                 <td class="rowTd" data-title="'Nome'" sortable="'Nome'">{{p.Nome}}</td>
                                 <td class="rowTd" data-title="'E-mail'" sortable="'Email'">{{p.Email}}</td>
-                                <td class="rowTd" data-title="'CPF'">{{p.Cpf}}</td>
-                                <td class="rowTd" data-title="'Telefone'">{{p.Telefone}}</td>
-                                <td class="rowTd" data-title="'Celular'">{{p.Celular}}</td>
+                                <td class="rowTd" data-title="'CPF'">{{p.Cpf }}</td>
+                                <td class="rowTd" data-title="'Telefone'">{{p.Telefone | telefone}}</td>
+                                <td class="rowTd" data-title="'Celular'">{{p.Celular | telefone}}</td>
                                 <td class="center">
                                     <div class="visible-md visible-lg hidden-sm hidden-xs">
-                                        <a href="#" class="btn btn-transparent btn-xs" tooltip-placement="top" tooltip="Edit"><i class="fa fa-pencil"></i></a>
+                                        <a ui-sref="app.clientes.editar({id: p.ClienteId})" class="btn btn-transparent btn-xs" tooltip-placement="top" tooltip="Editar"><i class="fa fa-pencil"></i></a>
                                         <a href="#" class="btn btn-transparent btn-xs tooltips" tooltip-placement="top" tooltip="Share"><i class="fa fa-share"></i></a>
                                         <a href="#" ng-if="p.IsAtivo==true" class="btn btn-transparent btn-xs tooltips" ng-click="Desativar(p.ClienteId)" tooltip-placement="top" tooltip="Desativar">
                                             <i class="fa fa-times fa fa-white"></i>
@@ -50,7 +42,7 @@
                                         <a href="#" ng-if="p.IsAtivo==false" class="btn btn-transparent btn-xs tooltips" ng-click="Ativar(p.ClienteId)" tooltip-placement="top" tooltip="Ativar">
                                             <i class="fa fa-apple fa fa-white"></i>
                                         </a>
-                                    </div>                                    
+                                    </div>
                                 </td>
                             </tr>
                         </tbody>

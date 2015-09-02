@@ -25,7 +25,7 @@ namespace BarraFisik.Domain.Entities
         public string Sexo { get; set; }
         public int QtdFilhos { get; set; }
         public bool IsAtivo { get; set; }
-        public byte[] Foto { get; set; }
+        public string Path { get; set; }
 
         public ValidationResult ResultadoValidacao { get; private set; }
 

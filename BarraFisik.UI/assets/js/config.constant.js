@@ -33,9 +33,11 @@ app.constant('JS_REQUIRES', {
         //*** Controllers APP
         'clienteCtrl': 'app/controllers/cliente/clienteCtrl.js',
         'clienteCreateCtrl' : 'app/controllers/cliente/clienteCreateCtrl.js',
+        'clienteEditCtrl' : 'app/controllers/cliente/clienteEditCtrl.js',
 
         //*** Factories
         'clienteData' : 'app/factory/clienteData.js',
+        'horarioData' : 'app/factory/horarioData.js',
 
         //*** Controllers
         'dashboardCtrl': 'assets/js/controllers/dashboardCtrl.js',
@@ -63,7 +65,8 @@ app.constant('JS_REQUIRES', {
         'chatCtrl': 'assets/js/controllers/chatCtrl.js',
         
         //*** Filters
-        'htmlToPlaintext': 'assets/js/filters/htmlToPlaintext.js'
+        'htmlToPlaintext': 'assets/js/filters/htmlToPlaintext.js',
+        'clienteFilters': 'app/filters/clienteFilters.js'
     },
     //*** angularJS Modules
     modules: [{

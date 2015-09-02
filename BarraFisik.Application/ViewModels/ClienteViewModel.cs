@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using BarraFisik.Domain.Entities;
 
 namespace BarraFisik.Application.ViewModels
 {
@@ -52,6 +53,9 @@ namespace BarraFisik.Application.ViewModels
         public bool IsAtivo { get; set; }
 
         public byte[] Foto { get; set; }
+
+        public string Path { get; set; }
+
 
     }
 }

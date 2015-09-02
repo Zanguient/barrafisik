@@ -1,12 +1,36 @@
 ﻿(function () {
-    app.controller('clienteCreateCtrl', clienteCreateCtrl);
+    'use strict';
 
-    function clienteCreateCtrl(clienteData, horarioData, $scope, SweetAlert) {
+    app.controller('clienteEditCtrl', clienteEditCtrl);
+
+    function clienteEditCtrl($scope, clienteData, horarioData, SweetAlert, $stateParams, $state) {
         var vm = this;
-        vm.clienteCreateCtrl = {};
+        $scope.cliente = {};
 
-        $scope.horario = {
-            ClienteId: null
+        activate();
+
+        function activate() {
+            clienteData.getCliente($stateParams.id).then(function (cliente) {
+                //Convert Data Nascimento
+                var dtNascimento = cliente.data.DtNascimento.toString().substring(0, 10);
+                dtNascimento = new Date(dtNascimento);
+                cliente.data.DtNascimento = new Date(dtNascimento.getTime() + dtNascimento.getTimezoneOffset() * 60000);
+
+                //Convert Data Inscrição
+                var dtInscricao = cliente.data.DtInscricao.toString().substring(0, 10);
+                dtInscricao = new Date(dtInscricao);
+                cliente.data.DtInscricao = new Date(dtInscricao.getTime() + dtInscricao.getTimezoneOffset() * 60000);
+
+                $scope.cliente = cliente.data;
+
+                //Horario
+                horarioData.getHorarioCliente($stateParams.id).then(function (horario) {
+                    $scope.horario = horario.data;
+                });
+
+            }), function (error) {
+                console.log(error);
+            }
         }
 
         var _video = null,
@@ -80,26 +104,6 @@
             return ctx.getImageData(x, y, w, h);
         };
 
-        $scope.cliente = {
-            Nome: "",
-            Endereco: "",
-            DtInscricao: new Date,
-            IsAtivo: true,
-        };
-
-        var defaultHorario = {
-            Segunda: false,
-            Terca: false,
-            Quarta: false,
-            Quinta: false,
-            Sexta: false,
-            HSegunda: null,
-            HTerca: null,
-            HQuarta: null,
-            HQuinta: null,
-            HSexta: null
-        }
-
         $scope.form = {
 
             submit: function (form) {
@@ -124,27 +128,16 @@
                     return;
 
                 } else {
-                    // Cadastra o cliente
-                    clienteData.addCliente($scope.cliente).success(function (id) {
-                        // Cadastra o horario do cliente 
-                        // se o mesmo se encontrar ativo
-                        $scope.horario.ClienteId = id;
-                        if ($scope.cliente.IsAtivo) {
-                            horarioData.addHorario($scope.horario).then(function() {});
-                        }
-                        
-                        //Limpa o formulario
-                        form.$setPristine(true);
-                        $scope.cliente = {
-                            Nome: "",
-                            Endereco: "",
-                            DtInscricao: new Date,
-                            IsAtivo: true,
-                        };
-                        $scope.horario = angular.copy(defaultHorario);
-                        
+                    // Salva dados do cliente
+                    clienteData.editCliente($scope.cliente).then(function () {
+                        $scope.horario.ClienteId = $scope.cliente.ClienteId;
+                        horarioData.editHorario($scope.horario).then(function () {});
+
                         SweetAlert.swal("Sucesso!", "Cliente foi cadastrado com sucesso!", "success");
-                    }).error(function (error) {
+
+                        //Retorna para lista de clientes
+                        $state.go('app.clientes.listar');
+                    }, function (error) {
                         var errors = [];
                         for (var key in error.ModelState) {
                             for (var i = 0; i < error.ModelState[key].length; i++) {
@@ -156,13 +149,7 @@
                     });
                 }
 
-            },
-            //reset: function (form) {
-
-            //    $scope.cliente = angular.copy(defaultForm);
-            //    form.$setPristine(true);
-
-            //}
+            }
         };
     }
-})();
+}());

@@ -55,7 +55,7 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         templateUrl: "app/views/cliente/clientes.html",
         title: 'Lista de Clientes',
         icon: 'ti-layout-media-left-alt',
-        resolve: loadSequence('clienteCtrl', 'ngTable', 'clienteData'),
+        resolve: loadSequence('clienteCtrl', 'ngTable', 'clienteData', 'clienteFilters'),
         controller: "clienteCtrl as vm",
         ncyBreadcrumb: {
             label: 'Listar'
@@ -65,48 +65,23 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         templateUrl: "app/views/cliente/create.html",
         title: 'Cadastrar Clientes',
         icon: 'ti-layout-media-left-alt',
-        resolve: loadSequence('clienteCreateCtrl', 'clienteData', 'ui.mask'),
+        resolve: loadSequence('clienteCreateCtrl', 'clienteData', 'horarioData', 'ui.mask'),
         controller: "clienteCreateCtrl as vm",
         ncyBreadcrumb: {
             label: 'Cadastrar'
         }
+    }).state('app.clientes.editar', {
+        url: '/editar/{id}',
+        templateUrl: "app/views/cliente/edit.html",
+        title: 'Editar Cliente',
+        resolve: loadSequence('clienteEditCtrl', 'clienteData', 'horarioData', 'ui.mask'),        
+        controller: "clienteEditCtrl as vm",
+        ncyBreadcrumb: {
+            label: 'Editar'
+        }
     })
 
-    //    .state('app.clientes', {
-    //    url: "/clientes",
-    //    templateUrl: "app/views/cliente/clientes.html",
-    //    resolve: loadSequence('clienteCtrl', 'ngTable', 'clienteData'),
-    //    title: 'Clientes',
-    //    controller: "clienteCtrl as vm",
-    //    ncyBreadcrumb: {
-    //        label: 'Clientes / Listar'
-    //    }
-    //}).state('app.clientes.create', {
-    //    url: "/create",
-    //    templateUrl: "app/views/cliente/create.html",
-    //    resolve: loadSequence('clienteCreateCtrl', 'clienteData'),
-    //    title: 'Clientes',
-    //    controller: "clienteCreateCtrl as vm",
-    //    ncyBreadcrumb: {
-    //        label: 'Cadastrar '
-    //    }
-    //})
-    //    .state('app.ui', {
-    //        url: '/ui',
-    //        template: '<div ui-view class="fade-in-up"></div>',
-    //        title: 'UI Elements',
-    //        ncyBreadcrumb: {
-    //            label: 'UI Elements'
-    //        }
-    //    }).state('app.ui.elements', {
-    //        url: '/elements',
-    //        templateUrl: "app/views/cliente/create.html",
-    //        title: 'Elements',
-    //        icon: 'ti-layout-media-left-alt',
-    //        ncyBreadcrumb: {
-    //            label: 'Elements'
-    //        }
-    //    })
+
 
 
      

@@ -10,7 +10,9 @@ namespace BarraFisik.Application.Interfaces
         ValidationAppResult Add(ClienteViewModel clienteViewModel);
         ClienteViewModel GetById(Guid id);
         IEnumerable<ClienteViewModel> GetAll();
-        void Update(ClienteViewModel clienteViewModel);
+        ValidationAppResult Update(ClienteViewModel clienteViewModel);
         void Remove(ClienteViewModel clienteViewModel);
+
+        ClienteViewModel GetClienteHorario(Guid id);
     }
 }
