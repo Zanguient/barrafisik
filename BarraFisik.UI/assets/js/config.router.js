@@ -49,6 +49,9 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         title: 'Clientes',
         ncyBreadcrumb: {
             label: 'Clientes'
+        },
+        params: {
+            updated: false
         }
     }).state('app.clientes.listar', {
         url: '/listar',
@@ -79,6 +82,15 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         ncyBreadcrumb: {
             label: 'Editar'
         }
+    }).state('app.clientes.ficha', {
+        url: '/ficha/{id}',
+        templateUrl: "app/views/cliente/ficha.html",
+        title: 'Editar Cliente',
+        resolve: loadSequence('clienteCtrl', 'clienteFilters'),
+        ncyBreadcrumb: {
+            label: 'Ficha do Cliente'
+        },
+        controller: 'clienteCtrl'
     })
 
 

@@ -22,6 +22,7 @@
                 cliente.data.DtInscricao = new Date(dtInscricao.getTime() + dtInscricao.getTimezoneOffset() * 60000);
 
                 $scope.cliente = cliente.data;
+                $scope.oldCpf = cliente.data.Cpf;
 
                 //Horario
                 horarioData.getHorarioCliente($stateParams.id).then(function (horario) {
@@ -130,13 +131,14 @@
                 } else {
                     // Salva dados do cliente
                     clienteData.editCliente($scope.cliente).then(function () {
-                        $scope.horario.ClienteId = $scope.cliente.ClienteId;
+                        $scope.horario.ClienteId = $stateParams.id;
                         horarioData.editHorario($scope.horario).then(function () {});
 
                         SweetAlert.swal("Sucesso!", "Cliente foi cadastrado com sucesso!", "success");
 
                         //Retorna para lista de clientes
-                        $state.go('app.clientes.listar');
+                        $state.go('app.clientes.listar', {}, {reload: true});
+
                     }, function (error) {
                         var errors = [];
                         for (var key in error.ModelState) {
@@ -147,6 +149,8 @@
                         }
                         vm.errors = errors;
                     });
+
+                    
                 }
 
             }

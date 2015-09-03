@@ -43,13 +43,6 @@ namespace BarraFisik.API.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (cliente.Foto != null)
-                {
-                    //Convert and Upload image
-                    ConvertAndSave(cliente.Foto, cliente.Cpf);
-                    cliente.Path = "/assets/images/fotos/"+cliente.Cpf+".jpg";
-                }
-                
                 var result = _clienteApp.Add(cliente);
 
                 if (!result.IsValid)
@@ -60,7 +53,17 @@ namespace BarraFisik.API.Controllers
                     }
                     return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
                 }
+
+                if (cliente.Foto != null)
+                {                    
+                    //Convert and Upload image
+                    ConvertAndSave(cliente.Foto, cliente.ClienteId);
+                    cliente.Path = "/assets/images/fotos/" + cliente.ClienteId + ".jpg";
+                    _clienteApp.Update(cliente);
+                }
+
                 return Request.CreateResponse(HttpStatusCode.Created, cliente.ClienteId);
+
             }
             return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
         }
@@ -71,13 +74,6 @@ namespace BarraFisik.API.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (cliente.Foto != null)
-                {
-                    //Convert and Upload image
-                    ConvertAndSave(cliente.Foto, cliente.Cpf);
-                    cliente.Path = "/assets/images/fotos/" + cliente.Cpf + ".jpg";
-                }
-
                 var result = _clienteApp.Update(cliente);
 
                 if (!result.IsValid)
@@ -88,6 +84,15 @@ namespace BarraFisik.API.Controllers
                     }
                     return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
                 }
+
+                if (cliente.Foto != null)
+                {
+                    //Convert and Upload image
+                    ConvertAndSave(cliente.Foto, cliente.ClienteId);
+                    cliente.Path = "/assets/images/fotos/" + cliente.ClienteId + ".jpg";
+                    _clienteApp.Update(cliente);
+                }
+
                 return Request.CreateResponse(HttpStatusCode.Created, "Cliente Atualizado com Sucesso!");
             }
             return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
@@ -156,7 +161,7 @@ namespace BarraFisik.API.Controllers
             return tsc.Task;
         }
 
-        public void ConvertAndSave(byte[] imageBytes, string cpf)
+        public void ConvertAndSave(byte[] imageBytes, Guid id)
         {
             // Convert Base64 String to byte[]
             //byte[] imageBytes = Convert.FromBase64String(base64String);
@@ -168,7 +173,7 @@ namespace BarraFisik.API.Controllers
 
             //Save image to Disk
             var path = "C:/Users/jefferson/Documents/Visual Studio 2015/Projects/BarraFisik/BarraFisik.UI/assets/images/fotos/";
-            var fileName = cpf + ".jpg";
+            var fileName = id + ".jpg";
             var fullPath = Path.Combine(path, fileName);
             image.Save(fullPath);
         }

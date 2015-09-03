@@ -58,6 +58,7 @@
     <Content Include="app\views\cliente\clientes.html" />
     <Content Include="app\views\cliente\create.html" />
     <Content Include="app\views\cliente\edit.html" />
+    <Content Include="app\views\cliente\ficha.html" />
     <Content Include="assets\api\groups.js" />
     <Content Include="assets\css\plugins.css" />
     <Content Include="assets\css\styles.css" />
