@@ -73,6 +73,16 @@ namespace BarraFisik.Domain.Services
             return _clienteRepository.GetClienteHorario(id);
         }
 
+        public ClienteHorario GetByClienteId(Guid id)
+        {
+            return _clienteRepositoryReadOnly.GetByClienteId(id);
+        }
+
+        public IEnumerable<Cliente> GetAniversariantes(int mes)
+        {
+            return _clienteRepository.GetAniversariantes(mes);
+        }
+
         public ValidationResult VerificaCpfUnico(Cliente cliente)
         {
             var fiscal = new ClienteCpfUnico(_clienteRepository);

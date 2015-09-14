@@ -4,7 +4,6 @@ using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
-using System.Web.Hosting;
 using System.Web.Http;
 using BarraFisik.Application.Interfaces;
 using BarraFisik.Application.ViewModels;
@@ -37,13 +36,26 @@ namespace BarraFisik.API.Controllers
             return await tsc.Task;
         }
 
+        [HttpGet]
+        [Route("aniversariantes/{mes:int}")]
+        [GzipCompression]
+        public async Task<HttpResponseMessage> GetAniversariantes(int mes)
+        {
+            var result = _clienteApp.GetAniversariantes(mes);
+            var response = Request.CreateResponse(HttpStatusCode.OK, result);
+
+            var tsc = new TaskCompletionSource<HttpResponseMessage>();
+            tsc.SetResult(response);
+            return await tsc.Task;
+        }
+
         [HttpPost]
         [Route("clientes")]
-        public HttpResponseMessage Post(ClienteViewModel cliente)
+        public HttpResponseMessage Post(ClienteHorarioViewModel clienteHorario)
         {
             if (ModelState.IsValid)
             {
-                var result = _clienteApp.Add(cliente);
+                var result = _clienteApp.Add(clienteHorario);
 
                 if (!result.IsValid)
                 {
@@ -54,27 +66,26 @@ namespace BarraFisik.API.Controllers
                     return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
                 }
 
-                if (cliente.Foto != null)
-                {                    
+                if (clienteHorario.Foto != null)
+                {
                     //Convert and Upload image
-                    ConvertAndSave(cliente.Foto, cliente.ClienteId);
-                    cliente.Path = "/assets/images/fotos/" + cliente.ClienteId + ".jpg";
-                    _clienteApp.Update(cliente);
+                    ConvertAndSave(clienteHorario.Foto, clienteHorario.ClienteId);
+                    clienteHorario.Path = "/assets/images/fotos/" + clienteHorario.ClienteId + ".jpg";
+                    _clienteApp.Update(clienteHorario);
                 }
 
-                return Request.CreateResponse(HttpStatusCode.Created, cliente.ClienteId);
-
+                return Request.CreateResponse(HttpStatusCode.Created, clienteHorario.ClienteId);
             }
             return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
         }
 
         [HttpPut]
         [Route("clientes")]
-        public HttpResponseMessage Put(ClienteViewModel cliente)
+        public HttpResponseMessage Put(ClienteHorarioViewModel clienteHorario)
         {
             if (ModelState.IsValid)
             {
-                var result = _clienteApp.Update(cliente);
+                var result = _clienteApp.Update(clienteHorario);
 
                 if (!result.IsValid)
                 {
@@ -85,12 +96,12 @@ namespace BarraFisik.API.Controllers
                     return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
                 }
 
-                if (cliente.Foto != null)
+                if (clienteHorario.Foto != null)
                 {
                     //Convert and Upload image
-                    ConvertAndSave(cliente.Foto, cliente.ClienteId);
-                    cliente.Path = "/assets/images/fotos/" + cliente.ClienteId + ".jpg";
-                    _clienteApp.Update(cliente);
+                    ConvertAndSave(clienteHorario.Foto, clienteHorario.ClienteId);
+                    clienteHorario.Path = "/assets/images/fotos/" + clienteHorario.ClienteId + ".jpg";
+                    _clienteApp.Update(clienteHorario);
                 }
 
                 return Request.CreateResponse(HttpStatusCode.Created, "Cliente Atualizado com Sucesso!");
@@ -102,64 +113,64 @@ namespace BarraFisik.API.Controllers
         [Route("cliente/{id:Guid}")]
         public HttpResponseMessage GetById(Guid id)
         {
-            var cliente = _clienteApp.GetById(id);
+            var cliente = _clienteApp.GetByClienteId(id);
 
             if (cliente == null)
             {
                 return Request.CreateResponse(HttpStatusCode.NotFound, "Cliente Não Encontrado");
             }
 
-            return Request.CreateResponse(HttpStatusCode.OK, cliente);            
-        }        
-
-        [HttpPut]
-        [Route("cliente/desativar/{id:Guid}")]
-        public Task<HttpResponseMessage> DesativarCliente(Guid id)
-        {
-            var cliente = _clienteApp.GetById(id);
-
-            var response = new HttpResponseMessage();
-
-            if (cliente == null)
-            {
-                response = Request.CreateResponse(HttpStatusCode.NotFound);
-            }
-            else
-            {
-                cliente.IsAtivo = false;
-                _clienteApp.Update(cliente);
-
-                response = Request.CreateResponse(HttpStatusCode.OK, "Cliente Desativado");
-            }
-
-            var tsc = new TaskCompletionSource<HttpResponseMessage>();
-            tsc.SetResult(response);
-            return tsc.Task;
+            return Request.CreateResponse(HttpStatusCode.OK, cliente);
         }
 
-        [HttpPut]
-        [Route("cliente/ativar/{id:Guid}")]
-        public Task<HttpResponseMessage> AtivarCliente(Guid id)
-        {
-            var cliente = _clienteApp.GetById(id);
+        //[HttpPut]
+        //[Route("cliente/desativar/{id:Guid}")]
+        //public Task<HttpResponseMessage> DesativarCliente(Guid id)
+        //{
+        //    var cliente = _clienteApp.GetById(id);
 
-            var response = new HttpResponseMessage();
+        //    var response = new HttpResponseMessage();
 
-            if (cliente == null)
-            {
-                response = Request.CreateResponse(HttpStatusCode.NotFound);
-            }
-            else
-            {
-                cliente.IsAtivo = true;
-                _clienteApp.Update(cliente);
-                response = Request.CreateResponse(HttpStatusCode.OK, "Cliente Desativado");
-            }
+        //    if (cliente == null)
+        //    {
+        //        response = Request.CreateResponse(HttpStatusCode.NotFound);
+        //    }
+        //    else
+        //    {
+        //        cliente.IsAtivo = false;
+        //        _clienteApp.Update(cliente);
 
-            var tsc = new TaskCompletionSource<HttpResponseMessage>();
-            tsc.SetResult(response);
-            return tsc.Task;
-        }
+        //        response = Request.CreateResponse(HttpStatusCode.OK, "Cliente Desativado");
+        //    }
+
+        //    var tsc = new TaskCompletionSource<HttpResponseMessage>();
+        //    tsc.SetResult(response);
+        //    return tsc.Task;
+        //}
+
+        //[HttpPut]
+        //[Route("cliente/ativar/{id:Guid}")]
+        //public Task<HttpResponseMessage> AtivarCliente(Guid id)
+        //{
+        //    var cliente = _clienteApp.GetById(id);
+
+        //    var response = new HttpResponseMessage();
+
+        //    if (cliente == null)
+        //    {
+        //        response = Request.CreateResponse(HttpStatusCode.NotFound);
+        //    }
+        //    else
+        //    {
+        //        cliente.IsAtivo = true;
+        //        _clienteApp.Update(cliente);
+        //        response = Request.CreateResponse(HttpStatusCode.OK, "Cliente Desativado");
+        //    }
+
+        //    var tsc = new TaskCompletionSource<HttpResponseMessage>();
+        //    tsc.SetResult(response);
+        //    return tsc.Task;
+        //}
 
         public void ConvertAndSave(byte[] imageBytes, Guid id)
         {
@@ -172,7 +183,8 @@ namespace BarraFisik.API.Controllers
             var image = Image.FromStream(ms, true);
 
             //Save image to Disk
-            var path = "C:/Users/jefferson/Documents/Visual Studio 2015/Projects/BarraFisik/BarraFisik.UI/assets/images/fotos/";
+            var path =
+                "C:/Users/jefferson/Documents/Visual Studio 2015/Projects/BarraFisik/BarraFisik.UI/assets/images/fotos/";
             var fileName = id + ".jpg";
             var fullPath = Path.Combine(path, fileName);
             image.Save(fullPath);

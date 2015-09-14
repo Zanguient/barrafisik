@@ -48,6 +48,7 @@ namespace BarraFisik.Infra.Data.Repository
             var entry = Context.Entry(obj);
             DbSet.Attach(obj);
             entry.State = EntityState.Modified;
+            //Context.SaveChanges();
         }
 
         public void Remove(TEntity obj)

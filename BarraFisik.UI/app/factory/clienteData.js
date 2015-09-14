@@ -21,8 +21,8 @@
             return $http.put(apiUrl + 'api/clientes', cliente);
         }
 
-        function addCliente(cliente) {
-            return $http.post(apiUrl+'api/clientes', cliente);
+        function addCliente(clienteHorario) {
+            return $http.post(apiUrl+'api/clientes', clienteHorario);
         }
 
         function desativarCliente(id) {
@@ -33,13 +33,18 @@
             return $http.put(apiUrl + 'api/cliente/ativar/' + id);
         }
 
+        function getAniversariantes(mes) {
+            return $http.get(apiUrl + "api/aniversariantes/" + mes);
+        }
+
         var service = {
             getClientes: getClientes,
             getCliente: getCliente,
             addCliente: addCliente,
             editCliente: editCliente,
             desativarCliente: desativarCliente,
-            ativarCliente: ativarCliente
+            ativarCliente: ativarCliente,
+            getAniversariantes: getAniversariantes
         };
 
         return service;

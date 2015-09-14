@@ -15,7 +15,7 @@ namespace BarraFisik.Infra.Data.UoW
 
         public UnitOfWork()
         {
-            _dbContext = _contextManager.GetContext();
+            _dbContext = _contextManager.GetContext();            
         }
 
         public void BeginTransaction()
@@ -34,7 +34,7 @@ namespace BarraFisik.Infra.Data.UoW
             {
                 if (disposing)
                 {
-                    _dbContext.Dispose();
+                    _dbContext.Dispose();                   
                 }
             }
         }

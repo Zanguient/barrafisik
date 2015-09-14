@@ -43,15 +43,13 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         }
     })
 
+    //Clientes
     .state('app.clientes', {
         url: '/clientes',
         template: '<div ui-view class="fade-in-up"></div>',
         title: 'Clientes',
         ncyBreadcrumb: {
             label: 'Clientes'
-        },
-        params: {
-            updated: false
         }
     }).state('app.clientes.listar', {
         url: '/listar',
@@ -68,7 +66,7 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         templateUrl: "app/views/cliente/create.html",
         title: 'Cadastrar Clientes',
         icon: 'ti-layout-media-left-alt',
-        resolve: loadSequence('clienteCreateCtrl', 'clienteData', 'horarioData', 'ui.mask'),
+        resolve: loadSequence('clienteCreateCtrl', 'clienteData', 'horarioData', 'ui.mask', 'filaEsperaData'),
         controller: "clienteCreateCtrl as vm",
         ncyBreadcrumb: {
             label: 'Cadastrar'
@@ -77,7 +75,7 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         url: '/editar/{id}',
         templateUrl: "app/views/cliente/edit.html",
         title: 'Editar Cliente',
-        resolve: loadSequence('clienteEditCtrl', 'clienteData', 'horarioData', 'ui.mask'),        
+        resolve: loadSequence('clienteEditCtrl', 'clienteData', 'horarioData', 'ui.mask'),
         controller: "clienteEditCtrl as vm",
         ncyBreadcrumb: {
             label: 'Editar'
@@ -91,12 +89,51 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
             label: 'Ficha do Cliente'
         },
         controller: 'clienteCtrl'
+    }).state('app.clientes.aniversariantes', {
+        url: '/aniversariantes/{mes}',
+        templateUrl: "app/views/cliente/aniversariantes.html",
+        title: 'Editar Cliente',
+        resolve: loadSequence('clienteAniversariantesCtrl', 'clienteData', 'xeditable'),
+        ncyBreadcrumb: {
+            label: 'Aniversariantes'
+        },
+        controller: 'clienteAniversariantesCtrl'
+    })
+
+    //Horários
+     .state('app.horarios', {
+            url: '/horarios',
+            template: '<div ui-view class="fade-in-up"></div>',
+            title: 'Horários',
+            ncyBreadcrumb: {
+                label: 'Horários'
+            }
+    })
+    .state('app.horarios.listar', {
+        url: '/lista',
+        templateUrl: "app/views/horario/horario.html",
+        title: 'Lista de Horários',
+        icon: 'ti-layout-media-left-alt',
+        resolve: loadSequence('horarioCtrl', 'horarioData', 'xeditable'),
+        controller: "horarioCtrl as vm",
+        ncyBreadcrumb: {
+            label: 'Lista de Horários'
+        }
+    })
+
+    //Fila de espera
+    .state('app.filaEspera', {
+        url: "/filaEspera",
+        templateUrl: "app/views/filaespera/filaespera.html",
+        resolve: loadSequence('filaEsperaCtrl', 'filaEsperaData', 'ngTable', 'clienteFilters', 'ui.mask'),
+        title: 'Fila de Espera',
+        ncyBreadcrumb: {
+            label: 'Fila de Espera'
+        },
+        controller: 'filaEsperaCtrl as vm'
     })
 
 
-
-
-     
 
     // Generates a resolve object previously configured in constant.JS_REQUIRES (config.constant.js)
     function loadSequence() {

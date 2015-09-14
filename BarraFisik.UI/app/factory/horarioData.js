@@ -20,10 +20,15 @@
             return $http.put(apiUrl + 'api/horarios', horario);
         }
 
+        function getHorarioTotal() {
+            return $http.get(apiUrl + 'api/horarios/total');
+        }
+
         var service = {
             addHorario: addHorario,
             getHorarioCliente: getHorarioCliente,
-            editHorario: editHorario
+            editHorario: editHorario,
+            gethorarioTotal: getHorarioTotal
         };
 
         return service;

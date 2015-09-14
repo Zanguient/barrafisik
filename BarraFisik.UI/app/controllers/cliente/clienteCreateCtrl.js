@@ -1,9 +1,9 @@
 ﻿(function () {
     app.controller('clienteCreateCtrl', clienteCreateCtrl);
 
-    function clienteCreateCtrl(clienteData, horarioData, $scope, SweetAlert) {
+    function clienteCreateCtrl(clienteData, horarioData, $scope, SweetAlert, filaEsperaData) {
         var vm = this;
-        vm.clienteCreateCtrl = {};
+        vm.clienteCreateCtrl = {};                
 
         $scope.horario = {
             ClienteId: null
@@ -80,12 +80,26 @@
             return ctx.getImageData(x, y, w, h);
         };
 
-        $scope.cliente = {
-            Nome: "",
-            Endereco: "",
-            DtInscricao: new Date,
-            IsAtivo: true,
-        };
+        var fila = null;
+        if (JSON.parse(window.sessionStorage.getItem('fila'))) {
+            fila = $scope.fila = JSON.parse(window.sessionStorage.getItem('fila'));
+            $scope.cliente = {
+                Nome: fila.Nome,
+                Endereco: "",
+                Telefone: fila.Telefone,
+                Celular: fila.Celular,
+                Email: fila.Email,
+                DtInscricao: new Date,
+                IsAtivo: true,
+            };
+        } else {
+            $scope.cliente = {
+                Nome: "",
+                Endereco: "",
+                DtInscricao: new Date,
+                IsAtivo: true,
+            };
+        }
 
         var defaultHorario = {
             Segunda: false,
@@ -126,12 +140,6 @@
                 } else {
                     // Cadastra o cliente
                     clienteData.addCliente($scope.cliente).success(function (id) {
-                        // Cadastra o horario do cliente 
-                        // se o mesmo se encontrar ativo
-                        $scope.horario.ClienteId = id;
-                        if ($scope.cliente.IsAtivo) {
-                            horarioData.addHorario($scope.horario).then(function() {});
-                        }
                         
                         //Limpa o formulario
                         form.$setPristine(true);
@@ -142,6 +150,14 @@
                             IsAtivo: true,
                         };
                         $scope.horario = angular.copy(defaultHorario);
+
+                        // Apagar fila e Limpa session storage
+                        if (fila != null) {
+                            filaEsperaData.deleteFila(fila.FilaEsperaId).then(function() {});
+                            window.sessionStorage.removeItem('fila');
+                        }
+                            
+
                         
                         SweetAlert.swal("Sucesso!", "Cliente foi cadastrado com sucesso!", "success");
                     }).error(function (error) {

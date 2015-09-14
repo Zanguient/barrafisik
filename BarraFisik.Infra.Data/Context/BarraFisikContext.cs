@@ -15,6 +15,7 @@ namespace BarraFisik.Infra.Data.Context
 
         public IDbSet<Cliente> Clientes { get; set; }
         public IDbSet<Horario> Horarios { get; set; }
+        public IDbSet<FilaEspera> FilaEspera { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -33,6 +34,7 @@ namespace BarraFisik.Infra.Data.Context
             //Model Configuration
             modelBuilder.Configurations.Add(new ClienteConfiguration());
             modelBuilder.Configurations.Add(new HorarioConfiguration());
+            modelBuilder.Configurations.Add(new FilaEsperaConfiguration());
 
             base.OnModelCreating(modelBuilder);
         }

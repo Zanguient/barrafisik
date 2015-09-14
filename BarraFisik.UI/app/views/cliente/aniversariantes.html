@@ -1,0 +1,105 @@
+﻿<style>
+    @media print {
+        @page {
+            margin: 0;
+        }
+
+        .body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .footer-inner {
+            display: none !important;
+        }
+
+        .main-navigation-menu {
+            display: none !important;
+        }
+
+        .navbar-title {
+            display: none !important;
+        }
+
+        #page-title {
+            display: none !important;
+        }
+
+        #nav, #sidebar {
+            display: none;
+        }
+
+        #selectMes {
+            display: none !important;
+        }
+    }
+</style>
+
+<!-- start: PAGE TITLE -->
+<section id="page-title">
+    <div class="row">
+        <div class="col-sm-8">
+            <h1 class="mainTitle">Aniversariantes</h1>
+            <span class="mainDescription">
+                <a href="#" editable-select="referencia.mes" onaftersave="alterames($data)" buttons="no" e-ng-options="s.value as s.text for s in months">
+                    {{ showStatus() }}
+                </a>
+            </span>
+        </div>
+        <div ncy-breadcrumb></div>
+    </div>
+</section>
+<div class="print">
+    <div class="container-fluid container-fullw bg-white">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="invoice">
+                    <div class="row invoice-logo">
+                        <div class="col-md-6 pull-left">
+                            <img alt="" src="assets/images/your-logo-here.png">
+                        </div>
+                        <div class="col-md-6">
+                            <p class="text-dark pull-right">
+                                Aniversariantes do Mês de <b>{{ showStatus() }}</b>
+                            </p>
+                        </div>
+                    </div>
+                    <hr>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div ng-show="aniversariantes.length != 0">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th class="text-center"> Aniversariantes </th>
+                                <th class="text-right"> Dia </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="a in aniversariantes">
+                                <td>{{a.Nome}}</td>
+                                <td class="text-right">{{a.DtNascimento | date:'dd'}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div ng-show="aniversariantes.length == 0">
+                    <h3> Nenhum cliente faz aniversário neste mês de {{showStatus()}}</h3>
+                </div>
+                </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12 invoice-block">
+
+                <br>
+                <a onclick="javascript:window.print();" class="btn btn-lg btn-primary hidden-print">
+                    Print <i class="fa fa-print"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+

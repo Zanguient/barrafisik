@@ -34,6 +34,18 @@ namespace BarraFisik.API.Controllers
             return await tsc.Task;
         }
 
+        [HttpGet]
+        [Route("horarios/total")]
+        public async Task<HttpResponseMessage> GetTotalHorarios()
+        {
+            var result = _horarioApp.GetHorarios();
+            var response = Request.CreateResponse(HttpStatusCode.OK, result);
+
+            var tsc = new TaskCompletionSource<HttpResponseMessage>();
+            tsc.SetResult(response);
+            return await tsc.Task;
+        }
+
         [HttpPost]
         [Route("horarios")]
         public async Task<HttpResponseMessage> Post(HorarioViewModel horario)

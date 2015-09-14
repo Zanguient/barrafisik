@@ -2,8 +2,8 @@
 /**
  * Clip-Two Main Controller
  */
-app.controller('AppCtrl', ['$rootScope', '$scope', '$state', '$translate', '$localStorage', '$window', '$document', '$timeout', 'cfpLoadingBar',
-function ($rootScope, $scope, $state, $translate, $localStorage, $window, $document, $timeout, cfpLoadingBar) {
+app.controller('AppCtrl', ['$rootScope', '$scope', '$state', '$localStorage', '$window', '$document', '$timeout', 'cfpLoadingBar',
+function ($rootScope, $scope, $state, $localStorage, $window, $document, $timeout, cfpLoadingBar) {
 
     // Loading bar transition
     // -----------------------------------
@@ -73,30 +73,30 @@ function ($rootScope, $scope, $state, $translate, $localStorage, $window, $docum
     // angular translate
     // ----------------------
 
-    $scope.language = {
-        // Handles language dropdown
-        listIsOpen: false,
-        // list of available languages
-        available: {
-            'en': 'English',
-            'it_IT': 'Italiano',
-            'de_DE': 'Deutsch'
-        },
-        // display always the current ui language
-        init: function () {
-            var proposedLanguage = $translate.proposedLanguage() || $translate.use();
-            var preferredLanguage = $translate.preferredLanguage();
-            // we know we have set a preferred one in app.config
-            $scope.language.selected = $scope.language.available[(proposedLanguage || preferredLanguage)];
-        },
-        set: function (localeId, ev) {
-            $translate.use(localeId);
-            $scope.language.selected = $scope.language.available[localeId];
-            $scope.language.listIsOpen = !$scope.language.listIsOpen;
-        }
-    };
+    //$scope.language = {
+    //    // Handles language dropdown
+    //    listIsOpen: false,
+    //    // list of available languages
+    //    available: {
+    //        'en': 'English',
+    //        'it_IT': 'Italiano',
+    //        'de_DE': 'Deutsch'
+    //    },
+    //    // display always the current ui language
+    //    init: function () {
+    //        var proposedLanguage = $translate.proposedLanguage() || $translate.use();
+    //        var preferredLanguage = $translate.preferredLanguage();
+    //        // we know we have set a preferred one in app.config
+    //        $scope.language.selected = $scope.language.available[(proposedLanguage || preferredLanguage)];
+    //    },
+    //    set: function (localeId, ev) {
+    //        $translate.use(localeId);
+    //        $scope.language.selected = $scope.language.available[localeId];
+    //        $scope.language.listIsOpen = !$scope.language.listIsOpen;
+    //    }
+    //};
 
-    $scope.language.init();
+    //$scope.language.init();
 
     // Function that find the exact height and width of the viewport in a cross-browser way
     var viewport = function () {

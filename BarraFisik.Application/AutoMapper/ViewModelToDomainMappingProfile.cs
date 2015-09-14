@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using BarraFisik.Application.ViewModels;
 using BarraFisik.Domain.Entities;
+using BarraFisik.Domain.ValueObjects;
 
 namespace BarraFisik.Application.AutoMapper
 {
@@ -17,6 +18,9 @@ namespace BarraFisik.Application.AutoMapper
 
             Mapper.CreateMap<ClienteViewModel, Cliente>();
             Mapper.CreateMap<HorarioViewModel, Horario>();
+            Mapper.CreateMap<TotalHorarioViewModel, TotalHorario>();
+            Mapper.CreateMap<ClienteHorarioViewModel, ClienteHorario>();
+            Mapper.CreateMap<FilaEsperaViewModel, FilaEspera>();
         }
     }
 }

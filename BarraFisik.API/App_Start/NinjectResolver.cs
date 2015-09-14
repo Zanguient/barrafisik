@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Http.Dependencies;
+﻿using System.Web.Http.Dependencies;
 using Ninject;
 
-namespace BarraFisik.API.App_Start
+namespace BarraFisik.API
 {
     public class NinjectResolver : NinjectScope, IDependencyResolver
     {

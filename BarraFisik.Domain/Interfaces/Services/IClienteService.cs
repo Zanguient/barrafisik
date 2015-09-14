@@ -11,5 +11,7 @@ namespace BarraFisik.Domain.Interfaces.Services
         ValidationResult AtualizarCliente(Cliente cliente);
         IEnumerable<Cliente> GetClientes();
         Cliente GetClienteHorario(Guid id);
+        ClienteHorario GetByClienteId(Guid id);
+        IEnumerable<Cliente> GetAniversariantes(int mes);
     }
 }

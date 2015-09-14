@@ -33,6 +33,10 @@ function ($rootScope, $state, $stateParams) {
             logo: 'assets/images/logo.png', // relative path of the project logo
         }
     };
+
+    //+1 por que o getMonth retorn valores de 0 a 11 (jan a dez)
+    $rootScope.mesAtual = new Date().getMonth()+1;
+    $rootScope.dataAtual = new Date();
     $rootScope.user = {
         name: 'Jefferson R. Shibuya',
         job: 'ng-Dev',
@@ -52,7 +56,7 @@ function ($rootScope, $state, $stateParams) {
 
 //    // Since you've now registered more then one translation table, angular-translate has to know which one to use.
 //    // This is where preferredLanguage(langKey) comes in.
-//    $translateProvider.preferredLanguage('en');
+//    $translateProvider.preferredLanguage('pt_br');
 
 //    // Store the language in the local storage
 //    $translateProvider.useLocalStorage();

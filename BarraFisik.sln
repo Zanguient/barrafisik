@@ -31,6 +31,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BarraFisik.Domain.Tests", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BarraFisik.Application", "BarraFisik.Application\BarraFisik.Application.csproj", "{C848946E-6DD4-409E-B536-F3D03C487298}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BarraFisik.CrossCutting.IoC.Unity", "BarraFisik.CrossCutting.IoC.Unity\BarraFisik.CrossCutting.IoC.Unity.csproj", "{95CF2F05-422C-4C5E-BDB3-471ACA3F08FD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -65,6 +67,10 @@ Global
 		{C848946E-6DD4-409E-B536-F3D03C487298}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C848946E-6DD4-409E-B536-F3D03C487298}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C848946E-6DD4-409E-B536-F3D03C487298}.Release|Any CPU.Build.0 = Release|Any CPU
+		{95CF2F05-422C-4C5E-BDB3-471ACA3F08FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{95CF2F05-422C-4C5E-BDB3-471ACA3F08FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{95CF2F05-422C-4C5E-BDB3-471ACA3F08FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{95CF2F05-422C-4C5E-BDB3-471ACA3F08FD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -79,5 +85,6 @@ Global
 		{934F2E6F-7B6A-433F-9128-84E4588D7556} = {F2657158-1C79-4B74-8EDA-5535CDA35555}
 		{85584A8F-66E5-4765-992C-B43BCADEB7FD} = {F165BE0F-8F3B-4E83-BB8B-95AED3493137}
 		{C848946E-6DD4-409E-B536-F3D03C487298} = {CA6AF09C-7F9F-4556-8044-195FA57C27BA}
+		{95CF2F05-422C-4C5E-BDB3-471ACA3F08FD} = {F2657158-1C79-4B74-8EDA-5535CDA35555}
 	EndGlobalSection
 EndGlobal

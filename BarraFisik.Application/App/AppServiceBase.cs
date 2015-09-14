@@ -10,15 +10,20 @@ namespace BarraFisik.Application.App
     {
         private IUnitOfWork<TContext> _uow;
 
-        public void BeginTransaction()
+        public virtual void BeginTransaction()
         {
             _uow = ServiceLocator.Current.GetInstance<IUnitOfWork<TContext>>();
             _uow.BeginTransaction();
         }
 
-        public void Commit()
+        public virtual void Commit()
         {
-            _uow.SaveChanges();
+            _uow.SaveChanges();            
+        }
+
+        public virtual void Fechar()
+        {
+            _uow.Dispose();
         }
 
         protected ValidationAppResult DomainToApplicationResult(ValidationResult result)

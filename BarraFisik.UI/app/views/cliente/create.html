@@ -172,7 +172,7 @@
                             </legend>
                             <div class="col-md-9">
                                 <div class="checkbox clip-check check-primary">
-                                    <input type="checkbox" id="segunda" value="false" ng-model="horario.Segunda" ng-change="horario.HSegunda = horario.HSegunda ? '' : horario.HSegunda">
+                                    <input type="checkbox" id="segunda" value="false" ng-model="cliente.Segunda" ng-change="cliente.HSegunda = cliente.HSegunda ? null : cliente.HSegunda">
                                     <label for="segunda">
                                         Segunda-feira
                                     </label>
@@ -180,14 +180,14 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="input-group">
-                                    <input type="text" class="form-control" ng-disabled="!horario.Segunda"  ui-mask="99" ng-model="horario.HSegunda">
+                                    <input type="text" class="form-control" ng-disabled="!cliente.Segunda" ui-mask="99"  ng-model="cliente.HSegunda">
                                     <span class="input-group-addon">: 00</span>
                                 </div>
                             </div>
 
                             <div class="col-md-9">
                                 <div class="checkbox clip-check check-primary">
-                                    <input type="checkbox" id="terca" value="false" ng-model="horario.Terca" ng-change="horario.HTerca = horario.HTerca ? '' : horario.HTerca">
+                                    <input type="checkbox" id="terca" value="false" ng-model="cliente.Terca" ng-change="cliente.HTerca = cliente.HTerca ? null : cliente.HTerca">
                                     <label for="terca">
                                         Terça-feira
                                     </label>
@@ -195,14 +195,14 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="input-group">
-                                    <input type="text" class="form-control" ui-mask="99" ng-model="horario.HTerca" ng-disabled="!horario.Terca">
+                                    <input type="text" class="form-control" ui-mask="99" ng-model="cliente.HTerca" ng-disabled="!cliente.Terca">
                                     <span class="input-group-addon">: 00</span>
                                 </div>
                             </div>
 
                             <div class="col-md-9">
                                 <div class="checkbox clip-check check-primary">
-                                    <input type="checkbox" id="quarta" value="false" ng-model="horario.Quarta" ng-change="horario.HQuarta = horario.HQuarta ? '' : horario.HQuarta">
+                                    <input type="checkbox" id="quarta" value="false" ng-model="cliente.Quarta" ng-change="cliente.HQuarta = cliente.HQuarta ? null : cliente.HQuarta">
                                     <label for="quarta">
                                         Quarta-feira
                                     </label>
@@ -210,14 +210,14 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="input-group">
-                                    <input type="text" class="form-control" ui-mask="99" ng-model="horario.HQuarta" ng-disabled="!horario.Quarta">
+                                    <input type="text" class="form-control" ui-mask="99" ng-model="cliente.HQuarta" ng-disabled="!cliente.Quarta">
                                     <span class="input-group-addon">: 00</span>
                                 </div>
                             </div>
 
                             <div class="col-md-9">
                                 <div class="checkbox clip-check check-primary">
-                                    <input type="checkbox" id="quinta" value="false" ng-model="horario.Quinta" ng-change="horario.HQuinta = horario.HQuinta ? '' : horario.HQuinta">
+                                    <input type="checkbox" id="quinta" value="false" ng-model="cliente.Quinta" ng-change="cliente.HQuinta = cliente.HQuinta ? null : cliente.HQuinta">
                                     <label for="quinta">
                                         Quinta-feira
                                     </label>
@@ -225,14 +225,14 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="input-group">
-                                    <input type="text" class="form-control" ui-mask="99" ng-model="horario.HQuinta" ng-disabled="!horario.Quinta">
+                                    <input type="text" class="form-control" ui-mask="99" ng-model="cliente.HQuinta" ng-disabled="!cliente.Quinta">
                                     <span class="input-group-addon">: 00</span>
                                 </div>
                             </div>
 
                             <div class="col-md-9">
                                 <div class="checkbox clip-check check-primary">
-                                    <input type="checkbox" id="sexta" value="false" ng-model="horario.Sexta" ng-change="horario.HSexta = horario.HSexta ? '' : horario.HSexta">
+                                    <input type="checkbox" id="sexta" value="false" ng-model="cliente.Sexta" ng-change="cliente.HSexta = cliente.HSexta ? null : cliente.HSexta">
                                     <label for="sexta">
                                         Sexta-feira
                                     </label>
@@ -240,7 +240,7 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="input-group">
-                                    <input type="text" class="form-control" ui-mask="99" ng-model="horario.HSexta" ng-disabled="!horario.Sexta">
+                                    <input type="text" class="form-control" ui-mask="99" ng-model="cliente.HSexta" ng-disabled="!cliente.Sexta">
                                     <span class="input-group-addon">: 00</span>
                                 </div>
                             </div>

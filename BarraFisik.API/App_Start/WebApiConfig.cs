@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web.Http;
-using BarraFisik.API.App_Start;
-using BarraFisik.Inra.CrossCutting.IoC;
+﻿using System.Web.Http;
+//using BarraFisik.Inra.CrossCutting.IoC;
+using BarraFisik.CrossCutting.IoC.Unity;
+using Unity.WebApi;
 
 namespace BarraFisik.API
 {
@@ -16,13 +14,16 @@ namespace BarraFisik.API
             // Rotas da API da Web
             config.MapHttpAttributeRoutes();
 
-            config.Routes.MapHttpRoute(
-                name: "DefaultApi",
-                routeTemplate: "api/{controller}/{id}",
-                defaults: new { id = RouteParameter.Optional }
-            );
+            config.Routes.MapHttpRoute("DefaultApi", "api/{controller}/{id}", new {id = RouteParameter.Optional}
+                );
 
-            GlobalConfiguration.Configuration.DependencyResolver = new NinjectResolver(new Container().GetModule());
+            //var container = new UnityContainer();
+            //DependencyResolver.Resolve(container);
+            //config.DependencyResolver = new UnityResolver(container);
+
+            GlobalConfiguration.Configuration.DependencyResolver = new UnityDependencyResolver(new Container().GetModule());
+
+            //GlobalConfiguration.Configuration.DependencyResolver = new NinjectResolver(new Container().GetModule());
         }
     }
 }
