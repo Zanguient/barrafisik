@@ -56,6 +56,8 @@ namespace BarraFisik.Application.ViewModels
 
         public string Path { get; set; }
 
+        public string Situacao { get; set; }
+
         //Horario Cliente
         public Guid HorarioId { get; set; }
 

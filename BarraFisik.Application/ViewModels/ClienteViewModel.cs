@@ -55,6 +55,7 @@ namespace BarraFisik.Application.ViewModels
         public byte[] Foto { get; set; }
 
         public string Path { get; set; }
+        public string Situacao { get; set; }
 
 
     }

@@ -13,7 +13,7 @@ namespace BarraFisik.Application.Interfaces
         MensalidadesViewModel GetById(Guid id);
         IEnumerable<MensalidadesViewModel> GetAll();
         IEnumerable<MensalidadesViewModel> GetMensalidadesCliente(Guid id);
-        void Update(MensalidadesViewModel mensalidadesViewModel);
+        ValidationAppResult Update(MensalidadesViewModel mensalidadesViewModel);
         void Remove(Guid id);
     }
 }

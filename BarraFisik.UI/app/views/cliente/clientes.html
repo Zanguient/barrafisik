@@ -36,6 +36,7 @@
                                 <td class="rowTd" data-title="'Telefone'">{{p.Telefone | telefone}}</td>
                                 <td class="rowTd" data-title="'Celular'">{{p.Celular | telefone}}</td>
                                 <td class="rowTd" data-title="'Status'">{{p.IsAtivo}}</td>
+                                <td class="rowTd" data-title="'Situação'"><span class="label" ng-class="{'label-warning': p.Situacao == 'Pendente', 'label-success': p.Situacao == 'Regular', 'label-inverse': p.Situacao == 'Inativo'}"> {{p.Situacao}}</span></td>
                                 <td class="rowTd" data-title="'Endereço'">{{p.Endereco}} </td>
                                 <td class="center">
                                     <div class="visible-md visible-lg hidden-sm hidden-xs">                                        

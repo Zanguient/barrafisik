@@ -104,9 +104,9 @@
                     // Cadastra/Atualiza mensalidade
                     mensalidade.ClienteId = ClienteId;
                     mensalidade.ValorPago = mensalidade.ValorPago.toString().replace(",", ".");
-                    mensalidadesData.addMensalidade(mensalidade).success(function () {
-                        SweetAlert.swal("Sucesso!", "Mensalidade atualizada com Sucesso", "success");
+                    mensalidadesData.editMensalidade(mensalidade).success(function () {
                         $scope.editId = -1;
+                        SweetAlert.swal("Sucesso!", "Mensalidade atualizada com Sucesso", "success");
                     }).error(function (error) {
                         var errors = [];
                         for (var key in error.ModelState) {

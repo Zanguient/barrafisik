@@ -59,7 +59,7 @@ namespace BarraFisik.API.Controllers
         {
             if (ModelState.IsValid)
             {
-                var result = _mensalidadesApp.AdicionarMensalidade(mensalidade);
+                var result = _mensalidadesApp.Update(mensalidade);
 
                 if (!result.IsValid)
                 {

@@ -24,6 +24,7 @@ namespace BarraFisik.Infra.Data.EntityConfig
             Property(c => c.Sexo).IsOptional().HasMaxLength(1).HasColumnType("char");
             Property(c => c.QtdFilhos).IsOptional();
             Property(c => c.Path).IsOptional().HasMaxLength(250);
+            Property(c => c.Situacao).IsOptional();
 
             Ignore(t => t.ResultadoValidacao);
 

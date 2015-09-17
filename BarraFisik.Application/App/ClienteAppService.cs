@@ -30,6 +30,9 @@ namespace BarraFisik.Application.App
 
             BeginTransaction();
 
+            if (!cliente.IsAtivo)
+                cliente.Situacao = "Inativo";
+            else cliente.Situacao = "Pendente";
             var result = _clienteService.AdicionarCliente(cliente);
 
             if (!result.IsValid)
@@ -62,9 +65,12 @@ namespace BarraFisik.Application.App
             var hasHorario = _horarioService.GetHorarioCliente(cliente.ClienteId);
 
             BeginTransaction();
-
+           
             var c = _clienteService.GetById(cliente.ClienteId);
             c = cliente;
+
+            if (!c.IsAtivo)
+                c.Situacao = "Inativo";
 
             var result = _clienteService.AtualizarCliente(c);
 
