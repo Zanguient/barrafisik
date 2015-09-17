@@ -155,6 +155,7 @@
     <Compile Include="Controllers\ClienteController.cs" />
     <Compile Include="Controllers\FilaEsperaController.cs" />
     <Compile Include="Controllers\HorarioController.cs" />
+    <Compile Include="Controllers\MensalidadesController.cs" />
     <Compile Include="Filters\GzipCompressionAttribute.cs" />
     <Compile Include="helpers\UnityResolver.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -24,18 +24,22 @@
                 <span class="error text-small block" ng-if="FormEdit.Nome.$dirty && FormEdit.Nome.$invalid">Informe o Nome</span>
             </td>
             <td>Email: </td>
-            <td>
-                <input class="form-control" type="text" name="Email" class="w180" ng-model="p.Email">
+            <td colspan="2">
+                <input class="form-control" type="text" name="Email" ng-model="p.Email">
             </td>
         </tr>
         <tr>
             <td>Telefone:</td>
             <td>
-                <input class="form-control" type="text" name="Telefone" class="w180" ng-model="p.Telefone" ui-mask="9999-9999">
+                <input class="form-control" type="text" name="Telefone" ng-model="p.Telefone" ui-mask="9999-9999">
             </td>
             <td>Celular</td>
             <td>
-                <input class="form-control" type="text" name="Celular" class="w180" ng-model="p.Celular" ui-mask="9999-9999">
+                <input class="form-control" type="text" name="Celular" ng-model="p.Celular" ui-mask="9999-9999">
+            </td>
+            <td>Horário:</td>
+            <td>
+                <input class="form-control" type="number" name="Hora" maxlength="2" ng-model="p.Hora">
             </td>
             <td colspan="2">
                 <div class="pull-right">

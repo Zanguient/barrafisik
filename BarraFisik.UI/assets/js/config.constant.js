@@ -27,7 +27,6 @@ app.constant('JS_REQUIRES', {
         'ckeditor-plugin': 'bower_components/ckeditor/ckeditor.js',
         'jquery-nestable-plugin': ['bower_components/jquery-nestable/jquery.nestable.js'],
         'touchspin-plugin': ['bower_components/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.js', 'bower_components/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.css'],
-        
 
 
         //*** Controllers APP

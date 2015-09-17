@@ -56,7 +56,7 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         templateUrl: "app/views/cliente/clientes.html",
         title: 'Lista de Clientes',
         icon: 'ti-layout-media-left-alt',
-        resolve: loadSequence('clienteCtrl', 'ngTable', 'clienteData', 'clienteFilters'),
+        resolve: loadSequence('clienteCtrl', 'ngTable', 'clienteData', 'clienteFilters', 'touchspin-plugin', 'ui.select'),
         controller: "clienteCtrl as vm",
         ncyBreadcrumb: {
             label: 'Listar'

@@ -21,6 +21,7 @@ namespace BarraFisik.Application.AutoMapper
             Mapper.CreateMap<TotalHorarioViewModel, TotalHorario>();
             Mapper.CreateMap<ClienteHorarioViewModel, ClienteHorario>();
             Mapper.CreateMap<FilaEsperaViewModel, FilaEspera>();
+            Mapper.CreateMap<MensalidadesViewModel, Mensalidades>();
         }
     }
 }

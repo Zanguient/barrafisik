@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using BarraFisik.Domain.Interfaces.Validation;
 using BarraFisik.Domain.Validation.Clientes;
 using BarraFisik.Domain.ValueObjects;
@@ -26,6 +27,8 @@ namespace BarraFisik.Domain.Entities
         public int QtdFilhos { get; set; }
         public bool IsAtivo { get; set; }
         public string Path { get; set; }
+
+        public virtual ICollection<Mensalidades> Mensalidades { get; set; }
 
         public ValidationResult ResultadoValidacao { get; private set; }
 

@@ -36,22 +36,26 @@ namespace BarraFisik.CrossCutting.IoC.Unity
             container.RegisterType<IClienteAppService, ClienteAppService>();
             container.RegisterType<IHorarioAppService, HorarioAppService>();
             container.RegisterType<IFilaEsperaAppService, FilaEsperaAppService>();
+            container.RegisterType<IMensalidadesAppService, MensalidadesAppService>();
 
             //Services
             container.RegisterType(typeof(IServiceBase<>), typeof(ServiceBase<>));
             container.RegisterType<IClienteService, ClienteService>();
             container.RegisterType<IHorarioService, HorarioService>();
             container.RegisterType<IFilaEsperaService, FilaEsperaService>();
+            container.RegisterType<IMensalidadesService, MensalidadesService>();
 
             //Data Repos
             container.RegisterType(typeof(IRepositoryBase<>), typeof(RepositoryBase<,>));
             container.RegisterType<IClienteRepository, ClienteRepository>();
             container.RegisterType<IHorarioRepository, HorarioRepository>();
             container.RegisterType<IFilaEsperaRepository, FilaEsperaRepository>();
+            container.RegisterType<IMensalidadesRepository, MensalidadesRepository>();
 
             //Data Repos Read Only
             container.RegisterType<IClienteRepositoryReadOnly, ClienteRepositoryReadOnly>();
             container.RegisterType<IHorarioRepositoryReadOnly, HorarioRepositoryReadOnly>();
+            container.RegisterType<IMensalidadesRepositoryReadOnly, MensalidadesRepositoryReadOnly>();
 
             //DataConfig
             container.RegisterType(typeof(IContextManager<>), typeof(ContextManager<>));

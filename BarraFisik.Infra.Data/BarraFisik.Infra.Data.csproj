@@ -63,6 +63,7 @@
     <Compile Include="Context\BaseContext.cs" />
     <Compile Include="Context\ContextManager.cs" />
     <Compile Include="EntityConfig\ClienteConfiguration.cs" />
+    <Compile Include="EntityConfig\MensalidadesConfiguration.cs" />
     <Compile Include="EntityConfig\FilaEsperaConfiguration.cs" />
     <Compile Include="EntityConfig\HorarioConfiguration.cs" />
     <Compile Include="Interfaces\IContextManager.cs" />
@@ -75,8 +76,10 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\ClienteRepository.cs" />
+    <Compile Include="Repository\MensalidadesRepository.cs" />
     <Compile Include="Repository\FilaEsperaRepository.cs" />
     <Compile Include="Repository\HorarioRepository.cs" />
+    <Compile Include="Repository\ReadOnly\MensalidadesRepositoryReadOnly.cs" />
     <Compile Include="Repository\ReadOnly\ClienteRepositoryReadOnly.cs" />
     <Compile Include="Repository\ReadOnly\HorarioRepositoryReadOnly.cs" />
     <Compile Include="Repository\ReadOnly\RepositoryBaseReadOnly.cs" />

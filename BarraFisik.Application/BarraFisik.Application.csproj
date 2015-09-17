@@ -59,6 +59,7 @@
   <ItemGroup>
     <Compile Include="App\AppServiceBase.cs" />
     <Compile Include="App\ClienteAppService.cs" />
+    <Compile Include="App\MensalidadesAppService.cs" />
     <Compile Include="App\FilaEsperaAppService.cs" />
     <Compile Include="App\HorarioAppService.cs" />
     <Compile Include="AutoMapper\AutoMapperConfig.cs" />
@@ -67,6 +68,7 @@
     <Compile Include="AutoMapper\ViewModelToDomainMappingProfile.cs" />
     <Compile Include="Interfaces\IAppServiceBase.cs" />
     <Compile Include="Interfaces\IClienteAppService.cs" />
+    <Compile Include="Interfaces\IMensalidadesAppService.cs" />
     <Compile Include="Interfaces\IFilaEsperaAppService.cs" />
     <Compile Include="Interfaces\IHorarioAppService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -74,6 +76,7 @@
     <Compile Include="Validation\ValidationAppResult.cs" />
     <Compile Include="ViewModels\ClienteHorarioViewModel.cs" />
     <Compile Include="ViewModels\ClienteViewModel.cs" />
+    <Compile Include="ViewModels\MensalidadesViewModel.cs" />
     <Compile Include="ViewModels\FilaEsperaViewModel.cs" />
     <Compile Include="ViewModels\HorarioViewModel.cs" />
     <Compile Include="ViewModels\TotalHorarioViewModel.cs" />

@@ -1,0 +1,55 @@
+﻿<div class="modal-header">
+    <h3 class="modal-title">Pagamento Mensalidade</h3>
+</div>
+<div class="modal-body">
+    <ul>
+        <li ng-repeat="error in vm.errors" class="text-danger">{{error}}</li>
+    </ul>
+    <form name="Form" id="form" novalidate ng-submit="form.submit(Form, mensalidade)">
+        <table class="table no-bg">
+            <tr>
+                <td>Mês: <span class="symbol required"></span></td>
+                <td ng-class="{'has-error':Form.MesReferencia.$dirty && Form.MesReferencia.$invalid, 'has-success':Form.MesReferencia.$valid}">
+                    <input class="form-control" type="number" min="01" max="12" name="MesReferencia" ng-model="mensalidade.MesReferencia" required>
+                    <span class="error text-small block" ng-if="Form.MesReferencia.$dirty && Form.MesReferencia.$invalid">Informe o Mês</span>
+                </td>
+                <td>Ano: <span class="symbol required"></span></td>
+                <td ng-class="{'has-error':Form.AnoReferencia.$dirty && Form.AnoReferencia.$invalid, 'has-success':Form.AnoReferencia.$valid}">
+                    <input class="form-control" type="number" name="AnoReferencia" ng-model="mensalidade.AnoReferencia" required>
+                    <span class="error text-small block" ng-if="Form.AnoReferencia.$dirty && Form.AnoReferencia.$invalid">Informe o Ano</span>
+                </td>
+            </tr>
+            <tr>
+                <td>valor Pago: <span class="symbol required"></span></td>
+                <td ng-class="{'has-error':Form.ValorPago.$dirty && Form.ValorPago.$invalid, 'has-success':Form.ValorPago.$valid}" class="width-200">
+                    <input class="form-control" type="text" money name="ValorPago" ng-model="mensalidade.ValorPago" required>
+                    <span class="error text-small block" ng-if="Form.ValorPago.$dirty && Form.ValorPago.$invalid">Informe o Valor Pago</span>
+                </td>
+                <td>Data Pagamento: <span class="symbol required"></span></td>
+                <td ng-class="{'has-error':Form.DataPagamento.$dirty && Form.DataPagamento.$invalid, 'has-success':Form.DataPagamento.$valid}">
+                    <div class="form-horizontal width-200">
+                        <p class="input-group  margin-top-10">
+                            <input type="text" name="DataReserva" disabled class="form-control" datepicker-popup="dd/MM/yyyy" ng-model="mensalidade.DataPagamento"
+                                   is-open="opened[$index]" datepicker-options="dateOptions"
+                                   ng-required="true" close-text="Fechar"/>
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default" ng-click="open($index)">
+                                    <i class="glyphicon glyphicon-calendar"></i>
+                                </button>
+                            </span>
+
+                        </p>
+                    </div>
+                    <span class="error text-small block" ng-if="Form.DataPagamento.$dirty && Form.DataPagamento.$invalid">Informe a Data de Pagamento</span>
+                </td>
+
+            </tr>
+        </table>
+        <!-- class="editRowTd" -->
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-primary btn-o">Cadastrar</button>
+            <button type="button" class="btn btn-primary btn-o" ng-click="vm.cancel()">Fechar</button>
+        </div>
+    </form>
+</div>
+                

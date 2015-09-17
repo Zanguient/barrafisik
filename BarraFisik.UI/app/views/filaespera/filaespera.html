@@ -21,28 +21,32 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="table-responsive">
-                    <table ng-table="tableParams" class="table">
+                    <table class="table">
                         <tr ng-show="createFila">
-                            <td colspan="7" ng-include src="'app/views/filaespera/create.html'"></td>
+                            <td colspan="12" ng-include src="'app/views/filaespera/create.html'"></td>
                         </tr>
+                    </table>
+                    <table ng-table="tableParams" class="table">
+
                         <tbody ng-repeat="p in $data">
-                            <tr id="tr{{p.FilaEsperaId}}" ng-class-odd="'odd'" ng-class-even="'even'">
-                                <td class="rowTd" data-title="'Data Reserva'" sortable="'DataReserva'">{{p.DataReserva | date:'dd/MM/yyyy'}}</td>
-                                <td class="rowTd" data-title="'Nome'" sortable="'Nome'">{{p.Nome}}</td>
-                                <td class="rowTd" data-title="'E-mail'" sortable="'Email'">{{p.Email}}</td>
-                                <td class="rowTd" data-title="'Telefone'">{{p.Telefone | telefone}}</td>
-                                <td class="rowTd" data-title="'Celular'">{{p.Celular | telefone}} </td>
-                                <td class="center">
-                                    <div class="visible-md visible-lg hidden-sm hidden-xs">
-                                        <a ng-click="setEditId(p.FilaEsperaId)" class="btn btn-transparent btn-xs" tooltip-placement="top" tooltip="Editar" id="editRowBtn{{p.FilaEsperaId}}"><i class="fa fa-pencil"></i></a>
-                                        <a ng-click="delete(p.FilaEsperaId)" class="btn btn-transparent btn-xs tooltips" tooltip-placement="top" tooltip="Excluir"><i class="fa fa-times"></i></a>
-                                        <a ng-click="cadastrar(p)" class="btn btn-transparent btn-xs tooltips" tooltip-placement="top" tooltip="Cadastrar"><i class="fa fa-share"></i></a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr ng-show="editId===p.FilaEsperaId" ng-if="editId===p.FilaEsperaId">
-                                <td colspan="7" ng-include src="'app/views/filaespera/edit.html'"></td>
-                            </tr>
+                        <tr id="tr{{p.FilaEsperaId}}" ng-class-odd="'odd'" ng-class-even="'even'">
+                            <td class="rowTd" data-title="'Data Reserva'" sortable="'DataReserva'">{{p.DataReserva | date:'dd/MM/yyyy'}}</td>
+                            <td class="rowTd" data-title="'Nome'" sortable="'Nome'">{{p.Nome}}</td>
+                            <td class="rowTd" data-title="'E-mail'" sortable="'Email'">{{p.Email}}</td>
+                            <td class="rowTd" data-title="'Telefone'">{{p.Telefone | telefone}}</td>
+                            <td class="rowTd" data-title="'Celular'">{{p.Celular | telefone}} </td>
+                            <td class="rowTd" data-title="'Hora'" sortable="'Hora'"><span ng-show="p.Hora != null">{{p.Hora}} H</span><span ng-show="p.Hora == null">-</span></td>
+                            <td class="center">
+                                <div class="visible-md visible-lg hidden-sm hidden-xs">
+                                    <a ng-click="setEditId(p.FilaEsperaId)" class="btn btn-transparent btn-xs" tooltip-placement="top" tooltip="Editar" id="editRowBtn{{p.FilaEsperaId}}"><i class="fa fa-pencil"></i></a>
+                                    <a ng-click="delete(p.FilaEsperaId)" class="btn btn-transparent btn-xs tooltips" tooltip-placement="top" tooltip="Excluir"><i class="fa fa-times"></i></a>
+                                    <a ng-click="cadastrar(p)" class="btn btn-transparent btn-xs tooltips" tooltip-placement="top" tooltip="Cadastrar"><i class="fa fa-share"></i></a>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr ng-show="editId===p.FilaEsperaId" ng-if="editId===p.FilaEsperaId">
+                            <td colspan="7" ng-include src="'app/views/filaespera/edit.html'"></td>
+                        </tr>
                         </tbody>
                     </table>
                 </div>

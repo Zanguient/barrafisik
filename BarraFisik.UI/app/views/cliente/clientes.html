@@ -28,7 +28,7 @@
                         <tbody ng-repeat="p in $data">
                             <tr ng-class-odd="'odd'">
                                 <td class="rowTd" data-title="Foto">
-                                    <img ng-src="{{p.Path}}" class="img-rounded" width="80" height="60"/>
+                                    <img ng-src="{{p.Path}}" class="img-rounded" width="80" height="60" />
                                 </td>
                                 <td class="rowTd" data-title="'Nome'" sortable="'Nome'">{{p.Nome}}</td>
                                 <td class="rowTd" data-title="'E-mail'" sortable="'Email'">{{p.Email}}</td>
@@ -38,15 +38,11 @@
                                 <td class="rowTd" data-title="'Status'">{{p.IsAtivo}}</td>
                                 <td class="rowTd" data-title="'Endereço'">{{p.Endereco}} </td>
                                 <td class="center">
-                                    <div class="visible-md visible-lg hidden-sm hidden-xs">
+                                    <div class="visible-md visible-lg hidden-sm hidden-xs">                                        
                                         <a ui-sref="app.clientes.editar({id: p.ClienteId})" class="btn btn-transparent btn-xs" tooltip-placement="top" tooltip="Editar"><i class="fa fa-pencil"></i></a>
                                         <a ui-sref="app.clientes.ficha({id: p.ClienteId})" class="btn btn-transparent btn-xs tooltips" tooltip-placement="top" tooltip="Share"><i class="fa fa-share"></i></a>
-                                        <a href="#" ng-if="p.IsAtivo==true" class="btn btn-transparent btn-xs tooltips" ng-click="Desativar(p.ClienteId)" tooltip-placement="top" tooltip="Desativar">
-                                            <i class="fa fa-times fa fa-white"></i>
-                                        </a>
-                                        <a href="#" ng-if="p.IsAtivo==false" class="btn btn-transparent btn-xs tooltips" ng-click="Ativar(p.ClienteId)" tooltip-placement="top" tooltip="Ativar">
-                                            <i class="fa fa-apple fa fa-white"></i>
-                                        </a>
+                                        <a ng-click="openMensalidades(p.ClienteId)" class="btn btn-transparent btn-xs tooltips" tooltip-placement="top" tooltip="Mensalidades"><i class="fa fa-money"></i></a>
+                                        <a ng-click="createMensalidade(p.ClienteId)" class="btn btn-transparent btn-xs tooltips" tooltip-placement="top" tooltip="Pagamento"><i class="fa fa-dollar"></i></a>
                                     </div>
                                 </td>
                             </tr>

@@ -168,7 +168,8 @@
                             Nome: null,
                             Telefone: "",
                             Celular: "",
-                            Email: null
+                            Email: null,
+                            Hora: ""
                         };
                         SweetAlert.swal("Cadastrado!", "Dados cadastrado com sucesso!", "success");
                         $scope.createFila = false;

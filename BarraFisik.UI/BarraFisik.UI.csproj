@@ -54,7 +54,10 @@
     <Content Include="app\controllers\cliente\clienteEditCtrl.js" />
     <Content Include="app\controllers\filaespera\filaEsperaCtrl.js" />
     <Content Include="app\controllers\horario\horarioCtrl.js" />
+    <Content Include="app\controllers\mensalidades\createMensalidadesCtrl.js" />
+    <Content Include="app\controllers\mensalidades\mensalidadesCtrl.js" />
     <Content Include="app\directives\xngFocus.js" />
+    <Content Include="app\factory\mensalidadesData.js" />
     <Content Include="app\factory\filaEsperaData.js" />
     <Content Include="app\factory\clienteData.js" />
     <Content Include="app\factory\horarioData.js" />
@@ -68,6 +71,9 @@
     <Content Include="app\views\filaespera\edit.html" />
     <Content Include="app\views\filaespera\filaespera.html" />
     <Content Include="app\views\horario\horario.html" />
+    <Content Include="app\views\mensalidades\create.html" />
+    <Content Include="app\views\mensalidades\edit.html" />
+    <Content Include="app\views\mensalidades\mensalidades.html" />
     <Content Include="assets\api\groups.js" />
     <Content Include="assets\css\plugins.css" />
     <Content Include="assets\css\styles.css" />
