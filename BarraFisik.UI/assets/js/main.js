@@ -5,6 +5,9 @@ function ($rootScope, $state, $stateParams) {
     // Attach Fastclick for eliminating the 300ms delay between a physical tap and the firing of a click event on mobile browsers
     FastClick.attach(document.body);
 
+    // UpdateClientes 1 vez a cada entrada no sistema
+    $rootScope.updateClientes = false;
+
     // Set some reference to access them from any scope
     $rootScope.$state = $state;
     $rootScope.$stateParams = $stateParams;
@@ -50,27 +53,6 @@ function ($rootScope, $state, $stateParams) {
         picture: 'app/img/user/02.jpg'
     };
 }]);
-// translate config
-//app.config(['$translateProvider',
-//function ($translateProvider) {
-
-//    // prefix and suffix information  is required to specify a pattern
-//    // You can simply use the static-files loader with this pattern:
-//    $translateProvider.useStaticFilesLoader({
-//        prefix: 'assets/i18n/',
-//        suffix: '.json'
-//    });
-
-//    // Since you've now registered more then one translation table, angular-translate has to know which one to use.
-//    // This is where preferredLanguage(langKey) comes in.
-//    $translateProvider.preferredLanguage('pt_br');
-
-//    // Store the language in the local storage
-//    $translateProvider.useLocalStorage();
-
-//}]);
-// Angular-Loading-Bar
-// configuration
 app.config(['cfpLoadingBarProvider',
 function (cfpLoadingBarProvider) {
     cfpLoadingBarProvider.includeBar = true;

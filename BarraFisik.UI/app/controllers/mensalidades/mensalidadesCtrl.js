@@ -1,18 +1,18 @@
-﻿(function() {
+﻿(function () {
     "use strict";
 
     app.controller('mensalidadesCtrl', mensalidadesCtrl);
 
-    function mensalidadesCtrl($scope, ClienteId, $modalInstance, mensalidadesData, ngTableParams, $filter, $timeout, SweetAlert) {
+    function mensalidadesCtrl($scope, ClienteId, modalService, $modalInstance, mensalidadesData, ngTableParams, $filter, $timeout, SweetAlert, toaster) {
         var vm = this;
         vm.mensalidades = [];
         $scope.teste = "teste";
 
         vm.cancel = function () {
             $modalInstance.dismiss('cancel');
-        };        
+        };
 
-        mensalidadesData.getMensalidades(ClienteId).then(function(result) {
+        mensalidadesData.getMensalidades(ClienteId).then(function (result) {
             vm.mensalidades = result.data;
             loadTable(vm.mensalidades);
         });
@@ -38,44 +38,27 @@
             });
         }
 
-        $scope.delete = function (id) {
-            SweetAlert.swal({
-                title: "Confirmar Exclusão?",
-                text: "Tem certeza que deseja excluir esse registro?",
-                type: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#DD6B55",
-                confirmButtonText: "Confirmar",
-                cancelButtonText: "Cancelar",
-                closeOnConfirm: false,
-                closeOnCancel: false
-            }, function (isConfirm) {
-                if (isConfirm) {
-                    SweetAlert.swal({
-                        title: "Excluído!",
-                        text: "Registro excluído com sucesso.",
-                        type: "success",
-                        confirmButtonColor: "#007AFF"
-                    });
+        vm.delete = function (id) {            
+            var modalOptions = {
+                closeButtonText: 'Cancelar',
+                actionButtonText: 'Excluir',
+                headerText: 'Excluir ?',
+                bodyText: 'Tem certeza que deseja exlcuir esta mensalidade?'
+            };
 
-                    mensalidadesData.deleteMensalidade(id).then(function () {
-                        SweetAlert.swal("Excluído!", "Dados apgados com sucesso!", "success");
-                        $.each(vm.mensalidades, function (i) {
-                            if (vm.mensalidades[i].MensalidadesId === id) {
-                                vm.mensalidades.splice(i, 1);
-                                return false;
-                            }
-                        });
-                        $scope.tableParams.reload();
+            modalService.showModal({}, modalOptions).then(function () {
+                mensalidadesData.deleteMensalidade(id).then(function () {
+                    toaster.pop('success', '', 'Mensalidade Excluída com Sucesso!');
+                    $.each(vm.mensalidades, function (i) {
+                        if (vm.mensalidades[i].MensalidadesId === id) {
+                            vm.mensalidades.splice(i, 1);
+                            return false;
+                        }
                     });
-                } else {
-                    SweetAlert.swal({
-                        title: "Cancelado",
-                        text: "Operação de exclusão cancelada",
-                        type: "error",
-                        confirmButtonColor: "#007AFF"
-                    });
-                }
+                    $scope.tableParams.reload();
+                }), function (data) {
+                    
+                };
             });
         }
 
@@ -96,8 +79,7 @@
                             }
                         }
                     }
-                    angular.element('.ng-invalid[name=' + firstError + ']').focus();
-                    SweetAlert.swal("Erro ao Atualizar!","Pro favor verifique os dados e tente novamente", "error");
+                    angular.element('.ng-invalid[name=' + firstError + ']').focus();                    
                     return;
 
                 } else {
@@ -105,14 +87,14 @@
                     mensalidade.ClienteId = ClienteId;
                     mensalidade.ValorPago = mensalidade.ValorPago.toString().replace(",", ".");
                     mensalidadesData.editMensalidade(mensalidade).success(function () {
+                        toaster.pop('success', '', 'Mensalidade Atualizada com Sucesso!');
                         $scope.editId = -1;
-                        SweetAlert.swal("Sucesso!", "Mensalidade atualizada com Sucesso", "success");
                     }).error(function (error) {
                         var errors = [];
                         for (var key in error.ModelState) {
                             for (var i = 0; i < error.ModelState[key].length; i++) {
                                 errors.push(error.ModelState[key][i]);
-                                SweetAlert.swal("Erro ao cadastrar!", error.ModelState[key][i], "error");
+                                toaster.pop('error', '', error.ModelState[key][i]);
                             }
                         }
                         vm.errors = errors;

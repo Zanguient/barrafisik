@@ -14,11 +14,13 @@ namespace BarraFisik.Domain.Services
     {
         private readonly IClienteRepository _clienteRepository;
         private readonly IClienteRepositoryReadOnly _clienteRepositoryReadOnly;
+        private readonly IHorarioRepository _horarioRepository;
 
-        public ClienteService(IClienteRepository clienteRepository, IClienteRepositoryReadOnly clienteRepositoryReadOnly) : base(clienteRepository)
+        public ClienteService(IClienteRepository clienteRepository, IClienteRepositoryReadOnly clienteRepositoryReadOnly, IHorarioRepository horarioRepository) : base(clienteRepository)
         {
             _clienteRepository = clienteRepository;
             _clienteRepositoryReadOnly = clienteRepositoryReadOnly;
+            _horarioRepository = horarioRepository;
         }
 
         public ValidationResult AdicionarCliente(Cliente cliente)
@@ -68,6 +70,11 @@ namespace BarraFisik.Domain.Services
             return _clienteRepositoryReadOnly.GetAll();
         }
 
+        public IEnumerable<Cliente> GetClientesSituacao(string situacao)
+        {
+            return _clienteRepositoryReadOnly.GetClientesSituacao(situacao);
+        }
+
         public Cliente GetClienteHorario(Guid id)
         {
             return _clienteRepository.GetClienteHorario(id);
@@ -81,6 +88,26 @@ namespace BarraFisik.Domain.Services
         public IEnumerable<Cliente> GetAniversariantes(int mes)
         {
             return _clienteRepository.GetAniversariantes(mes);
+        }
+
+        public void UpdateClientesPendentes(int mes, int ano)
+        {
+            _clienteRepositoryReadOnly.UpdateClientesPendentes(mes, ano);
+        }
+
+        public void InativarClientes(IEnumerable<Cliente> listClientes)
+        {            
+            foreach (var cliente in listClientes)
+            {
+                //Delete horario do cliente
+                var horario = _horarioRepository.GetHorarioCliente(cliente.ClienteId);
+                if(horario != null)
+                    _horarioRepository.Remove(horario);
+
+                cliente.Situacao = "Inativo";
+                cliente.IsAtivo = false;
+                base.Update(cliente);
+            }
         }
 
         public ValidationResult VerificaCpfUnico(Cliente cliente)

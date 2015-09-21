@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Net;
@@ -29,6 +30,19 @@ namespace BarraFisik.API.Controllers
         public async Task<HttpResponseMessage> GetClientes()
         {
             var result = _clienteApp.GetAll();
+            var response = Request.CreateResponse(HttpStatusCode.OK, result);
+
+            var tsc = new TaskCompletionSource<HttpResponseMessage>();
+            tsc.SetResult(response);
+            return await tsc.Task;
+        }
+
+        [HttpGet]
+        [Route("clientes/{situacao}")]
+        [GzipCompression]
+        public async Task<HttpResponseMessage> GetClientesSituacao(string situacao)
+        {
+            var result = _clienteApp.GetClientesSituacao(situacao);
             var response = Request.CreateResponse(HttpStatusCode.OK, result);
 
             var tsc = new TaskCompletionSource<HttpResponseMessage>();
@@ -121,6 +135,24 @@ namespace BarraFisik.API.Controllers
             }
 
             return Request.CreateResponse(HttpStatusCode.OK, cliente);
+        }
+
+        [HttpGet]
+        [Route("clientes/updateClientesPendentes")]
+        public HttpResponseMessage UpdateClientesPendentes(int mes, int ano)
+        {
+            _clienteApp.UpdateClientesPendentes(mes, ano);
+
+            return Request.CreateResponse(HttpStatusCode.NotFound, "Clientes Atualizados");            
+        }
+
+        [HttpPost]
+        [Route("clientes/inativarClientes")]
+        public HttpResponseMessage InativarClientes(IEnumerable<ClienteViewModel> listClientes)
+        {
+            _clienteApp.InativarClientes(listClientes);
+
+            return Request.CreateResponse(HttpStatusCode.OK, "Clientes Inativados");
         }
 
         //[HttpPut]

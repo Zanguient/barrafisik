@@ -15,7 +15,7 @@ namespace BarraFisik.Infra.Data.Repository.ReadOnly
         {
             using (IDbConnection cn = Connection)
             {
-                var query = @"Select * from cliente c ";
+                var query = @"Select * from cliente c where c.IsAtivo = 1";
 
                 cn.Open();
                 var clientes = cn.Query<Cliente>(query);
@@ -39,6 +39,41 @@ namespace BarraFisik.Infra.Data.Repository.ReadOnly
                 cn.Close();
 
                 return clienteHorario;
+            }
+        }
+
+        public void UpdateClientesPendentes(int mes, int ano)
+        {
+            using (IDbConnection cn = Connection)
+            {
+                var query = @"  update c set c.Situacao = 'Pendente'
+                                from Cliente c
+                                where not exists 
+                                        (
+                                            select * from Mensalidades m 
+                                                where m.MesReferencia >= "+mes+ "and "+ 
+                                                "m.AnoReferencia = "+ano+" and "+  
+                                                "c.ClienteId = m.ClienteId" +
+                                        ") and c.IsAtivo = 1 and c.Situacao != 'Pendente'";
+
+                cn.Open();
+                var clienteHorario = cn.Execute(query);
+                cn.Close();
+                
+            }
+        }
+
+        public IEnumerable<Cliente> GetClientesSituacao(string situacao)
+        {
+            using (IDbConnection cn = Connection)
+            {
+                var query = @"Select * from cliente c where c.IsAtivo = 1 and c.Situacao = '"+situacao+"'";
+
+                cn.Open();
+                var clientes = cn.Query<Cliente>(query);
+                cn.Close();
+
+                return clientes;
             }
         }
     }

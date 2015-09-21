@@ -34,9 +34,22 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entities\Cliente.cs" />
+    <Compile Include="Entities\FilaEspera.cs" />
+    <Compile Include="Entities\Horario.cs" />
+    <Compile Include="Entities\Mensalidades.cs" />
+    <Compile Include="Exceptions\CustomException.cs" />
     <Compile Include="Interfaces\Repository\IClienteRepository.cs" />
+    <Compile Include="Interfaces\Repository\IMensalidadesRepository.cs" />
+    <Compile Include="Interfaces\Repository\IFilaEsperaRepository.cs" />
+    <Compile Include="Interfaces\Repository\IHorarioRepository.cs" />
     <Compile Include="Interfaces\Repository\IRepositoryBase.cs" />
+    <Compile Include="Interfaces\Repository\ReadOnly\IMensalidadesRepositoryReadOnly.cs" />
+    <Compile Include="Interfaces\Repository\ReadOnly\IClienteRepositoryReadOnly.cs" />
+    <Compile Include="Interfaces\Repository\ReadOnly\IHorarioRepositoryReadOnly.cs" />
     <Compile Include="Interfaces\Services\IClienteService.cs" />
+    <Compile Include="Interfaces\Services\IMensalidadesService.cs" />
+    <Compile Include="Interfaces\Services\IFilaEsperaService.cs" />
+    <Compile Include="Interfaces\Services\IHorarioService.cs" />
     <Compile Include="Interfaces\Services\IServiceBase.cs" />
     <Compile Include="Interfaces\Specification\ISpecification.cs" />
     <Compile Include="Interfaces\Validation\IFiscal.cs" />
@@ -44,18 +57,25 @@
     <Compile Include="Interfaces\Validation\ISelfValidation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ClienteService.cs" />
+    <Compile Include="Services\MensalidadesService.cs" />
+    <Compile Include="Services\FilaEsperaService.cs" />
+    <Compile Include="Services\HorarioService.cs" />
     <Compile Include="Services\ServiceBase.cs" />
+    <Compile Include="Specification\Clientes\ClientePossuiCPFUnico.cs" />
     <Compile Include="Specification\Clientes\ClientePossuiCPFValido.cs" />
+    <Compile Include="Specification\Mensalidades\MensalidadeUnicaMensal.cs" />
     <Compile Include="Validation\Base\FiscalBase.cs" />
+    <Compile Include="Validation\Clientes\ClienteCpfUnico.cs" />
     <Compile Include="Validation\Clientes\ClienteEstaAptoParaCadastroNoSistema.cs" />
     <Compile Include="Validation\Documentos\CPFValidation.cs" />
+    <Compile Include="Validation\Mensalidades\MensalidadeUnica.cs" />
     <Compile Include="Validation\Regra.cs" />
+    <Compile Include="ValueObjects\ClienteHorario.cs" />
+    <Compile Include="ValueObjects\TotalHorario.cs" />
     <Compile Include="ValueObjects\ValidationError.cs" />
     <Compile Include="ValueObjects\ValidationResult.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Exceptions\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

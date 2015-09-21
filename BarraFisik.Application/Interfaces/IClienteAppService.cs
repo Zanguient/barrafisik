@@ -16,5 +16,9 @@ namespace BarraFisik.Application.Interfaces
 
         ClienteViewModel GetClienteHorario(Guid id);
         IEnumerable<ClienteViewModel> GetAniversariantes(int mes);
+
+        void UpdateClientesPendentes(int mes, int ano);
+        IEnumerable<ClienteViewModel> GetClientesSituacao(string situacao);
+        void InativarClientes(IEnumerable<ClienteViewModel> listClientes);
     }
 }

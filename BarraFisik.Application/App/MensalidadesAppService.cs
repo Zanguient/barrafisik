@@ -106,7 +106,7 @@ namespace BarraFisik.Application.App
                 cliente.Situacao = "Regular";
                 _clienteService.Update(cliente);
             }
-            else
+            else if((!existeMensalidade))
             {
                 cliente.Situacao = "Pendente";
                 _clienteService.Update(cliente);
@@ -143,7 +143,7 @@ namespace BarraFisik.Application.App
                 cliente.Situacao = "Regular";
                 _clienteService.Update(cliente);
             }
-            else
+            else if((!existeMensalidade))
             {
                 cliente.Situacao = "Pendente";
                 _clienteService.Update(cliente);

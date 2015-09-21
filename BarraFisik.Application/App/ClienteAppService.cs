@@ -15,11 +15,13 @@ namespace BarraFisik.Application.App
     {
         private readonly IClienteService _clienteService;
         private readonly IHorarioService _horarioService;
+        private readonly IMensalidadesService _mensalidadesService;
 
-        public ClienteAppService(IClienteService clienteService, IHorarioService horarioService)
+        public ClienteAppService(IClienteService clienteService, IHorarioService horarioService, IMensalidadesService mensalidadesService)
         {
             _clienteService = clienteService;
             _horarioService = horarioService;
+            _mensalidadesService = mensalidadesService;
         }
 
 
@@ -71,6 +73,31 @@ namespace BarraFisik.Application.App
 
             if (!c.IsAtivo)
                 c.Situacao = "Inativo";
+            else if(c.IsAtivo && c.Situacao == "Inativo" || c.Situacao == null)
+            {
+                //Caso esteja ativando novamente o cliente, verifica se o mesmo já possui mensalidade paga atual            
+                var today = DateTime.Now;
+                bool existeMensalidade = false;
+                foreach (var mensalidades in _mensalidadesService.GetMensalidadesCliente(c.ClienteId))
+                {
+                    if (mensalidades.MesReferencia >= today.Month && mensalidades.AnoReferencia >= today.Year)
+                    {
+                        existeMensalidade = true;
+                    }
+                }
+
+                if (existeMensalidade && cliente.Situacao != "Regular")
+                {
+                    c.Situacao = "Regular";
+                    _clienteService.Update(cliente);
+                }
+                else
+                {
+                    c.Situacao = "Pendente";
+                    _clienteService.Update(cliente);
+                }
+
+            }
 
             var result = _clienteService.AtualizarCliente(c);
 
@@ -87,7 +114,7 @@ namespace BarraFisik.Application.App
             else
             {
                 //Adiciona ou Atualiza
-                _horarioService.Update(h);
+                _horarioService.Add(h);
             }
 
             Commit();
@@ -117,6 +144,24 @@ namespace BarraFisik.Application.App
         public IEnumerable<ClienteViewModel> GetAniversariantes(int mes)
         {
             return Mapper.Map<IEnumerable<Cliente>, IEnumerable<ClienteViewModel>>(_clienteService.GetAniversariantes(mes));
+        }
+
+        public void UpdateClientesPendentes(int mes, int ano)
+        {
+            _clienteService.UpdateClientesPendentes(mes, ano);
+        }
+
+        public IEnumerable<ClienteViewModel> GetClientesSituacao(string situacao)
+        {
+            return Mapper.Map<IEnumerable<Cliente>, IEnumerable<ClienteViewModel>>(_clienteService.GetClientesSituacao(situacao));
+        }
+
+        public void InativarClientes(IEnumerable<ClienteViewModel> listClientes)
+        {
+            var clientesLista = Mapper.Map<IEnumerable<ClienteViewModel>, IEnumerable<Cliente>>(listClientes);
+            BeginTransaction();
+            _clienteService.InativarClientes(clientesLista);
+            Commit();
         }
 
         public void Dispose()

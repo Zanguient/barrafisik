@@ -131,7 +131,7 @@
                     // Salva dados do cliente
                     clienteData.editCliente($scope.cliente).then(function () {
                         //$scope.horario.ClienteId = $stateParams.id;
-                        horarioData.editHorario($scope.cliente).then(function () {});
+                        //horarioData.editHorario($scope.cliente).then(function () {});
 
                         SweetAlert.swal("Sucesso!", "Cliente foi cadastrado com sucesso!", "success");
 

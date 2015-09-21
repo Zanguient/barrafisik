@@ -9,6 +9,7 @@ namespace BarraFisik.Domain.Interfaces.Repository.ReadOnly
     {
         IEnumerable<Cliente> GetAll();
         ClienteHorario GetByClienteId(Guid id);
-
+        void UpdateClientesPendentes(int mes, int ano);
+        IEnumerable<Cliente> GetClientesSituacao(string situacao);
     }
 }

@@ -1,0 +1,108 @@
+﻿<section id="page-title">
+    <div class="row">
+        <div class="col-sm-8">
+            <h1 class="mainTitle">Clientes</h1>
+            <span class="mainDescription">Lista de Horários dos Clientes</span>
+        </div>
+        <div ncy-breadcrumb></div>
+    </div>
+</section>
+<div class="container-fluid container-fullw">
+    <div class="row">
+        <div class="col-md-12">
+            <div>
+                <div class="row margin-bottom-10">
+                    <div class="col-md-12">
+                        <button ng-click="refresh()" class="btn btn-error pull-right">
+                            Refresh
+                        </button>
+                        <button ng-click="tableParams.sorting({})" class="btn btn-default pull-right">
+                            Limpar Filtros
+                        </button>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table ng-table="tableParams" class="table">
+                        <tr>
+                            <td>Hora</td>
+                            <td>Segunda</td>
+                            <td>Terça</td>
+                            <td>Quarta</td>
+                            <td>Quinta</td>
+                            <td>Sexta</td>
+                        </tr>
+                        <tr>
+                            <td>06:00 - 07:00</td>
+                            <td><progressbar max="22" value="horario.Segunda06" type="danger"> {{horario.Segunda06}} / 22</progressbar></td>
+                            <td>{{horario.Terca06}}</td>
+                            <td>{{horario.Quarta06}}</td>
+                            <td>{{horario.Quinta06}}</td>
+                            <td>{{horario.Sexta06}}</td>
+                        </tr>
+                        <tr>
+                            <td>07:00 - 08:00</td>
+                            <td>{{horario.Segunda07}}</td>
+                            <td>{{horario.Terca07}}</td>
+                            <td>{{horario.Quarta07}}</td>
+                            <td>{{horario.Quinta07}}</td>
+                            <td>{{horario.Sexta07}}</td>
+                        </tr>
+                        <tr>
+                            <td>08:00 - 09:00</td>
+                            <td>{{horario.Segunda08}}</td>
+                            <td>{{horario.Terca08}}</td>
+                            <td>{{horario.Quarta08}}</td>
+                            <td>{{horario.Quinta08}}</td>
+                            <td>{{horario.Sexta08}}</td>
+                        </tr>
+                        <tr>
+                            <td>09:00 - 10:00</td>
+                            <td>
+                                <progressbar max="15" value="horario.Segunda09" type="warning">{{horario.Segunda09}} / 15</progressbar>
+                                <a href="#" class="btn btn-transparent btn-xs tooltips" ng-click="Desativar(p.ClienteId)" tooltip-placement="top" tooltip="Desativar">
+                                    <i class="fa fa-times fa fa-white">Clientes</i>
+                                </a>
+                                <a href="#" class="btn btn-transparent btn-xs tooltips" ng-click="Desativar(p.ClienteId)" tooltip-placement="top" tooltip="Desativar">
+                                    <i class="fa fa-times fa fa-white">Fila</i>
+                                </a>
+                            </td>
+                            <td><span class="badge">{{horario.Segunda09}}</span></td>
+                            <td> <progressbar value="30" class="progress-striped progress-xs active" type="danger"></progressbar></td>
+                            <td> <progressbar value="90" class="progress-striped progress-xs active" type="danger"></progressbar></td>
+                            <td> <progressbar value="10" class="progress-striped progress-xs active" type="danger"></progressbar></td>
+                        </tr>
+                        <tr>
+                            <td>14:00 - 15:00</td>
+                            <td><span class="badge">{{horario.Segunda14}} </span> </td>
+                            <td> {{horario.Terca14}}</td>
+                            <td> {{horario.Quarta14}}</td>
+                            <td> {{horario.Quinta14}}</td>
+                            <td> {{horario.Sexta14}}</td>
+                        </tr>
+                        <tr>
+                            <td>15:00 - 16:00</td>
+                            <td>{{horario.Segunda15}}</td>
+                            <td> {{horario.Terca15}}</td>
+                            <td> {{horario.Quarta15}}</td>
+                            <td> {{horario.Quinta15}}</td>
+                            <td> {{horario.Sexta15}}</td>
+                        </tr>
+                        <tr>
+                            <td>16:00 - 17:00</td>
+                            <td>{{horario.Segunda16}}</td>
+                            <td> {{horario.Terca16}}</td>
+                            <td> {{horario.Quarta16}}</td>
+                            <td> {{horario.Quinta16}}</td>
+                            <td> {{horario.Sexta16}}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<progressbar max="200" value="166" type="danger">
+    166 / 200
+</progressbar>
+

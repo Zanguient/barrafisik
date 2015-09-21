@@ -1,7 +1,7 @@
 ﻿<div class="modal-header">
     <h3 class="modal-title">Mensalidades</h3>
 </div>
-<div class="modal-body">
+<div class="modal-body" data-backdrop="static">
     <div ng-show="vm.mensalidades != ''">
         <table ng-table="tableParams" class="table">
             <tbody ng-repeat="m in $data">
@@ -13,7 +13,7 @@
                     <td class="center">
                         <div class="visible-md visible-lg hidden-sm hidden-xs">
                             <a ng-click="setEditId(m.MensalidadesId)" class="btn btn-transparent btn-xs" tooltip-placement="top" tooltip="Editar" id="editRowBtn{{m.MensalidadesId}}"><i class="fa fa-pencil"></i></a>
-                            <a ng-click="delete(m.MensalidadesId)" class="btn btn-transparent btn-xs" tooltip-placement="top" tooltip="Excluir"><i class="fa fa-times"></i></a>
+                            <a ng-click="vm.delete(m.MensalidadesId)" class="btn btn-transparent btn-xs" tooltip-placement="top" tooltip="Excluir"><i class="fa fa-times"></i></a>
                         </div>
                     </td>
                 </tr>

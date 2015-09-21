@@ -1,0 +1,77 @@
+﻿<section id="page-title" class="padding-top-15 padding-bottom-15">
+    <div class="row">
+        <div class="col-sm-7">
+            <h1 class="mainTitle">Dashboard</h1>
+            <span class="mainDescription">overview &amp; stats </span>
+        </div>
+    </div>
+</section>
+
+<div class="container-fluid container-fullw">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-sm-6" ng-controller="ClientesPendentesCtrl">
+                <div class="panel panel-white">
+                    <div class="panel-heading border-light">
+                        <h4 class="panel-title">Clientes Pendentes <br/><small>Total: {{clientesPendentes.length}} | Selecionados: {{selection.length}}</small></h4>
+                        
+                        <ul class="panel-heading-tabs border-light">
+                            <li>
+                                <div class="pull-right">                                    
+                                    <div class="btn-group" dropdown is-open="status.isopen">
+                                        <button type="button" class="btn btn-primary dropdown-toggle" dropdown-toggle ng-disabled="disabled">
+                                            Ação <span class="caret"></span>
+                                        </button>
+                                        <ul class="dropdown-menu" role="menu">
+                                            <li>
+                                                <a ng-click="inativarSelecionados()">
+                                                    Inativar Selecionados
+                                                </a>
+                                            </li>                                            
+                                        </ul>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="panel-tools">
+                                <ct-paneltool tool-refresh="load1"></ct-paneltool>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="panel-body">
+                        <div class="panel-scroll height-330" perfect-scrollbar wheel-propagation="false" suppress-scroll-x="true">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <tr>
+                                        <td>
+                                            <div class="checkbox clip-check check-primary">
+                                                <input type="checkbox" id="checkAll" ng-model="selectedAll" ng-click="checkAll()">
+                                                <label for="checkAll"></label>
+                                            </div>
+                                        </td>
+                                        <td>Nome</td>
+                                        <td>Telefone</td>
+                                        <td>Celular</td>
+                                    </tr>
+                                    <tr ng-repeat="cliente in clientesPendentes">
+                                        <td>
+                                            <div class="checkbox clip-check check-primary">
+                                                <input type="checkbox" id="{{cliente.ClienteId}}" value="{{cliente}}"
+                                                       ng-model="cliente.Selected"
+                                                       ng-checked="selection.indexOf(cliente) > -1"
+                                                       ng-click="toggleSelection(cliente)">
+                                                <label for="{{cliente.ClienteId}}"></label>
+                                            </div>
+                                        </td>
+                                        <td>{{cliente.Nome}}</td>
+                                        <td>{{cliente.Telefone}}</td>
+                                        <td>{{cliente.Celular}}</td>                                       
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

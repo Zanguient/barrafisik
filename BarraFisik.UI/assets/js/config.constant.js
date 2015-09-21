@@ -21,7 +21,8 @@ app.constant('JS_REQUIRES', {
         //*** jQuery Plugins
         'perfect-scrollbar-plugin': ['bower_components/perfect-scrollbar/js/min/perfect-scrollbar.jquery.min.js', 'bower_components/perfect-scrollbar/css/perfect-scrollbar.min.css'],
         'ladda': ['bower_components/ladda/dist/ladda.min.js', 'bower_components/ladda/dist/ladda-themeless.min.css'],
-        'sweet-alert': ['bower_components/sweetalert/lib/sweet-alert.min.js', 'bower_components/sweetalert/lib/sweet-alert.css'],
+        //'sweet-alert': ['bower_components/sweetalert/lib/sweet-alert.min.js', 'bower_components/sweetalert/lib/sweet-alert.css'],
+        'sweet-alert': ['bower_components/sweetalert2/dist/sweetalert2.min.js', 'bower_components/sweetalert2/dist/sweetalert2.css'],
         'chartjs': 'bower_components/chartjs/Chart.min.js',
         'jquery-sparkline': 'bower_components/jquery.sparkline.build/dist/jquery.sparkline.min.js',
         'ckeditor-plugin': 'bower_components/ckeditor/ckeditor.js',
@@ -39,13 +40,16 @@ app.constant('JS_REQUIRES', {
 
         'filaEsperaCtrl': 'app/controllers/filaespera/filaEsperaCtrl.js',
 
+        'dashboardCtrl': 'app/controllers/Dashboard/dashboardCtrl.js',
+
         //*** Factories
         'clienteData' : 'app/factory/clienteData.js',
         'horarioData' : 'app/factory/horarioData.js',
         'filaEsperaData' : 'app/factory/filaEsperaData.js',
+        'dashboardData' : 'app/factory/dashboardData.js',
 
         //*** Controllers
-        'dashboardCtrl': 'assets/js/controllers/dashboardCtrl.js',
+        //'dashboardCtrl': 'assets/js/controllers/dashboardCtrl.js',
         'iconsCtrl': 'assets/js/controllers/iconsCtrl.js',
         'vAccordionCtrl': 'assets/js/controllers/vAccordionCtrl.js',
         'ckeditorCtrl': 'assets/js/controllers/ckeditorCtrl.js',

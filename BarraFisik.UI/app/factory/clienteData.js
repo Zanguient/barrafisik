@@ -37,6 +37,18 @@
             return $http.get(apiUrl + "api/aniversariantes/" + mes);
         }
 
+        function updateClientesPendentes() {
+            return $http.get(apiUrl + 'api/clientes/updateClientesPendentes');
+        }
+
+        function getClientesSituacao(situacao) {
+            return $http.get(apiUrl+'api/clientes/'+situacao);
+        }
+
+        function inativarClientes(clientes) {
+            return $http.post(apiUrl + 'api/clientes/inativarClientes', clientes);
+        }
+
         var service = {
             getClientes: getClientes,
             getCliente: getCliente,
@@ -44,7 +56,10 @@
             editCliente: editCliente,
             desativarCliente: desativarCliente,
             ativarCliente: ativarCliente,
-            getAniversariantes: getAniversariantes
+            getAniversariantes: getAniversariantes,
+            updateClientesPendentes: updateClientesPendentes,
+            getClientesSituacao: getClientesSituacao,
+            inativarClientes: inativarClientes
         };
 
         return service;

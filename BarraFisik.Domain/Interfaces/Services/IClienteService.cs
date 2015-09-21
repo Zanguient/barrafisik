@@ -10,8 +10,11 @@ namespace BarraFisik.Domain.Interfaces.Services
         ValidationResult AdicionarCliente(Cliente cliente);
         ValidationResult AtualizarCliente(Cliente cliente);
         IEnumerable<Cliente> GetClientes();
+        IEnumerable<Cliente> GetClientesSituacao(string situacao);
         Cliente GetClienteHorario(Guid id);
         ClienteHorario GetByClienteId(Guid id);
         IEnumerable<Cliente> GetAniversariantes(int mes);
+        void UpdateClientesPendentes(int mes, int ano);
+        void InativarClientes(IEnumerable<Cliente> listClientes);
     }
 }
