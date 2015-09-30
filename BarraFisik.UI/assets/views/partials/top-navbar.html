@@ -23,32 +23,17 @@
 		<!-- start: USER OPTIONS DROPDOWN -->
 		<li class="dropdown current-user" dropdown on-toggle="toggled(open)">
 			<a href class="dropdown-toggle" dropdown-toggle>
-				<img src="/assets/images/avatar-1.jpg" alt="{{user.name}}"> <span class="username">{{user.name}} <i class="ti-angle-down"></i></span>
+				<img src="/assets/images/avatar.jpg" alt="{{userInfo.nome}}"> <span class="username">{{userInfo.nome}}<i class="ti-angle-down"></i></span>
 			</a>
 			<ul class="dropdown-menu dropdown-dark">
 				<li>
-					<a ui-sref="app.pages.user">
-						My Profile
+					<a ng-click="alterarSenha()">
+						Alterar Senha
 					</a>
 				</li>
 				<li>
-					<a ui-sref="app.pages.calendar">
-						My Calendar
-					</a>
-				</li>
-				<li>
-					<a ui-sref="app.pages.messages">
-						My Messages (3)
-					</a>
-				</li>
-				<li>
-					<a ui-sref="login.lockscreen">
-						Lock Screen
-					</a>
-				</li>
-				<li>
-					<a ui-sref="login.signin">
-						Log Out
+					<a ng-click="logOut()">
+						Sair
 					</a>
 				</li>
 			</ul>

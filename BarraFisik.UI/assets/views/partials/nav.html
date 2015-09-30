@@ -44,24 +44,17 @@
             </li>        
         </ul>
     </li>
-    <li ng-class="{'active open':$state.includes('app.horarios')}">
-        <a href="javascript:void(0)">
+    <li ui-sref-active="active">
+        <a ui-sref="app.horarios">
             <div class="item-content">
                 <div class="item-media">
                     <i class="ti-time"></i>
                 </div>
                 <div class="item-inner">
-                    <span class="title"> Horários </span><i class="icon-arrow"></i>
+                    <span class="title"> Hor&aacute;rios </span>
                 </div>
             </div>
         </a>
-        <ul class="sub-menu">
-            <li ui-sref-active="active">
-                <a ui-sref="app.horarios.listar">
-                    <span class="title"> Lista de Horários </span>
-                </a>
-            </li>
-        </ul>
     </li>
     <li ui-sref-active="active">
         <a ui-sref="app.filaEspera">
@@ -71,6 +64,18 @@
                 </div>
                 <div class="item-inner">
                     <span class="title"> Lista de Espera </span>
+                </div>
+            </div>
+        </a>
+    </li>
+    <li ui-sref-active="active" ng-if="userInfo.isAdmin">
+        <a ui-sref="app.accounts">
+            <div class="item-content">
+                <div class="item-media">
+                    <i class="ti-lock"></i>
+                </div>
+                <div class="item-inner">
+                    <span class="title"> Acessos ao sistema</span>
                 </div>
             </div>
         </a>

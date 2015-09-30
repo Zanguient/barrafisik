@@ -6,45 +6,72 @@
         </div>
     </div>
 </section>
-
 <div class="container-fluid container-fullw">
     <div class="row">
-        <div class="col-md-12">
-            <div class="col-sm-6" ng-controller="ClientesPendentesCtrl">
+        <div class="col-sm-12">
+            <div class="col-md-7 col-lg-8">
+                <div class="panel panel-white no-radius" id="visits">
+                    <div class="panel-heading border-light">
+                        <h4 class="panel-title"> Inscrições </h4>
+                    </div>
+                    <div collapse="visits" ng-init="visits=false" class="panel-wrapper">
+                        <div class="panel-body">
+                            <div ng-controller="InscritosCtrl" class="height-350">
+                                <canvas class="tc-chart" tc-chartjs-line chart-options="options" chart-data="data" chart-legend="chart1" width="100%"></canvas>
+                                <div class="margin-top-20">
+                                    <div tc-chartjs-legend chart-legend="chart1" class="inline pull-left"></div>
+                                    <div class="pull-right">                
+                                        <form role="form" class="form-inline">
+                                            <div class="form-group">
+                                                <select name="selectAno2" id="selectAno2" ng-model="ano2">
+                                                    <option data-ng-repeat="option in selectAno" ng-value="{{option.ano}}">{{option.ano}}</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <select name="selectAno1" id="selectAno1" ng-model="ano1" ng-init="ano1">
+                                                    <option ng-repeat="option2 in selectAno" ng-value="{{option2.ano}}">{{option2.ano}}</option>
+                                                </select>
+                                            </div>
+                                            <button ng-click="getAno()" class="btn">Filtrar</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-5 col-lg-4" ng-controller="ClientesPendentesCtrl">
                 <div class="panel panel-white">
                     <div class="panel-heading border-light">
-                        <h4 class="panel-title">Clientes Pendentes <br/><small>Total: {{clientesPendentes.length}} | Selecionados: {{selection.length}}</small></h4>
-                        
+                        <h4 class="panel-title">Clientes Pendentes <span class="text-danger"> ( {{selection.length}} / {{clientesPendentes.length}} ) </span></h4>
                         <ul class="panel-heading-tabs border-light">
                             <li>
-                                <div class="pull-right">                                    
+                                <div class="pull-right">
                                     <div class="btn-group" dropdown is-open="status.isopen">
                                         <button type="button" class="btn btn-primary dropdown-toggle" dropdown-toggle ng-disabled="disabled">
                                             Ação <span class="caret"></span>
                                         </button>
-                                        <ul class="dropdown-menu" role="menu">
+                                        <ul class="dropdown-menu pull-right bullet" role="menu">
                                             <li>
                                                 <a ng-click="inativarSelecionados()">
                                                     Inativar Selecionados
                                                 </a>
-                                            </li>                                            
+                                            </li>
                                         </ul>
                                     </div>
                                 </div>
                             </li>
-                            <li class="panel-tools">
-                                <ct-paneltool tool-refresh="load1"></ct-paneltool>
-                            </li>
                         </ul>
                     </div>
                     <div class="panel-body">
-                        <div class="panel-scroll height-330" perfect-scrollbar wheel-propagation="false" suppress-scroll-x="true">
+                        <div class="panel-scroll height-350" perfect-scrollbar wheel-propagation="false" suppress-scroll-x="true">
                             <div class="table-responsive">
                                 <table class="table">
                                     <tr>
                                         <td>
                                             <div class="checkbox clip-check check-primary">
-                                                <input type="checkbox" id="checkAll" ng-model="selectedAll" ng-click="checkAll()">
+                                                <input type="checkbox" id="checkAll" ng-init="false" ng-model="selectedAll" ng-click="checkAll()">
                                                 <label for="checkAll"></label>
                                             </div>
                                         </td>
@@ -64,9 +91,12 @@
                                         </td>
                                         <td>{{cliente.Nome}}</td>
                                         <td>{{cliente.Telefone}}</td>
-                                        <td>{{cliente.Celular}}</td>                                       
+                                        <td>{{cliente.Celular}}</td>
                                     </tr>
                                 </table>
+                            </div>
+                            <div class="margin-top-20">
+                                <div tc-chartjs-legend chart-legend="chart1" class="inline pull-left"></div>
                             </div>
                         </div>
                     </div>

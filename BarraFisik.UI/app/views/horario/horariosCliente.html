@@ -1,0 +1,34 @@
+﻿<div class="modal-header">
+    <h4 class="modal-title">{{cliente.Nome}}</h4>
+</div>
+<div class="modal-body" data-backdrop="static">
+    <table class="table">
+        <tr>
+            <td>Dia</td>
+            <td>Horário</td>
+        </tr>
+        <tr ng-show="cliente.Segunda">
+            <td>Segunda-feira</td>
+            <td>{{cliente.HSegunda}}:00h - {{parseInt(cliente.HSegunda) + 1}}:00h</td>
+        </tr>
+        <tr ng-show="cliente.Terca">
+            <td>Terça-feira</td>
+            <td>{{cliente.HTerca}}:00h - {{parseInt(cliente.HTerca) + 1}}:00h</td>
+        </tr>
+        <tr ng-show="cliente.Quarta">
+            <td>Quarta-feira</td>
+            <td>{{cliente.HQuarta}}:00h - {{parseInt(cliente.HQuarta) + 1}}:00h</td>
+        </tr>
+        <tr ng-show="cliente.Quinta">
+            <td>Quinta-feira</td>
+            <td>{{cliente.HQuinta}}:00h - {{parseInt(cliente.HQuinta) + 1}}:00h</td>
+        </tr>
+        <tr ng-show="cliente.Sexta">
+            <td>Sexta-feira</td>
+            <td>{{cliente.HSexta}}:00h - {{parseInt(cliente.HSexta) + 1}}:00h</td>
+        </tr>
+    </table>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary btn-o" ng-click="vm.cancel()">Fechar</button>
+</div>

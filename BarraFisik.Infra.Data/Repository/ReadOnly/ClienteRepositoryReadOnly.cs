@@ -11,14 +11,28 @@ namespace BarraFisik.Infra.Data.Repository.ReadOnly
 {
     public class ClienteRepositoryReadOnly : RepositoryBaseReadOnly, IClienteRepositoryReadOnly
     {
-        public IEnumerable<Cliente> GetAll()
+        public IEnumerable<ClienteHorario> GetAll()
         {
             using (IDbConnection cn = Connection)
             {
-                var query = @"Select * from cliente c where c.IsAtivo = 1";
+                var query = @"Select * from cliente c inner join Horario h on c.ClienteId = h.ClienteId where c.IsAtivo = 1";
 
                 cn.Open();
-                var clientes = cn.Query<Cliente>(query);
+                var clientes = cn.Query<ClienteHorario>(query);
+                cn.Close();
+
+                return clientes;
+            }
+        }
+
+        public IEnumerable<ClienteHorario> GetClientesAll()
+        {
+            using (IDbConnection cn = Connection)
+            {
+                var query = @"Select * from cliente c left join Horario h on c.ClienteId = h.ClienteId";
+
+                cn.Open();
+                var clientes = cn.Query<ClienteHorario>(query);
                 cn.Close();
 
                 return clientes;
@@ -74,6 +88,34 @@ namespace BarraFisik.Infra.Data.Repository.ReadOnly
                 cn.Close();
 
                 return clientes;
+            }
+        }
+
+        public TotalInscritos GetTotalInscritos(int ano)
+        {
+            using (IDbConnection cn = Connection)
+            {
+                var query = @"  Select distinct "+
+                                    "(select count(*) from Cliente c where Month(c.DtInscricao) = 1 and YEAR(c.DtInscricao) =  "+ano+")  as Janeiro,    "+
+                                    "(select count(*) from Cliente c where Month(c.DtInscricao) = 2 and YEAR(c.DtInscricao) =  "+ano+")  as Fevereiro,  "+
+                                    "(select count(*) from Cliente c where Month(c.DtInscricao) = 3 and YEAR(c.DtInscricao) =  "+ano+")  as Marco,      "+
+                                    "(select count(*) from Cliente c where Month(c.DtInscricao) = 4 and YEAR(c.DtInscricao) =  "+ano+")  as Abril,      "+
+                                    "(select count(*) from Cliente c where Month(c.DtInscricao) = 5 and YEAR(c.DtInscricao) =  "+ano+")  as Maio,       "+
+                                    "(select count(*) from Cliente c where Month(c.DtInscricao) = 6 and YEAR(c.DtInscricao) =  "+ano+")  as Junho,      "+
+                                    "(select count(*) from Cliente c where Month(c.DtInscricao) = 7 and YEAR(c.DtInscricao) =  "+ano+")  as Julho,      "+
+                                    "(select count(*) from Cliente c where Month(c.DtInscricao) = 8 and YEAR(c.DtInscricao) =  "+ano+")  as Agosto,     "+
+                                    "(select count(*) from Cliente c where Month(c.DtInscricao) = 9 and YEAR(c.DtInscricao) =  "+ano+")  as Setembro,   "+
+                                    "(select count(*) from Cliente c where Month(c.DtInscricao) = 10 and YEAR(c.DtInscricao) = "+ano+")  as Outubro,    "+
+                                    "(select count(*) from Cliente c where Month(c.DtInscricao) = 11 and YEAR(c.DtInscricao) = "+ano+")  as Novembro,   "+
+                                    "(select count(*) from Cliente c where Month(c.DtInscricao) = 12 and YEAR(c.DtInscricao) = "+ano+")  as Dezembro,   "+
+                                    "(select MAX(YEAR(c.DtInscricao)) from Cliente c )                                                   as UltimoAno,  "+
+                                    "(select MIN(YEAR(c.DtInscricao)) from Cliente c )                                                   as PrimeiroAno "+                                
+                                " from Cliente c";
+                cn.Open();
+                var inscritos = cn.Query<TotalInscritos>(query).FirstOrDefault();
+                cn.Close();
+
+                return inscritos;
             }
         }
     }

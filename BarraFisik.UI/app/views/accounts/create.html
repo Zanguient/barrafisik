@@ -1,0 +1,40 @@
+﻿<form name="Form" id="form" novalidate ng-submit="form.submit(Form, user)">
+    <table class="table no-bg">
+        <tr>            
+            <td>Nome: <span class="symbol required"></span></td>
+            <td ng-class="{'has-error':Form.Name.$dirty && Form.Name.$invalid, 'has-success':Form.Name.$valid}">
+                <input class="form-control" type="text" name="Name" ng-model="user.Name" required>
+                <span class="error text-small block" ng-if="Form.Name.$dirty && Form.Name.$invalid">Informe o Nome</span>
+            </td>
+            <td >Usuário: <span class="symbol required"></span></td>
+            <td ng-class="{'has-error':Form.UserName.$dirty && Form.UserName.$invalid, 'has-success':Form.UserName.$valid}">
+                <input class="form-control" type="text" name="UserName" ng-model="user.userName" required>
+                <span class="error text-small block" ng-if="Form.UserName.$dirty && Form.UserName.$invalid">Informe o Nome de Usuário</span>
+            </td>
+            <td>Email:</td>
+            <td>
+                <input class="form-control" type="text" name="Email" ng-model="user.Email">
+            </td>
+        </tr>
+        <tr>
+            <td>Senha: <span class="symbol required"></span></td>
+            <td ng-class="{'has-error':Form.Password.$dirty && Form.Password.$invalid, 'has-success':Form.Password.$valid}">
+                <input class="form-control" type="password" name="Password" ng-model="user.Password" required>
+                <span class="error text-small block" ng-if="Form.Password.$dirty && Form.Password.$invalid">Informe a Senha</span>
+            </td>
+            <td>Confirma Senha: <span class="symbol required"></span></td>
+            <td ng-class="{'has-error':Form.ConfirmPassword.$dirty && Form.ConfirmPassword.$invalid, 'has-success':Form.ConfirmPassword.$valid}">
+                <input class="form-control" type="password" name="ConfirmPassword" ng-model="user.ConfirmPassword" required equals="{{user.Password}}">
+                <span class="error text-small block" ng-if="Form.ConfirmPassword.$dirty && Form.ConfirmPassword.$error.required">Confirme a Senha</span>
+                <span class="error text-small block" ng-if="Form.ConfirmPassword.$error.equals">Senhas não conferem</span>
+            </td>
+            <td colspan="2">
+                <div class="pull-right">
+                    <input type="submit" class="btn btn-primary btn-sm margin-right-15" value="Cadastrar">
+                    <input type="button" class="btn btn-primary btn-sm margin-right-15" value="Cancelar" ng-click="cancelCreate(Form)">
+                </div>
+            </td>
+        </tr>
+    </table>
+    <!-- class="editRowTd" -->
+</form>

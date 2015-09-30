@@ -28,6 +28,7 @@ namespace BarraFisik.Domain.ValueObjects
         public int QtdFilhos { get; set; }
         public bool IsAtivo { get; set; }
         public string Path { get; set; }
+        public string Situacao { get; set; }
 
         //Horario Cliente
         public Guid HorarioId { get; set; }

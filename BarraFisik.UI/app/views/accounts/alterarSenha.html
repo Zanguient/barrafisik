@@ -1,0 +1,49 @@
+﻿<div class="wrapper-md">
+    <div>
+        <div class="row">
+            <div class="col-md-12">
+                <form name="frmUsuario" class="form-validation" novalidate ng-submit="frmUsuario.$valid && vm.alterarSenha(usuario)">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <span class="h4">Alterar Senha </span>
+                        </div>
+                        <br />
+                        <ul>
+                            <li ng-repeat="error in vm.errors" class="text-danger">{{error}}</li>
+                        </ul>
+                        <div class="panel-body">
+                            <div class="form-group pull-in clearfix">
+                                <div class="col-sm-12" ng-class="{true: 'has-error'}[submitted && frmUsuario.senhaAtual.$invalid]">
+                                    <input type="password" class="form-control" name="senhaAtual" placeholder="Senha Atual" data-ng-model="usuario.OldPassword" required>
+                                    <span class="text-danger" ng-show="submitted && frmUsuario.senhaAtual.$invalid">
+                                        Informe a Senha Atual
+                                    </span>
+                                </div>                                
+                            </div>
+                            <div class="form-group pull-in clearfix">
+                                <div class="col-sm-12" ng-class="{true: 'has-error'}[submitted && frmUsuario.novaSenha.$invalid]">
+                                    <input type="password" class="form-control" name="novaSenha" placeholder="Nova Senha" ng-model="usuario.NewPassword" required>
+                                    <span class="text-danger" ng-show="submitted && frmUsuario.novaSenha.$invalid">
+                                        Informe a Nova Senha
+                                    </span>
+                                </div>                               
+                            </div>
+                            <div class="form-group pull-in clearfix">
+                                <div class="col-sm-12" ng-class="{true: 'has-error'}[submitted && frmUsuario.confirmSenha.$invalid]">
+                                    <input type="password" class="form-control" name="confirmSenha" placeholder="Confirmar Senha" ng-model="usuario.ConfirmPassword" equals="{{usuario.NewPassword}}" required>
+                                    <span class="text-danger" ng-show="submitted && frmUsuario.confirmSenha.$error.required"> Confirme a Nova Senha </span>
+                                    <span class="text-danger" ng-show="submitted && frmUsuario.confirmSenha.$error.equals"> Nova senha e Confirmação da senha não conferem </span>
+                                </div>
+                            </div>
+                        </div>
+                        <footer class="panel-footer text-right bg-light lter">                            
+                            <button class="btn btn-warning btn-addon" data-ng-click="vm.cancel()"><i class="fa fa-close"></i>Fechar</button>                            
+                            <button data-ng-click="submitted=true" class="btn btn-success btn-addon"><i class="fa fa-check"></i>Alterar</button>
+                        </footer>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+

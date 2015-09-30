@@ -65,9 +65,19 @@ namespace BarraFisik.Domain.Services
             return resultado;
         }
 
-        public IEnumerable<Cliente> GetClientes()
+        public IEnumerable<ClienteHorario> GetClientes()
         {
             return _clienteRepositoryReadOnly.GetAll();
+        }
+
+        public IEnumerable<ClienteHorario> GetClientesAll()
+        {
+            return _clienteRepositoryReadOnly.GetClientesAll();
+        }
+
+        public TotalInscritos GetTotalInscritos(int ano)
+        {
+            return _clienteRepositoryReadOnly.GetTotalInscritos(ano);
         }
 
         public IEnumerable<Cliente> GetClientesSituacao(string situacao)

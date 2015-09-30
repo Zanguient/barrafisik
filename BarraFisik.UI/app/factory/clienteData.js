@@ -49,6 +49,14 @@
             return $http.post(apiUrl + 'api/clientes/inativarClientes', clientes);
         }
 
+        function getClientesAll() {
+            return $http.get(apiUrl + 'api/clientes/all');
+        }
+
+        function getInscritos(ano) {
+            return $http.get(apiUrl + 'api/clientes/inscritos/'+ano);
+        }
+
         var service = {
             getClientes: getClientes,
             getCliente: getCliente,
@@ -59,7 +67,9 @@
             getAniversariantes: getAniversariantes,
             updateClientesPendentes: updateClientesPendentes,
             getClientesSituacao: getClientesSituacao,
-            inativarClientes: inativarClientes
+            inativarClientes: inativarClientes,
+            getClientesAll: getClientesAll,
+            getInscritos: getInscritos
         };
 
         return service;

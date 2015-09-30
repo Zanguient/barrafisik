@@ -3,8 +3,8 @@
 /**
  * Config for the router
  */
-app.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$compileProvider', '$filterProvider', '$provide', '$ocLazyLoadProvider', 'JS_REQUIRES',
-function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvider, $filterProvider, $provide, $ocLazyLoadProvider, jsRequires) {
+app.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$compileProvider', '$filterProvider', '$provide', '$ocLazyLoadProvider', 'JS_REQUIRES', '$httpProvider',
+function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvider, $filterProvider, $provide, $ocLazyLoadProvider, jsRequires, $httpProvider) {
 
     app.controller = $controllerProvider.register;
     app.directive = $compileProvider.directive;
@@ -25,6 +25,7 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
     // APPLICATION ROUTES
     // -----------------------------------
     // For any unmatched url, redirect to /app/dashboard
+    $httpProvider.interceptors.push('authInterceptorService');
     $urlRouterProvider.otherwise("/app/dashboard");
     //
     // Set up the states
@@ -43,97 +44,111 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         }
     })
 
-    //Clientes
-    .state('app.clientes', {
-        url: '/clientes',
-        template: '<div ui-view class="fade-in-up"></div>',
-        title: 'Clientes',
-        ncyBreadcrumb: {
-            label: 'Clientes'
-        }
-    }).state('app.clientes.listar', {
-        url: '/listar',
-        templateUrl: "app/views/cliente/clientes.html",
-        title: 'Lista de Clientes',
-        icon: 'ti-layout-media-left-alt',
-        resolve: loadSequence('clienteCtrl', 'ngTable', 'clienteData', 'clienteFilters', 'touchspin-plugin', 'ui.select'),
-        controller: "clienteCtrl as vm",
-        ncyBreadcrumb: {
-            label: 'Listar'
-        }
-    }).state('app.clientes.cadastrar', {
-        url: '/cadastrar',
-        templateUrl: "app/views/cliente/create.html",
-        title: 'Cadastrar Clientes',
-        icon: 'ti-layout-media-left-alt',
-        resolve: loadSequence('clienteCreateCtrl', 'clienteData', 'horarioData', 'ui.mask', 'filaEsperaData'),
-        controller: "clienteCreateCtrl as vm",
-        ncyBreadcrumb: {
-            label: 'Cadastrar'
-        }
-    }).state('app.clientes.editar', {
-        url: '/editar/{id}',
-        templateUrl: "app/views/cliente/edit.html",
-        title: 'Editar Cliente',
-        resolve: loadSequence('clienteEditCtrl', 'clienteData', 'horarioData', 'ui.mask'),
-        controller: "clienteEditCtrl as vm",
-        ncyBreadcrumb: {
-            label: 'Editar'
-        }
-    }).state('app.clientes.ficha', {
-        url: '/ficha/{id}',
-        templateUrl: "app/views/cliente/ficha.html",
-        title: 'Editar Cliente',
-        resolve: loadSequence('clienteCtrl', 'clienteFilters'),
-        ncyBreadcrumb: {
-            label: 'Ficha do Cliente'
-        },
-        controller: 'clienteCtrl'
-    }).state('app.clientes.aniversariantes', {
-        url: '/aniversariantes/{mes}',
-        templateUrl: "app/views/cliente/aniversariantes.html",
-        title: 'Editar Cliente',
-        resolve: loadSequence('clienteAniversariantesCtrl', 'clienteData', 'xeditable'),
-        ncyBreadcrumb: {
-            label: 'Aniversariantes'
-        },
-        controller: 'clienteAniversariantesCtrl'
-    })
+        // Login routes
+        .state('login', {
+            url: '/login',
+            template: '<div ui-view class="fade-in-right-big smooth"></div>',
+            abstract: true
+        }).state('login.signin', {
+            url: '/signin',
+            templateUrl: "app/views/login/login.html",
+            resolve: loadSequence('loginCtrl'),
+            controller: "loginCtrl as vm",
+        })
 
-    //Horários
-     .state('app.horarios', {
-            url: '/horarios',
+        //Clientes
+        .state('app.clientes', {
+            url: '/clientes',
             template: '<div ui-view class="fade-in-up"></div>',
-            title: 'Horários',
+            title: 'Clientes',
             ncyBreadcrumb: {
-                label: 'Horários'
+                label: 'Clientes'
             }
-    })
-    .state('app.horarios.listar', {
-        url: '/lista',
-        templateUrl: "app/views/horario/horario.html",
-        title: 'Lista de Horários',
-        icon: 'ti-layout-media-left-alt',
-        resolve: loadSequence('horarioCtrl', 'horarioData', 'xeditable'),
-        controller: "horarioCtrl as vm",
-        ncyBreadcrumb: {
-            label: 'Lista de Horários'
-        }
-    })
+        }).state('app.clientes.listar', {
+            url: '/listar',
+            templateUrl: "app/views/cliente/clientes.html",
+            title: 'Lista de Clientes',
+            icon: 'ti-layout-media-left-alt',
+            resolve: loadSequence('clienteCtrl', 'ngTable', 'clienteData', 'clienteFilters', 'touchspin-plugin', 'ui.select'),
+            controller: "clienteCtrl as vm",
+            ncyBreadcrumb: {
+                label: 'Listar'
+            }
+        }).state('app.clientes.cadastrar', {
+            url: '/cadastrar',
+            templateUrl: "app/views/cliente/create.html",
+            title: 'Cadastrar Clientes',
+            icon: 'ti-layout-media-left-alt',
+            resolve: loadSequence('clienteCreateCtrl', 'clienteData', 'horarioData', 'ui.mask', 'filaEsperaData'),
+            controller: "clienteCreateCtrl as vm",
+            ncyBreadcrumb: {
+                label: 'Cadastrar'
+            }
+        }).state('app.clientes.editar', {
+            url: '/editar/{id}',
+            templateUrl: "app/views/cliente/edit.html",
+            title: 'Editar Cliente',
+            resolve: loadSequence('clienteEditCtrl', 'clienteData', 'horarioData', 'ui.mask'),
+            controller: "clienteEditCtrl as vm",
+            ncyBreadcrumb: {
+                label: 'Editar'
+            }
+        }).state('app.clientes.ficha', {
+            url: '/ficha/{id}',
+            templateUrl: "app/views/cliente/ficha.html",
+            title: 'Editar Cliente',
+            resolve: loadSequence('clienteCtrl', 'clienteFilters'),
+            ncyBreadcrumb: {
+                label: 'Ficha do Cliente'
+            },
+            controller: 'clienteCtrl'
+        }).state('app.clientes.aniversariantes', {
+            url: '/aniversariantes/{mes}',
+            templateUrl: "app/views/cliente/aniversariantes.html",
+            title: 'Editar Cliente',
+            resolve: loadSequence('clienteAniversariantesCtrl', 'clienteData', 'xeditable'),
+            ncyBreadcrumb: {
+                label: 'Aniversariantes'
+            },
+            controller: 'clienteAniversariantesCtrl',
+        })
 
-    //Fila de espera
-    .state('app.filaEspera', {
-        url: "/filaEspera",
-        templateUrl: "app/views/filaespera/filaespera.html",
-        resolve: loadSequence('filaEsperaCtrl', 'filaEsperaData', 'ngTable', 'clienteFilters', 'ui.mask'),
-        title: 'Fila de Espera',
-        ncyBreadcrumb: {
-            label: 'Fila de Espera'
-        },
-        controller: 'filaEsperaCtrl as vm'
-    })
+        //Horários
+        .state('app.horarios', {
+            url: '/horarios',
+            templateUrl: "app/views/horario/horario.html",
+            title: 'Lista de Horários',
+            icon: 'ti-layout-media-left-alt',
+            resolve: loadSequence('horarioCtrl', 'horarioData', 'xeditable'),
+            controller: "horarioCtrl as vm",
+            ncyBreadcrumb: {
+                label: 'Lista de Horários'
+            }
+        })
 
+        //Fila de espera
+        .state('app.filaEspera', {
+            url: "/filaEspera",
+            templateUrl: "app/views/filaespera/filaespera.html",
+            resolve: loadSequence('filaEsperaCtrl', 'filaEsperaData', 'ngTable', 'clienteFilters', 'ui.mask'),
+            title: 'Fila de Espera',
+            ncyBreadcrumb: {
+                label: 'Fila de Espera'
+            },
+            controller: 'filaEsperaCtrl as vm'
+        })
 
+        //Accounts
+        .state('app.accounts', {
+            url: "/accounts",
+            templateUrl: "app/views/accounts/listaAccounts.html",
+            resolve: loadSequence('accountCtrl', 'accountsData', 'ngTable'),
+            title: 'Lista de Acessos',
+            ncyBreadcrumb: {
+                label: 'Lista de Acessos'
+            },
+            controller: 'accountCtrl as vm'
+        });
 
     // Generates a resolve object previously configured in constant.JS_REQUIRES (config.constant.js)
     function loadSequence() {

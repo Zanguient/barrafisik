@@ -2,8 +2,43 @@
 /**
  * Clip-Two Main Controller
  */
-app.controller('AppCtrl', ['$rootScope', '$scope', '$state', '$localStorage', '$window', '$document', '$timeout', 'cfpLoadingBar',
-function ($rootScope, $scope, $state, $localStorage, $window, $document, $timeout, cfpLoadingBar) {
+app.controller('AppCtrl', ['$rootScope', '$scope', '$state', '$localStorage', '$window', '$document', '$timeout', 'cfpLoadingBar', 'authService', '$modal',
+function ($rootScope, $scope, $state, $localStorage, $window, $document, $timeout, cfpLoadingBar, authService, $modal) {
+    
+    // Usuário
+    $rootScope.userInfo = JSON.parse(localStorage.getItem('authorizationData'));
+
+    $scope.logOut = function () {
+        authService.logOut();
+        $state.go('login.signin');
+    }
+
+    $scope.alterarSenha = function (size) {
+        $scope.modalInstance = $modal.open({
+            templateUrl: 'app/views/accounts/alterarSenha.html',
+            size: size,
+            resolve: {
+                deps: [
+                    '$ocLazyLoad',
+                    function ($ocLazyLoad) {
+                        return $ocLazyLoad.load(['app/controllers/accounts/alterarSenhaCtrl.js', 'app/factory/accountsData.js']);
+                    }
+                ]
+            },
+            controller: 'alterarSenhaCtrl as vm',
+        });
+        $scope.modalInstance.result.then(function (data) {
+        }, function () {
+            console.log('Cancelled');
+        })['finally'](function () {
+            $scope.modalInstance = undefined;
+        });
+    };
+
+    //Window Back
+    $scope.$back = function () {
+        window.history.back();
+    };
 
     // Loading bar transition
     // -----------------------------------
@@ -11,8 +46,7 @@ function ($rootScope, $scope, $state, $localStorage, $window, $document, $timeou
 
     $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
         //start loading bar on stateChangeStart
-        cfpLoadingBar.start();
-
+        cfpLoadingBar.start();        
     });
     $rootScope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
 
@@ -54,7 +88,6 @@ function ($rootScope, $scope, $state, $localStorage, $window, $document, $timeou
     // save settings to local storage
     if (angular.isDefined($localStorage.layout)) {
         $scope.app.layout = $localStorage.layout;
-
     } else {
         $localStorage.layout = $scope.app.layout;
     }

@@ -80,6 +80,7 @@
     <Compile Include="ViewModels\FilaEsperaViewModel.cs" />
     <Compile Include="ViewModels\HorarioViewModel.cs" />
     <Compile Include="ViewModels\TotalHorarioViewModel.cs" />
+    <Compile Include="ViewModels\TotalInscritosViewModel.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

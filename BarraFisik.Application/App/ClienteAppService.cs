@@ -54,9 +54,14 @@ namespace BarraFisik.Application.App
         }
 
 
-        public IEnumerable<ClienteViewModel> GetAll()
+        public IEnumerable<ClienteHorarioViewModel> GetAll()
         {
-            return Mapper.Map<IEnumerable<Cliente>, IEnumerable<ClienteViewModel>>(_clienteService.GetClientes());
+            return Mapper.Map<IEnumerable<ClienteHorario>, IEnumerable<ClienteHorarioViewModel>>(_clienteService.GetClientes());
+        }
+
+        public IEnumerable<ClienteHorarioViewModel> GetClientesAll()
+        {
+            return Mapper.Map<IEnumerable<ClienteHorario>, IEnumerable<ClienteHorarioViewModel>>(_clienteService.GetClientesAll());
         }
 
         public ValidationAppResult Update(ClienteHorarioViewModel clienteHorarioViewModel)
@@ -162,6 +167,11 @@ namespace BarraFisik.Application.App
             BeginTransaction();
             _clienteService.InativarClientes(clientesLista);
             Commit();
+        }
+
+        public TotalInscritosViewModel GetTotalInscritos(int ano)
+        {
+            return Mapper.Map<TotalInscritos, TotalInscritosViewModel>(_clienteService.GetTotalInscritos(ano));
         }
 
         public void Dispose()

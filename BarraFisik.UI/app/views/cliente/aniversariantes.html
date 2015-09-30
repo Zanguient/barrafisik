@@ -2,6 +2,7 @@
     @media print {
         @page {
             margin: 0;
+            padding: 0;
         }
 
         .body {
@@ -26,7 +27,7 @@
         }
 
         #nav, #sidebar {
-            display: none;
+            display: none !important;
         }
 
         #selectMes {
@@ -56,10 +57,10 @@
                 <div class="invoice">
                     <div class="row invoice-logo">
                         <div class="col-md-6 pull-left">
-                            <img alt="" src="assets/images/your-logo-here.png">
+                            <img alt="" src="/assets/images/logo.jpg">
                         </div>
                         <div class="col-md-6">
-                            <p class="text-dark pull-right">
+                            <p class="text-dark pull-right margin-top-15">
                                 Aniversariantes do Mês de <b>{{ showStatus() }}</b>
                             </p>
                         </div>

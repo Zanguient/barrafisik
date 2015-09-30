@@ -72,6 +72,7 @@
     <Compile Include="Validation\Regra.cs" />
     <Compile Include="ValueObjects\ClienteHorario.cs" />
     <Compile Include="ValueObjects\TotalHorario.cs" />
+    <Compile Include="ValueObjects\TotalInscritos.cs" />
     <Compile Include="ValueObjects\ValidationError.cs" />
     <Compile Include="ValueObjects\ValidationResult.cs" />
   </ItemGroup>

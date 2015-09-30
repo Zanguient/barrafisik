@@ -12,7 +12,8 @@ using BarraFisik.API.Filters;
 
 namespace BarraFisik.API.Controllers
 {
-    [RoutePrefix("api")]
+    [Authorize]
+    [RoutePrefix("api")]    
     public class ClienteController : ApiController
     {
         private readonly IClienteAppService _clienteApp;
@@ -30,6 +31,19 @@ namespace BarraFisik.API.Controllers
         public async Task<HttpResponseMessage> GetClientes()
         {
             var result = _clienteApp.GetAll();
+            var response = Request.CreateResponse(HttpStatusCode.OK, result);
+
+            var tsc = new TaskCompletionSource<HttpResponseMessage>();
+            tsc.SetResult(response);
+            return await tsc.Task;
+        }
+
+        [HttpGet]
+        [Route("clientes/all")]
+        [GzipCompression]
+        public async Task<HttpResponseMessage> GetClientesAll()
+        {
+            var result = _clienteApp.GetClientesAll();
             var response = Request.CreateResponse(HttpStatusCode.OK, result);
 
             var tsc = new TaskCompletionSource<HttpResponseMessage>();
@@ -143,7 +157,7 @@ namespace BarraFisik.API.Controllers
         {
             _clienteApp.UpdateClientesPendentes(mes, ano);
 
-            return Request.CreateResponse(HttpStatusCode.NotFound, "Clientes Atualizados");            
+            return Request.CreateResponse(HttpStatusCode.OK, "Clientes Atualizados");            
         }
 
         [HttpPost]
@@ -155,54 +169,14 @@ namespace BarraFisik.API.Controllers
             return Request.CreateResponse(HttpStatusCode.OK, "Clientes Inativados");
         }
 
-        //[HttpPut]
-        //[Route("cliente/desativar/{id:Guid}")]
-        //public Task<HttpResponseMessage> DesativarCliente(Guid id)
-        //{
-        //    var cliente = _clienteApp.GetById(id);
+        [HttpGet]
+        [Route("clientes/inscritos/{ano:int}")]
+        public HttpResponseMessage GetInscritos(int ano)
+        {
+            var result = _clienteApp.GetTotalInscritos(ano);
 
-        //    var response = new HttpResponseMessage();
-
-        //    if (cliente == null)
-        //    {
-        //        response = Request.CreateResponse(HttpStatusCode.NotFound);
-        //    }
-        //    else
-        //    {
-        //        cliente.IsAtivo = false;
-        //        _clienteApp.Update(cliente);
-
-        //        response = Request.CreateResponse(HttpStatusCode.OK, "Cliente Desativado");
-        //    }
-
-        //    var tsc = new TaskCompletionSource<HttpResponseMessage>();
-        //    tsc.SetResult(response);
-        //    return tsc.Task;
-        //}
-
-        //[HttpPut]
-        //[Route("cliente/ativar/{id:Guid}")]
-        //public Task<HttpResponseMessage> AtivarCliente(Guid id)
-        //{
-        //    var cliente = _clienteApp.GetById(id);
-
-        //    var response = new HttpResponseMessage();
-
-        //    if (cliente == null)
-        //    {
-        //        response = Request.CreateResponse(HttpStatusCode.NotFound);
-        //    }
-        //    else
-        //    {
-        //        cliente.IsAtivo = true;
-        //        _clienteApp.Update(cliente);
-        //        response = Request.CreateResponse(HttpStatusCode.OK, "Cliente Desativado");
-        //    }
-
-        //    var tsc = new TaskCompletionSource<HttpResponseMessage>();
-        //    tsc.SetResult(response);
-        //    return tsc.Task;
-        //}
+            return Request.CreateResponse(HttpStatusCode.OK, result);
+        }     
 
         public void ConvertAndSave(byte[] imageBytes, Guid id)
         {

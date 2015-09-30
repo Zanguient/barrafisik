@@ -1,0 +1,27 @@
+﻿<form name="FormEdit" id="FormEdit" novalidate ng-submit="formEdit.submit(FormEdit, p)">
+    <table class="table no-bg">
+        <tr>
+            <td>Nome: <span class="symbol required"></span></td>
+            <td ng-class="{'has-error':FormEdit.FullName.$dirty && FormEdit.FullName.$invalid, 'has-success':FormEdit.FullName.$valid}">
+                <input class="form-control" type="text" name="FullName" ng-model="p.FullName" required>
+                <span class="error text-small block" ng-if="FormEdit.FullName.$dirty && FormEdit.FullName.$invalid">Informe o Nome</span>
+            </td>
+            <td>Usuário: <span class="symbol required"></span></td>
+            <td ng-class="{'has-error':FormEdit.UserName.$dirty && FormEdit.UserName.$invalid, 'has-success':FormEdit.UserName.$valid}">
+                <input class="form-control" type="text" name="UserName" ng-model="p.UserName" required>
+                <span class="error text-small block" ng-if="FormEdit.UserName.$dirty && FormEdit.UserName.$invalid">Informe o Nome de Usuário</span>
+            </td>
+            <td>Email:</td>
+            <td>
+                <input class="FormEdit-control" type="text" name="Email" ng-model="p.Email">
+            </td>
+            <td>
+                <div class="pull-right">
+                    <input type="submit" class="btn btn-primary btn-sm margin-right-15" value="Salvar">
+                    <input type="button" class="btn btn-primary btn-sm margin-right-15" value="Cancelar" ng-click="setEditId(-1)">
+                </div>
+            </td>
+        </tr>
+    </table>
+    <!-- class="editRowTd" -->
+</form>

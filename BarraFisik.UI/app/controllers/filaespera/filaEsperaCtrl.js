@@ -117,7 +117,7 @@
 
 
         $scope.fila = {
-            DataReserva: new Date(),
+            DataReserva: today,
             Nome: null,
             Telefone: "",
             Celular: "",
@@ -160,11 +160,13 @@
 
                 } else {
                     // Cadastra o fila
+                    if (fila.DataReserva === today)
+                        fila.DataReserva = new Date();
                     filaEsperaData.addFila(fila).success(function (fila) {
                         //Limpa o formulario
                         form.$setPristine(true);
                         $scope.fila = {
-                            DataReserva: new Date(),
+                            DataReserva: today,
                             Nome: null,
                             Telefone: "",
                             Celular: "",

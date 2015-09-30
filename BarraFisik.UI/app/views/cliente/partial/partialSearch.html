@@ -1,0 +1,114 @@
+﻿<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-white" id="panel1">
+            <div class="panel-heading">
+                <h4 class="panel-title text-primary">Filtros</h4>
+                <ct-paneltool class="panel-tools" tool-collapse="tool-collapse"></ct-paneltool>
+            </div>
+            <div collapse="panel1" ng-init="panel1=true" class="panel-wrapper">
+                <div class="panel-body">
+                    <div class="col-md-3">
+                        <h4>Dados do Cliente</h4>
+                        <div class="form-group">
+                            <span class="input-icon">
+                                <input type="text" placeholder="Cliente..." class="form-control" ng-model="filter.Nome">
+                                <i class="ti-user"></i>
+                            </span>
+                        </div>
+                        <div class="form-group">
+                            <span class="input-icon">
+                                <input type="text" placeholder="CPF..." class="form-control" ng-model="filter.Cpf">
+                                <i class="fa fa-leaf"></i>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <h4>Situação</h4>
+                        <div class="radio clip-radio radio-primary radio-inline">
+                            <input type="radio" id="Todos" name="situacao" value="" checked="checked" ng-model="filter.Situacao">
+                            <label for="Todos">
+                                Todos
+                            </label>
+                        </div>
+                        <div class="radio clip-radio radio-primary radio-inline">
+                            <input type="radio" id="Regular" name="situacao" value="Regular" ng-model="filter.Situacao">
+                            <label for="Regular">
+                                Regular
+                            </label>
+                        </div>
+                        <div class="radio clip-radio radio-primary radio-inline">
+                            <input type="radio" id="Pendente" name="situacao" value="Pendente" ng-model="filter.Situacao">
+                            <label for="Pendente">
+                                Pendente
+                            </label>
+                        </div>
+                        <div ng-show="inativos" class="radio clip-radio radio-primary radio-inline">
+                            <input type="radio" id="Inativo" name="situacao" value="Inativo" ng-model="filter.Situacao">
+                            <label for="Inativo">
+                                Inativo
+                            </label>
+                        </div>
+                        <br/>
+                        <h4>Inativos</h4>
+                        <div class="checkbox clip-check check-info">
+                            <input type="checkbox" id="Inativos" ng-click="exibirInativos()" ng-model="inativos">
+                            <label for="Inativos">Exibir Clientes Inativos</label>
+                        </div>
+                    </div>
+                    <div class="col-md-5 pull-right">
+                        <h4>Horário</h4>
+                        <table>
+                            <tr>
+                                <td>
+                                    <div class="checkbox clip-check check-info">
+                                        <input type="checkbox" id="Segunda" ng-true-value="true" ng-false-value="undefined" ng-model="filter.Segunda">
+                                        <label for="Segunda">Segunda</label>
+                                    </div>
+                                </td>
+                                <td class="border-right col-sm-3"><input type="text" class="form-control" ng-model="filter.HSegunda"/> </td>
+                                <td class="padding-left-10">
+                                    <div class="checkbox clip-check check-info">
+                                        <input type="checkbox" id="Terca" ng-true-value="true" ng-false-value="undefined" ng-model="filter.Terca">
+                                        <label for="Terca">Terça</label>
+                                    </div>
+                                </td>
+                                <td class="col-sm-3"><input type="text" class="form-control" ng-model="filter.HTerca"/></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="checkbox clip-check check-info">
+                                        <input type="checkbox" id="Quarta" ng-true-value="true" ng-false-value="undefined" ng-model="filter.Quarta">
+                                        <label for="Quarta">Quarta</label>
+                                    </div>
+                                </td>
+                                <td class="border-right col-sm-3"><input type="text" class="form-control" ng-model="filter.HQuarta"/></td>
+                                <td class="padding-left-10">
+                                    <div class="checkbox clip-check check-info">
+                                        <input type="checkbox" id="Quinta" ng-true-value="true" ng-false-value="undefined" ng-model="filter.Quinta">
+                                        <label for="Quinta">Quinta</label>
+                                    </div>
+                                </td>
+                                <td class="col-sm-3"><input type="text" class="form-control" ng-model="filter.HQuinta"/></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="checkbox clip-check check-info">
+                                        <input type="checkbox" id="Sexta" ng-true-value="true" ng-false-value="undefined" ng-model="filter.Sexta">
+                                        <label for="Sexta">Sexta</label>
+                                    </div>
+                                </td>
+                                <td class="border-right col-sm-3"><input type="text" class="form-control" ng-model="filter.HSexta"/></td>
+                                <td class="padding-left-10"></td>
+                                <td></td>
+                            </tr>
+
+                        </table>
+
+                        <a class="btn btn-wide btn-blue pull-right" ng-click="limpar()"><i class="fa fa-refresh"></i> Limpar</a>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>

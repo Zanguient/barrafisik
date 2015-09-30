@@ -11,6 +11,7 @@ using BarraFisik.API.Filters;
 
 namespace BarraFisik.API.Controllers
 {
+    [Authorize]
     [RoutePrefix("api")]
     public class HorarioController : ApiController
     {
