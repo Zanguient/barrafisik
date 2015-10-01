@@ -1,0 +1,54 @@
+﻿<!-- start: PAGE TITLE -->
+<section id="page-title">
+    <div class="row">
+        <div class="col-sm-8">
+            <h1 class="mainTitle">Valores Mensalidades</h1>
+            <span class="mainDescription">
+            </span>
+        </div>
+        <div ncy-breadcrumb></div>
+    </div>
+</section>
+<div class="print">
+    <div class="container-fluid container-fullw bg-white">
+        <div class="row">
+            <div class="col-md-6">
+                <button type="button" ng-disabled="createValor" class="btn btn-primary btn-wide btn-scroll btn-scroll-top ti-plus" ng-click="createValor = !createValor">
+                    <span>Cadastrar</span>
+                </button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="table-responsive">
+                    <table class="table">
+                        <tr ng-show="createValor">
+                            <td colspan="12" ng-include src="'app/views/valores/create.html'"></td>
+                        </tr>
+                    </table>
+                    <table ng-table="tableParams" class="table">
+
+                        <tbody ng-repeat="p in $data">
+                        <tr id="tr{{p.ValoresId}}" ng-class-odd="'odd'" ng-class-even="'even'">
+                            <td class="rowTd" data-title="'Qtd. Dias'" sortable="'QtdDias'">{{p.QtdDias}}</td>
+                            <td class="rowTd" data-title="'Valor'" sortable="'Valor'">{{p.Valor | currency}}</td>
+                            <td class="rowTd" data-title="'Horário Início'" sortable="'HorarioInicio'">{{p.HorarioInicio}}h</td>
+                            <td class="rowTd" data-title="'Horário Fim'" sortable="'HorarioFim'">{{p.HorarioFim}}h</td>                            
+                            <td class="text-right">
+                                <div class="visible-md visible-lg hidden-sm hidden-xs">
+                                    <a ng-click="setEditId(p.ValoresId)" class="btn btn-transparent btn-xs" tooltip-placement="top" tooltip="Editar" id="editRowBtn{{p.ValoresId}}"><i class="fa fa-pencil"></i></a>
+                                    <a ng-click="delete(p.ValoresId)" class="btn btn-transparent btn-xs tooltips" tooltip-placement="top" tooltip="Excluir"><i class="fa fa-times"></i></a>                                    
+                                </div>
+                            </td>
+                        </tr>
+                        <tr ng-show="editId===p.ValoresId" ng-if="editId===p.ValoresId">
+                            <td colspan="7" ng-include src="'app/views/valores/edit.html'"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

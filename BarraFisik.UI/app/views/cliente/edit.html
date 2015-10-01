@@ -18,8 +18,269 @@
             </ul>
 
             <span class="symbol required"> Campos Obrigatórios</span>
-
             <form name="Form" id="form" novalidate ng-submit="form.submit(Form)">
+
+                <div class="row">
+                    <fieldset>
+                        <legend>
+                            Dados do Cliente - {{cliente.Nome}}
+                        </legend>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group" ng-class="{'has-error':Form.nome.$dirty && Form.nome.$invalid, 'has-success':Form.nome.$valid}">
+                                    <label class="control-label">
+                                        Nome <span class="symbol required"></span>
+                                    </label>
+                                    <input type="text" placeholder="Nome Completo" class="form-control" name="nome" ng-model="cliente.Nome" required />
+                                    <span class="error text-small block" ng-if="Form.nome.$dirty && Form.nome.$invalid">Informe o Nome</span>
+                                </div>
+
+                                <div class="form-group" ng-class="{'has-error':Form.endereco.$dirty && Form.endereco.$invalid, 'has-success':Form.endereco.$valid}">
+                                    <label class="control-label">
+                                        Endereço <span class="symbol required"></span>
+                                    </label>
+                                    <input type="text" placeholder="Endereço" class="form-control" name="endereco" ng-model="cliente.Endereco" required />
+                                    <span class="error text-small block" ng-if="Form.endereco.$dirty && Form.endereco.$invalid">Informe o Endereço</span>
+                                </div>
+
+                                <div class="form-group" ng-class="{'has-error':Form.cpf.$dirty && Form.cpf.$invalid, 'has-success':Form.cpf.$valid}">
+                                    <label class="control-label">
+                                        CPF <span class="symbol required"></span>
+                                    </label>
+                                    <input type="text" placeholder="___.___.___-__" class="form-control" name="cpf" ng-model="cliente.Cpf" ng-cpf ui-mask="999.999.999-99" required />
+                                    <span class="error text-small block" ng-if="Form.cpf.$dirty && Form.cpf.$invalid">Informe um CPF válido</span>
+                                </div>
+
+                                <div class="form-group" ng-class="{'has-error':Form.email.$dirty && Form.email.$invalid, 'has-success':Form.email.$valid}">
+                                    <label class="control-label">
+                                        E-mail
+                                    </label>
+                                    <input type="email" placeholder="E-mail" class="form-control" name="email" ng-model="cliente.Email">
+                                    <span class="error text-small block" ng-if="Form.email.$error.email">E-mail inválido.</span>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label">
+                                        Telefone
+                                    </label>
+                                    <input type="text" placeholder="____-____" class="form-control" ui-mask="9999-9999" name="telefone" ng-model="cliente.Telefone">
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label">
+                                        Celular
+                                    </label>
+                                    <input type="text" placeholder="____-____" class="form-control" ui-mask="9999-9999" name="celular" ng-model="cliente.Celular">
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label">
+                                        RG
+                                    </label>
+                                    <input type="text" placeholder="Número do RG" class="form-control" name="rg" ng-model="cliente.Rg">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <div class="form-group" ng-class="{'has-error':Form.sexo.$dirty && Form.gender.$invalid, 'has-success':Form.sexo.$valid}">
+                                            <label class="control-label block">
+                                                Sexo
+                                            </label>
+                                            <div class="clip-radio radio-primary">
+                                                <input type="radio" id="feminino" name="sexo" value="F" ng-model="cliente.Sexo">
+                                                <label for="feminino">
+                                                    Feminino
+                                                </label>
+                                                <input type="radio" id="masculino" name="sexo" value="M" ng-model="cliente.Sexo">
+                                                <label for="masculino">
+                                                    Masculino
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-7 pull-right text-right" ng-show="cliente.Path != null">
+                                        <div class="user-image" ng-show="!excluirFoto">
+                                            <div class="thumbnail">
+                                                <img ng-src="{{cliente.Path}}"/>
+                                            </div>
+                                            <div class="user-image-buttons">
+                                                <span class="btn btn-danger" ng-click="excluirFoto = true"> <i class="fa fa-times"></i> </span>
+                                            </div>
+                                        </div>
+                                        <div ng-show="excluirFoto">
+                                            <span>- Para Finalizar exclusão clique em salvar </span><br/>
+                                            <button type="button" class="btn btn-warning" ng-click="excluirFoto = false">Desfazer exclusão</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group" ng-class="{'has-error':Form.dtNascimento.$dirty && Form.dtNascimento.$invalid, 'has-success':Form.dtNascimento.$valid}">
+                                    <label class="control-label">
+                                        Data de Nascimento <span class="symbol required"></span>
+                                    </label>
+                                    <input type="date" placeholder="Data de Nascimento" class="form-control" name="dtNascimento" ng-model="cliente.DtNascimento" required>
+                                    <span class="error text-small block" ng-if="Form.dtNascimento.$error.date">Data de Nascimento inválida.</span>
+                                    <span class="error text-small block" ng-if="Form.dtNascimento.$dirty && Form.dtNascimento.$invalid">Informe a Data de Nascimento</span>
+                                </div>
+
+                                <div class="form-group" ng-class="{'has-error':Form.dtInscricao.$dirty && Form.dtInscricao.$invalid, 'has-success':Form.dtInscricao.$valid}">
+                                    <label class="control-label">
+                                        Data de Inscrição <span class="symbol required"></span>
+                                    </label>
+                                    <input type="date" placeholder="Data de Inscrição" class="form-control" name="dtInscricao" ng-model="cliente.DtInscricao" required>
+                                    <span class="error text-small block" ng-if="Form.dtInscricao.$error.date">Data de Inscrição inválida.</span>
+                                    <span class="error text-small block" ng-if="Form.dtInscricao.$dirty && Form.dtInscricao.$invalid">Informe a Data de Inscrição</span>
+                                </div>
+
+                                <div class="form-group" ng-class="{'has-error': Form.filhos.$invalid, 'has-success':Form.filhos.$valid}">
+                                    <label class="control-label">
+                                        Filhos
+                                    </label>
+                                    <input type="number" name="filhos" placeholder="Quantitdade de Filhos" class="form-control" ng-model="cliente.QtdFilhos" />
+                                    <span class="error text-small block" ng-if="Form.filhos.$error.number">Informe o número de filhos!</span>
+                                </div>
+
+                                <div class="checkbox clip-check check-primary  check-md">
+                                    <input type="checkbox" id="ativo" value="false" ng-model="cliente.IsAtivo">
+                                    <label for="ativo">
+                                        Ativo
+                                    </label>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label">
+                                                <a ng-click="toggleWebCam = !toggleWebCam">Ativar/Desativar WebCam</a>
+                                            </label>
+                                            <div ng-if="toggleWebCam">
+                                                <webcam class="well-small"
+                                                        on-stream="onStream(stream)"
+                                                        on-error="onError(err)"
+                                                        on-streaming="onSuccess()"
+                                                        channel="channel"
+                                                        placeholder="'/assets/images/loading.gif'">
+                                                    <div class="alert alert-error" ng-show="webcamError">
+                                                        <span>Webcam não foi iniciar. Você deu permissão?</span>
+                                                    </div>
+                                                </webcam>
+                                                <button type="button" class="btn btn-large btn-primary" ng-click="makeSnapshot()">Tirar Foto!</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label">
+                                                Foto
+                                            </label>
+                                            <div ng-show="cliente.Foto != null">
+                                                <canvas id="snapshot" class="well-small"></canvas>
+                                                <button type="button" class="btn btn-large btn-primary" ng-click="cliente.Foto = undefined">Apagar Foto</button>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+
+                <div class="row" ng-show="cliente.IsAtivo == true">
+                    <fieldset>
+                        <legend>
+                            Horário
+                        </legend>
+                        <div class="col-md-4">
+                            <div class="col-md-7">
+                                <div class="checkbox clip-check check-primary">
+                                    <input type="checkbox" id="segunda" value="false" ng-model="cliente.Segunda" ng-change="cliente.HSegunda = cliente.HSegunda ? null : cliente.HSegunda">
+                                    <label for="segunda">
+                                        Segunda-feira
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-5">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" ng-disabled="!cliente.Segunda" ui-mask="99" ng-model="cliente.HSegunda">
+                                    <span class="input-group-addon">: 00</span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-7">
+                                <div class="checkbox clip-check check-primary">
+                                    <input type="checkbox" id="terca" value="false" ng-model="cliente.Terca" ng-change="cliente.HTerca = cliente.HTerca ? null : cliente.HTerca">
+                                    <label for="terca">
+                                        Terça-feira
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-5">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" ng-disabled="!cliente.Terca" ui-mask="99" ng-model="cliente.HTerca">
+                                    <span class="input-group-addon">: 00</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="col-md-7">
+                                <div class="checkbox clip-check check-primary">
+                                    <input type="checkbox" id="quarta" value="false" ng-model="cliente.Quarta" ng-change="cliente.HQuarta = cliente.HQuarta ? null : cliente.HQuarta">
+                                    <label for="quarta">
+                                        Quarta-feira
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-5">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" ui-mask="99" ng-model="cliente.HQuarta" ng-disabled="!cliente.Quarta">
+                                    <span class="input-group-addon">: 00</span>
+                                </div>
+                            </div>
+                            <div class="col-md-7">
+                                <div class="checkbox clip-check check-primary">
+                                    <input type="checkbox" id="quinta" value="false" ng-model="cliente.Quinta" ng-change="cliente.HQuinta = cliente.HQuinta ? null : cliente.HQuinta">
+                                    <label for="quinta">
+                                        Quinta-feira
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-5">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" ui-mask="99" ng-model="cliente.HQuinta" ng-disabled="!cliente.Quinta">
+                                    <span class="input-group-addon">: 00</span>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-4">
+                            <div class="col-md-7">
+                                <div class="checkbox clip-check check-primary">
+                                    <input type="checkbox" id="sexta" value="false" ng-model="cliente.Sexta" ng-change="cliente.HSexta = cliente.HSexta ? null : cliente.HSexta">
+                                    <label for="sexta">
+                                        Sexta-feira
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-5">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" ui-mask="99" ng-model="cliente.HSexta" ng-disabled="!cliente.Sexta">
+                                    <span class="input-group-addon">: 00</span>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="pull-right">
+                            <button type="submit" class="btn btn-primary"> Salvar </button>
+                            <button type="button" class="btn btn-warning btn-addon" data-ng-click="$back()">Cancelar</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <!--<form name="Form" id="form" novalidate ng-submit="form.submit(Form)">
                 <div class="row">
 
                     <div class="col-md-6">
@@ -149,7 +410,7 @@
                                         <span>Webcam não foi iniciar. Você deu permissão?</span>
                                     </div>
                                 </webcam>
-                                <button type="button" class="btn btn-large btn-primary" ng-click="makeSnapshot()">Take snapshot!</button>
+                                <button type="button" class="btn btn-large btn-primary" ng-click="makeSnapshot()">Tirar Foto!</button>
                             </div>
 
                         </fieldset>
@@ -261,10 +522,8 @@
                         </div>
                     </div>
                 </div>
-                <!--<pre>{{cliente | json}}</pre>-->
-            </form>
+            </form>-->
         </div>
     </div>
 </div>
 <!-- end: FORM VALIDATION -->
-

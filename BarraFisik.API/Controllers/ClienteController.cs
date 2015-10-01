@@ -85,6 +85,12 @@ namespace BarraFisik.API.Controllers
             {
                 var result = _clienteApp.Add(clienteHorario);
 
+                if (result == null)
+                {
+                    ModelState.AddModelError(string.Empty, "Favor Preencher o horário");
+                    return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
+                }
+
                 if (!result.IsValid)
                 {
                     foreach (var validationAppError in result.Erros)
@@ -93,6 +99,8 @@ namespace BarraFisik.API.Controllers
                     }
                     return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
                 }
+
+                
 
                 if (clienteHorario.Foto != null)
                 {
@@ -122,6 +130,18 @@ namespace BarraFisik.API.Controllers
                         ModelState.AddModelError(string.Empty, validationAppError.Message);
                     }
                     return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
+                }
+
+                if (clienteHorario.Path == null)
+                {
+                    //Remove image from Disk
+                    var path = "C:/Users/jefferson/Documents/Visual Studio 2015/Projects/BarraFisik/BarraFisik.UI/assets/images/fotos/";
+                    var fileName = clienteHorario.ClienteId + ".jpg";
+                    var fullPath = Path.Combine(path, fileName);
+                    if (File.Exists(fullPath))
+                    {
+                        File.Delete(fullPath);
+                    }
                 }
 
                 if (clienteHorario.Foto != null)
@@ -189,8 +209,7 @@ namespace BarraFisik.API.Controllers
             var image = Image.FromStream(ms, true);
 
             //Save image to Disk
-            var path =
-                "C:/Users/jefferson/Documents/Visual Studio 2015/Projects/BarraFisik/BarraFisik.UI/assets/images/fotos/";
+            var path = "C:/Users/jefferson/Documents/Visual Studio 2015/Projects/BarraFisik/BarraFisik.UI/assets/images/fotos/";
             var fileName = id + ".jpg";
             var fullPath = Path.Combine(path, fileName);
             image.Save(fullPath);

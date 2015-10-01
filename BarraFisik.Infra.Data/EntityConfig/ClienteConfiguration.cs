@@ -28,6 +28,8 @@ namespace BarraFisik.Infra.Data.EntityConfig
 
             Ignore(t => t.ResultadoValidacao);
 
+            HasOptional(c => c.Valores);
+
         }
     }
 }

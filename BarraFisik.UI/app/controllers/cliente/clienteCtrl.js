@@ -90,7 +90,9 @@
              { show: true, title: "Celular" },
              { show: false, title: "Dt. Nascimento" },
              { show: false, title: "Dt. Inscrição" },
-             { show: true, title: "Situação" }
+             { show: true, title: "Situação" },
+             { show: false, title: "Qtd. Dias" },
+             { show: false, title: "Valor" },
         ];
 
         //$scope.Ativar = function (id) {
@@ -164,13 +166,13 @@
         }
 
         //Mensalidades
-        $scope.createMensalidade = function (id) {
+        $scope.createMensalidade = function (cliente) {
             vm.modalInstance = $modal.open({
                 templateUrl: 'app/views/mensalidades/create.html',
                 size: 'lg',
                 resolve: {
-                    ClienteId: function () {
-                        return id;
+                    Cliente: function () {
+                        return cliente;
                     },
                     deps: [
                         '$ocLazyLoad',

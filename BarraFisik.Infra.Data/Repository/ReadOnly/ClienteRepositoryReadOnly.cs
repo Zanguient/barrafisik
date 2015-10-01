@@ -15,7 +15,10 @@ namespace BarraFisik.Infra.Data.Repository.ReadOnly
         {
             using (IDbConnection cn = Connection)
             {
-                var query = @"Select * from cliente c inner join Horario h on c.ClienteId = h.ClienteId where c.IsAtivo = 1";
+                var query = @"Select * from cliente c 
+                                inner join Horario h on c.ClienteId = h.ClienteId 
+                                left join Valores v on c.ValoresId = v.ValoresId
+                            where c.IsAtivo = 1";
 
                 cn.Open();
                 var clientes = cn.Query<ClienteHorario>(query);

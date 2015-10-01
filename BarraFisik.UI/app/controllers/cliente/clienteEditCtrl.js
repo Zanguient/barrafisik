@@ -6,6 +6,7 @@
     function clienteEditCtrl($scope, clienteData, horarioData, SweetAlert, $stateParams, $state) {
         var vm = this;
         $scope.cliente = {};
+        $scope.excluirFoto = false;
 
         activate();
 
@@ -129,11 +130,13 @@
 
                 } else {
                     // Salva dados do cliente
+                    if ($scope.excluirFoto)
+                        $scope.cliente.Path = null;
                     clienteData.editCliente($scope.cliente).then(function () {
                         //$scope.horario.ClienteId = $stateParams.id;
                         //horarioData.editHorario($scope.cliente).then(function () {});
 
-                        SweetAlert.swal("Sucesso!", "Cliente foi cadastrado com sucesso!", "success");
+                        SweetAlert.swal("Sucesso!", "Cliente foi salvo com sucesso!", "success");
 
                         //Retorna para lista de clientes
                         $state.go('app.clientes.listar', {}, {reload: true});
@@ -143,7 +146,7 @@
                         for (var key in error.ModelState) {
                             for (var i = 0; i < error.ModelState[key].length; i++) {
                                 errors.push(error.ModelState[key][i]);
-                                SweetAlert.swal("Erro ao cadastrar!", error.ModelState[key][i], "error");
+                                SweetAlert.swal("Erro ao salvar!", error.ModelState[key][i], "error");
                             }
                         }
                         vm.errors = errors;
@@ -154,5 +157,6 @@
 
             }
         };
+
     }
 }());

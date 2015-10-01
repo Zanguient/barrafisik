@@ -28,6 +28,9 @@ namespace BarraFisik.Domain.Entities
         public bool IsAtivo { get; set; }
         public string Path { get; set; }
         public string Situacao { get; set; }
+        public Guid? ValoresId { get; set; }
+
+        public virtual Valores Valores { get; set; }
 
         public virtual ICollection<Mensalidades> Mensalidades { get; set; }
 

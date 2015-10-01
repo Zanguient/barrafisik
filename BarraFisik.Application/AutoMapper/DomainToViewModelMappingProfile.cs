@@ -23,6 +23,7 @@ namespace BarraFisik.Application.AutoMapper
             Mapper.CreateMap<FilaEspera, FilaEsperaViewModel>();
             Mapper.CreateMap<Mensalidades, MensalidadesViewModel>();
             Mapper.CreateMap<TotalInscritos, TotalInscritosViewModel>();
+            Mapper.CreateMap<Valores, ValoresViewModel>();
         }
     }
 }

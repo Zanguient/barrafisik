@@ -3,17 +3,32 @@
 
     app.controller('createMensalidadesCtrl', createMensalidadesCtrl);
 
-    function createMensalidadesCtrl($scope, ClienteId, $modalInstance, mensalidadesData, $timeout, SweetAlert) {
+    function createMensalidadesCtrl($scope, Cliente, $modalInstance, mensalidadesData, $timeout, SweetAlert) {
         var vm = this;
         vm.mensalidades = [];
 
+        //Format Data Atual
         var today = new Date();
-        
+        var dd = today.getDate();
+        var mm = today.getMonth() + 1;
+        var yyyy = today.getFullYear();
+
+        if (dd < 10) {
+            dd = '0' + dd
+        }
+
+        if (mm < 10) {
+            mm = '0' + mm
+        }
+
+        today = dd + '/' + mm + '/' + yyyy;
+
+
         $scope.mensalidade = {
             DataPagamento: today,
-            AnoReferencia: today.getFullYear(),
-            MesReferencia: today.getMonth() + 1,
-            ValorPago: '0',
+            AnoReferencia: yyyy,
+            MesReferencia: mm,
+            ValorPago: Cliente.Valor,
         }
 
         vm.cancel = function () {
@@ -74,7 +89,10 @@
 
                 } else {
                     // Cadastra mensalidade
-                    mensalidade.ClienteId = ClienteId;
+                    if (mensalidade.DataPagamento === today)
+                        mensalidade.DataPagamento = new Date();
+
+                    mensalidade.ClienteId = Cliente.ClienteId;
                     mensalidade.ValorPago = mensalidade.ValorPago.replace(',', '.');
                     mensalidadesData.addMensalidade(mensalidade).success(function () {
                         $modalInstance.close();

@@ -16,32 +16,37 @@ namespace BarraFisik.Application.App
         private readonly IClienteService _clienteService;
         private readonly IHorarioService _horarioService;
         private readonly IMensalidadesService _mensalidadesService;
+        private readonly IValoresService _valoresService;
 
-        public ClienteAppService(IClienteService clienteService, IHorarioService horarioService, IMensalidadesService mensalidadesService)
+        public ClienteAppService(IClienteService clienteService, IHorarioService horarioService, IMensalidadesService mensalidadesService, IValoresService valoresService)
         {
             _clienteService = clienteService;
             _horarioService = horarioService;
             _mensalidadesService = mensalidadesService;
+            _valoresService = valoresService;
         }
-
 
         public ValidationAppResult Add(ClienteHorarioViewModel clienteHorarioViewModel)
         {
             var cliente = Mapper.Map<ClienteHorarioViewModel, Cliente>(clienteHorarioViewModel);
             var horario = Mapper.Map<ClienteHorarioViewModel, Horario>(clienteHorarioViewModel);
 
-            BeginTransaction();
+            var valor = GetValor(horario);
 
-            if (!cliente.IsAtivo)
-                cliente.Situacao = "Inativo";
-            else cliente.Situacao = "Pendente";
+            if (valor != null)
+                cliente.ValoresId = valor.ValoresId;
+
+            cliente.Situacao = !cliente.IsAtivo ? "Inativo" : "Pendente";
+
+            BeginTransaction();
             var result = _clienteService.AdicionarCliente(cliente);
 
             if (!result.IsValid)
                 return DomainToApplicationResult(result);
 
-            //Cadastra Horario
+            //Cadastra Horario                      
             _horarioService.Add(horario);
+              
 
             Commit();
 
@@ -70,6 +75,8 @@ namespace BarraFisik.Application.App
             var horario = Mapper.Map<ClienteHorarioViewModel, Horario>(clienteHorarioViewModel);
 
             var hasHorario = _horarioService.GetHorarioCliente(cliente.ClienteId);
+
+            var valor = GetValor(horario);
 
             BeginTransaction();
            
@@ -104,6 +111,7 @@ namespace BarraFisik.Application.App
 
             }
 
+            c.ValoresId = valor.ValoresId;
             var result = _clienteService.AtualizarCliente(c);
 
             if (!result.IsValid)
@@ -174,9 +182,32 @@ namespace BarraFisik.Application.App
             return Mapper.Map<TotalInscritos, TotalInscritosViewModel>(_clienteService.GetTotalInscritos(ano));
         }
 
+        private Valores GetValor(Horario horario)
+        {
+            //Pega qtd de dias, e maior horario
+            int qtdDias = 0;
+            int maiorHorario = 0;
+            if (horario.Segunda) qtdDias = qtdDias + 1;
+            if (horario.Terca) qtdDias = qtdDias + 1;
+            if (horario.Quarta) qtdDias = qtdDias + 1;
+            if (horario.Quinta) qtdDias = qtdDias + 1;
+            if (horario.Sexta) qtdDias = qtdDias + 1;
+
+            if (horario.HSegunda != null && Int32.Parse(horario.HSegunda) > maiorHorario) maiorHorario = Int32.Parse(horario.HSegunda);
+            if (horario.HTerca != null && Int32.Parse(horario.HTerca) > maiorHorario) maiorHorario = Int32.Parse(horario.HTerca);
+            if (horario.HQuarta != null && Int32.Parse(horario.HQuarta) > maiorHorario) maiorHorario = Int32.Parse(horario.HQuarta);
+            if (horario.HQuinta != null && Int32.Parse(horario.HQuinta) > maiorHorario) maiorHorario = Int32.Parse(horario.HQuinta);
+            if (horario.HSexta != null && Int32.Parse(horario.HSexta) > maiorHorario) maiorHorario = Int32.Parse(horario.HSexta);
+
+            var valor = _valoresService.GetValorCliente(qtdDias, maiorHorario);
+            return valor;
+        }
+
         public void Dispose()
         {
             _clienteService.Dispose();
         }
+
+        
     }
 }

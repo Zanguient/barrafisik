@@ -190,6 +190,7 @@
     <Compile Include="Controllers\FilaEsperaController.cs" />
     <Compile Include="Controllers\HorarioController.cs" />
     <Compile Include="Controllers\MensalidadesController.cs" />
+    <Compile Include="Controllers\ValoresController.cs" />
     <Compile Include="Filters\GzipCompressionAttribute.cs" />
     <Compile Include="helpers\UnityResolver.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />

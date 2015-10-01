@@ -148,7 +148,19 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
                 label: 'Lista de Acessos'
             },
             controller: 'accountCtrl as vm'
-        });
+        })
+
+        //Valores
+     .state('app.valores', {
+         url: "/valores",
+         templateUrl: "app/views/valores/valores.html",
+         resolve: loadSequence('valoresCtrl', 'valoresData', 'ngTable'),
+         title: 'Lista de Valores',
+         ncyBreadcrumb: {
+             label: 'Lista de Valores'
+         },
+         controller: 'valoresCtrl as vm'
+     });
 
     // Generates a resolve object previously configured in constant.JS_REQUIRES (config.constant.js)
     function loadSequence() {

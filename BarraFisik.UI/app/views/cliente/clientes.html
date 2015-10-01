@@ -20,7 +20,8 @@
 
                         <!--<button type="button" class="btn btn-default btn-sm btn-warning dropdown-toggle pull-right" ng-click="refresh()"><span class="glyphicon glyphicon-refresh"></span></button>-->
                         <div class="button-group pull-right margin-right-10">
-                            <button type="button" class="btn btn-default btn-sm btn-dark-grey dropdown-toggle" data-placeholder="false" data-toggle="dropdown"><span class="glyphicon glyphicon-cog"></span> <span class="caret"></span></button>
+                            <button type="button" class="btn btn-blue btn-sm" tooltip-placement="top" tooltip="Atualizar Página" ng-click="refresh()"><i class="fa fa-refresh"/></button>
+                            <button type="button" class="btn btn-default btn-sm btn-dark-grey dropdown-toggle" data-placeholder="false" data-toggle="dropdown"><span class="glyphicon glyphicon-cog"></span> </button>
                             <ul class="dropdown-menu">
                                 <li ng-repeat="col in vm.cols">
                                     <input type="checkbox" id="{{col.title}}" ng-model="col.show">
@@ -48,12 +49,15 @@
                             <td class="rowTd" title="vm.cols[7].title" ng-show="vm.cols[7].show" sortable="'DtNascimento'">{{p.DtNascimento | date:'dd/MM/yyyy'}}</td>
                             <td class="rowTd" title="vm.cols[8].title" ng-show="vm.cols[8].show" sortable="'DtInscricao'">{{p.DtInscricao | date: 'dd/MM/yyyy'}}</td>
                             <td class="rowTd" title="vm.cols[9].title" ng-show="vm.cols[9].show"><span class="label" ng-class="{'label-warning': p.Situacao == 'Pendente', 'label-success': p.Situacao == 'Regular', 'label-inverse': p.Situacao == 'Inativo'}"> {{p.Situacao}}</span></td>
+                            <td class="rowTd" title="vm.cols[10].title" ng-show="vm.cols[10].show">{{p.QtdDias}}</td>
+                            <td class="rowTd" title="vm.cols[11].title" ng-show="vm.cols[11].show">{{p.Valor | currency}}</td>
+
                             <td class="text-right">
                                 <div class="visible-md visible-lg hidden-sm hidden-xs">
                                     <a ui-sref="app.clientes.editar({id: p.ClienteId})" class="btn btn-transparent btn-xs" tooltip-placement="top" tooltip="Editar"><i class="fa fa-pencil"></i></a>
                                     <a ng-click="openHorarios(p)" class="btn btn-transparent btn-xs" tooltip-placement="top" tooltip="Horários"><i class="fa fa-clock-o"></i></a>
                                     <a ng-click="openMensalidades(p.ClienteId)" class="btn btn-transparent btn-xs tooltips" tooltip-placement="top" tooltip="Mensalidades"><i class="fa fa-money"></i></a>
-                                    <a ng-click="createMensalidade(p.ClienteId)" class="btn btn-transparent btn-xs tooltips" tooltip-placement="top" tooltip="Pagamento"><i class="fa fa-dollar"></i></a>
+                                    <a ng-click="createMensalidade(p)" class="btn btn-transparent btn-xs tooltips" tooltip-placement="top" tooltip="Pagamento"><i class="fa fa-dollar"></i></a>
                                 </div>
                             </td>
                         </tr>

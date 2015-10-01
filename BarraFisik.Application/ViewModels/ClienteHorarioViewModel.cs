@@ -10,6 +10,7 @@ namespace BarraFisik.Application.ViewModels
         {
             ClienteId = Guid.NewGuid();
             HorarioId = Guid.NewGuid();
+            //ValoresId = Guid.NewGuid();
         }
 
         //CLiente
@@ -75,5 +76,12 @@ namespace BarraFisik.Application.ViewModels
 
         public bool Sexta { get; set; }
         public string HSexta { get; set; }
+
+        //Valor Mensalidade
+        public Guid? ValoresId { get; set; }
+        public int QtdDias { get; set; }
+        public decimal Valor { get; set; }
+        public int HorarioInicio { get; set; }
+        public int HorarioFim { get; set; }
     }
 }

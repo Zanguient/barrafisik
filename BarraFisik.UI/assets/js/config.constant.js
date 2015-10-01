@@ -46,12 +46,15 @@ app.constant('JS_REQUIRES', {
 
         'accountCtrl': 'app/controllers/accounts/accountCtrl.js',
 
+        'valoresCtrl': 'app/controllers/valores/valoresCtrl.js',
+
         //*** Factories
         'clienteData' : 'app/factory/clienteData.js',
         'horarioData' : 'app/factory/horarioData.js',
         'filaEsperaData' : 'app/factory/filaEsperaData.js',
         'dashboardData' : 'app/factory/dashboardData.js',
         'accountsData' : 'app/factory/accountsData.js',
+        'valoresData' : 'app/factory/valoresData.js',
 
         //*** Controllers
         //'dashboardCtrl': 'assets/js/controllers/dashboardCtrl.js',

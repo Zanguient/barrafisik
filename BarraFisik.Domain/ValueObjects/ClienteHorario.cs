@@ -9,7 +9,7 @@ namespace BarraFisik.Domain.ValueObjects
         public ClienteHorario()
         {
             ClienteId = Guid.NewGuid();
-            HorarioId = Guid.NewGuid();
+            HorarioId = Guid.NewGuid();            
         }
 
         //CLiente
@@ -47,5 +47,12 @@ namespace BarraFisik.Domain.ValueObjects
 
         public bool Sexta { get; set; }
         public string HSexta { get; set; }
+
+        //Valor Mensalidade
+        public Guid? ValoresId { get; set; }
+        public int QtdDias { get; set; }
+        public decimal Valor { get; set; }
+        public int HorarioInicio { get; set; }
+        public int HorarioFim { get; set; }
     }
 }
