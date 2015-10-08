@@ -42,7 +42,7 @@ namespace BarraFisik.Data.CrossCutting.Identity.Providers
             ClaimsIdentity oAuthIdentity = await user.GenerateUserIdentityAsync(userManager, "JWT");
 
             oAuthIdentity.AddClaim(new Claim(ClaimTypes.Name, user.UserName));
-            oAuthIdentity.AddClaim(new Claim(ClaimTypes.GivenName, user.Email));
+           // oAuthIdentity.AddClaim(new Claim(ClaimTypes.GivenName, user.Email));
 
             var ticket = new AuthenticationTicket(oAuthIdentity, null);
 

@@ -46,6 +46,8 @@ namespace BarraFisik.CrossCutting.IoC.Unity
             container.RegisterType<IFilaEsperaService, FilaEsperaService>();
             container.RegisterType<IMensalidadesService, MensalidadesService>();
             container.RegisterType<IValoresService, ValoresService>();
+            container.RegisterType<ILogSistemaService, LogSistemaService>();
+            container.RegisterType<ILogMensalidadesService, LogMensalidadesService>();
 
             //Data Repos
             container.RegisterType(typeof(IRepositoryBase<>), typeof(RepositoryBase<,>));
@@ -54,6 +56,8 @@ namespace BarraFisik.CrossCutting.IoC.Unity
             container.RegisterType<IFilaEsperaRepository, FilaEsperaRepository>();
             container.RegisterType<IMensalidadesRepository, MensalidadesRepository>();
             container.RegisterType<IValoresRepository,ValoresRepository>();
+            container.RegisterType<ILogSistemaRepository,LogSistemaRepository>();
+            container.RegisterType<ILogMensalidadesRepository, LogMensalidadesRepository>();
 
             //Data Repos Read Only
             container.RegisterType<IClienteRepositoryReadOnly, ClienteRepositoryReadOnly>();

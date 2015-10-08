@@ -52,7 +52,7 @@ namespace BarraFisik.API.Controllers
         {
             if (ModelState.IsValid)
             {
-                _filaEsperaApp.Add(filaEsperaViewModel);
+                _filaEsperaApp.Update(filaEsperaViewModel);
 
                 return Request.CreateResponse(HttpStatusCode.Created, "Cadastro efetuado com sucesso!");
             }

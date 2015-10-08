@@ -12,10 +12,12 @@ namespace BarraFisik.Application.App
     public class FilaEsperaAppService : AppServiceBase<BarraFisikContext>, IFilaEsperaAppService
     {
         private readonly IFilaEsperaService _filaEsperaService;
+        private readonly ILogSistemaService _logSistemaService;
 
-        public FilaEsperaAppService(IFilaEsperaService filaEsperaService)
+        public FilaEsperaAppService(IFilaEsperaService filaEsperaService, ILogSistemaService logSistemaService)
         {
             _filaEsperaService = filaEsperaService;
+            _logSistemaService = logSistemaService;
         }
 
         public void Add(FilaEsperaViewModel filaEsperaViewModel)
@@ -24,6 +26,8 @@ namespace BarraFisik.Application.App
 
             BeginTransaction();
             _filaEsperaService.Add(filaEspera);
+
+            _logSistemaService.AddLog("FilaDeEspera", filaEsperaViewModel.FilaEsperaId, "Cadastro", "");
             Commit();
         }
 
@@ -43,6 +47,8 @@ namespace BarraFisik.Application.App
 
             BeginTransaction();
             _filaEsperaService.Update(filaEspera);
+
+            _logSistemaService.AddLog("FilaDeEspera", filaEsperaViewModel.FilaEsperaId, "Update", "");
             Commit();
         }
 
@@ -52,6 +58,8 @@ namespace BarraFisik.Application.App
 
             BeginTransaction();
             _filaEsperaService.Remove(filaEspera);
+
+            _logSistemaService.AddLog("FilaDeEspera", id, "Delete", "Cliente: "+filaEspera.Nome);
             Commit();
         }
 

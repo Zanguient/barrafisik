@@ -5,6 +5,10 @@
 app.controller('AppCtrl', ['$rootScope', '$scope', '$state', '$localStorage', '$window', '$document', '$timeout', 'cfpLoadingBar', 'authService', '$modal',
 function ($rootScope, $scope, $state, $localStorage, $window, $document, $timeout, cfpLoadingBar, authService, $modal) {
     
+    //Configure Loading
+    $scope.$on('LOAD', function () { $scope.loading = true; });
+    $scope.$on('UNLOAD', function () { $scope.loading = false; });
+
     // Usuário
     $rootScope.userInfo = JSON.parse(localStorage.getItem('authorizationData'));
 

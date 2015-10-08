@@ -7,9 +7,9 @@
         <div ncy-breadcrumb></div>
     </div>
 </section>
-
+<div ng-show="loading"><img src="assets/images/loading.gif" />Carregando Clientes...</div>
 <!-- start: INLINE EDIT EXAMPLE -->
-<div class="container-fluid container-fullw">
+<div class="container-fluid container-fullw" ng-show="!loading">
     <div ng-include src="'app/views/cliente/partial/partialSearch.html'"></div>
     <div class="row">
         <div class="col-md-12">
@@ -17,12 +17,29 @@
                 <div class="row margin-bottom-10">
                     <div class="col-md-12">
                         <h5 class="pull-left ">Total: <span class="badge badge-info">{{total}}</span></h5>
-
-                        <!--<button type="button" class="btn btn-default btn-sm btn-warning dropdown-toggle pull-right" ng-click="refresh()"><span class="glyphicon glyphicon-refresh"></span></button>-->
+                        
                         <div class="button-group pull-right margin-right-10">
                             <button type="button" class="btn btn-blue btn-sm" tooltip-placement="top" tooltip="Atualizar Página" ng-click="refresh()"><i class="fa fa-refresh"/></button>
-                            <button type="button" class="btn btn-default btn-sm btn-dark-grey dropdown-toggle" data-placeholder="false" data-toggle="dropdown"><span class="glyphicon glyphicon-cog"></span> </button>
-                            <ul class="dropdown-menu">
+
+                            <div class="btn-group" dropdown is-open="status.isopen">
+                                <button type="button" class="btn btn-default btn-sm btn-azure dropdown-toggle" tooltip-placement="top" tooltip="Exportar" dropdown-toggle data-toggle="dropdown" data-placeholder="false" >
+                                    <span class="fa fa-share-square"></span>
+                                </button>
+                                <ul class="dropdown-menu pull-right bullet" role="menu">
+                                    <li>
+                                        <a href="#" onClick="$('#tableClientes').tableExport({ type: 'excel', tableName:'Clientes', escape: 'false' });">
+                                            <img src="/assets/images/icons/16x16/Excel-icon.png"/> Excel</a>
+                                    </li>
+                                    <li class="divider"></li>
+                                    <li>
+                                        <a href="#" onClick="$('#tableClientes').tableExport({ type: 'doc', escape: 'false' });">
+                                            <img src="/assets/images/icons/16x16/Word-icon.png"/> Word
+                                        </a>
+                                    </li>              
+                                </ul>
+                            </div>
+                            <button type="button" class="btn btn-default btn-sm btn-dark-grey dropdown-toggle"  data-placeholder="false" dropdown-toggle data-toggle="dropdown"><span class="glyphicon glyphicon-cog"></span> </button>
+                            <ul class="dropdown-menu pull-right">
                                 <li ng-repeat="col in vm.cols">
                                     <input type="checkbox" id="{{col.title}}" ng-model="col.show">
                                     <label for="{{col.title}}">{{col.title}}</label>
@@ -34,7 +51,7 @@
                 </div>
                 
                 <div class="table-responsive">
-                    <table ng-table="tableParams" class="table table-striped">
+                    <table id="tableClientes" ng-table="tableParams" class="table table-striped export-table">
                         <tr ng-repeat="p in $data">
                             <td class="rowTd" title="vm.cols[0].title" ng-show="vm.cols[0].show">
                                 <img ng-if="p.Path !== null" ng-src="{{p.Path}}" class="img-rounded" width="70" height="60" />

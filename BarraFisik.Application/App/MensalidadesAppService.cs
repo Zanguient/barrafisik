@@ -14,11 +14,15 @@ namespace BarraFisik.Application.App
     {
         private readonly IMensalidadesService _mensalidadesService;
         private readonly IClienteService _clienteService;
+        private readonly ILogMensalidadesService _logMensalidadesService;
+        private readonly ILogSistemaService _logSistemaService;
 
-        public MensalidadesAppService(IMensalidadesService mensalidadesService, IClienteService clienteService)
+        public MensalidadesAppService(IMensalidadesService mensalidadesService, IClienteService clienteService, ILogMensalidadesService logMensalidadesService, ILogSistemaService logSistemaService)
         {
             _mensalidadesService = mensalidadesService;
             _clienteService = clienteService;
+            _logMensalidadesService = logMensalidadesService;
+            _logSistemaService = logSistemaService;
         }
 
 
@@ -28,6 +32,8 @@ namespace BarraFisik.Application.App
 
             BeginTransaction();
             _mensalidadesService.Add(mensalidade);
+
+            _logMensalidadesService.AddLog("Cadastro", mensalidade);
             Commit();
         }
 
@@ -49,7 +55,11 @@ namespace BarraFisik.Application.App
                 var cliente = _clienteService.GetById(mensalidadesViewModel.ClienteId);
                 cliente.Situacao = "Regular";
                 _clienteService.Update(cliente);
+
+                _logSistemaService.AddLog("Cliente", cliente.ClienteId, "Update", "Alteração da situacao para: REGULAR. Adicionado mensalidade: "+mensalidade.MensalidadesId);
             }
+
+            _logMensalidadesService.AddLog("Cadastro", mensalidade);
 
             Commit();
 
@@ -105,13 +115,16 @@ namespace BarraFisik.Application.App
             {
                 cliente.Situacao = "Regular";
                 _clienteService.Update(cliente);
+                _logSistemaService.AddLog("Cliente", cliente.ClienteId, "Update", "Alteração da situacao para: REGULAR. Atualizado mensalidade: " + mensalidade.MensalidadesId);
             }
             else if((!existeMensalidade))
             {
                 cliente.Situacao = "Pendente";
                 _clienteService.Update(cliente);
+                _logSistemaService.AddLog("Cliente", cliente.ClienteId, "Update", "Alteração da situacao para: PENDENTE. Atualizado mensalidade: " + mensalidade.MensalidadesId);
             }
 
+            _logMensalidadesService.AddLog("Update", mensalidade);
             Commit();
 
             return DomainToApplicationResult(result);
@@ -142,12 +155,16 @@ namespace BarraFisik.Application.App
             {
                 cliente.Situacao = "Regular";
                 _clienteService.Update(cliente);
+                _logSistemaService.AddLog("Cliente", cliente.ClienteId, "Update", "Alteração da situacao para: REGULAR. Deletado mensalidade: " + mensalidade.MensalidadesId);
             }
             else if((!existeMensalidade))
             {
                 cliente.Situacao = "Pendente";
                 _clienteService.Update(cliente);
+                _logSistemaService.AddLog("Cliente", cliente.ClienteId, "Update", "Alteração da situacao para: PENDENTE. Deletado mensalidade: " + mensalidade.MensalidadesId);
             }
+
+            _logMensalidadesService.AddLog("Remove", mensalidade);
             Commit();
         }
 

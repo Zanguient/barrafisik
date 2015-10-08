@@ -13,6 +13,8 @@
         activate();
 
         function activate() {
+            $scope.$emit('LOAD');
+
             //if existe sessioStorage fila
             if (window.sessionStorage.getItem('fila') != null)
                 window.sessionStorage.removeItem('fila');
@@ -20,6 +22,7 @@
             filaEsperaData.getFila().then(function (result) {
                 vm.fila = result.data;
                 loadTable(vm.fila);
+                $scope.$emit('UNLOAD');
             });
         }
 

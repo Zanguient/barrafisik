@@ -63,6 +63,7 @@
     <Content Include="app\controllers\mensalidades\createMensalidadesCtrl.js" />
     <Content Include="app\controllers\mensalidades\mensalidadesCtrl.js" />
     <Content Include="app\directives\equals.js" />
+    <Content Include="app\directives\exportTable.js" />
     <Content Include="app\directives\xngFocus.js" />
     <Content Include="app\factory\dashboardData.js" />
     <Content Include="app\factory\accountsData.js" />
@@ -131,6 +132,12 @@
     <Content Include="assets\images\avatar.jpg" />
     <Content Include="assets\images\dark_dots.png" />
     <Content Include="assets\images\default-user.png" />
+    <Content Include="assets\images\icons\16x16\Pdf-icon.png" />
+    <Content Include="assets\images\icons\16x16\Excel-icon.png" />
+    <Content Include="assets\images\icons\16x16\Word-icon.png" />
+    <Content Include="assets\images\icons\24x24\Pdf-icon.png" />
+    <Content Include="assets\images\icons\24x24\Excel-icon.png" />
+    <Content Include="assets\images\icons\24x24\Word-icon.png" />
     <Content Include="assets\images\line_detail.png" />
     <Content Include="assets\images\lion-403764_640.jpg" />
     <Content Include="assets\images\lion-565818_640.jpg" />
@@ -3009,6 +3016,11 @@
     <Content Include="bower_components\es5-shim\es5-sham.min.js" />
     <Content Include="bower_components\es5-shim\es5-shim.js" />
     <Content Include="bower_components\es5-shim\es5-shim.min.js" />
+    <Content Include="bower_components\exportTable\jquery.base64.js" />
+    <Content Include="bower_components\exportTable\jspdf\jspdf.js" />
+    <Content Include="bower_components\exportTable\jspdf\libs\base64.js" />
+    <Content Include="bower_components\exportTable\jspdf\libs\sprintf.js" />
+    <Content Include="bower_components\exportTable\tableExport.js" />
     <Content Include="bower_components\fastclick\lib\fastclick.js" />
     <Content Include="bower_components\flow.js\dist\flow.js" />
     <Content Include="bower_components\flow.js\dist\flow.min.js" />

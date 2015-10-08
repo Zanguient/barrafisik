@@ -6,12 +6,25 @@
     function clienteCtrl($scope, ngTableParams, clienteData, SweetAlert, $filter, $state, $stateParams, $window, $modal) {
         var vm = this;
         vm.clientes = [];
+        vm.cols = [];
+
+        $scope.status = {
+            isopen: false
+        };
+
+        $scope.toggleDropdown = function ($event) {
+            $event.preventDefault();
+            $event.stopPropagation();
+            $scope.status.isopen = !$scope.status.isopen;
+        };
 
         activate();
 
         function activate() {
+            $scope.$emit('LOAD');
             clienteData.getClientes().then(function (result) {
                 vm.clientes = result.data;
+                $scope.$emit('UNLOAD');
             });
         }
 
@@ -49,8 +62,8 @@
                     vm.clientes = result.data;
                     $scope.tableParams.reload();
                     $scope.filter.Situacao = '';
-                });                
-            }            
+                });
+            }
         }
 
         $scope.tableParams = new ngTableParams({
@@ -73,26 +86,26 @@
 
                 $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
             }
-            
+
         });
 
-        $scope.$watch("vm.clientes", function() {
+        $scope.$watch("vm.clientes", function () {
             $scope.tableParams.reload();
         });
 
         vm.cols = [
-             { show: false, title: "Foto" },
-             { show: true, title: "Nome" },
-             { show: true, title: "Endereço" },
-             { show: true, title: "CPF" },
-             { show: true, title: "E-mail" },
-             { show: true, title: "Telefone" },
-             { show: true, title: "Celular" },
-             { show: false, title: "Dt. Nascimento" },
-             { show: false, title: "Dt. Inscrição" },
-             { show: true, title: "Situação" },
-             { show: false, title: "Qtd. Dias" },
-             { show: false, title: "Valor" },
+            { show: false, title: "Foto" },
+            { show: true, title: "Nome" },
+            { show: true, title: "Endereço" },
+            { show: true, title: "CPF" },
+            { show: true, title: "E-mail" },
+            { show: true, title: "Telefone" },
+            { show: true, title: "Celular" },
+            { show: false, title: "Dt. Nascimento" },
+            { show: false, title: "Dt. Inscrição" },
+            { show: true, title: "Situação" },
+            { show: false, title: "Qtd. Dias" },
+            { show: false, title: "Valor" },
         ];
 
         //$scope.Ativar = function (id) {
@@ -184,7 +197,7 @@
                 controller: 'createMensalidadesCtrl as vm'
             });
             vm.modalInstance.result.then(function (data) {
-                SweetAlert.swal("Sucesso!", "Mensalidade foi cadastrada com sucesso!", "success");                
+                SweetAlert.swal("Sucesso!", "Mensalidade foi cadastrada com sucesso!", "success");
                 clienteData.getClientes().then(function (result) {
                     vm.clientes = result.data;
                 });

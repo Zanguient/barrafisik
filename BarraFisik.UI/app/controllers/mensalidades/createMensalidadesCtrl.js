@@ -93,7 +93,7 @@
                         mensalidade.DataPagamento = new Date();
 
                     mensalidade.ClienteId = Cliente.ClienteId;
-                    mensalidade.ValorPago = mensalidade.ValorPago.replace(',', '.');
+                    mensalidade.ValorPago = mensalidade.ValorPago.toString().replace(",",".");
                     mensalidadesData.addMensalidade(mensalidade).success(function () {
                         $modalInstance.close();
                     }).error(function (error) {

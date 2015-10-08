@@ -17,13 +17,15 @@ namespace BarraFisik.Application.App
         private readonly IHorarioService _horarioService;
         private readonly IMensalidadesService _mensalidadesService;
         private readonly IValoresService _valoresService;
+        private readonly ILogSistemaService _logSistemaService;
 
-        public ClienteAppService(IClienteService clienteService, IHorarioService horarioService, IMensalidadesService mensalidadesService, IValoresService valoresService)
+        public ClienteAppService(IClienteService clienteService, IHorarioService horarioService, IMensalidadesService mensalidadesService, IValoresService valoresService, ILogSistemaService logSistemaService)
         {
             _clienteService = clienteService;
             _horarioService = horarioService;
             _mensalidadesService = mensalidadesService;
             _valoresService = valoresService;
+            _logSistemaService = logSistemaService;
         }
 
         public ValidationAppResult Add(ClienteHorarioViewModel clienteHorarioViewModel)
@@ -46,8 +48,8 @@ namespace BarraFisik.Application.App
 
             //Cadastra Horario                      
             _horarioService.Add(horario);
-              
 
+            _logSistemaService.AddLog("Cliente", cliente.ClienteId, "Cadastro", "");
             Commit();
 
             return DomainToApplicationResult(result);
@@ -130,6 +132,7 @@ namespace BarraFisik.Application.App
                 _horarioService.Add(h);
             }
 
+            _logSistemaService.AddLog("Cliente", cliente.ClienteId, "Update", "");
             Commit();
 
             return DomainToApplicationResult(result);
@@ -141,6 +144,8 @@ namespace BarraFisik.Application.App
 
             BeginTransaction();
             _clienteService.Remove(cliente);
+
+            _logSistemaService.AddLog("Cliente", cliente.ClienteId, "Remove", "Cliente"+cliente.Nome);
             Commit();
         }
 
@@ -172,8 +177,14 @@ namespace BarraFisik.Application.App
         public void InativarClientes(IEnumerable<ClienteViewModel> listClientes)
         {
             var clientesLista = Mapper.Map<IEnumerable<ClienteViewModel>, IEnumerable<Cliente>>(listClientes);
+
             BeginTransaction();
             _clienteService.InativarClientes(clientesLista);
+
+            foreach (var cliente in clientesLista)
+            {
+                _logSistemaService.AddLog("Cliente", cliente.ClienteId, "Inativado", "Cliente: " + cliente.ClienteId);
+            }
             Commit();
         }
 

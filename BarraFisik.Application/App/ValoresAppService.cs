@@ -12,10 +12,12 @@ namespace BarraFisik.Application.App
     public class ValoresAppService : AppServiceBase<BarraFisikContext>, IValoresAppService
     {
         private readonly IValoresService _valoresService;
+        private readonly ILogSistemaService _logSistemaService;
 
-        public ValoresAppService(IValoresService valoresService)
+        public ValoresAppService(IValoresService valoresService, ILogSistemaService logSistemaService)
         {
             _valoresService = valoresService;
+            _logSistemaService = logSistemaService;
         }
 
         public void Add(ValoresViewModel valoresViewModel)
@@ -24,6 +26,8 @@ namespace BarraFisik.Application.App
 
             BeginTransaction();
             _valoresService.Add(valores);
+
+            _logSistemaService.AddLog("Valores", valoresViewModel.ValoresId, "Cadastro", "QtdDias:"+valores.QtdDias+" - "+valores.Valor);
             Commit();
         }
 
@@ -37,12 +41,14 @@ namespace BarraFisik.Application.App
             return Mapper.Map<IEnumerable<Valores>, IEnumerable<ValoresViewModel>>(_valoresService.GetAll());
         }
 
-        public void Update(ValoresViewModel filaEsperaViewModel)
+        public void Update(ValoresViewModel valoresViewModel)
         {
-            var valores = Mapper.Map<ValoresViewModel, Valores>(filaEsperaViewModel);
+            var valores = Mapper.Map<ValoresViewModel, Valores>(valoresViewModel);
 
             BeginTransaction();
             _valoresService.Update(valores);
+
+            _logSistemaService.AddLog("Valores", valoresViewModel.ValoresId, "Update", "QtdDias:" + valores.QtdDias + " - " + valores.Valor);
             Commit();
         }
 
@@ -52,6 +58,8 @@ namespace BarraFisik.Application.App
 
             BeginTransaction();
             _valoresService.Remove(valores);
+
+            _logSistemaService.AddLog("Valores", id, "Cadastro", "QtdDias:" + valores.QtdDias + " - " + valores.Valor);
             Commit();
         }
 

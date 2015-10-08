@@ -10,8 +10,10 @@
         activate();
 
         function activate() {
+            $scope.$emit('LOAD');
             accountsData.getUsers().then(function (result) {
                 vm.users = result.data;
+                $scope.$emit('UNLOAD');
             });
         }
 

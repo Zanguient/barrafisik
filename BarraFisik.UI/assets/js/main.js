@@ -1,6 +1,6 @@
 var app = angular.module('app', ['clip-two']);
-app.run(['$rootScope', '$state', '$stateParams', 'authService', '$location', '$http',
-function ($rootScope, $state, $stateParams, authService, $location, $http) {
+app.run(['$rootScope', '$state', '$stateParams',
+function ($rootScope, $state, $stateParams) {
     // Attach Fastclick for eliminating the 300ms delay between a physical tap and the firing of a click event on mobile browsers
     FastClick.attach(document.body);
 
@@ -26,7 +26,7 @@ function ($rootScope, $state, $stateParams, authService, $location, $http) {
         description: 'BarraFisik - Studio & Funcional', // brief description
         version: '1.0', // current version
         year: ((new Date()).getFullYear()), // automatic current year (for copyright information)
-        isMobile: (function() { // true if the browser is a mobile device
+        isMobile: (function () { // true if the browser is a mobile device
             var check = false;
             if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
                 check = true;
@@ -42,11 +42,11 @@ function ($rootScope, $state, $stateParams, authService, $location, $http) {
             logo: 'assets/images/logo.png', // relative path of the project logo
         },
         date: new Date()
-};
+    };
 
     //+1 por que o getMonth retorn valores de 0 a 11 (jan a dez)
-    $rootScope.mesAtual = new Date().getMonth()+1;
-    $rootScope.dataAtual = new Date();   
+    $rootScope.mesAtual = new Date().getMonth() + 1;
+    $rootScope.dataAtual = new Date();
 }]);
 app.config(['cfpLoadingBarProvider',
 function (cfpLoadingBarProvider) {

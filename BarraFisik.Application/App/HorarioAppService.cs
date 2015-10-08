@@ -14,11 +14,13 @@ namespace BarraFisik.Application.App
     {
         private readonly IHorarioService _horarioService;
         private readonly IClienteService _clienteService;
+        private readonly ILogSistemaService _logSistemaService;
 
-        public HorarioAppService(IHorarioService horarioService, IClienteService clienteService)
+        public HorarioAppService(IHorarioService horarioService, IClienteService clienteService, ILogSistemaService logSistemaService)
         {
             _horarioService = horarioService;
             _clienteService = clienteService;
+            _logSistemaService = logSistemaService;
         }
 
 
@@ -34,10 +36,12 @@ namespace BarraFisik.Application.App
             if (_clienteService.GetById(horario.ClienteId).IsAtivo == false && _horarioService.GetById(horario.HorarioId) != null)
             {
                 _horarioService.Remove(horario);
+                _logSistemaService.AddLog("Horario", horarioViewModel.HorarioId, "Remove", "Cadastro de cliente e o mesmo não está ativo e existe horário vinculado ao mesmo. Cliente:" +horario.ClienteId);
             }
             else
             {
                 _horarioService.Add(horario);
+                _logSistemaService.AddLog("Horario", horarioViewModel.HorarioId, "Cadastro", "Cliente:" + horarioViewModel.ClienteId);
             }
             
             Commit();
@@ -65,8 +69,10 @@ namespace BarraFisik.Application.App
             if (_clienteService.GetById(horario.ClienteId).IsAtivo == false && _horarioService.GetById(horario.HorarioId) != null)
             {
                _horarioService.Remove(horario);
+               _logSistemaService.AddLog("Horario", clienteHorarioViewModel.HorarioId, "Remove", "Update de cliente e o mesmo não está ativo e existe horário vinculado ao mesmo. Cliente:" + horario.ClienteId);
             } else {
                 _horarioService.Update(horario);
+                _logSistemaService.AddLog("Horario", clienteHorarioViewModel.HorarioId, "Update", "Cliente:" + clienteHorarioViewModel.ClienteId);
             }
 
             Commit();
@@ -78,6 +84,8 @@ namespace BarraFisik.Application.App
 
             BeginTransaction();
             _horarioService.Remove(horario);
+
+            _logSistemaService.AddLog("Horario", horarioViewModel.HorarioId, "Remove", "Delete horario:" + horario.ClienteId);
             Commit();
         }
 

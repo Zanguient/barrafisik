@@ -7,8 +7,10 @@
         var vm = this;
         $scope.teste = "Controller Horario";
 
+        $scope.$emit('LOAD');
         horarioData.gethorarioTotal().then(function (result) {
             $scope.horario = result.data;
+            $scope.$emit('UNLOAD');
         }, function (error) {
             console.log(error);
         });
