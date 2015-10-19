@@ -59,6 +59,10 @@
   <ItemGroup>
     <Compile Include="App\AppServiceBase.cs" />
     <Compile Include="App\ClienteAppService.cs" />
+    <Compile Include="App\CategoriaFinanceiraAppService.cs" />
+    <Compile Include="App\DespesasAppService.cs" />
+    <Compile Include="App\ReceitasAppService.cs" />
+    <Compile Include="App\ReceitasAvaliacaoFisicaAppService.cs" />
     <Compile Include="App\ValoresAppService.cs" />
     <Compile Include="App\MensalidadesAppService.cs" />
     <Compile Include="App\FilaEsperaAppService.cs" />
@@ -69,6 +73,11 @@
     <Compile Include="AutoMapper\ViewModelToDomainMappingProfile.cs" />
     <Compile Include="Interfaces\IAppServiceBase.cs" />
     <Compile Include="Interfaces\IClienteAppService.cs" />
+    <Compile Include="Interfaces\ICategoriaFinanceiraAppService.cs" />
+    <Compile Include="Interfaces\IDespesasAppService.cs" />
+    <Compile Include="Interfaces\ILogReceitasDespesasAppService.cs" />
+    <Compile Include="Interfaces\IReceitasAppService.cs" />
+    <Compile Include="Interfaces\IReceitasAvaliacaoFisicaAppService.cs" />
     <Compile Include="Interfaces\IValoresAppService.cs" />
     <Compile Include="Interfaces\IMensalidadesAppService.cs" />
     <Compile Include="Interfaces\IFilaEsperaAppService.cs" />
@@ -78,6 +87,10 @@
     <Compile Include="Validation\ValidationAppResult.cs" />
     <Compile Include="ViewModels\ClienteHorarioViewModel.cs" />
     <Compile Include="ViewModels\ClienteViewModel.cs" />
+    <Compile Include="ViewModels\CategoriaFinanceiraViewModel.cs" />
+    <Compile Include="ViewModels\ReceitasAvaliacaoFisicaViewModel.cs" />
+    <Compile Include="ViewModels\DespesasViewModel.cs" />
+    <Compile Include="ViewModels\ReceitasViewModel.cs" />
     <Compile Include="ViewModels\ValoresViewModel.cs" />
     <Compile Include="ViewModels\MensalidadesViewModel.cs" />
     <Compile Include="ViewModels\FilaEsperaViewModel.cs" />

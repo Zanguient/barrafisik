@@ -20,6 +20,11 @@ namespace BarraFisik.Infra.Data.Context
         public IDbSet<Valores> Valores { get; set; }
         public IDbSet<LogSistema> Log { get; set; }
         public IDbSet<LogMensalidades> LogMensalidades { get; set; }
+        public IDbSet<ReceitasAvaliacaoFisica> ReceitasAvaliacaoFisica { get; set; }
+        public IDbSet<CategoriaFinanceira> CategoriaFinanceira { get; set; }
+        public IDbSet<Receitas> Receitas { get; set; }
+        public IDbSet<Despesas> Despesas { get; set; }
+        public IDbSet<LogReceitasDespesas> LogReceitasDespesas { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -43,6 +48,11 @@ namespace BarraFisik.Infra.Data.Context
             modelBuilder.Configurations.Add(new ValoresConfiguration());
             modelBuilder.Configurations.Add(new LogSistemaConfiguration());
             modelBuilder.Configurations.Add(new LogMensalidadesConfiguration());
+            modelBuilder.Configurations.Add(new ReceitasAvaliacaoFisicaConfiguration());
+            modelBuilder.Configurations.Add(new CategoriaFinanceiraConfiguration());
+            modelBuilder.Configurations.Add(new ReceitasConfiguration());
+            modelBuilder.Configurations.Add(new DespesasConfiguration());
+            modelBuilder.Configurations.Add(new LogReceitasDespesasConfiguration());
 
             base.OnModelCreating(modelBuilder);
         }

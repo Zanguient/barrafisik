@@ -1,0 +1,25 @@
+﻿<form name="Form" id="form" novalidate ng-submit="form.submit(Form, categoria)">
+    <table class="table no-bg">
+        <tr>
+            <td>Tipo: <span class="symbol required"></span></td>
+            <td ng-class="{'has-error':Form.Tipo.$dirty && Form.Tipo.$invalid, 'has-success':Form.Tipo.$valid}">
+	            <select class="form-control" name="Tipo" ng-model="categoria.Tipo" required>
+		            <option value="Receitas">Receitas</option>
+		            <option value="Despesas">Despesas</option>
+	            </select>
+                <span class="error text-small block" ng-if="Form.Tipo.$dirty && Form.Tipo.$error.required">Informe o Tipo</span>
+            </td>
+            <td>Categoria:  <span class="symbol required"></span></td>
+            <td ng-class="{'has-error':Form.Categoria.$dirty && Form.Categoria.$invalid, 'has-success':Form.Categoria.$valid}">
+                <input class="form-control" type="text" name="Categoria" ng-model="categoria.Categoria" required>
+                <span class="error text-small block" ng-if="Form.Categoria.$dirty && Form.Categoria.$error.required">Informe a Categoria</span>
+            </td>
+            <td>
+                <div class="pull-right">
+                    <input type="submit" class="btn btn-primary btn-sm margin-right-15" value="Cadastrar">
+                    <input type="button" class="btn btn-primary btn-sm margin-right-15" value="Cancelar" ng-click="cancelCreate(Form)">
+                </div>
+            </td>
+        </tr>
+    </table>
+</form>

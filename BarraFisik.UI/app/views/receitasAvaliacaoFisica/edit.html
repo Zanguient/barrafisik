@@ -1,0 +1,19 @@
+﻿<form name="FormEdit" id="formEdit" novalidate ng-submit="formEdit.submit(FormEdit, r)">
+    <table class="table no-bg">
+        <tr>
+            <td>Valor Pago: <span class="symbol required"></span></td>
+            <td ng-class="{'has-error':FormEdit.ValorPago.$dirty && FormEdit.ValorPago.$invalid, 'has-success':FormEdit.ValorPago.$valid}">
+                <input class="form-control" type="text" name="ValorPago" ng-model="r.Valor" required>
+                <span class="error text-small block" ng-if="FormEdit.ValorPago.$dirty && FormEdit.ValorPago.$invalid">Informe o Valor Pago</span>
+            </td>
+           
+            <td colspan="2">
+                <div class="pull-right">
+                    <input type="submit" class="btn btn-primary btn-sm margin-right-15" value="Salvar">
+                    <input type="button" class="btn btn-primary btn-sm margin-right-15" value="Cancelar" ng-click="setEditId(-1)">
+                </div>
+            </td>
+        </tr>
+    </table>
+    <!-- class="editRowTd" -->
+</form>

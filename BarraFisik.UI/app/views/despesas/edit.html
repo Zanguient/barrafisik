@@ -1,0 +1,34 @@
+﻿<Form name="FormEdit" id="formEdit" novalidate ng-submit="formEdit.submit(FormEdit, d)">
+    <table class="table no-bg">
+	    <tr>
+		    <td>Categoria: <span class="symbol required"></span></td>
+		    <td ng-class="{'has-error':FormEdit.Categoria.$dirty && FormEdit.Categoria.$invalid, 'has-success':FormEdit.Categoria.$valid}">
+			    <select id="sel" class="FormEdit-control" style="width: 100%" name="Categoria" ng-model="d.CategoriaFinanceira.CategoriaFinanceiraId" ng-options="obj.CategoriaFinanceiraId as obj.Categoria for obj in vm.categorias" required>
+			    </select>
+			    <span class="error text-small block" ng-if="FormEdit.Categoria.$dirty && FormEdit.Categoria.$error.required">Informe a Categoria</span>
+		    </td>
+		    <td>Nome: <span class="symbol required"></span></td>
+		    <td colspan="2" ng-class="{'has-error':FormEdit.Nome.$dirty && FormEdit.Nome.$invalid, 'has-success':FormEdit.Nome.$valid}">
+			    <input class="FormEdit-control" style="width: 100%" type="text" name="Nome" ng-model="d.Nome" required>
+			    <span class="error text-small block" ng-if="FormEdit.Nome.$dirty && FormEdit.Nome.$error.required">Informe o Nome da Receita</span>
+		    </td>
+	    </tr>
+        <tr>
+			<td>Valor: <span class="symbol required"></span></td>
+			<td ng-class="{'has-error':FormEdit.Valor.$dirty && FormEdit.Valor.$invalid, 'has-success':FormEdit.Valor.$valid}">
+				<input class="FormEdit-control" mask-money  style="width: 100%" type="text" name="Valor" ng-model="d.Valor" required>
+				<span class="error text-small block" ng-if="FormEdit.Valor.$dirty && FormEdit.Valor.$error.required">Informe o Valor</span>                
+			</td>
+			<td>Observação: </td>
+			<td>
+				<textarea class="FormEdit-control"  style="width: 100%" rows="3" style="resize: vertical" name="Observacao" ng-model="d.Observacao"/>
+			</td>
+            <td>
+                <div class="pull-right">
+                    <input type="submit" class="btn btn-primary btn-sm margin-right-15" value="Salvar">
+                    <input type="button" class="btn btn-primary btn-sm margin-right-15" value="Cancelar" ng-click="setEditId(-1)">
+                </div>
+            </td>
+        </tr>
+    </table>
+</Form>

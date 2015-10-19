@@ -1,0 +1,36 @@
+﻿<form name="Form" id="form" novalidate ng-submit="form.submit(Form, valor)">
+    <table class="table no-bg">
+        <tr>
+            <td>Qtd Dias: <span class="symbol required"></span></td>
+            <td class="w100" ng-class="{'has-error':Form.QtdDias.$dirty && Form.QtdDias.$invalid, 'has-success':Form.QtdDias.$valid}">
+                <input class="form-control" type="number" max="5" name="QtdDias" style="min-width: 100px" ng-model="valor.QtdDias" required>
+                <span class="error text-small block" ng-if="Form.QtdDias.$dirty && Form.QtdDias.$error.required">Informe a qtd. de dias</span>
+                <span class="error text-small block" ng-if="Form.QtdDias.$dirty && Form.QtdDias.$error.max">Máximo de dias: 5</span>
+            </td>
+            <td>Valor: </td>
+            <td ng-class="{'has-error':Form.Valor.$dirty && Form.Valor.$invalid, 'has-success':Form.Valor.$valid}">
+                <input class="form-control" type="number" step="any" style="min-width: 100px" name="Valor" ng-model="valor.Valor" required>
+                <span class="error text-small block" ng-if="Form.Valor.$dirty && Form.Valor.$error.required">Informe o Valor</span>
+            </td>
+            <td>Horário Início:</td>
+            <td ng-class="{'has-error':Form.HorarioInicio.$dirty && Form.HorarioInicio.$invalid, 'has-success':Form.HorarioInicio.$valid}">
+                <input class="form-control" type="number" min="6" max="20" style="min-width: 100px" name="HorarioInicio" ng-model="valor.HorarioInicio" required>
+                <span class="error text-small block" ng-if="Form.HorarioInicio.$dirty && Form.HorarioInicio.$error.required">Informe o Horario Inicio</span>
+                <span class="error text-small block" ng-if="Form.HorarioInicio.$dirty && Form.HorarioInicio.$error.min || Form.HorarioInicio.$error.max">Intervalo deve ser: 6h - 20h</span>                                   
+            </td>
+            <td>Horário Fim</td>
+            <td ng-class="{'has-error':Form.HorarioFim.$dirty && Form.HorarioFim.$invalid, 'has-success':Form.HorarioFim.$valid}">
+                <input class="form-control" type="number" min="6" max="20" style="min-width: 100px" name="HorarioFim" ng-model="valor.HorarioFim" required>
+                <span class="error text-small block" ng-if="Form.HorarioFim.$dirty && Form.HorarioFim.$error.required">Informe o Horario Fim</span>
+                <span class="error text-small block" ng-if="Form.HorarioFim.$dirty && Form.HorarioFim.$error.min || Form.HorarioFim.$error.max">Intervalo deve ser: 6h - 20h</span>    
+                <span class="error text-small block" ng-if="Form.HorarioFim.$dirty && valor.HorarioInicio > valor.HorarioFim">Intervalo inválido!</span>                            
+            </td>
+            <td>
+                <div class="pull-right">
+                    <input type="submit" class="btn btn-primary btn-sm margin-right-15" value="Cadastrar">
+                    <input type="button" class="btn btn-primary btn-sm margin-right-15" value="Cancelar" ng-click="cancelCreate(Form)">
+                </div>
+            </td>
+        </tr>
+    </table>    
+</form>

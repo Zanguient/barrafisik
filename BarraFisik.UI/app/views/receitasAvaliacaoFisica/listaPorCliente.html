@@ -1,0 +1,31 @@
+﻿<div class="modal-header">
+    <h3 class="modal-title">Mensalidades</h3>
+</div>
+<div class="modal-body" data-backdrop="static">
+    <div ng-show="vm.avaliacoes != ''">
+        <table ng-table="tableParams" class="table">
+            <tbody ng-repeat="r in vm.avaliacoes">
+                <tr id="tr{{r.ReceitasAvaliacaoFisicaId}}" ng-class-odd="'odd'" ng-class-even="'even'">
+                    <td class="rowTd" data-title="'Data Pagamento'"   sortable="'MesReferencia'">{{r.DataPagamento | date:'dd/MM/yyyy'}}</td>
+                    <td class="rowTd" data-title="'Valor'"            sortable="'AnoReferencia'">{{r.Valor| currency}}</td>
+                    <td class="center">
+                        <div class="visible-md visible-lg hidden-sm hidden-xs">
+                            <a ng-click="setEditId(r.ReceitasAvaliacaoFisicaId)" class="btn btn-transparent btn-xs" tooltip-placement="top" tooltip="Editar" id="editRowBtn{{r.ReceitasAvaliacaoFisica}}"><i class="fa fa-pencil"></i></a>
+                            <a ng-click="vm.delete(r.ReceitasAvaliacaoFisicaId)" class="btn btn-transparent btn-xs" tooltip-placement="top" tooltip="Excluir"><i class="fa fa-times"></i></a>
+                        </div>
+                    </td>
+                </tr>
+                <tr ng-show="editId===r.ReceitasAvaliacaoFisicaId" ng-if="editId===r.ReceitasAvaliacaoFisicaId">
+                    <td colspan="5" ng-include src="'app/views/receitasAvaliacaoFisica/edit.html'"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div ng-show="vm.avaliacoes == ''">
+        - Nenhuma avaliação paga foi registrada para esse cliente
+    </div>
+
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary btn-o" ng-click="vm.cancel()">Fechar</button>
+</div>

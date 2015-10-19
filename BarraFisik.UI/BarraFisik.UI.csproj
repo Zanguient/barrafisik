@@ -50,11 +50,13 @@
   <ItemGroup>
     <Content Include="app\controllers\accounts\accountCtrl.js" />
     <Content Include="app\controllers\accounts\alterarSenhaCtrl.js" />
+    <Content Include="app\controllers\categoriaFinanceira\categoriaFinanceiraCtrl.js" />
     <Content Include="app\controllers\cliente\clienteAniversariantesCtrl.js" />
     <Content Include="app\controllers\cliente\clienteCreateCtrl.js" />
     <Content Include="app\controllers\cliente\clienteCtrl.js" />
     <Content Include="app\controllers\cliente\clienteEditCtrl.js" />
     <Content Include="app\controllers\dashboard\dashboardCtrl.js" />
+    <Content Include="app\controllers\despesas\despesasCtrl.js" />
     <Content Include="app\controllers\filaespera\filaEsperaCtrl.js" />
     <Content Include="app\controllers\horario\clientesPorHorarioCtrl.js" />
     <Content Include="app\controllers\horario\horarioClienteCtrl.js" />
@@ -62,11 +64,18 @@
     <Content Include="app\controllers\login\loginCtrl.js" />
     <Content Include="app\controllers\mensalidades\createMensalidadesCtrl.js" />
     <Content Include="app\controllers\mensalidades\mensalidadesCtrl.js" />
+    <Content Include="app\controllers\receitasAvaliacaoFisica\createReceitasAvaliacaoFisicaCtrl.js" />
+    <Content Include="app\controllers\receitasAvaliacaoFisica\receitasAvaliacaoFisicaCtrl.js" />
+    <Content Include="app\controllers\receitas\receitasCtrl.js" />
     <Content Include="app\directives\equals.js" />
     <Content Include="app\directives\exportTable.js" />
     <Content Include="app\directives\xngFocus.js" />
     <Content Include="app\factory\dashboardData.js" />
     <Content Include="app\factory\accountsData.js" />
+    <Content Include="app\factory\despesasData.js" />
+    <Content Include="app\factory\receitasAvaliacaoFisicaData.js" />
+    <Content Include="app\factory\categoriaFinanceiraData.js" />
+    <Content Include="app\factory\receitasData.js" />
     <Content Include="app\factory\valoresData.js" />
     <Content Include="app\factory\mensalidadesData.js" />
     <Content Include="app\factory\filaEsperaData.js" />
@@ -81,12 +90,18 @@
     <Content Include="app\views\accounts\alterarSenha.html" />
     <Content Include="app\views\accounts\edit.html" />
     <Content Include="app\views\accounts\listaAccounts.html" />
+    <Content Include="app\views\categoriaFinanceira\categoriaFinanceira.html" />
+    <Content Include="app\views\categoriaFinanceira\create.html" />
+    <Content Include="app\views\categoriaFinanceira\edit.html" />
     <Content Include="app\views\cliente\aniversariantes.html" />
     <Content Include="app\views\cliente\clientes.html" />
     <Content Include="app\views\cliente\create.html" />
     <Content Include="app\views\cliente\edit.html" />
     <Content Include="app\views\cliente\ficha.html" />
     <Content Include="app\views\cliente\partial\partialSearch.html" />
+    <Content Include="app\views\despesas\create.html" />
+    <Content Include="app\views\despesas\edit.html" />
+    <Content Include="app\views\despesas\despesas.html" />
     <Content Include="app\views\horario\horariosCliente.html" />
     <Content Include="app\views\dashboard\dashboard.html" />
     <Content Include="app\views\filaespera\create.html" />
@@ -98,6 +113,12 @@
     <Content Include="app\views\mensalidades\create.html" />
     <Content Include="app\views\mensalidades\edit.html" />
     <Content Include="app\views\mensalidades\mensalidades.html" />
+    <Content Include="app\views\receitasAvaliacaoFisica\create.html" />
+    <Content Include="app\views\receitasAvaliacaoFisica\edit.html" />
+    <Content Include="app\views\receitasAvaliacaoFisica\listaPorCliente.html" />
+    <Content Include="app\views\receitas\create.html" />
+    <Content Include="app\views\receitas\edit.html" />
+    <Content Include="app\views\receitas\receitas.html" />
     <Content Include="app\views\valores\create.html" />
     <Content Include="app\views\valores\edit.html" />
     <Content Include="app\views\valores\valores.html" />
@@ -3157,6 +3178,7 @@
     <Content Include="bower_components\ladda\test\bootstrap.html" />
     <Content Include="bower_components\ladda\test\bootstrap.jquery.html" />
     <Content Include="bower_components\locale\angular-locale_pt-br.js" />
+    <Content Include="bower_components\MaskMoney\jquery.maskMoney.js" />
     <Content Include="bower_components\microplugin\.gitignore" />
     <Content Include="bower_components\microplugin\src\microplugin.js" />
     <Content Include="bower_components\moment\benchmarks\clone.js" />
@@ -4597,6 +4619,7 @@
     <Content Include="bower_components\v-accordion\src\vAccordion\vAccordion.suffix" />
     <Content Include="assets\images\Thumbs.db" />
     <Content Include="bower_components\webcam\webcam.min.js" />
+    <Content Include="app\directives\angular.maskMoney.js" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

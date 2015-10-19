@@ -98,8 +98,6 @@
                     });
                 }
             });
-
-            
         }
 
         //Format Data Atual

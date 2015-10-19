@@ -1,0 +1,55 @@
+﻿<!-- start: PAGE TITLE -->
+<section id="page-title">
+    <div class="row">
+        <div class="col-sm-8">
+            <h1 class="mainTitle">Receitas</h1>
+            <span class="mainDescription">
+            </span>
+        </div>
+        <div ncy-breadcrumb></div>
+    </div>
+</section>
+<div class="print">
+    <div class="container-fluid container-fullw bg-white">
+        <div class="row">
+            <div class="col-md-6">
+                <button type="button" ng-disabled="createReceita" class="btn btn-primary btn-wide btn-scroll btn-scroll-top ti-plus" ng-click="createReceita = !createReceita">
+                    <span>Cadastrar</span>
+                </button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="table-responsive">
+                    <table class="table">
+                        <tr ng-show="createReceita">
+                            <td colspan="12" ng-include src="'app/views/receitas/create.html'"></td>
+                        </tr>
+                    </table>
+                    <table ng-table="tableParams" class="table">
+
+                        <tbody ng-repeat="r in $data">
+                        <tr id="tr{{r.ReceitasId}}" ng-class-odd="'odd'" ng-class-even="'even'">
+	                         <td class="rowTd" data-title="'Categoria'" sortable="'CategoriaFinanceira.Categoria'">{{r.CategoriaFinanceira.Categoria}}</td>
+	                        <td class="rowTd" data-title="'Nome'" sortable="'Nome'">{{r.Nome}}</td>
+	                        <td class="rowTd" data-title="'Valor'" sortable="'Valor'">{{r.Valor | currency}}</td>
+	                        <td class="rowTd" data-title="'Data'" sortable="'Data'">{{r.Data | date:'dd/MM/yyyy'}}</td>
+	                        <td class="rowTd" style="max-width: 150px" data-title="'Observação'">{{r.Observacao}}</td>
+	                        <td class="text-right">
+		                        <div class="visible-md visible-lg hidden-sm hidden-xs">
+			                        <a ng-click="setEditId(r.ReceitasId)" class="btn btn-transparent btn-xs" tooltip-placement="top" tooltip="Editar" id="editRowBtn{{r.ReceitasId}}"><i class="fa fa-pencil"></i></a>
+			                        <a ng-click="delete(r.ReceitasId)" class="btn btn-transparent btn-xs tooltips" tooltip-placement="top" tooltip="Excluir"><i class="fa fa-times"></i></a>
+		                        </div>
+	                        </td>
+                        </tr>
+                        <tr ng-show="editId===r.ReceitasId" ng-if="editId===r.ReceitasId">
+                            <td colspan="7" ng-include src="'app/views/receitas/edit.html'"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

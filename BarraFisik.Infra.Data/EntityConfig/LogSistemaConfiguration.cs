@@ -15,9 +15,9 @@ namespace BarraFisik.Infra.Data.EntityConfig
             Property(l => l.UserId).IsRequired();
             Property(l => l.UsuarioNome).IsRequired();
             Property(l => l.Acao).IsRequired();
-            Property(f => f.Tabela).IsRequired();
-            Property(f => f.RegistroId).IsRequired();
-            Property(f => f.Descricao).IsOptional().HasMaxLength(250);
+            Property(l => l.Tabela).IsRequired();
+            Property(l => l.RegistroId).IsRequired();
+            Property(l => l.Descricao).IsOptional().HasMaxLength(250);
         }
     }
 }

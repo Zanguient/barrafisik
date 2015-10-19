@@ -1,0 +1,25 @@
+﻿<div class="modal-header">
+    <h3 class="modal-title">Pagamento Avaliação Física</h3>
+</div>
+<div class="modal-body">
+    <ul>
+        <li ng-repeat="error in vm.errors" class="text-danger">{{error}}</li>
+    </ul>
+    <form name="Form" id="form" novalidate ng-submit="form.submit(Form, avaliacaofisica)">
+        <table class="table no-bg">
+            <tr>
+                <td class="col-md-3">Valor Pago: <span class="symbol required"></span></td>
+                <td ng-class="{'has-error':Form.ValorPago.$dirty && Form.ValorPago.$invalid, 'has-success':Form.ValorPago.$valid}">
+                    <input class="form-control" type="text" name="ValorPago" ng-model="avaliacaofisica.Valor" required>
+                    <span class="error text-small block" ng-if="Form.ValorPago.$dirty && Form.ValorPago.$invalid">Informe o Valor Pago</span>
+                </td>               
+            </tr>
+        </table>
+        <!-- class="editRowTd" -->
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-primary btn-o">Cadastrar</button>
+            <button type="button" class="btn btn-primary btn-o" ng-click="vm.cancel()">Fechar</button>
+        </div>
+    </form>
+</div>
+                

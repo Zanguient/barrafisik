@@ -35,18 +35,15 @@ app.constant('JS_REQUIRES', {
         'clienteCreateCtrl' : 'app/controllers/cliente/clienteCreateCtrl.js',
         'clienteEditCtrl': 'app/controllers/cliente/clienteEditCtrl.js',
         'clienteAniversariantesCtrl': 'app/controllers/cliente/clienteAniversariantesCtrl.js',
-
         'horarioCtrl': 'app/controllers/horario/horarioCtrl.js',
-
         'filaEsperaCtrl': 'app/controllers/filaespera/filaEsperaCtrl.js',
-
         'dashboardCtrl': 'app/controllers/Dashboard/dashboardCtrl.js',
-
         'loginCtrl': 'app/controllers/login/loginCtrl.js',
-
         'accountCtrl': 'app/controllers/accounts/accountCtrl.js',
-
         'valoresCtrl': 'app/controllers/valores/valoresCtrl.js',
+        'categoriaFinanceiraCtrl': 'app/controllers/categoriaFinanceira/categoriaFinanceiraCtrl.js',
+        'receitasCtrl': 'app/controllers/receitas/receitasCtrl.js',
+        'despesasCtrl': 'app/controllers/despesas/despesasCtrl.js',
 
         //*** Factories
         'clienteData' : 'app/factory/clienteData.js',
@@ -55,6 +52,10 @@ app.constant('JS_REQUIRES', {
         'dashboardData' : 'app/factory/dashboardData.js',
         'accountsData' : 'app/factory/accountsData.js',
         'valoresData' : 'app/factory/valoresData.js',
+        'receitasAvaliacaoFisicaData' : 'app/factory/receitaAvaliacaoFisicaData.js',
+        'categoriaFinanceiraData': 'app/factory/categoriaFinanceiraData.js',
+        'receitasData': 'app/factory/receitasData.js',
+        'despesasData': 'app/factory/despesasData.js',
 
         //*** Controllers
         //'dashboardCtrl': 'assets/js/controllers/dashboardCtrl.js',

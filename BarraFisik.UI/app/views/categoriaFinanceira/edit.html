@@ -1,0 +1,25 @@
+﻿<form name="FormEdit" id="formEdit" novalidate ng-submit="formEdit.submit(FormEdit, c)">
+    <table class="table no-bg">
+        <tr>
+            <td>Tipo: <span class="symbol required"></span></td>
+            <td ng-class="{'has-error':FormEdit.Tipo.$dirty && FormEdit.Tipo.$invalid, 'has-success':FormEdit.Tipo.$valid}">
+                 <select class="form-control" name="Tipo" ng-model="c.Tipo" required>
+		            <option value="Receitas">Receitas</option>
+		            <option value="Despesas">Despesas</option>
+	            </select>
+                <span class="error text-small block" ng-if="FormEdit.Tipo.$dirty && FormEdit.Tipo.$error.required">Informe o tipo</span>                
+            </td>
+            <td>Categoria:  <span class="symbol required"></span></td>
+            <td ng-class="{'has-error':FormEdit.Categoria.$dirty && FormEdit.Categoria.$invalid, 'has-success':FormEdit.Categoria.$valid}">
+                <input class="form-control" type="text" name="Categoria" ng-model="c.Categoria" required>
+                <span class="error text-small block" ng-if="FormEdit.Categoria.$dirty && FormEdit.Categoria.$error.required">Informe a Categoria</span>
+            </td>
+            <td>
+                <div class="pull-right">
+                    <input type="submit" class="btn btn-primary btn-sm margin-right-15" value="Salvar">
+                    <input type="button" class="btn btn-primary btn-sm margin-right-15" value="Cancelar" ng-click="setEditId(-1)">
+                </div>
+            </td>
+        </tr>
+    </table>    
+</form>

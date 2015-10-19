@@ -1,0 +1,52 @@
+﻿<!-- start: PAGE TITLE -->
+<section id="page-title">
+    <div class="row">
+        <div class="col-sm-8">
+            <h1 class="mainTitle">Categorias Financeiras</h1>
+            <span class="mainDescription">
+            </span>
+        </div>
+        <div ncy-breadcrumb></div>
+    </div>
+</section>
+<div class="print">
+    <div class="container-fluid container-fullw bg-white">
+        <div class="row">
+            <div class="col-md-6">
+                <button type="button" ng-disabled="createCategoria" class="btn btn-primary btn-wide btn-scroll btn-scroll-top ti-plus" ng-click="createCategoria = !createCategoria">
+                    <span>Cadastrar</span>
+                </button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="table-responsive">
+                    <table class="table">
+                        <tr ng-show="createCategoria">
+                            <td colspan="12" ng-include src="'app/views/categoriaFinanceira/create.html'"></td>
+                        </tr>
+                    </table>
+                    <table ng-table="tableParams" class="table">
+
+                        <tbody ng-repeat="c in vm.categorias">
+                        <tr id="tr{{c.CategoriaFinanceiraId}}" ng-class-odd="'odd'" ng-class-even="'even'">
+                            <td class="rowTd" data-title="'Tipo'" sortable="'Tipo'">{{c.Tipo}}</td>
+                            <td class="rowTd" data-title="'Categoria'" sortable="'Categoria'">{{c.Categoria}}</td>                                             
+                            <td class="text-right">
+                                <div class="visible-md visible-lg hidden-sm hidden-xs">
+                                    <a ng-click="setEditId(c.CategoriaFinanceiraId)" class="btn btn-transparent btn-xs" tooltip-placement="top" tooltip="Editar" id="editRowBtn{{c.CategoriaFinanceiraId}}"><i class="fa fa-pencil"></i></a>
+                                    <a ng-click="delete(c.CategoriaFinanceiraId)" class="btn btn-transparent btn-xs tooltips" tooltip-placement="top" tooltip="Excluir"><i class="fa fa-times"></i></a>                                    
+                                </div>
+                            </td>
+                        </tr>
+                        <tr ng-show="editId===c.CategoriaFinanceiraId" ng-if="editId===c.CategoriaFinanceiraId">
+                            <td colspan="7" ng-include src="'app/views/categoriaFinanceira/edit.html'"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

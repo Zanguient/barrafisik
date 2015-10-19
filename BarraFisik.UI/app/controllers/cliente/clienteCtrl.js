@@ -206,5 +206,59 @@
             });
         }
 
+        //Avaliacao Fisica
+        $scope.createAvaliacaoFisica = function (cliente) {
+            vm.modalInstance = $modal.open({
+                templateUrl: 'app/views/receitasAvaliacaoFisica/create.html',
+                size: '',
+                resolve: {
+                    Cliente: function () {
+                        return cliente;
+                    },
+                    deps: [
+                        '$ocLazyLoad',
+                        function ($ocLazyLoad) {
+                            return $ocLazyLoad.load(['app/controllers/receitasAvaliacaoFisica/createReceitasAvaliacaoFisicaCtrl.js', 'app/factory/receitasAvaliacaoFisicaData.js']);
+                        }
+                    ]
+                },
+                controller: 'createReceitasAvaliacaoFisicaCtrl as vm'
+            });
+            vm.modalInstance.result.then(function (data) {
+                SweetAlert.swal("Sucesso!", "Avaliação Física paga com sucesso!", "success");
+                clienteData.getClientes().then(function (result) {
+                    vm.clientes = result.data;
+                });
+            }, function () {
+                console.log('Cancelled');
+            });
+        }
+
+        //Avaliacao Fisica
+        $scope.openReceitasAvaliacaoFisica = function (id) {
+            vm.modalInstance = $modal.open({
+                templateUrl: 'app/views/receitasAvaliacaoFisica/listaPorCliente.html',
+                size: '',
+                resolve: {
+                    ClienteId: function () {
+                        return id;
+                    },
+                    deps: [
+                        '$ocLazyLoad',
+                        function ($ocLazyLoad) {
+                            return $ocLazyLoad.load(['app/controllers/receitasAvaliacaoFisica/receitasAvaliacaoFisicaCtrl.js', 'app/factory/receitasAvaliacaoFisicaData.js']);
+                        }
+                    ]
+                },
+                controller: 'receitasAvaliacaoFisicaCtrl as vm'
+            });
+            vm.modalInstance.result.then(function (data) {
+            }, function () {
+                console.log('Cancelled');
+                clienteData.getClientes().then(function (result) {
+                    vm.clientes = result.data;
+                });
+            });
+        }
     };
 })();

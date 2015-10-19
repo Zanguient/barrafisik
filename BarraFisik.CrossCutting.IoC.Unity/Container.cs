@@ -1,5 +1,4 @@
-﻿using System;
-using BarraFisik.Application.App;
+﻿using BarraFisik.Application.App;
 using BarraFisik.Application.Interfaces;
 using BarraFisik.Domain.Interfaces.Repository;
 using BarraFisik.Domain.Interfaces.Repository.ReadOnly;
@@ -30,7 +29,7 @@ namespace BarraFisik.CrossCutting.IoC.Unity
 
         public UnityContainer ConfigureUnityContainer()
         {
-            UnityContainer container = new UnityContainer();
+            var container = new UnityContainer();
 
             //APP            
             container.RegisterType<IClienteAppService, ClienteAppService>();
@@ -38,26 +37,40 @@ namespace BarraFisik.CrossCutting.IoC.Unity
             container.RegisterType<IFilaEsperaAppService, FilaEsperaAppService>();
             container.RegisterType<IMensalidadesAppService, MensalidadesAppService>();
             container.RegisterType<IValoresAppService, ValoresAppService>();
+            container.RegisterType<IReceitasAvaliacaoFisicaAppService, ReceitasAvaliacaoFisicaAppService>();
+            container.RegisterType<ICategoriaFinanceiraAppService, CategoriaFinanceiraAppService>();
+            container.RegisterType<IReceitasAppService, ReceitasAppService>();
+            container.RegisterType<IDespesasAppService, DespesasAppService>();
 
             //Services
-            container.RegisterType(typeof(IServiceBase<>), typeof(ServiceBase<>));
+            container.RegisterType(typeof (IServiceBase<>), typeof (ServiceBase<>));
             container.RegisterType<IClienteService, ClienteService>();
             container.RegisterType<IHorarioService, HorarioService>();
             container.RegisterType<IFilaEsperaService, FilaEsperaService>();
             container.RegisterType<IMensalidadesService, MensalidadesService>();
             container.RegisterType<IValoresService, ValoresService>();
             container.RegisterType<ILogSistemaService, LogSistemaService>();
+            container.RegisterType<ILogReceitasDespesasService, LogReceitasDespesasService>();
             container.RegisterType<ILogMensalidadesService, LogMensalidadesService>();
+            container.RegisterType<IReceitasAvaliacaoFisicaService, ReceitasAvaliacaoFisicaService>();
+            container.RegisterType<ICategoriaFinanceiraService, CategoriaFinanceiraService>();
+            container.RegisterType<IReceitasService, ReceitasService>();
+            container.RegisterType<IDespesasService, DespesasService>();
 
             //Data Repos
-            container.RegisterType(typeof(IRepositoryBase<>), typeof(RepositoryBase<,>));
+            container.RegisterType(typeof (IRepositoryBase<>), typeof (RepositoryBase<,>));
             container.RegisterType<IClienteRepository, ClienteRepository>();
             container.RegisterType<IHorarioRepository, HorarioRepository>();
             container.RegisterType<IFilaEsperaRepository, FilaEsperaRepository>();
             container.RegisterType<IMensalidadesRepository, MensalidadesRepository>();
-            container.RegisterType<IValoresRepository,ValoresRepository>();
-            container.RegisterType<ILogSistemaRepository,LogSistemaRepository>();
+            container.RegisterType<IValoresRepository, ValoresRepository>();
+            container.RegisterType<ILogSistemaRepository, LogSistemaRepository>();
+            container.RegisterType<ILogReceitasDespesasRepository, LogReceitasDespesasRepository>();
             container.RegisterType<ILogMensalidadesRepository, LogMensalidadesRepository>();
+            container.RegisterType<IReceitasAvaliacaoFisicaRepository, ReceitasAvaliacaoFisicaRepository>();
+            container.RegisterType<ICategoriaFinanceiraRepository, CategoriaFinanceiraRepository>();
+            container.RegisterType<IReceitasRepository, ReceitasRepository>();
+            container.RegisterType<IDespesasRepository, DespesasRepository>();
 
             //Data Repos Read Only
             container.RegisterType<IClienteRepositoryReadOnly, ClienteRepositoryReadOnly>();
@@ -66,9 +79,9 @@ namespace BarraFisik.CrossCutting.IoC.Unity
             container.RegisterType<IValoresRepositoryReadOnly, ValoresRepositoryReadOnly>();
 
             //DataConfig
-            container.RegisterType(typeof(IContextManager<>), typeof(ContextManager<>));
+            container.RegisterType(typeof (IContextManager<>), typeof (ContextManager<>));
             container.RegisterType<IDbContext, BarraFisikContext>();
-            container.RegisterType(typeof(IUnitOfWork<>), typeof(UnitOfWork<>));
+            container.RegisterType(typeof (IUnitOfWork<>), typeof (UnitOfWork<>));
 
             return container;
         }

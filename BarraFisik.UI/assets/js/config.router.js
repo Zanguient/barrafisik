@@ -150,6 +150,47 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
             controller: 'accountCtrl as vm'
         })
 
+
+         //Financeiro
+        .state('app.financeiro', {
+            url: '/financeiro',
+            template: '<div ui-view class="fade-in-up"></div>',
+            title: 'Financeiro',
+            ncyBreadcrumb: {
+                label: 'Financeiro'
+            }
+        }).state('app.financeiro.receitas', {
+            url: '/receitas',
+            templateUrl: "app/views/receitas/receitas.html",
+            title: 'Lista das Receitas',
+            icon: 'ti-layout-media-left-alt',
+            resolve: loadSequence('receitasCtrl', 'ngTable', 'receitasData', 'categoriaFinanceiraData'),
+            controller: "receitasCtrl as vm",
+            ncyBreadcrumb: {
+                label: 'Receitas'
+            }
+        }).state('app.financeiro.despesas', {
+            url: '/despesas',
+            templateUrl: "app/views/despesas/despesas.html",
+            title: 'Lista das Despesas',
+            icon: 'ti-layout-media-left-alt',
+            resolve: loadSequence('despesasCtrl', 'ngTable', 'despesasData', 'categoriaFinanceiraData'),
+            controller: "despesasCtrl as vm",
+            ncyBreadcrumb: {
+                label: 'Despesas'
+            }
+        }).state('app.financeiro.categorias', {
+            url: '/categorias',
+            templateUrl: "app/views/categoriaFinanceira/categoriaFinanceira.html",
+            title: 'Categorias Financeiras',
+            icon: 'ti-layout-media-left-alt',
+            resolve: loadSequence('categoriaFinanceiraCtrl', 'ngTable', 'categoriaFinanceiraData'),
+            controller: "categoriaFinanceiraCtrl as vm",
+            ncyBreadcrumb: {
+                label: 'Categorias'
+            }
+        })
+
         //Valores
      .state('app.valores', {
          url: "/valores",

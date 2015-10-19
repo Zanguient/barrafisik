@@ -37,17 +37,27 @@
     <Reference Include="System.Web" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities\CategoriaFinanceira.cs" />
     <Compile Include="Entities\Cliente.cs" />
+    <Compile Include="Entities\Despesas.cs" />
     <Compile Include="Entities\LogMensalidades.cs" />
     <Compile Include="Entities\LogSistema.cs" />
     <Compile Include="Entities\FilaEspera.cs" />
     <Compile Include="Entities\Horario.cs" />
     <Compile Include="Entities\Mensalidades.cs" />
+    <Compile Include="Entities\LogReceitasDespesas.cs" />
+    <Compile Include="Entities\Receitas.cs" />
+    <Compile Include="Entities\ReceitasAvaliacaoFisica.cs" />
     <Compile Include="Entities\Valores.cs" />
     <Compile Include="Exceptions\CustomException.cs" />
     <Compile Include="Interfaces\Repository\IClienteRepository.cs" />
     <Compile Include="Interfaces\Repository\ILogMensalidadesRepository.cs" />
     <Compile Include="Interfaces\Repository\ILogSistemaRepository.cs" />
+    <Compile Include="Interfaces\Repository\ICategoriaFinanceiraRepository.cs" />
+    <Compile Include="Interfaces\Repository\IReceitasAvaliacaoFisicaRepository.cs" />
+    <Compile Include="Interfaces\Repository\IDespesasRepository.cs" />
+    <Compile Include="Interfaces\Repository\ILogReceitasDespesasRepository.cs" />
+    <Compile Include="Interfaces\Repository\IReceitasRepository.cs" />
     <Compile Include="Interfaces\Repository\IValoresRepository.cs" />
     <Compile Include="Interfaces\Repository\IMensalidadesRepository.cs" />
     <Compile Include="Interfaces\Repository\IFilaEsperaRepository.cs" />
@@ -60,6 +70,11 @@
     <Compile Include="Interfaces\Services\IClienteService.cs" />
     <Compile Include="Interfaces\Services\ILogMensalidadesService.cs" />
     <Compile Include="Interfaces\Services\ILogSistemaService.cs" />
+    <Compile Include="Interfaces\Services\IReceitasAvaliacaoFisicaService.cs" />
+    <Compile Include="Interfaces\Services\ICategoriaFinanceiraService.cs" />
+    <Compile Include="Interfaces\Services\IDespesasService.cs" />
+    <Compile Include="Interfaces\Services\ILogReceitasDespesasService.cs" />
+    <Compile Include="Interfaces\Services\IReceitasService.cs" />
     <Compile Include="Interfaces\Services\IValoresService.cs" />
     <Compile Include="Interfaces\Services\IMensalidadesService.cs" />
     <Compile Include="Interfaces\Services\IFilaEsperaService.cs" />
@@ -71,8 +86,13 @@
     <Compile Include="Interfaces\Validation\ISelfValidation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ClienteService.cs" />
+    <Compile Include="Services\CategoriaFinanceiraService.cs" />
     <Compile Include="Services\LogMensalidadesService.cs" />
     <Compile Include="Services\LogSistemaServices.cs" />
+    <Compile Include="Services\ReceitasAvaliacaoFisicaService.cs" />
+    <Compile Include="Services\DespesasService.cs" />
+    <Compile Include="Services\LogReceitasDespesasService.cs" />
+    <Compile Include="Services\ReceitasService.cs" />
     <Compile Include="Services\ValoresService.cs" />
     <Compile Include="Services\MensalidadesService.cs" />
     <Compile Include="Services\FilaEsperaService.cs" />

@@ -1,0 +1,61 @@
+﻿<section id="page-title">
+    <div class="row">
+        <div class="col-sm-8">
+            <h1 class="mainTitle">Usuários</h1>
+            <span class="mainDescription">Permissões ao Sistema</span>
+        </div>
+        <div ncy-breadcrumb></div>
+    </div>
+</section>
+<div ng-show="loading"><img src="assets/images/loading.gif" />Carregando Acessos...</div>
+<!-- start: INLINE EDIT EXAMPLE -->
+<div class="container-fluid container-fullw" ng-show="!loading">
+    <div class="row">
+        <div class="col-md-12">
+            <div>
+                <div class="row margin-bottom-10">
+                    <div class="col-md-12">
+                        <button type="button" ng-disabled="createUser" class="btn btn-primary btn-wide btn-scroll btn-scroll-top ti-plus" ng-click="createUser = !createUser">
+                            <span>Cadastrar</span>
+                        </button>
+                        <h5 class="pull-right ">Total: <span class="badge badge-info">{{total}}</span></h5>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="table">
+                        <tr ng-show="createUser">
+                            <td colspan="12" ng-include src="'app/views/accounts/create.html'"></td>
+                        </tr>
+                    </table>
+                    <table ng-table="tableParams" class="table">
+
+                        <tbody ng-repeat="p in $data">
+                            <tr id="tr{{p.Id}}" ng-class-odd="'odd'" ng-class-even="'even'">
+                                <td class="rowTd" data-title="'Nome'" sortable="'FullName'">{{p.FullName}}</td>
+                                <td class="rowTd" data-title="'Usuário'" sortable="'UserName'">{{p.UserName}}</td>
+                                <td class="rowTd" data-title="'E-mail'" sortable="'Email'">{{p.Email}}</td>
+                                <td class="rowTd" data-title="'Permissão'">
+                                    <span ng-if="p.Roles.length > 0" data-ng-repeat="roles in p.Roles">
+                                        <span class="label bg-success" style="cursor: pointer" ng-click="vm.removeRole(p.Id, 'Admin')" tooltip="Remover Permissão de Admin" title="roles">{{roles}}</span>
+                                    </span>
+                                    <span ng-if="p.Roles.length == 0" class="label bg-black" style="cursor: pointer" ng-click="vm.addRole(p.Id, 'Admin')" tooltip="Adicionar Permissão de Admin">Admin</span>
+                                </td>
+                                <td class="rowTd text-right">
+                                    <div class="visible-md visible-lg hidden-sm hidden-xs">
+                                        <a ng-click="setEditId(p.Id)" class="btn btn-transparent btn-xs" tooltip-placement="top" tooltip="Editar" id="editRowBtn{{p.Id}}"><i class="fa fa-pencil"></i></a>
+                                        <a ng-click="resetPassword(p)" class="btn btn-transparent btn-xs tooltips" tooltip-placement="top" tooltip="Redefinir Senha"><i class="fa fa-refresh"></i></a>
+                                        <a ng-click="delete(p.Id)" class="btn btn-transparent btn-xs tooltips" tooltip-placement="top" tooltip="Excluir"><i class="fa fa-times"></i></a>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr ng-show="editId===p.Id" ng-if="editId===p.Id">
+                                <td colspan="7" ng-include src="'app/views/accounts/edit.html'"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end: INLINE EDIT EXAMPLE -->

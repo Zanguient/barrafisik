@@ -17,28 +17,29 @@
                 <div class="row margin-bottom-10">
                     <div class="col-md-12">
                         <h5 class="pull-left ">Total: <span class="badge badge-info">{{total}}</span></h5>
-                        
+
                         <div class="button-group pull-right margin-right-10">
-                            <button type="button" class="btn btn-blue btn-sm" tooltip-placement="top" tooltip="Atualizar Página" ng-click="refresh()"><i class="fa fa-refresh"/></button>
+                            <button type="button" class="btn btn-blue btn-sm" tooltip-placement="top" tooltip="Atualizar Página" ng-click="refresh()"><i class="fa fa-refresh" /></button>
 
                             <div class="btn-group" dropdown is-open="status.isopen">
-                                <button type="button" class="btn btn-default btn-sm btn-azure dropdown-toggle" tooltip-placement="top" tooltip="Exportar" dropdown-toggle data-toggle="dropdown" data-placeholder="false" >
+                                <button type="button" class="btn btn-default btn-sm btn-azure dropdown-toggle" tooltip-placement="top" tooltip="Exportar" dropdown-toggle data-toggle="dropdown" data-placeholder="false">
                                     <span class="fa fa-share-square"></span>
                                 </button>
                                 <ul class="dropdown-menu pull-right bullet" role="menu">
                                     <li>
                                         <a href="#" onClick="$('#tableClientes').tableExport({ type: 'excel', tableName:'Clientes', escape: 'false' });">
-                                            <img src="/assets/images/icons/16x16/Excel-icon.png"/> Excel</a>
+                                            <img src="/assets/images/icons/16x16/Excel-icon.png" /> Excel
+                                        </a>
                                     </li>
                                     <li class="divider"></li>
                                     <li>
                                         <a href="#" onClick="$('#tableClientes').tableExport({ type: 'doc', escape: 'false' });">
-                                            <img src="/assets/images/icons/16x16/Word-icon.png"/> Word
+                                            <img src="/assets/images/icons/16x16/Word-icon.png" /> Word
                                         </a>
-                                    </li>              
+                                    </li>
                                 </ul>
                             </div>
-                            <button type="button" class="btn btn-default btn-sm btn-dark-grey dropdown-toggle"  data-placeholder="false" dropdown-toggle data-toggle="dropdown"><span class="glyphicon glyphicon-cog"></span> </button>
+                            <button type="button" class="btn btn-default btn-sm btn-dark-grey dropdown-toggle" data-placeholder="false" dropdown-toggle data-toggle="dropdown"><span class="glyphicon glyphicon-cog"></span> </button>
                             <ul class="dropdown-menu pull-right">
                                 <li ng-repeat="col in vm.cols">
                                     <input type="checkbox" id="{{col.title}}" ng-model="col.show">
@@ -49,7 +50,7 @@
 
                     </div>
                 </div>
-                
+
                 <div class="table-responsive">
                     <table id="tableClientes" ng-table="tableParams" class="table table-striped export-table">
                         <tr ng-repeat="p in $data">
@@ -70,12 +71,26 @@
                             <td class="rowTd" title="vm.cols[11].title" ng-show="vm.cols[11].show">{{p.Valor | currency}}</td>
 
                             <td class="text-right">
-                                <div class="visible-md visible-lg hidden-sm hidden-xs">
-                                    <a ui-sref="app.clientes.editar({id: p.ClienteId})" class="btn btn-transparent btn-xs" tooltip-placement="top" tooltip="Editar"><i class="fa fa-pencil"></i></a>
-                                    <a ng-click="openHorarios(p)" class="btn btn-transparent btn-xs" tooltip-placement="top" tooltip="Horários"><i class="fa fa-clock-o"></i></a>
-                                    <a ng-click="openMensalidades(p.ClienteId)" class="btn btn-transparent btn-xs tooltips" tooltip-placement="top" tooltip="Mensalidades"><i class="fa fa-money"></i></a>
-                                    <a ng-click="createMensalidade(p)" class="btn btn-transparent btn-xs tooltips" tooltip-placement="top" tooltip="Pagamento"><i class="fa fa-dollar"></i></a>
-                                </div>
+                                <a ui-sref="app.clientes.editar({id: p.ClienteId})" class="btn btn-transparent btn-xs" tooltip-placement="top" tooltip="Editar"><i class="fa fa-pencil"></i></a>
+                                <a ng-click="openHorarios(p)" class="btn btn-transparent btn-xs" tooltip-placement="top" tooltip="Horários"><i class="fa fa-clock-o"></i></a>
+                                <!--<a ng-click="openMensalidades(p.ClienteId)" class="btn btn-transparent btn-xs tooltips" tooltip-placement="top" tooltip="Mensalidades"><i class="fa fa-money"></i></a>-->
+                                
+                                <span class="dropdown" dropdown>
+                                    <a class="btn btn-transparent btn-xs tooltips" dropdown-toggle tooltip-placement="top" tooltip="Listar"><i class="fa fa-money"></i></a>
+                                    <ul class="dropdown-menu pull-right">
+                                        <li><a ng-click="openMensalidades(p.ClienteId)">Mensalidades</a></li>
+                                        <li><a ng-click="openReceitasAvaliacaoFisica(p.ClienteId)"> Avaliações Físicas</a></li>
+                                    </ul>
+                                </span>
+                                
+                                <!--<a ng-click="createMensalidade(p)" class="btn btn-transparent btn-xs tooltips" tooltip-placement="top" tooltip="Pagamento"><i class="fa fa-dollar"></i></a>-->
+                                <span class="dropdown" dropdown>
+                                    <a class="btn btn-transparent btn-xs tooltips" dropdown-toggle tooltip-placement="top" tooltip="Pagar"><i class="fa fa-dollar"></i></a>
+                                    <ul class="dropdown-menu pull-right">
+                                        <li><a ng-click="createMensalidade(p)"> Mensalidade</a></li>
+                                        <li><a ng-click="createAvaliacaoFisica(p)"> Avaliação Física</a></li>
+                                    </ul>
+                                </span>
                             </td>
                         </tr>
                     </table>

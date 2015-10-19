@@ -16,5 +16,6 @@ angular.module("clip-two", [
 	'duScroll',
 	//'pascalprecht.translate',
     'ngCpfCnpj',
-    'webcam'
+    'webcam',
+    'maskMoney'
 ]);
