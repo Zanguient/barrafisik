@@ -60,6 +60,7 @@
     <Compile Include="App\AppServiceBase.cs" />
     <Compile Include="App\ClienteAppService.cs" />
     <Compile Include="App\CategoriaFinanceiraAppService.cs" />
+    <Compile Include="App\RelatorioFinanceiroAppService.cs" />
     <Compile Include="App\DespesasAppService.cs" />
     <Compile Include="App\ReceitasAppService.cs" />
     <Compile Include="App\ReceitasAvaliacaoFisicaAppService.cs" />
@@ -72,6 +73,7 @@
     <Compile Include="AutoMapper\DomainToViewModelMappingProfile.cs" />
     <Compile Include="AutoMapper\ViewModelToDomainMappingProfile.cs" />
     <Compile Include="Interfaces\IAppServiceBase.cs" />
+    <Compile Include="Interfaces\IRelatorioFinanceiroAppService.cs" />
     <Compile Include="Interfaces\IClienteAppService.cs" />
     <Compile Include="Interfaces\ICategoriaFinanceiraAppService.cs" />
     <Compile Include="Interfaces\IDespesasAppService.cs" />
@@ -91,6 +93,8 @@
     <Compile Include="ViewModels\ReceitasAvaliacaoFisicaViewModel.cs" />
     <Compile Include="ViewModels\DespesasViewModel.cs" />
     <Compile Include="ViewModels\ReceitasViewModel.cs" />
+    <Compile Include="ViewModels\RelatorioFinanceiroSearchViewModel.cs" />
+    <Compile Include="ViewModels\RelatorioFinanceiroViewModel.cs" />
     <Compile Include="ViewModels\ValoresViewModel.cs" />
     <Compile Include="ViewModels\MensalidadesViewModel.cs" />
     <Compile Include="ViewModels\FilaEsperaViewModel.cs" />

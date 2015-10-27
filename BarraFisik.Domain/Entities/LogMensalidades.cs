@@ -20,5 +20,7 @@ namespace BarraFisik.Domain.Entities
         public DateTime Data { get; set; }
         public string UserId { get; set; }
         public string UsuarioNome { get; set; }
+        public bool isPersonal { get; set; }
+        public decimal ValorPersonal { get; set; }
     }
 }

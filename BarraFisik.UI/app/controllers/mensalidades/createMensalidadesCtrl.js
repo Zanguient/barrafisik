@@ -35,6 +35,7 @@
             $modalInstance.dismiss('cancel');
         };
 
+        
         /**
          * /
          * @returns {DatePicker} 

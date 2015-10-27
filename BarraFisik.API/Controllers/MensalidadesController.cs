@@ -9,7 +9,7 @@ using BarraFisik.API.Filters;
 
 namespace BarraFisik.API.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [RoutePrefix("api")]
     public class MensalidadesController : ApiController
     {
@@ -18,6 +18,19 @@ namespace BarraFisik.API.Controllers
         public MensalidadesController(IMensalidadesAppService mensalidadesApp)
         {
             _mensalidadesApp = mensalidadesApp;
+        }
+
+        [HttpGet]
+        [Route("mensalidades")]
+        [GzipCompression]
+        public async Task<HttpResponseMessage> Get()
+        {
+            var result = _mensalidadesApp.GetAll();
+            var response = Request.CreateResponse(HttpStatusCode.OK, result);
+
+            var tsc = new TaskCompletionSource<HttpResponseMessage>();
+            tsc.SetResult(response);
+            return await tsc.Task;
         }
 
         [HttpGet]
@@ -37,6 +50,8 @@ namespace BarraFisik.API.Controllers
         [Route("mensalidades")]
         public HttpResponseMessage Post(MensalidadesViewModel mensalidade)
         {
+            mensalidade.Nome = "Mensalidade";
+            mensalidade.CategoriaFinanceiraId = new Guid("1c1278df-f5a5-4407-a0c4-bdbb71c362b1");
             if (ModelState.IsValid)
             {
                 var result = _mensalidadesApp.AdicionarMensalidade(mensalidade);

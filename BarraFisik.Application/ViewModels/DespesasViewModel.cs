@@ -31,5 +31,7 @@ namespace BarraFisik.Application.ViewModels
         [Required(ErrorMessage = "Informe a Categoria Financeira")]
         public Guid CategoriaFinanceiraId { get; set; }
         public virtual CategoriaFinanceira CategoriaFinanceira { get; set; }
+
+        public string DataDespesa { get; set; }
     }
 }

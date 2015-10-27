@@ -1,5 +1,7 @@
 ﻿using System.Data.Entity;
+using System.Linq;
 using BarraFisik.Data.CrossCutting.Identity.Infra;
+using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace BarraFisik.Data.CrossCutting.Identity.Context

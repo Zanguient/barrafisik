@@ -16,6 +16,8 @@ namespace BarraFisik.Infra.Data.EntityConfig
             Property(d => d.Nome).IsRequired();
 
             HasRequired(d => d.CategoriaFinanceira).WithMany().HasForeignKey(r => r.CategoriaFinanceiraId);
+
+            Ignore(d => d.DataDespesa);
         }
     }
 }

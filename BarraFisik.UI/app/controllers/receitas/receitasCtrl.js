@@ -8,14 +8,25 @@
         vm.title = 'receitasCtrl';
         vm.receitas = [];
         vm.categorias = [];
+        $scope.categorias = [{ id: "", title: "" }];
         $scope.createReceita = false;
 
         activate();
 
         function activate() {
+            $scope.$emit('LOAD');
             receitasData.getReceitas().then(function (result) {
                 vm.receitas = result.data;
             });
+
+            categoriaFinanceiraData.getCategoriaByTipo("Receitas").then(function (cat) {
+                vm.categorias = cat.data;
+
+                angular.forEach(vm.categorias, function (value, key) {
+                    $scope.categorias.push({ id: value.CategoriaFinanceiraId, title: value.Categoria });
+                });
+            });
+            $scope.$emit('UNLOAD');
         }
 
         $scope.tableParams = new ngTableParams({
@@ -30,16 +41,17 @@
             getData: function ($defer, params) {
                 // use build-in angular filter
                 var orderedData = params.sorting() ? $filter('orderBy')(vm.receitas, params.orderBy()) : vm.receitas;
+                orderedData = $filter('filter')(orderedData, params.filter());
+
+                params.total(orderedData.length);
+                $scope.total = orderedData.length;
+
                 $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
             }
         });
 
         $scope.$watch('vm.receitas', function () {
             $scope.tableParams.reload();
-        });
-
-        categoriaFinanceiraData.getCategoriaByTipo("Receitas").then(function(cat) {
-            vm.categorias = cat.data;
         });
 
         $scope.editId = -1;

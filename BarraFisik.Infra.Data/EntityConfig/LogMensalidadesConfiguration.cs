@@ -13,7 +13,8 @@ namespace BarraFisik.Infra.Data.EntityConfig
 
             Property(m => m.AnoReferencia).IsRequired();
             Property(m => m.MesReferencia).IsRequired();
-            Property(m => m.ValorPago).IsRequired().HasPrecision(6, 2);
+            Property(m => m.ValorPago).IsRequired().HasPrecision(7, 2);
+            Property(m => m.ValorPersonal).IsOptional().HasPrecision(7, 2);
             Property(m => m.DataPagamento).IsRequired();
             Property(l => l.Data).IsRequired();
             Property(l => l.UserId).IsRequired();

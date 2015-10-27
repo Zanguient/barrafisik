@@ -48,7 +48,7 @@
                                 Inativo
                             </label>
                         </div>
-                        <br/>
+                        <br />
                         <h4>Inativos</h4>
                         <div class="checkbox clip-check check-info">
                             <input type="checkbox" id="Inativos" ng-click="exibirInativos()" ng-model="inativos">
@@ -65,14 +65,17 @@
                                         <label for="Segunda">Segunda</label>
                                     </div>
                                 </td>
-                                <td class="border-right col-sm-3"><input type="text" class="form-control" ng-model="filter.HSegunda"/> </td>
+                                <td class="border-right col-sm-3">
+                                    <input type="text" class="form-control" ng-model="filter.HSegunda" />
+                                </td>
                                 <td class="padding-left-10">
                                     <div class="checkbox clip-check check-info">
                                         <input type="checkbox" id="Terca" ng-true-value="true" ng-false-value="undefined" ng-model="filter.Terca">
                                         <label for="Terca">Terça</label>
                                     </div>
                                 </td>
-                                <td class="col-sm-3"><input type="text" class="form-control" ng-model="filter.HTerca"/></td>
+                                <td class="col-sm-3">
+                                    <input type="text" class="form-control" ng-model="filter.HTerca" /></td>
                             </tr>
                             <tr>
                                 <td>
@@ -81,14 +84,16 @@
                                         <label for="Quarta">Quarta</label>
                                     </div>
                                 </td>
-                                <td class="border-right col-sm-3"><input type="text" class="form-control" ng-model="filter.HQuarta"/></td>
+                                <td class="border-right col-sm-3">
+                                    <input type="text" class="form-control" ng-model="filter.HQuarta" /></td>
                                 <td class="padding-left-10">
                                     <div class="checkbox clip-check check-info">
                                         <input type="checkbox" id="Quinta" ng-true-value="true" ng-false-value="undefined" ng-model="filter.Quinta">
                                         <label for="Quinta">Quinta</label>
                                     </div>
                                 </td>
-                                <td class="col-sm-3"><input type="text" class="form-control" ng-model="filter.HQuinta"/></td>
+                                <td class="col-sm-3">
+                                    <input type="text" class="form-control" ng-model="filter.HQuinta" /></td>
                             </tr>
                             <tr>
                                 <td>
@@ -97,17 +102,18 @@
                                         <label for="Sexta">Sexta</label>
                                     </div>
                                 </td>
-                                <td class="border-right col-sm-3"><input type="text" class="form-control" ng-model="filter.HSexta"/></td>
+                                <td class="border-right col-sm-3">
+                                    <input type="text" class="form-control" ng-model="filter.HSexta" /></td>
                                 <td class="padding-left-10"></td>
                                 <td></td>
                             </tr>
 
                         </table>
 
-                        <a class="btn btn-wide btn-blue pull-right" ng-click="limpar()"><i class="fa fa-refresh"></i> Limpar</a>
+                        <a class="btn btn-wide btn-blue pull-right" ng-click="limpar()"><i class="fa fa-refresh"></i>Limpar</a>
                     </div>
                 </div>
-                
+
             </div>
         </div>
     </div>

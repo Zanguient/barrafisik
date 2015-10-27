@@ -77,39 +77,19 @@
     <Compile Include="Interfaces\IContextManager.cs" />
     <Compile Include="Interfaces\IDbContext.cs" />
     <Compile Include="Interfaces\IUnitOfWork.cs" />
-    <Compile Include="Migrations\201508272117022_AddTable_Horario.cs" />
-    <Compile Include="Migrations\201508272117022_AddTable_Horario.Designer.cs">
-      <DependentUpon>201508272117022_AddTable_Horario.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201510131249162_ReceitasAvaliacaoFisica.cs" />
-    <Compile Include="Migrations\201510131249162_ReceitasAvaliacaoFisica.Designer.cs">
-      <DependentUpon>201510131249162_ReceitasAvaliacaoFisica.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201510131916364_CategoriaFinanceira.cs" />
-    <Compile Include="Migrations\201510131916364_CategoriaFinanceira.Designer.cs">
-      <DependentUpon>201510131916364_CategoriaFinanceira.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201510141337146_Receitas.cs" />
-    <Compile Include="Migrations\201510141337146_Receitas.Designer.cs">
-      <DependentUpon>201510141337146_Receitas.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201510141342136_Despesas.cs" />
-    <Compile Include="Migrations\201510141342136_Despesas.Designer.cs">
-      <DependentUpon>201510141342136_Despesas.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201510141423481_LogReceitasDespesas.cs" />
-    <Compile Include="Migrations\201510141423481_LogReceitasDespesas.Designer.cs">
-      <DependentUpon>201510141423481_LogReceitasDespesas.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201510191329584_Change_CategoriaFinanceiraId_To_String.cs" />
-    <Compile Include="Migrations\201510191329584_Change_CategoriaFinanceiraId_To_String.Designer.cs">
-      <DependentUpon>201510191329584_Change_CategoriaFinanceiraId_To_String.cs</DependentUpon>
+    <Compile Include="Migrations\201510231916392_Initial_All.cs" />
+    <Compile Include="Migrations\201510231916392_Initial_All.Designer.cs">
+      <DependentUpon>201510231916392_Initial_All.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\ClienteRepository.cs" />
+    <Compile Include="Repository\RelatorioFinanceiroRepository.cs" />
     <Compile Include="Repository\LogReceitasDespesasRepository.cs" />
     <Compile Include="Repository\LogMensalidadesRepository.cs" />
+    <Compile Include="Repository\ReadOnly\RelatorioFinanceiroRepositoryReadOnly.cs" />
+    <Compile Include="Repository\ReadOnly\ReceitasRepositoryReadOnly.cs" />
+    <Compile Include="Repository\ReadOnly\DespesasRepositoryReadOnly.cs" />
     <Compile Include="Repository\ReadOnly\ValoresRepositoryReadOnly.cs" />
     <Compile Include="Repository\LogSistemaRepository.cs" />
     <Compile Include="Repository\ReceitasAvaliacaoFisicaRepository.cs" />
@@ -138,26 +118,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201508272117022_AddTable_Horario.resx">
-      <DependentUpon>201508272117022_AddTable_Horario.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201510131249162_ReceitasAvaliacaoFisica.resx">
-      <DependentUpon>201510131249162_ReceitasAvaliacaoFisica.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201510131916364_CategoriaFinanceira.resx">
-      <DependentUpon>201510131916364_CategoriaFinanceira.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201510141337146_Receitas.resx">
-      <DependentUpon>201510141337146_Receitas.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201510141342136_Despesas.resx">
-      <DependentUpon>201510141342136_Despesas.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201510141423481_LogReceitasDespesas.resx">
-      <DependentUpon>201510141423481_LogReceitasDespesas.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201510191329584_Change_CategoriaFinanceiraId_To_String.resx">
-      <DependentUpon>201510191329584_Change_CategoriaFinanceiraId_To_String.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201510231916392_Initial_All.resx">
+      <DependentUpon>201510231916392_Initial_All.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

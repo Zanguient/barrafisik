@@ -17,5 +17,7 @@ namespace BarraFisik.Domain.Entities
 
         public Guid CategoriaFinanceiraId { get; set; }
         public virtual CategoriaFinanceira CategoriaFinanceira { get; set; }
+
+        public string DataDespesa { get; set; }
     }
 }

@@ -51,6 +51,7 @@
     <Compile Include="Entities\Valores.cs" />
     <Compile Include="Exceptions\CustomException.cs" />
     <Compile Include="Interfaces\Repository\IClienteRepository.cs" />
+    <Compile Include="Interfaces\Repository\IRelatorioFinanceiroRepository.cs" />
     <Compile Include="Interfaces\Repository\ILogMensalidadesRepository.cs" />
     <Compile Include="Interfaces\Repository\ILogSistemaRepository.cs" />
     <Compile Include="Interfaces\Repository\ICategoriaFinanceiraRepository.cs" />
@@ -63,11 +64,15 @@
     <Compile Include="Interfaces\Repository\IFilaEsperaRepository.cs" />
     <Compile Include="Interfaces\Repository\IHorarioRepository.cs" />
     <Compile Include="Interfaces\Repository\IRepositoryBase.cs" />
+    <Compile Include="Interfaces\Repository\ReadOnly\IRelatorioFinanceiroRepositoryReadOnly.cs" />
+    <Compile Include="Interfaces\Repository\ReadOnly\IReceitasRepositoryReadOnly.cs" />
+    <Compile Include="Interfaces\Repository\ReadOnly\IDespesasRepositoryReadOnly.cs" />
     <Compile Include="Interfaces\Repository\ReadOnly\IMensalidadesRepositoryReadOnly.cs" />
     <Compile Include="Interfaces\Repository\ReadOnly\IClienteRepositoryReadOnly.cs" />
     <Compile Include="Interfaces\Repository\ReadOnly\IHorarioRepositoryReadOnly.cs" />
     <Compile Include="Interfaces\Repository\ReadOnly\IValoresRepositoryReadOnly.cs" />
     <Compile Include="Interfaces\Services\IClienteService.cs" />
+    <Compile Include="Interfaces\Services\IRelatorioFinanceiroService.cs" />
     <Compile Include="Interfaces\Services\ILogMensalidadesService.cs" />
     <Compile Include="Interfaces\Services\ILogSistemaService.cs" />
     <Compile Include="Interfaces\Services\IReceitasAvaliacaoFisicaService.cs" />
@@ -87,6 +92,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ClienteService.cs" />
     <Compile Include="Services\CategoriaFinanceiraService.cs" />
+    <Compile Include="Services\RelatorioFinanceiroService.cs" />
     <Compile Include="Services\LogMensalidadesService.cs" />
     <Compile Include="Services\LogSistemaServices.cs" />
     <Compile Include="Services\ReceitasAvaliacaoFisicaService.cs" />
@@ -108,6 +114,8 @@
     <Compile Include="Validation\Mensalidades\MensalidadeUnica.cs" />
     <Compile Include="Validation\Regra.cs" />
     <Compile Include="ValueObjects\ClienteHorario.cs" />
+    <Compile Include="ValueObjects\RelatorioFinanceiro.cs" />
+    <Compile Include="ValueObjects\RelatorioFinanceiroSearch.cs" />
     <Compile Include="ValueObjects\TotalHorario.cs" />
     <Compile Include="ValueObjects\TotalInscritos.cs" />
     <Compile Include="ValueObjects\ValidationError.cs" />

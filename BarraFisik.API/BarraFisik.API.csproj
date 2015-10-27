@@ -197,6 +197,7 @@
     <Compile Include="Controllers\BaseApiController.cs" />
     <Compile Include="Controllers\ClienteController.cs" />
     <Compile Include="Controllers\CategoriaFinanceiraController.cs" />
+    <Compile Include="Controllers\RelatorioFinanceiroController.cs" />
     <Compile Include="Controllers\FilaEsperaController.cs" />
     <Compile Include="Controllers\HorarioController.cs" />
     <Compile Include="Controllers\MensalidadesController.cs" />

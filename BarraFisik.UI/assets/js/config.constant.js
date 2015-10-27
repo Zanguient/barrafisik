@@ -44,6 +44,7 @@ app.constant('JS_REQUIRES', {
         'categoriaFinanceiraCtrl': 'app/controllers/categoriaFinanceira/categoriaFinanceiraCtrl.js',
         'receitasCtrl': 'app/controllers/receitas/receitasCtrl.js',
         'despesasCtrl': 'app/controllers/despesas/despesasCtrl.js',
+        'relatorioFinanceiroCtrl': 'app/controllers/relatorioFinanceiro/relatorioFinanceiroCtrl.js',
 
         //*** Factories
         'clienteData' : 'app/factory/clienteData.js',
@@ -56,6 +57,7 @@ app.constant('JS_REQUIRES', {
         'categoriaFinanceiraData': 'app/factory/categoriaFinanceiraData.js',
         'receitasData': 'app/factory/receitasData.js',
         'despesasData': 'app/factory/despesasData.js',
+        'relatorioFinanceiroData': 'app/factory/relatorioFinanceiroData.js',
 
         //*** Controllers
         //'dashboardCtrl': 'assets/js/controllers/dashboardCtrl.js',

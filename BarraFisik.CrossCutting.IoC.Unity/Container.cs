@@ -41,6 +41,7 @@ namespace BarraFisik.CrossCutting.IoC.Unity
             container.RegisterType<ICategoriaFinanceiraAppService, CategoriaFinanceiraAppService>();
             container.RegisterType<IReceitasAppService, ReceitasAppService>();
             container.RegisterType<IDespesasAppService, DespesasAppService>();
+            container.RegisterType<IRelatorioFinanceiroAppService, RelatorioFinanceiroAppService>();
 
             //Services
             container.RegisterType(typeof (IServiceBase<>), typeof (ServiceBase<>));
@@ -56,6 +57,7 @@ namespace BarraFisik.CrossCutting.IoC.Unity
             container.RegisterType<ICategoriaFinanceiraService, CategoriaFinanceiraService>();
             container.RegisterType<IReceitasService, ReceitasService>();
             container.RegisterType<IDespesasService, DespesasService>();
+            container.RegisterType<IRelatorioFinanceiroService, RelatorioFinanceiroService>();
 
             //Data Repos
             container.RegisterType(typeof (IRepositoryBase<>), typeof (RepositoryBase<,>));
@@ -71,12 +73,16 @@ namespace BarraFisik.CrossCutting.IoC.Unity
             container.RegisterType<ICategoriaFinanceiraRepository, CategoriaFinanceiraRepository>();
             container.RegisterType<IReceitasRepository, ReceitasRepository>();
             container.RegisterType<IDespesasRepository, DespesasRepository>();
+            container.RegisterType<IRelatorioFinanceiroRepository, RelatorioFinanceiroRepository>();
 
             //Data Repos Read Only
             container.RegisterType<IClienteRepositoryReadOnly, ClienteRepositoryReadOnly>();
             container.RegisterType<IHorarioRepositoryReadOnly, HorarioRepositoryReadOnly>();
             container.RegisterType<IMensalidadesRepositoryReadOnly, MensalidadesRepositoryReadOnly>();
             container.RegisterType<IValoresRepositoryReadOnly, ValoresRepositoryReadOnly>();
+            container.RegisterType<IDespesasRepositoryReadOnly, DespesasRepositoryReadOnly>();
+            container.RegisterType<IReceitasRepositoryReadOnly, ReceitasRepositoryReadOnly>();
+            container.RegisterType<IRelatorioFinanceiroRepositoryReadOnly, RelatorioFinanceiroRepositoryReadOnly>();
 
             //DataConfig
             container.RegisterType(typeof (IContextManager<>), typeof (ContextManager<>));

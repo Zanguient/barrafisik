@@ -1,0 +1,96 @@
+﻿<!-- start: PAGE TITLE -->
+<section id="page-title">
+    <div class="row">
+        <div class="col-sm-8">
+            <h1 class="mainTitle">Relat&oacute;rio Financeiro</h1>
+            <span class="mainDescription"></span>
+        </div>
+        <div ncy-breadcrumb></div>
+    </div>
+</section>
+<br />
+<br />
+<div ng-include src="'app/views/relatorioFinanceiro/partial/partialSearch.html'"></div>
+
+<div ng-if="search">
+    <div ng-show="loading">
+        <img src="/assets/images/loading.gif" />Carregando Dados Financeiros...
+    </div>
+    <div class="container-fluid container-fullw bg-white" ng-show="!loading">
+        <div class="row">
+            <div class="col-md-6">
+                <h5 class="pull-left ">Total: <span class="badge badge-info">{{total}}</span></h5>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <th ng-click="sort('Tipo')" style="cursor: pointer">Tipo
+		                        <i ng-class="{'fa fa-chevron-up':isSortUp('Tipo'),'fa fa-chevron-down':isSortDown('Tipo')}"></i>
+                            </th>
+                            <th ng-click="sort('Categoria')" style="cursor: pointer">Categoria
+		                    <i ng-class="{'fa fa-chevron-up':isSortUp('Categoria'),'fa fa-chevron-down':isSortDown('Categoria')}"></i>
+                            </th>
+                            <th ng-click="sort('Nome')" style="cursor: pointer">Nome
+	                        <i ng-class="{'fa fa-chevron-up':isSortUp('Nome'),'fa fa-chevron-down':isSortDown('Nome')}"></i>
+                            </th>
+                            <th ng-click="sort('Data')" style="cursor: pointer">Data
+	                        <i ng-class="{'fa fa-chevron-up':isSortUp('Data'),'fa fa-chevron-down':isSortDown('Data')}"></i>
+                            </th>
+                            <th ng-click="sort('Observacao')" style="cursor: pointer">Observacao
+	                        <i ng-class="{'fa fa-chevron-up':isSortUp('Observacao'),'fa fa-chevron-down':isSortDown('Observacao')}"></i>
+                            </th>
+                            <th ng-click="sort('Valor')" style="cursor: pointer">Valor
+		                    <i ng-class="{'fa fa-chevron-up':isSortUp('Valor'),'fa fa-chevron-down':isSortDown('Valor')}"></i>
+                            </th>
+                        </thead>
+                        <tbody>
+                            <tr ng-class-odd="'odd'" ng-class-even="'even'" ng-repeat="rf in vm.relatorioFinanceiro  | orderBy:sortField:reverse">
+                                <td class="rowTd">{{rf.Tipo}}</td>
+                                <td class="rowTd">{{rf.Categoria}}</td>
+                                <td class="rowTd">{{rf.Nome}}</td>
+                                <td class="rowTd">{{rf.Data | date:'dd/MM/yyyy'}}</td>
+                                <td class="rowTd">{{rf.Observacao}}</td>
+                                <td class="rowTd">{{rf.Valor | currency}}</td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td class="text-right"><b>TOTAL: </b></td>
+                                <td><b>{{totalValor | currency}}</b></td>
+                            </tr>
+                        </tfoot>
+
+                    </table>
+                    <!--<table ng-table="tableParams" class="table" show-filter="true">
+			            <tbody ng-repeat="rf in $data">
+			            <tr ng-class-odd="'odd'" ng-class-even="'even'">
+			            <td class="rowTd" data-title="'Tipo'" sortable="'Tipo'">{{rf.Tipo}}</td>
+			            <td class="rowTd" data-title="'Categoria'" sortable="'Categoria'">{{rf.Categoria}}</td>
+			            <td class="rowTd" data-title="'Nome'" sortable="'Nome'">{{rf.Nome}}</td>
+			            <td class="rowTd" data-title="'Data'" sortable="'Data'">{{rf.Data | date: 'dd/MM/yyyy'}}</td>
+			            <td class="rowTd" data-title="'Obs.'" sortable="'Observacao'">{{rf.Observacao}}</td>
+			            <td class="rowTd" data-title="'Valor'" sortable="'Valor'">{{rf.Valor | currency}}</td>
+			            </tbody>
+			            <tfoot>
+			            <tr>
+				            <td></td>
+				            <td></td>
+				            <td></td>
+				            <td></td>
+				            <td class="text-right"><b>TOTAL: </b></td>
+				            <td><b> {{totalValor | currency}}</b></td>
+			            </tr>
+			            </tfoot>
+		            </table>-->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

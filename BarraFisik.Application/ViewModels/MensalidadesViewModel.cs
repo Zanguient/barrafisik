@@ -1,6 +1,6 @@
 ﻿using System;
-using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using BarraFisik.Domain.Entities;
 
 namespace BarraFisik.Application.ViewModels
 {
@@ -29,5 +29,12 @@ namespace BarraFisik.Application.ViewModels
         [Required(ErrorMessage = "Informar o Valor Pago")]
         public decimal ValorPago { get; set; }
 
+        public Guid CategoriaFinanceiraId { get; set; }
+        public virtual CategoriaFinanceira CategoriaFinanceira { get; set; }
+
+        public string Nome { get; set; }
+
+        public bool isPersonal { get; set; }
+        public decimal ValorPersonal { get; set; }
     }
 }

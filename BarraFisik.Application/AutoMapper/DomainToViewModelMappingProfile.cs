@@ -28,6 +28,7 @@ namespace BarraFisik.Application.AutoMapper
             Mapper.CreateMap<CategoriaFinanceira, CategoriaFinanceiraViewModel>();
             Mapper.CreateMap<Receitas, ReceitasViewModel>();
             Mapper.CreateMap<Despesas, DespesasViewModel>();
+            Mapper.CreateMap<RelatorioFinanceiro, RelatorioFinanceiroViewModel>();
         }
     }
 }

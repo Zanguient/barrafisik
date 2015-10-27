@@ -117,12 +117,12 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         .state('app.horarios', {
             url: '/horarios',
             templateUrl: "app/views/horario/horario.html",
-            title: 'Lista de Horários',
+            title: 'Lista de Hor&aacute;rios',
             icon: 'ti-layout-media-left-alt',
             resolve: loadSequence('horarioCtrl', 'horarioData', 'xeditable'),
             controller: "horarioCtrl as vm",
             ncyBreadcrumb: {
-                label: 'Lista de Horários'
+                label: 'Lista de Hor&aacute;rios'
             }
         })
 
@@ -188,6 +188,16 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
             controller: "categoriaFinanceiraCtrl as vm",
             ncyBreadcrumb: {
                 label: 'Categorias'
+            }
+        }).state('app.financeiro.relatorioFinanceiro', {
+            url: '/relatoriofinanceiro',
+            templateUrl: "app/views/relatorioFinanceiro/relatorioFinanceiro.html",
+            title: 'Relatorio Financeiro',
+            icon: 'ti-layout-media-left-alt',
+            resolve: loadSequence('relatorioFinanceiroCtrl', 'ngTable', 'relatorioFinanceiroData', 'categoriaFinanceiraData'),
+            controller: "relatorioFinanceiroCtrl as vm",
+            ncyBreadcrumb: {
+                label: 'Relatorio Financeiro'
             }
         })
 

@@ -1,5 +1,5 @@
 ﻿(function () {
-    'use strict';
+    "use strict";
 
     app.controller('despesasCtrl', despesasCtrl);
 
@@ -7,14 +7,26 @@
         var vm = this;
         vm.despesas = [];
         vm.categorias = [];
+        $scope.categorias = [{id: "", title: ""}];
         $scope.createDespesa = false;
 
         activate();
 
         function activate() {
+            $scope.$emit('LOAD');
             despesasData.getDespesas().then(function (result) {
                 vm.despesas = result.data;
             });
+
+            categoriaFinanceiraData.getCategoriaByTipo("Despesas").then(function (cat) {
+                vm.categorias = cat.data;
+                
+                angular.forEach(vm.categorias, function (value, key) {
+                    $scope.categorias.push({ id: value.CategoriaFinanceiraId, title: value.Categoria });
+                });
+            });
+
+            $scope.$emit('UNLOAD');
         }
 
         $scope.tableParams = new ngTableParams({
@@ -22,23 +34,24 @@
             count: 50, // count per page
             sorting: {
                 Data: 'desc'
-            }
+            }            
         }, {
             counts: [],
             total: vm.despesas.length, // length of data
             getData: function ($defer, params) {
-                // use build-in angular filter
+                // use build-in angular filter                   
                 var orderedData = params.sorting() ? $filter('orderBy')(vm.despesas, params.orderBy()) : vm.despesas;
+                orderedData = $filter('filter')(orderedData, params.filter());
+
+                params.total(orderedData.length);
+                $scope.total = orderedData.length;
+
                 $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
             }
         });
 
         $scope.$watch('vm.despesas', function () {
             $scope.tableParams.reload();
-        });
-
-        categoriaFinanceiraData.getCategoriaByTipo("Despesas").then(function (cat) {
-            vm.categorias = cat.data;
         });
 
         $scope.editId = -1;

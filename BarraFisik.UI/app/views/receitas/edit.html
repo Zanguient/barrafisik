@@ -3,7 +3,7 @@
 	    <tr>
 		    <td>Categoria: <span class="symbol required"></span></td>
 		    <td ng-class="{'has-error':FormEdit.Categoria.$dirty && FormEdit.Categoria.$invalid, 'has-success':FormEdit.Categoria.$valid}">
-			    <select id="sel" class="FormEdit-control" style="width: 100%" name="Categoria" ng-model="r.CategoriaFinanceira.CategoriaFinanceiraId" ng-options="obj.CategoriaFinanceiraId as obj.Categoria for obj in vm.categorias" required>
+			    <select id="sel" class="FormEdit-control" style="width: 100%" name="Categoria" ng-value="r.CategoriaFinanceiraId" ng-model="r.CategoriaFinanceiraId" ng-options="obj.CategoriaFinanceiraId as obj.Categoria for obj in vm.categorias" required>
 			    </select>
 			    <span class="error text-small block" ng-if="FormEdit.Categoria.$dirty && FormEdit.Categoria.$error.required">Informe a Categoria</span>
 		    </td>

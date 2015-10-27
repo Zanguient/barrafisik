@@ -35,7 +35,7 @@
                             <td class="text-right">
                                 <div class="visible-md visible-lg hidden-sm hidden-xs">
                                     <a ng-click="setEditId(c.CategoriaFinanceiraId)" class="btn btn-transparent btn-xs" tooltip-placement="top" tooltip="Editar" id="editRowBtn{{c.CategoriaFinanceiraId}}"><i class="fa fa-pencil"></i></a>
-                                    <a ng-click="delete(c.CategoriaFinanceiraId)" class="btn btn-transparent btn-xs tooltips" tooltip-placement="top" tooltip="Excluir"><i class="fa fa-times"></i></a>                                    
+                                    <a ng-click="delete(c.CategoriaFinanceiraId)" ng-if="c.CategoriaFinanceiraId != '1c1278df-f5a5-4407-a0c4-bdbb71c362b1'" class="btn btn-transparent btn-xs tooltips" tooltip-placement="top" tooltip="Excluir"><i class="fa fa-times"></i></a>                                    
                                 </div>
                             </td>
                         </tr>

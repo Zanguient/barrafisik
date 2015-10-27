@@ -67,9 +67,11 @@
     <Content Include="app\controllers\receitasAvaliacaoFisica\createReceitasAvaliacaoFisicaCtrl.js" />
     <Content Include="app\controllers\receitasAvaliacaoFisica\receitasAvaliacaoFisicaCtrl.js" />
     <Content Include="app\controllers\receitas\receitasCtrl.js" />
+    <Content Include="app\controllers\relatorioFinanceiro\relatorioFinanceiroCtrl.js" />
     <Content Include="app\directives\equals.js" />
     <Content Include="app\directives\exportTable.js" />
     <Content Include="app\directives\xngFocus.js" />
+    <Content Include="app\factory\relatorioFinanceiroData.js" />
     <Content Include="app\factory\dashboardData.js" />
     <Content Include="app\factory\accountsData.js" />
     <Content Include="app\factory\despesasData.js" />
@@ -85,6 +87,7 @@
     <Content Include="app\filters\clienteFilters.js" />
     <Content Include="app\services\authInterceptorService.js" />
     <Content Include="app\services\authService.js" />
+    <Content Include="app\services\listCategorias.js" />
     <Content Include="app\services\modalService.js" />
     <Content Include="app\services\Session.js" />
     <Content Include="app\views\accounts\alterarSenha.html" />
@@ -119,6 +122,8 @@
     <Content Include="app\views\receitas\create.html" />
     <Content Include="app\views\receitas\edit.html" />
     <Content Include="app\views\receitas\receitas.html" />
+    <Content Include="app\views\relatorioFinanceiro\partial\partialSearch.html" />
+    <Content Include="app\views\relatorioFinanceiro\relatorioFinanceiro.html" />
     <Content Include="app\views\valores\create.html" />
     <Content Include="app\views\valores\edit.html" />
     <Content Include="app\views\valores\valores.html" />

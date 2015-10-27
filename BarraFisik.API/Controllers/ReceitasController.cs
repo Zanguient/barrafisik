@@ -25,7 +25,7 @@ namespace BarraFisik.API.Controllers
 
         [HttpGet]
         [Route("receitas")]
-        [GzipCompression]
+        //[GzipCompression]
         public async Task<HttpResponseMessage> Get()
         {
             var result = _receitasApp.GetReceitas();

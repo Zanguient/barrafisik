@@ -6,7 +6,7 @@
     function loginCtrl($scope, $rootScope, authService, $location) {
         
         $scope.login = function () {
-            $scope.loadingLogin = true;
+            $scope.$emit('LOAD');
             authService.login($scope.loginData).then(function (response) {
                 $location.path('/app/dashboard');
             },
@@ -18,7 +18,7 @@
                  };
                  //toastr.error(err.error_description);
              })['finally'](function () {
-                 $scope.loadingLogin = false;
+                 $scope.$emit('UNLOAD');
              });
         };
     }

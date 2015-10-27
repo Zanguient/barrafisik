@@ -31,6 +31,7 @@ namespace BarraFisik.Application.App
             var mensalidade = Mapper.Map<MensalidadesViewModel, Mensalidades>(mensalidadesViewModel);
 
             BeginTransaction();
+            
             _mensalidadesService.Add(mensalidade);
 
             _logMensalidadesService.AddLog("Cadastro", mensalidade);
