@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using BarraFisik.Domain.Entities;
 
@@ -9,7 +10,9 @@ namespace BarraFisik.Domain.ValueObjects
         public ClienteHorario()
         {
             ClienteId = Guid.NewGuid();
-            HorarioId = Guid.NewGuid();            
+            HorarioId = Guid.NewGuid();
+            Mensalidades = new List<Mensalidades>();
+            AvaliacoesFisicas = new List<ReceitasAvaliacaoFisica>();
         }
 
         //CLiente
@@ -54,5 +57,8 @@ namespace BarraFisik.Domain.ValueObjects
         public decimal Valor { get; set; }
         public int HorarioInicio { get; set; }
         public int HorarioFim { get; set; }
+
+        public virtual ICollection<Mensalidades> Mensalidades { get; set; }
+        public virtual ICollection<ReceitasAvaliacaoFisica> AvaliacoesFisicas { get; set; }
     }
 }

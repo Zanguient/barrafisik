@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using BarraFisik.Domain.Entities;
 
 namespace BarraFisik.Application.ViewModels
 {
@@ -83,5 +85,8 @@ namespace BarraFisik.Application.ViewModels
         public decimal Valor { get; set; }
         public int HorarioInicio { get; set; }
         public int HorarioFim { get; set; }
+
+        public virtual ICollection<MensalidadesViewModel> Mensalidades { get; set; }
+        public virtual ICollection<ReceitasAvaliacaoFisica> AvaliacoesFisicas { get; set; }
     }
 }

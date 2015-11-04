@@ -120,6 +120,11 @@ namespace BarraFisik.Domain.Services
             }
         }
 
+        public ClienteHorario GetClientePerfil(Guid id)
+        {
+            return _clienteRepositoryReadOnly.GetClientePerfil(id);
+        }
+
         public ValidationResult VerificaCpfUnico(Cliente cliente)
         {
             var fiscal = new ClienteCpfUnico(_clienteRepository);

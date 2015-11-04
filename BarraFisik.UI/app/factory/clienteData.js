@@ -21,6 +21,10 @@
             return $http.put(apiUrl + 'api/clientes', cliente);
         }
 
+        function getClientePerfil(id) {
+            return $http.get(apiUrl + 'api/cliente/perfil/' + id);
+        }
+
         function addCliente(clienteHorario) {
             return $http.post(apiUrl+'api/clientes', clienteHorario);
         }
@@ -69,7 +73,8 @@
             getClientesSituacao: getClientesSituacao,
             inativarClientes: inativarClientes,
             getClientesAll: getClientesAll,
-            getInscritos: getInscritos
+            getInscritos: getInscritos,
+            getClientePerfil: getClientePerfil
         };
 
         return service;

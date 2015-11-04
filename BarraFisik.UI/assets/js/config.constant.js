@@ -34,6 +34,7 @@ app.constant('JS_REQUIRES', {
         'clienteCtrl': 'app/controllers/cliente/clienteCtrl.js',
         'clienteCreateCtrl' : 'app/controllers/cliente/clienteCreateCtrl.js',
         'clienteEditCtrl': 'app/controllers/cliente/clienteEditCtrl.js',
+        'clientePerfilCtrl': 'app/controllers/cliente/clientePerfilCtrl.js',
         'clienteAniversariantesCtrl': 'app/controllers/cliente/clienteAniversariantesCtrl.js',
         'horarioCtrl': 'app/controllers/horario/horarioCtrl.js',
         'filaEsperaCtrl': 'app/controllers/filaespera/filaEsperaCtrl.js',
@@ -44,7 +45,7 @@ app.constant('JS_REQUIRES', {
         'categoriaFinanceiraCtrl': 'app/controllers/categoriaFinanceira/categoriaFinanceiraCtrl.js',
         'receitasCtrl': 'app/controllers/receitas/receitasCtrl.js',
         'despesasCtrl': 'app/controllers/despesas/despesasCtrl.js',
-        'relatorioFinanceiroCtrl': 'app/controllers/relatorioFinanceiro/relatorioFinanceiroCtrl.js',
+        'relatorioFinanceiroCtrl': 'app/controllers/relatorioFinanceiro/relatorioFinanceiroCtrl.js',        
 
         //*** Factories
         'clienteData' : 'app/factory/clienteData.js',
@@ -53,7 +54,7 @@ app.constant('JS_REQUIRES', {
         'dashboardData' : 'app/factory/dashboardData.js',
         'accountsData' : 'app/factory/accountsData.js',
         'valoresData' : 'app/factory/valoresData.js',
-        'receitasAvaliacaoFisicaData' : 'app/factory/receitaAvaliacaoFisicaData.js',
+        'receitasAvaliacaoFisicaData' : 'app/factory/receitasAvaliacaoFisicaData.js',
         'categoriaFinanceiraData': 'app/factory/categoriaFinanceiraData.js',
         'receitasData': 'app/factory/receitasData.js',
         'despesasData': 'app/factory/despesasData.js',

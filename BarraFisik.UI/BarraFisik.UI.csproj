@@ -52,6 +52,7 @@
     <Content Include="app\controllers\accounts\alterarSenhaCtrl.js" />
     <Content Include="app\controllers\categoriaFinanceira\categoriaFinanceiraCtrl.js" />
     <Content Include="app\controllers\cliente\clienteAniversariantesCtrl.js" />
+    <Content Include="app\controllers\cliente\clientePerfilCtrl.js" />
     <Content Include="app\controllers\cliente\clienteCreateCtrl.js" />
     <Content Include="app\controllers\cliente\clienteCtrl.js" />
     <Content Include="app\controllers\cliente\clienteEditCtrl.js" />
@@ -97,6 +98,7 @@
     <Content Include="app\views\categoriaFinanceira\create.html" />
     <Content Include="app\views\categoriaFinanceira\edit.html" />
     <Content Include="app\views\cliente\aniversariantes.html" />
+    <Content Include="app\views\cliente\clientePerfil.html" />
     <Content Include="app\views\cliente\clientes.html" />
     <Content Include="app\views\cliente\create.html" />
     <Content Include="app\views\cliente\edit.html" />
@@ -156,6 +158,7 @@
     <Content Include="assets\images\avatar-8.jpg" />
     <Content Include="assets\images\avatar-9.jpg" />
     <Content Include="assets\images\avatar.jpg" />
+    <Content Include="assets\images\BarraFisik.jpg" />
     <Content Include="assets\images\dark_dots.png" />
     <Content Include="assets\images\default-user.png" />
     <Content Include="assets\images\icons\16x16\Pdf-icon.png" />

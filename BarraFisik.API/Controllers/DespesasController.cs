@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Globalization;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -10,6 +9,7 @@ using BarraFisik.API.Filters;
 
 namespace BarraFisik.API.Controllers
 {
+    [Authorize]
     [RoutePrefix("api")]
     public class DespesasController : ApiController
     {

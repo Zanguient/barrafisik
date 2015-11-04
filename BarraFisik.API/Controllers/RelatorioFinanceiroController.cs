@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -8,6 +9,7 @@ using BarraFisik.Application.ViewModels;
 
 namespace BarraFisik.API.Controllers
 {
+    [Authorize(Roles = "Admin")]
     [RoutePrefix("api")]
     public class RelatorioFinanceiroController : ApiController
     {
@@ -37,5 +39,19 @@ namespace BarraFisik.API.Controllers
             tsc.SetResult(response);
             return await tsc.Task;
         }
+
+        [HttpGet]
+        [Route("totalMeses")]
+        //[GzipCompression]
+        public async Task<HttpResponseMessage> GetTotalPorMes()
+        {            
+            var result = _relatorioFinanceiroApp.GetTotalPorMes();
+            var response = Request.CreateResponse(HttpStatusCode.OK, result);
+
+            var tsc = new TaskCompletionSource<HttpResponseMessage>();
+            tsc.SetResult(response);
+            return await tsc.Task;
+        }
+
     }
 }

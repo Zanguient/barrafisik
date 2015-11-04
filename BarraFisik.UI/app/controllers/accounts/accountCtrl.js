@@ -2,7 +2,7 @@
     "use sctrict";
     app.controller('accountCtrl', accountCtrl);
 
-    function accountCtrl($scope, ngTableParams, accountsData, $filter, SweetAlert, $state) {
+    function accountCtrl($scope, ngTableParams, accountsData, $filter, SweetAlert, $state, $rootScope) {
         var vm = this;
         vm.users = [];
         $scope.createUser = false;
@@ -162,24 +162,34 @@
                 closeOnConfirm: false,
                 closeOnCancel: false
             }, function(isConfirm) {
-                if (isConfirm) {
-                    SweetAlert.swal({
-                        title: "Excluído!",
-                        text: "Registro excluído com sucesso.",
-                        type: "success",
-                        confirmButtonColor: "#007AFF"
-                    });
-
-                    accountsData.deleteUser(id).then(function() {
-                        SweetAlert.swal("Excluído!", "Dados apgados com sucesso!", "success");
-                        $.each(vm.users, function(i) {
-                            if (vm.users[i].Id === id) {
-                                vm.users.splice(i, 1);
-                                return false;
-                            }
+                if (isConfirm) {                    
+                    if (id === $rootScope.userInfo.id) {
+                        SweetAlert.swal({
+                            title: "Logado!",
+                            text: "O usuário se encontra logado no momento!",
+                            type: "error",
+                            confirmButtonColor: "#007AFF"
                         });
-                        $scope.tableParams.reload();
-                    });
+                    } else {
+                        accountsData.deleteUser(id).then(function () {
+                            SweetAlert.swal("Excluído!", "Dados apgados com sucesso!", "success");
+                            $.each(vm.users, function (i) {
+                                if (vm.users[i].Id === id) {
+                                    vm.users.splice(i, 1);
+                                    return false;
+                                }
+                            });
+                            $scope.tableParams.reload();
+                        });
+
+                        SweetAlert.swal({
+                            title: "Excluído!",
+                            text: "Registro excluído com sucesso.",
+                            type: "success",
+                            confirmButtonColor: "#007AFF"
+                        });
+                    }
+                    
                 } else {
                     SweetAlert.swal({
                         title: "Cancelado",

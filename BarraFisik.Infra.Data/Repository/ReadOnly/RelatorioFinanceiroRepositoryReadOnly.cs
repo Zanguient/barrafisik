@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Data;
 using BarraFisik.Domain.Interfaces.Repository.ReadOnly;
 using BarraFisik.Domain.ValueObjects;
 using Dapper;
@@ -62,13 +63,13 @@ namespace BarraFisik.Infra.Data.Repository.ReadOnly
                         " select  " +
                         "    m.DataPagamento as Data," +
                         "    m.Nome as Nome, " +
-                        "    '' as Observacao, " +
+                        "    c.Nome as Observacao, " +
                         "    m.ValorPago as Valor, " +
                         "    cf.Categoria as Categoria," +
                         "    m.MensalidadesId as RegistroId," +
                         "    cf.Tipo  as Tipo" +
-                        " from Mensalidades m, CategoriaFinanceira cf " +
-                        " where m.CategoriaFinanceiraId = cf.CategoriaFinanceiraId";
+                        " from Mensalidades m, CategoriaFinanceira cf, Cliente c " +                        
+                        " where m.CategoriaFinanceiraId = cf.CategoriaFinanceiraId and m.ClienteId = c.ClienteId ";
 
                 if (filters.Tipo != null && filters.Tipo != "Todos")
                     query = query + " and cf.Tipo = '" + filters.Tipo + "' ";
@@ -84,6 +85,33 @@ namespace BarraFisik.Infra.Data.Repository.ReadOnly
 
                 cn.Open();
                 var relatorio = cn.Query<RelatorioFinanceiro>(query);
+                cn.Close();
+
+                return relatorio;
+            }
+        }
+
+        public IEnumerable<RelatorioFinanceiroTotalMeses> GetTotalPorMes()
+        {
+            
+            using (var cn = Connection)
+            {
+                var query = @"select distinct  (select sum(Valor) from Despesas where MONTH(Data) = 1) as  DespesasJaneiro, " +
+                            "  (select sum(Valor) from Despesas where MONTH(Data) = 2) as  DespesasFevereiro, " +
+                            "  (select sum(Valor) from Despesas where MONTH(Data) = 3) as  DespesasMarco, " +
+                            "  (select sum(Valor) from Despesas where MONTH(Data) = 4) as  DespesasAbril, " +
+                            "  (select sum(Valor) from Despesas where MONTH(Data) = 5) as  DespesasMaio, " +
+                            "  (select sum(Valor) from Despesas where MONTH(Data) = 6) as  DespesasJunho, " +
+                            "  (select sum(Valor) from Despesas where MONTH(Data) = 7) as  DespesasJulho, " +
+                            "  (select sum(Valor) from Despesas where MONTH(Data) = 8) as  DespesasAgosto, " +
+                            "  (select sum(Valor) from Despesas where MONTH(Data) = 9) as  DespesasSetembro, " +
+                            "  (select sum(Valor) from Despesas where MONTH(Data) = 10) as DespesasOutubro, " +
+                            "  (select sum(Valor) from Despesas where MONTH(Data) = 11) as DespesasNovembro," +
+                            "  (select sum(Valor) from Despesas where MONTH(Data) = 12) as DespesasDezembro";
+                
+
+                cn.Open();
+                var relatorio = cn.Query<RelatorioFinanceiroTotalMeses>(query);
                 cn.Close();
 
                 return relatorio;

@@ -102,16 +102,23 @@
                     <span class="title"> Despesas </span>
                 </a>
             </li>
-            <li ui-sref-active="active">
-                <a ui-sref="app.financeiro.categorias">
-                    <span class="title"> Categorias </span>
-                </a>
+	        <li ui-sref-active="active">
+		        <a ui-sref="app.financeiro.categorias">
+			        <span class="title"> Categorias </span>
+		        </a>
 	        </li>
-            <li ui-sref-active="active">
-                <a ui-sref="app.financeiro.relatorioFinanceiro">
-                    <span class="title"> Relat&oacute;rio Financeiro </span>
-                </a>
-            </li>
+            <li  ui-sref-active="active">
+				<a href="javascript:;">
+					<span class="text-bold text-info">Relat&oacute;rios Financeiros</span>  <i class="icon-arrow"></i>
+				</a>
+				<ul class="sub-menu">
+					<li  ui-sref-active="active">
+						<a ui-sref="app.financeiro.relatorioFinanceiro">
+							<span class="title"> Geral </span>
+						</a>
+					</li>
+				</ul>
+			</li>
         </ul>
     </li>
 </ul>

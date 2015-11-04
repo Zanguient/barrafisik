@@ -14,7 +14,7 @@ function ($rootScope, $scope, $state, $localStorage, $window, $document, $timeou
 
     $scope.logOut = function () {
         authService.logOut();
-        $state.go('login.signin');
+        $state.go('login.signin', {}, {reload: true});
     }
 
     $scope.alterarSenha = function (size) {

@@ -16,7 +16,7 @@ namespace BarraFisik.Application.ViewModels
         public DateTime Data { get; set; }
 
         [Required(ErrorMessage = "Informe o Valor")]
-        [RegularExpression(@"^\d+.\d{0,2}$", ErrorMessage = "Máximo de 2 casas decimais")]
+        //[RegularExpression(@"^\d+.\d{0,2}$", ErrorMessage = "Máximo de 2 casas decimais")]
         public decimal Valor { get; set; }
 
         [Required(ErrorMessage = "Informe o Nome da Despesa")]

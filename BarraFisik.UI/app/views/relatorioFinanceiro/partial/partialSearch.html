@@ -14,42 +14,58 @@
                             <option ng-value="Despesas">Despesas</option>
                         </select>
                         <br />
-	                    <h6>Categoria</h6>
-                        <!--<select ng-model="filter.Categoria" ng-options="c.Categoria as c.Categoria for c in vm.categorias">
-                          <option value="">.:: Todas Categorias ::.</option>
-                        </select>-->
+                        <h6>Categoria</h6>
                         <select class="form-control" ng-model="filter.Categoria" ng-options="c.Categoria as c.Categoria for c in vm.categorias">
-	                        <option value="">.:: Todas Categorias ::.</option>
+                            <option value="">.:: Todas Categorias ::.</option>
                         </select>
                     </div>
                     <div class="col-md-4">
                         <h6>Nome</h6>
-                        <input type="text" ng-model="filter.Nome" style="width: 100%" />
+                        <input type="text" ng-model="filter.Nome" style="width: 100%" />                                                
                     </div>
                     <div class="col-md-5 pull-right">
                         <h4>Data</h4>
                         <div class="input-group">
-                            <div class="input-group">
-                                <input type="date" ng-model="filter.DataInicio" name="from" id="from"/>
-                                <span class="input-group-addon">to</span>
-                                <input type="date" ng-model="filter.DataFim"    name="to"   id="to"/>
+	                        <div class="input-group">
+                                <input type="date" ng-model="filter.DataInicio" name="from" id="from" />
+                                <span class="input-group-addon"> - </span>
+                                <input type="date" ng-model="filter.DataFim" name="to" id="to" />
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-12 pull-right">
-                        <a class="btn btn-wide btn-blue pull-right" ng-click="vm.pesquisar(filter)"><i class="fa fa-search"></i>Pesquisar</a>
-                        <a class="btn btn-wide btn-blue pull-right" ng-click="vm.clear()"><i class="fa fa-refresh"></i>Limpar</a>
-                    </div>
-                </div>
+	                <div class="col-md-12 margin-top-15">
+		                <h6>Campos para Impressão</h6>
+                            <div class="checkbox clip-check check-info">
+                                <input type="checkbox" id="Tipo"  ng-model="vm.printTipo">
+                                <label for="Tipo">Tipo</label>
 
+                                <input type="checkbox" id="Categoria" ng-model="vm.printCategoria">
+                                <label for="Categoria">Categoria</label>
+
+                                <input type="checkbox" id="Nome" ng-model="vm.printNome">
+                                <label for="Nome">Nome</label>
+
+                                <input type="checkbox" id="Data" ng-model="vm.printData">
+                                <label for="Data">Data</label>
+
+                                <input type="checkbox" id="Observacao" ng-model="vm.printObservacao">
+                                <label for="Observacao">Obs.</label>
+
+                                <input type="checkbox" id="Valor" ng-model="vm.printValor">
+                                <label for="Valor">Valor</label>
+
+		                <button class="btn btn-warning pull-right margin-left-10" ng-click="vm.clear()"><i class="fa fa-refresh"></i>Limpar</button>
+		                <button class="btn btn-primary pull-right" ng-click="vm.pesquisar(filter)"><i class="fa fa-search"></i>Pesquisar</button>
+	                </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
 <script>
-    $('#from, #to').on('focus', function(){
+    $('#from, #to').on('focus', function () {
         $('#to').attr('min', $('#from').val());
-        $('#from').attr('max', $('#to').val());        
-    });    
+        $('#from').attr('max', $('#to').val());
+    });
 </script>
-
+</div>

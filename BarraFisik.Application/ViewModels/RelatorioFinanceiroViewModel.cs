@@ -1,11 +1,9 @@
 ﻿using System;
-using BarraFisik.Domain.Entities;
 
 namespace BarraFisik.Application.ViewModels
 {
     public class RelatorioFinanceiroViewModel
     {
-        public Guid RelatorioFinanceiroId { get; set; }
         public DateTime Data { get; set; }
         public string Nome { get; set; }
         public decimal Valor { get; set; }

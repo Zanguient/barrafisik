@@ -193,6 +193,11 @@ namespace BarraFisik.Application.App
             return Mapper.Map<TotalInscritos, TotalInscritosViewModel>(_clienteService.GetTotalInscritos(ano));
         }
 
+        public ClienteHorarioViewModel GetClientePerfil(Guid id)
+        {
+            return Mapper.Map<ClienteHorario, ClienteHorarioViewModel>(_clienteService.GetClientePerfil(id));
+        }
+
         private Valores GetValor(Horario horario)
         {
             //Pega qtd de dias, e maior horario

@@ -121,5 +121,37 @@ namespace BarraFisik.Infra.Data.Repository.ReadOnly
                 return inscritos;
             }
         }
+
+        public ClienteHorario GetClientePerfil(Guid id)
+        {
+            using (IDbConnection cn = Connection)
+            {
+                cn.Open();
+                var lookup = new Dictionary<Guid, ClienteHorario>();
+                    cn.Query<ClienteHorario, Mensalidades, ClienteHorario>(@"
+                                        SELECT *
+                                        FROM Cliente c
+                                        LEFT JOIN Horario h on c.ClienteId = h.ClienteId
+                                        FULL JOIN Mensalidades m ON c.ClienteId = m.ClienteId
+                                        where c.ClienteId = '" + id+"'"
+                                        , (c, m) => {
+                        ClienteHorario clienteH;
+                        if (!lookup.TryGetValue(c.ClienteId, out clienteH))
+                        {
+                            lookup.Add(c.ClienteId, clienteH = c);
+                        }
+                        //if (shop.Mensalidades == null)
+                        //    shop.Mensalidades = new List<Mensalidades>();
+                        clienteH.Mensalidades.Add(m);
+                        
+                        return clienteH;
+                    }, splitOn: "ClienteId, MensalidadesId");
+
+                var resultList = lookup.Values;
+
+                cn.Close();
+                return resultList.FirstOrDefault();
+            }
+        }
     }
 }

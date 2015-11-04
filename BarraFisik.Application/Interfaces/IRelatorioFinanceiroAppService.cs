@@ -7,5 +7,6 @@ namespace BarraFisik.Application.Interfaces
     public interface IRelatorioFinanceiroAppService : IDisposable
     {
         IEnumerable<RelatorioFinanceiroViewModel> GetRelatorio(RelatorioFinanceiroSearchViewModel filters);
+        IEnumerable<RelatorioFinanceiroTotalMesesViewModel> GetTotalPorMes();
     }
 }

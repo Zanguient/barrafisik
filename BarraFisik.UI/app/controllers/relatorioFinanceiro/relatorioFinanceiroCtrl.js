@@ -14,6 +14,14 @@
             DataFim: null
         }
 
+        //Campos para impressao
+        vm.printTipo = true;
+        vm.printCategoria = true;
+        vm.printNome = true;
+        vm.printData = true;
+        vm.printObservacao = true;
+        vm.printValor = true;
+
         getCategorias('Todos');
 
         $scope.filterCategorias = function (tipo) {
@@ -33,39 +41,22 @@
         }
 
         vm.pesquisar = function (filter) {
-            $scope.totalValor = 0;
+            $scope.totalReceitas = 0;
+            $scope.totalDespesas = 0;
             $scope.search = true;
             $scope.$emit('LOAD');
             relatorioFinanceiroData.getRelatorio(filter).then(function(result) {
                 vm.relatorioFinanceiro = result.data;
 
                 angular.forEach(result.data, function (value, key) {
-                    $scope.totalValor = $scope.totalValor + value.Valor;
-                });
-
-                $scope.total = result.data.length;
-
-                //$scope.tableParams = new ngTableParams({
-                //    page: 1, // show first page
-                //    count: result.data.length, // count per page
-                //    sorting: {
-                //        Data: 'asc'
-                //    }
-                //}, {
-                //    counts: [],
-                //    total: result.data.length, // length of data
-                //    getData: function ($defer, params) {
-                //        // use build-in angular filter
-                //        var orderedData = params.sorting() ? $filter('orderBy')(result.data, params.orderBy()) : result.data;
-                //        $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+                    if (value.Tipo === "Receitas") {
+                        $scope.totalReceitas = $scope.totalReceitas + value.Valor;
+                    } else {
+                        $scope.totalDespesas = $scope.totalDespesas + value.Valor;
+                    }
                         
-                //        $scope.total = orderedData.length;
-                //    }
-                //});
-
-                //$scope.$watch('result.data', function () {
-                //    $scope.tableParams.reload();
-                //});
+                });
+                $scope.total = result.data.length;
             });
             $scope.$emit('UNLOAD');
         };
@@ -90,8 +81,6 @@
                 $scope.reverse = false;
             };
         }
-
-
         
         vm.clear = function() {
             $scope.filter = {
@@ -100,6 +89,12 @@
                 DataInicio: null,
                 DataFim: null
             }
+            vm.printTipo = true;
+            vm.printCategoria = true;
+            vm.printNome = true;
+            vm.printData = true;
+            vm.printObservacao = true;
+            vm.printValor = true;
         };
 
     }

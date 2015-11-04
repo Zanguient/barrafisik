@@ -9,7 +9,7 @@ using BarraFisik.API.Filters;
 
 namespace BarraFisik.API.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [RoutePrefix("api")]
     public class MensalidadesController : ApiController
     {

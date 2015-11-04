@@ -1,5 +1,9 @@
 ﻿"use strict";
 
+app.controller('dashCtrl', ["$rootScope", function ($rootScope) {
+    // Usuário
+    $rootScope.userInfo = JSON.parse(localStorage.getItem('authorizationData'));
+}]);
 app.controller('ClientesPendentesCtrl', ["$scope", "clienteData", "$rootScope", "SweetAlert", "$state", function ($scope, clienteData, $rootScope, SweetAlert, $state) {
 
     //Atualiza clientes para pendente caso dia do mes for maior que 10 e não tenha mensalidade paga para o mês atual
@@ -103,8 +107,6 @@ app.controller('InscritosCtrl', ["$scope", "clienteData", "$rootScope", function
         $scope.selectAno = [];
         activate();
     }
-
-    $rootScope.userInfo = JSON.parse(localStorage.getItem('authorizationData'));
 
     activate();
 

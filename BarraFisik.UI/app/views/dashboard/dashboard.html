@@ -1,107 +1,111 @@
 ﻿<section id="page-title" class="padding-top-15 padding-bottom-15">
     <div class="row">
         <div class="col-sm-7">
-            <h1 class="mainTitle">Dashboard</h1>
-            <span class="mainDescription"> </span>
+            <h1 class="mainTitle">Painel</h1>
+            <span class="mainDescription"></span>
         </div>
     </div>
 </section>
-<div class="container-fluid container-fullw">
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="col-md-7 col-lg-8">
-                <div class="panel panel-white no-radius" id="visits">
-                    <div class="panel-heading border-light">
-                        <h4 class="panel-title"> Inscrições </h4>
-                    </div>
-                    <div collapse="visits" ng-init="visits=false" class="panel-wrapper">
-                        <div class="panel-body">
-                            <div ng-controller="InscritosCtrl" class="height-350">
-                                <canvas class="tc-chart" tc-chartjs-line chart-options="options" chart-data="data" chart-legend="chart1" width="100%"></canvas>
-                                <div class="margin-top-20">
-                                    <div tc-chartjs-legend chart-legend="chart1" class="inline pull-left"></div>
-                                    <div class="pull-right">                
-                                        <form role="form" class="form-inline">
-                                            <div class="form-group">
-                                                <select name="selectAno2" id="selectAno2" ng-model="ano2">
-                                                    <option data-ng-repeat="option in selectAno" ng-value="{{option.ano}}">{{option.ano}}</option>
-                                                </select>
-                                            </div>
-                                            <div class="form-group">
-                                                <select name="selectAno1" id="selectAno1" ng-model="ano1" ng-init="ano1">
-                                                    <option ng-repeat="option2 in selectAno" ng-value="{{option2.ano}}">{{option2.ano}}</option>
-                                                </select>
-                                            </div>
-                                            <button ng-click="getAno()" class="btn">Filtrar</button>
-                                        </form>
+<div ng-controller="dashCtrl">
+    <div class="container-fluid container-fullw" ng-if="userInfo.isAdmin">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="col-md-7 col-lg-8">
+                    <div class="panel panel-white no-radius" id="visits">
+                        <div class="panel-heading border-light">
+                            <h4 class="panel-title">Inscrições </h4>
+                        </div>
+                        <div collapse="visits" ng-init="visits=false" class="panel-wrapper">
+                            <div class="panel-body">
+                                <div ng-controller="InscritosCtrl" class="height-350">
+                                    <canvas class="tc-chart" tc-chartjs-line chart-options="options" chart-data="data" chart-legend="chart1" width="100%"></canvas>
+                                    <div class="margin-top-20">
+                                        <div tc-chartjs-legend chart-legend="chart1" class="inline pull-left"></div>
+                                        <div class="pull-right">
+                                            <form role="form" class="form-inline">
+                                                <div class="form-group">
+                                                    <select name="selectAno2" id="selectAno2" ng-model="ano2">
+                                                        <option data-ng-repeat="option in selectAno" ng-value="{{option.ano}}">{{option.ano}}</option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group">
+                                                    <select name="selectAno1" id="selectAno1" ng-model="ano1" ng-init="ano1">
+                                                        <option ng-repeat="option2 in selectAno" ng-value="{{option2.ano}}">{{option2.ano}}</option>
+                                                    </select>
+                                                </div>
+                                                <button ng-click="getAno()" class="btn">Filtrar</button>
+                                            </form>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-5 col-lg-4" ng-controller="ClientesPendentesCtrl">
-                <div class="panel panel-white">
-                    <div class="panel-heading border-light">
-                        <h4 class="panel-title">Clientes Pendentes <span class="text-danger"> ( {{selection.length}} / {{clientesPendentes.length}} ) </span></h4>
-                        <ul class="panel-heading-tabs border-light">
-                            <li>
-                                <div class="pull-right">
-                                    <div class="btn-group" dropdown is-open="status.isopen">
-                                        <button type="button" class="btn btn-primary dropdown-toggle" dropdown-toggle ng-disabled="disabled">
-                                            Ação <span class="caret"></span>
-                                        </button>
-                                        <ul class="dropdown-menu pull-right bullet" role="menu">
-                                            <li>
-                                                <a ng-click="inativarSelecionados()">
-                                                    Inativar Selecionados
-                                                </a>
-                                            </li>
-                                        </ul>
+                <div class="col-md-5 col-lg-4" ng-controller="ClientesPendentesCtrl">
+                    <div class="panel panel-white">
+                        <div class="panel-heading border-light">
+                            <h4 class="panel-title">Clientes Pendentes <span class="text-danger">( {{selection.length}} / {{clientesPendentes.length}} ) </span></h4>
+                            <ul class="panel-heading-tabs border-light">
+                                <li>
+                                    <div class="pull-right">
+                                        <div class="btn-group" dropdown is-open="status.isopen">
+                                            <button type="button" class="btn btn-primary dropdown-toggle" dropdown-toggle ng-disabled="disabled">
+                                                Ação <span class="caret"></span>
+                                            </button>
+                                            <ul class="dropdown-menu pull-right bullet" role="menu">
+                                                <li>
+                                                    <a ng-click="inativarSelecionados()">Inativar Selecionados
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
                                     </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="panel-body">
+                            <div class="panel-scroll height-350" perfect-scrollbar wheel-propagation="false" suppress-scroll-x="true">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <tr>
+                                            <td>
+                                                <div class="checkbox clip-check check-primary">
+                                                    <input type="checkbox" id="checkAll" ng-init="false" ng-model="selectedAll" ng-click="checkAll()">
+                                                    <label for="checkAll"></label>
+                                                </div>
+                                            </td>
+                                            <td>Nome</td>
+                                            <td>Telefone</td>
+                                            <td>Celular</td>
+                                        </tr>
+                                        <tr ng-repeat="cliente in clientesPendentes">
+                                            <td>
+                                                <div class="checkbox clip-check check-primary">
+                                                    <input type="checkbox" id="{{cliente.ClienteId}}" value="{{cliente}}"
+                                                        ng-model="cliente.Selected"
+                                                        ng-checked="selection.indexOf(cliente) > -1"
+                                                        ng-click="toggleSelection(cliente)">
+                                                    <label for="{{cliente.ClienteId}}"></label>
+                                                </div>
+                                            </td>
+                                            <td>{{cliente.Nome}}</td>
+                                            <td>{{cliente.Telefone}}</td>
+                                            <td>{{cliente.Celular}}</td>
+                                        </tr>
+                                    </table>
                                 </div>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="panel-body">
-                        <div class="panel-scroll height-350" perfect-scrollbar wheel-propagation="false" suppress-scroll-x="true">
-                            <div class="table-responsive">
-                                <table class="table">
-                                    <tr>
-                                        <td>
-                                            <div class="checkbox clip-check check-primary">
-                                                <input type="checkbox" id="checkAll" ng-init="false" ng-model="selectedAll" ng-click="checkAll()">
-                                                <label for="checkAll"></label>
-                                            </div>
-                                        </td>
-                                        <td>Nome</td>
-                                        <td>Telefone</td>
-                                        <td>Celular</td>
-                                    </tr>
-                                    <tr ng-repeat="cliente in clientesPendentes">
-                                        <td>
-                                            <div class="checkbox clip-check check-primary">
-                                                <input type="checkbox" id="{{cliente.ClienteId}}" value="{{cliente}}"
-                                                       ng-model="cliente.Selected"
-                                                       ng-checked="selection.indexOf(cliente) > -1"
-                                                       ng-click="toggleSelection(cliente)">
-                                                <label for="{{cliente.ClienteId}}"></label>
-                                            </div>
-                                        </td>
-                                        <td>{{cliente.Nome}}</td>
-                                        <td>{{cliente.Telefone}}</td>
-                                        <td>{{cliente.Celular}}</td>
-                                    </tr>
-                                </table>
-                            </div>
-                            <div class="margin-top-20">
-                                <div tc-chartjs-legend chart-legend="chart1" class="inline pull-left"></div>
+                                <div class="margin-top-20">
+                                    <div tc-chartjs-legend chart-legend="chart1" class="inline pull-left"></div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
+    <div class="container-fluid container-fullw" ng-if="!userInfo.isAdmin">
+        <h3>Bem Vindo, {{userInfo.nome}}</h3>
     </div>
 </div>

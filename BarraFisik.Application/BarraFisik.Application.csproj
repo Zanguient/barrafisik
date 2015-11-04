@@ -94,6 +94,7 @@
     <Compile Include="ViewModels\DespesasViewModel.cs" />
     <Compile Include="ViewModels\ReceitasViewModel.cs" />
     <Compile Include="ViewModels\RelatorioFinanceiroSearchViewModel.cs" />
+    <Compile Include="ViewModels\RelatorioFinanceiroTotalMesesViewModel.cs" />
     <Compile Include="ViewModels\RelatorioFinanceiroViewModel.cs" />
     <Compile Include="ViewModels\ValoresViewModel.cs" />
     <Compile Include="ViewModels\MensalidadesViewModel.cs" />

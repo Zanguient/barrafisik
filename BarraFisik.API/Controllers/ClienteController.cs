@@ -40,6 +40,18 @@ namespace BarraFisik.API.Controllers
         }
 
         [HttpGet]
+        [Route("cliente/perfil/{id:Guid}")]
+        public async Task<HttpResponseMessage> GetClientePerfil(Guid id)
+        {
+            var result = _clienteApp.GetClientePerfil(id);
+            var response = Request.CreateResponse(HttpStatusCode.OK, result);
+
+            var tsc = new TaskCompletionSource<HttpResponseMessage>();
+            tsc.SetResult(response);
+            return await tsc.Task;
+        }
+
+        [HttpGet]
         [Route("clientes/all")]
         [GzipCompression]
         public async Task<HttpResponseMessage> GetClientesAll()

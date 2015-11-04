@@ -93,15 +93,15 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
             ncyBreadcrumb: {
                 label: 'Editar'
             }
-        }).state('app.clientes.ficha', {
-            url: '/ficha/{id}',
-            templateUrl: "app/views/cliente/ficha.html",
-            title: 'Editar Cliente',
-            resolve: loadSequence('clienteCtrl', 'clienteFilters'),
+        }).state('app.clientes.perfil', {
+            url: '/perfil/{id}',
+            templateUrl: "app/views/cliente/clientePerfil.html",
+            title: 'Perfil Cliente',
+            resolve: loadSequence('clientePerfilCtrl', 'ngTable', 'clienteData', 'horarioData', 'clienteFilters', 'receitasAvaliacaoFisicaData'),
             ncyBreadcrumb: {
-                label: 'Ficha do Cliente'
+                label: 'Perfil do Cliente'
             },
-            controller: 'clienteCtrl'
+            controller: 'clientePerfilCtrl as vm'
         }).state('app.clientes.aniversariantes', {
             url: '/aniversariantes/{mes}',
             templateUrl: "app/views/cliente/aniversariantes.html",

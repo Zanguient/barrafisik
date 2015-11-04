@@ -1,5 +1,52 @@
-﻿<!-- start: PAGE TITLE -->
-<section id="page-title">
+﻿<style>
+	 @page {
+		 orphans:3; widows:3;
+		 margin: 0;
+		 padding-bottom: 30px;
+		 margin-top: 35px;
+	 }
+
+	@media print {	
+    
+        * {
+            background:transparent !important;
+            color:#000 !important;
+            text-shadow:none !important;
+            filter:none !important;
+            -ms-filter:none !important;
+          }
+ 
+          body {
+            margin:0;
+            padding:0;
+            line-height: 1.4em;
+            }	
+
+
+		.footer-inner {
+			display: none !important;
+		}
+
+		.main-navigation-menu {
+			display: none !important;
+		}
+
+		.navbar-title {
+			display: none !important;
+		}
+
+		#nav, #sidebar {
+			display: none !important;
+		}
+
+		#Valor {
+			min-width: 120px;
+		}
+	}
+</style>
+
+<!-- start: PAGE TITLE -->
+<section id="page-title" class="hidden-print">
     <div class="row">
         <div class="col-sm-8">
             <h1 class="mainTitle">Relat&oacute;rio Financeiro</h1>
@@ -10,86 +57,95 @@
 </section>
 <br />
 <br />
-<div ng-include src="'app/views/relatorioFinanceiro/partial/partialSearch.html'"></div>
+
+<div class="hidden-print" ng-include src="'app/views/relatorioFinanceiro/partial/partialSearch.html'"></div>
 
 <div ng-if="search">
     <div ng-show="loading">
         <img src="/assets/images/loading.gif" />Carregando Dados Financeiros...
     </div>
-    <div class="container-fluid container-fullw bg-white" ng-show="!loading">
+    <div class="container-fluid container-fullw" ng-show="!loading">
         <div class="row">
             <div class="col-md-6">
                 <h5 class="pull-left ">Total: <span class="badge badge-info">{{total}}</span></h5>
             </div>
         </div>
+
         <div class="row">
             <div class="col-md-12">
-                <div class="table-responsive">
-                    <table class="table">
-                        <thead>
-                            <th ng-click="sort('Tipo')" style="cursor: pointer">Tipo
-		                        <i ng-class="{'fa fa-chevron-up':isSortUp('Tipo'),'fa fa-chevron-down':isSortDown('Tipo')}"></i>
-                            </th>
-                            <th ng-click="sort('Categoria')" style="cursor: pointer">Categoria
-		                    <i ng-class="{'fa fa-chevron-up':isSortUp('Categoria'),'fa fa-chevron-down':isSortDown('Categoria')}"></i>
-                            </th>
-                            <th ng-click="sort('Nome')" style="cursor: pointer">Nome
-	                        <i ng-class="{'fa fa-chevron-up':isSortUp('Nome'),'fa fa-chevron-down':isSortDown('Nome')}"></i>
-                            </th>
-                            <th ng-click="sort('Data')" style="cursor: pointer">Data
-	                        <i ng-class="{'fa fa-chevron-up':isSortUp('Data'),'fa fa-chevron-down':isSortDown('Data')}"></i>
-                            </th>
-                            <th ng-click="sort('Observacao')" style="cursor: pointer">Observacao
-	                        <i ng-class="{'fa fa-chevron-up':isSortUp('Observacao'),'fa fa-chevron-down':isSortDown('Observacao')}"></i>
-                            </th>
-                            <th ng-click="sort('Valor')" style="cursor: pointer">Valor
-		                    <i ng-class="{'fa fa-chevron-up':isSortUp('Valor'),'fa fa-chevron-down':isSortDown('Valor')}"></i>
-                            </th>
-                        </thead>
-                        <tbody>
-                            <tr ng-class-odd="'odd'" ng-class-even="'even'" ng-repeat="rf in vm.relatorioFinanceiro  | orderBy:sortField:reverse">
-                                <td class="rowTd">{{rf.Tipo}}</td>
-                                <td class="rowTd">{{rf.Categoria}}</td>
-                                <td class="rowTd">{{rf.Nome}}</td>
-                                <td class="rowTd">{{rf.Data | date:'dd/MM/yyyy'}}</td>
-                                <td class="rowTd">{{rf.Observacao}}</td>
-                                <td class="rowTd">{{rf.Valor | currency}}</td>
-                            </tr>
-                        </tbody>
-                        <tfoot>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td class="text-right"><b>TOTAL: </b></td>
-                                <td><b>{{totalValor | currency}}</b></td>
-                            </tr>
-                        </tfoot>
-
-                    </table>
-                    <!--<table ng-table="tableParams" class="table" show-filter="true">
-			            <tbody ng-repeat="rf in $data">
-			            <tr ng-class-odd="'odd'" ng-class-even="'even'">
-			            <td class="rowTd" data-title="'Tipo'" sortable="'Tipo'">{{rf.Tipo}}</td>
-			            <td class="rowTd" data-title="'Categoria'" sortable="'Categoria'">{{rf.Categoria}}</td>
-			            <td class="rowTd" data-title="'Nome'" sortable="'Nome'">{{rf.Nome}}</td>
-			            <td class="rowTd" data-title="'Data'" sortable="'Data'">{{rf.Data | date: 'dd/MM/yyyy'}}</td>
-			            <td class="rowTd" data-title="'Obs.'" sortable="'Observacao'">{{rf.Observacao}}</td>
-			            <td class="rowTd" data-title="'Valor'" sortable="'Valor'">{{rf.Valor | currency}}</td>
-			            </tbody>
-			            <tfoot>
-			            <tr>
-				            <td></td>
-				            <td></td>
-				            <td></td>
-				            <td></td>
-				            <td class="text-right"><b>TOTAL: </b></td>
-				            <td><b> {{totalValor | currency}}</b></td>
-			            </tr>
-			            </tfoot>
-		            </table>-->
+                <div class="print">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <th ng-click="sort('Tipo')" style="cursor: pointer"><span ng-class="{ 'hidden-print' : !vm.printTipo}">Tipo</span>
+                                    <i ng-class="{'fa fa-chevron-up':isSortUp('Tipo'),'fa fa-chevron-down':isSortDown('Tipo')}"></i>
+                                </th>
+                                <th ng-click="sort('Categoria')" style="cursor: pointer">
+                                    <span ng-class="{ 'hidden-print' : !vm.printCategoria}">Categoria</span>
+                                    <i ng-class="{'fa fa-chevron-up':isSortUp('Categoria'),'fa fa-chevron-down':isSortDown('Categoria')}"></i>
+                                </th>
+                                <th ng-click="sort('Nome')" style="cursor: pointer">
+                                    <span ng-class="{ 'hidden-print' : !vm.printNome}">Nome</span>
+                                    <i ng-class="{'fa fa-chevron-up':isSortUp('Nome'),'fa fa-chevron-down':isSortDown('Nome')}"></i>
+                                </th>
+                                <th ng-click="sort('Data')" style="cursor: pointer">
+                                    <span ng-class="{ 'hidden-print' : !vm.printData}">Data</span>
+                                    <i ng-class="{'fa fa-chevron-up':isSortUp('Data'),'fa fa-chevron-down':isSortDown('Data')}"></i>
+                                </th>
+                                <th ng-click="sort('Observacao')" style="cursor: pointer">
+                                    <span ng-class="{ 'hidden-print' : !vm.printObservacao}">Obs.</span>
+                                    <i ng-class="{'fa fa-chevron-up':isSortUp('Observacao'),'fa fa-chevron-down':isSortDown('Observacao')}"></i>
+                                </th>
+                                <th ng-click="sort('Valor')" id="Valor" style="cursor: pointer;" class="text-right">
+                                    <span ng-class="{ 'hidden-print' : !vm.printValor}">Valor</span>
+                                    <i ng-class="{'fa fa-chevron-up':isSortUp('Valor'),'fa fa-chevron-down':isSortDown('Valor')}"></i>
+                                </th>
+                            </thead>
+                            <tbody>
+                                <tr ng-class-odd="'odd'" ng-class-even="'even'" ng-repeat="rf in vm.relatorioFinanceiro  | orderBy:sortField:reverse">
+                                    <td class="rowTd"><span ng-class="{ 'hidden-print' : !vm.printTipo}">{{rf.Tipo}}</span></td>
+                                    <td class="rowTd"><span ng-class="{ 'hidden-print' : !vm.printCategoria}">{{rf.Categoria}}</span></td>
+                                    <td class="rowTd"><span ng-class="{ 'hidden-print' : !vm.printNome}">{{rf.Nome}}</span></td>
+                                    <td class="rowTd"><span ng-class="{ 'hidden-print' : !vm.printData}">{{rf.Data | date:'dd/MM/yyyy'}}</span></td>
+                                    <td class="rowTd"><span ng-class="{ 'hidden-print' : !vm.printObservacao}">{{rf.Observacao}}</span></td>
+                                    <td class="rowTd text-right text-bold"><span ng-class="{ 'hidden-print' : !vm.printValor, 'text-red': rf.Tipo == 'Despesas', 'text-primary': rf.Tipo == 'Receitas' }">{{rf.Valor | currency}}</span></td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="3"></td>
+                                    <td class="text-right"><b>TOTAL: </b></td>
+                                    <td class="text-right">
+                                        <b ng-show="totalReceitas > 0" class="text-primary">Receitas:
+								        <br />
+                                        </b>
+                                        <b ng-show="totalDespesas > 0" class="text-red">Despesas: </b>
+                                    </td>
+                                    <td class="text-right">
+                                        <b ng-show="totalReceitas > 0" class="text-primary">{{totalReceitas | currency}}
+								        <br />
+                                        </b>
+                                        <b ng-show="totalDespesas > 0" class="text-red">{{totalDespesas | currency}}</b>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="4"></td>
+                                    <td class="text-right"><b>Saldo: </b></td>
+                                    <td class="text-right">
+                                        <b ng-class="{ 'text-primary': totalReceitas > totalDespesas, 'text-red': totalReceitas < totalDespesas }">{{totalReceitas - totalDespesas | currency}}</b>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
                 </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12 invoice-block">
+                <br>
+                <a onclick="javascript:window.print();" class="btn btn-lg btn-primary hidden-print">Print <i class="fa fa-print"></i>
+                </a>
             </div>
         </div>
     </div>

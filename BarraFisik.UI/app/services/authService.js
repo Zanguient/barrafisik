@@ -5,6 +5,7 @@ app.factory('authService', [
         var authServiceFactory = {};
 
         var _authentication = {
+            id: null,
             isAuth: false,
             nome: "",
             userName: "",
@@ -46,6 +47,7 @@ app.factory('authService', [
                     _authentication.nome = usr.FullName;
                     _authentication.isAuth = true;
                     _authentication.userName = loginData.userName;
+                    _authentication.id = usr.Id;
 
                     localStorage.setItem('authorizationData', JSON.stringify(_authentication));
 
