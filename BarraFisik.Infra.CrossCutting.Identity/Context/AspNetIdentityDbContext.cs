@@ -1,10 +1,8 @@
 ﻿using System.Data.Entity;
-using System.Linq;
-using BarraFisik.Data.CrossCutting.Identity.Infra;
-using Microsoft.AspNet.Identity;
+using BarraFisik.Infra.CrossCutting.Identity.Infra;
 using Microsoft.AspNet.Identity.EntityFramework;
 
-namespace BarraFisik.Data.CrossCutting.Identity.Context
+namespace BarraFisik.Infra.CrossCutting.Identity.Context
 {
     public class AspNetIdentityDbContext : IdentityDbContext<ApplicationUser>
     {

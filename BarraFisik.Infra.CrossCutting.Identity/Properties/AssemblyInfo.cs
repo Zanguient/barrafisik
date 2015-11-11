@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // As informações gerais sobre um assembly são controladas por
 // conjunto de atributos. Altere estes valores de atributo para modificar as informações
 // associada a um assembly.
-[assembly: AssemblyTitle("BarraFisik.CrossCutting.IoC.Unity")]
+[assembly: AssemblyTitle("BarraFisik.Infra.CrossCutting.Identity")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("BarraFisik.CrossCutting.IoC.Unity")]
+[assembly: AssemblyProduct("BarraFisik.Infra.CrossCutting.Identity")]
 [assembly: AssemblyCopyright("Copyright ©  2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // O GUID a seguir será destinado à ID de typelib se este projeto for exposto para COM
-[assembly: Guid("95cf2f05-422c-4c5e-bdb3-471aca3f08fd")]
+[assembly: Guid("47b11c1a-51e9-422a-b69e-96b19b5956b8")]
 
 // As informações da versão de um assembly consistem nos quatro valores a seguir:
 //

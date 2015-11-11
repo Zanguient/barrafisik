@@ -1,8 +1,7 @@
-namespace BarraFisik.Data.CrossCutting.Identity.Migrations
+using System.Data.Entity.Migrations;
+
+namespace BarraFisik.Infra.CrossCutting.Identity.Migrations
 {
-    using System;
-    using System.Data.Entity.Migrations;
-    
     public partial class Identity_Initial : DbMigration
     {
         public override void Up()

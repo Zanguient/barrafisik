@@ -20,7 +20,7 @@
         function loadTable(data) {
             $scope.tableParams = new ngTableParams({
                 page: 1, // show first page
-                count: 20, // count per page
+                count: 12, // count per page
                 sorting: {
                     DataPagamento: 'desc' // initial sorting
                 }

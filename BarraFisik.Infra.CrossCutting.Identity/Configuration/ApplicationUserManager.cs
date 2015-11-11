@@ -1,12 +1,12 @@
 ﻿using System;
-using BarraFisik.Data.CrossCutting.Identity.Context;
-using BarraFisik.Data.CrossCutting.Identity.Infra;
+using BarraFisik.Infra.CrossCutting.Identity.Context;
+using BarraFisik.Infra.CrossCutting.Identity.Infra;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 
-namespace BarraFisik.Data.CrossCutting.Identity.Configuration
+namespace BarraFisik.Infra.CrossCutting.Identity.Configuration
 {
     public class ApplicationUserManager : UserManager<ApplicationUser>
     {

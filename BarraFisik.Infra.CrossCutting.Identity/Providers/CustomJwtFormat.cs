@@ -5,7 +5,7 @@ using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.DataHandler.Encoder;
 using Thinktecture.IdentityModel.Tokens;
 
-namespace BarraFisik.Data.CrossCutting.Identity.Providers
+namespace BarraFisik.Infra.CrossCutting.Identity.Providers
 {
     public class CustomJwtFormat : ISecureDataFormat<AuthenticationTicket>
     {

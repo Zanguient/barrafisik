@@ -2,9 +2,9 @@
 using System.Configuration;
 using System.Web.Http;
 using BarraFisik.Application.AutoMapper;
-using BarraFisik.Data.CrossCutting.Identity.Configuration;
-using BarraFisik.Data.CrossCutting.Identity.Context;
-using BarraFisik.Data.CrossCutting.Identity.Providers;
+using BarraFisik.Infra.CrossCutting.Identity.Configuration;
+using BarraFisik.Infra.CrossCutting.Identity.Context;
+using BarraFisik.Infra.CrossCutting.Identity.Providers;
 using Microsoft.Owin;
 using Microsoft.Owin.Cors;
 using Microsoft.Owin.Security;

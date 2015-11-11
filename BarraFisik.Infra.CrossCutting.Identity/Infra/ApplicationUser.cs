@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 
-namespace BarraFisik.Data.CrossCutting.Identity.Infra
+namespace BarraFisik.Infra.CrossCutting.Identity.Infra
 {
     public class ApplicationUser : IdentityUser
     {

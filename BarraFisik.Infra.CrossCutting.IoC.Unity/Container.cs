@@ -13,7 +13,7 @@ using Microsoft.Practices.ServiceLocation;
 using Microsoft.Practices.Unity;
 using UnityServiceLocator = Microsoft.Practices.Unity.ServiceLocatorAdapter.UnityServiceLocator;
 
-namespace BarraFisik.CrossCutting.IoC.Unity
+namespace BarraFisik.Infra.CrossCutting.IoC.Unity
 {
     public class Container
     {

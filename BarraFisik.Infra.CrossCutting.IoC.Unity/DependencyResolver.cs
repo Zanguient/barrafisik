@@ -11,7 +11,7 @@ using BarraFisik.Infra.Data.Repository.ReadOnly;
 using BarraFisik.Infra.Data.UoW;
 using Microsoft.Practices.Unity;
 
-namespace BarraFisik.CrossCutting.IoC.Unity
+namespace BarraFisik.Infra.CrossCutting.IoC.Unity
 {
     public class DependencyResolver
     {

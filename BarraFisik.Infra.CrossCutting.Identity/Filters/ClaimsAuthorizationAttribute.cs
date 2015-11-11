@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Web.Http.Controllers;
 using System.Web.Http.Filters;
 
-namespace BarraFisik.Data.CrossCutting.Identity.Filters
+namespace BarraFisik.Infra.CrossCutting.Identity.Filters
 {
     public class ClaimsAuthorizationAttribute : AuthorizationFilterAttribute
     {

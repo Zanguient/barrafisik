@@ -215,6 +215,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+    <None Include="Properties\PublishProfiles\BarraFisikAPI.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -231,17 +232,13 @@
       <Project>{c848946e-6dd4-409e-b536-f3d03c487298}</Project>
       <Name>BarraFisik.Application</Name>
     </ProjectReference>
-    <ProjectReference Include="..\BarraFisik.CrossCutting.IoC.Unity\BarraFisik.CrossCutting.IoC.Unity.csproj">
-      <Project>{95cf2f05-422c-4c5e-bdb3-471aca3f08fd}</Project>
-      <Name>BarraFisik.CrossCutting.IoC.Unity</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\BarraFisik.Data.CrossCutting.Identity\BarraFisik.Data.CrossCutting.Identity.csproj">
+    <ProjectReference Include="..\BarraFisik.Infra.CrossCutting.Identity\BarraFisik.Infra.CrossCutting.Identity.csproj">
       <Project>{47b11c1a-51e9-422a-b69e-96b19b5956b8}</Project>
-      <Name>BarraFisik.Data.CrossCutting.Identity</Name>
+      <Name>BarraFisik.Infra.CrossCutting.Identity</Name>
     </ProjectReference>
-    <ProjectReference Include="..\BarraFisik.Inra.CrossCutting.IoC\BarraFisik.Inra.CrossCutting.IoC.csproj">
-      <Project>{934f2e6f-7b6a-433f-9128-84e4588d7556}</Project>
-      <Name>BarraFisik.Inra.CrossCutting.IoC</Name>
+    <ProjectReference Include="..\BarraFisik.Infra.CrossCutting.IoC.Unity\BarraFisik.Infra.CrossCutting.IoC.Unity.csproj">
+      <Project>{95cf2f05-422c-4c5e-bdb3-471aca3f08fd}</Project>
+      <Name>BarraFisik.Infra.CrossCutting.IoC.Unity</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

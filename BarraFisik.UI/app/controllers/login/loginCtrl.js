@@ -3,8 +3,16 @@
 
     app.controller('loginCtrl', loginCtrl);
 
-    function loginCtrl($scope, $rootScope, authService, $location) {
+    function loginCtrl($scope, $rootScope, authService, $location, $state) {
         
+        $scope.$emit('UNLOAD');
+
+        //Verifica se usuário está logado e redireciona para Dashboard
+        var user = JSON.parse(localStorage.getItem('authorizationData'));
+        if( user != null) {
+            $state.go('app.dashboard');
+        };       
+
         $scope.login = function () {
             $scope.$emit('LOAD');
             authService.login($scope.loginData).then(function (response) {

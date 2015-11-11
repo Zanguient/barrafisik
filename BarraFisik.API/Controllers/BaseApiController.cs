@@ -1,7 +1,7 @@
 ﻿using System.Net.Http;
 using System.Web.Http;
 using BarraFisik.API.Models;
-using BarraFisik.Data.CrossCutting.Identity.Configuration;
+using BarraFisik.Infra.CrossCutting.Identity.Configuration;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 

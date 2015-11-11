@@ -1,7 +1,6 @@
 using Microsoft.Practices.Unity;
 using System.Web.Http;
 using BarraFisik.API.helpers;
-using BarraFisik.CrossCutting.IoC.Unity;
 using Unity.WebApi;
 
 namespace BarraFisik.API

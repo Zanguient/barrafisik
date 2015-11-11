@@ -1,4 +1,4 @@
-﻿namespace BarraFisik.Data.CrossCutting.Identity.Infra
+﻿namespace BarraFisik.Infra.CrossCutting.Identity.Infra
 {
     public class ApplicationRole
     {

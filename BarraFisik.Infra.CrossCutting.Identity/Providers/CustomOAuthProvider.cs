@@ -1,12 +1,12 @@
 ﻿using System.Security.Claims;
 using System.Threading.Tasks;
-using BarraFisik.Data.CrossCutting.Identity.Configuration;
-using BarraFisik.Data.CrossCutting.Identity.Infra;
+using BarraFisik.Infra.CrossCutting.Identity.Configuration;
+using BarraFisik.Infra.CrossCutting.Identity.Infra;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.OAuth;
 
-namespace BarraFisik.Data.CrossCutting.Identity.Providers
+namespace BarraFisik.Infra.CrossCutting.Identity.Providers
 {
     public class CustomOAuthProvider : OAuthAuthorizationServerProvider
     {

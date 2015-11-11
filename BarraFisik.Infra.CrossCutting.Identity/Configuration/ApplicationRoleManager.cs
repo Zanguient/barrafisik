@@ -1,10 +1,10 @@
-﻿using BarraFisik.Data.CrossCutting.Identity.Context;
+﻿using BarraFisik.Infra.CrossCutting.Identity.Context;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 
-namespace BarraFisik.Data.CrossCutting.Identity.Configuration
+namespace BarraFisik.Infra.CrossCutting.Identity.Configuration
 {
     public class ApplicationRoleManager : RoleManager<IdentityRole>
     {

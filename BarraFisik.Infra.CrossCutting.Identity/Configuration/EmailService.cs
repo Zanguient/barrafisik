@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Web;
 using Microsoft.AspNet.Identity;
 
-namespace BarraFisik.Data.CrossCutting.Identity.Configuration
+namespace BarraFisik.Infra.CrossCutting.Identity.Configuration
 {
     public class EmailService : IIdentityMessageService
     {

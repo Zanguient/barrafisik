@@ -1,6 +1,6 @@
 ﻿using System.Web.Http;
+using BarraFisik.Infra.CrossCutting.IoC.Unity;
 //using BarraFisik.Inra.CrossCutting.IoC;
-using BarraFisik.CrossCutting.IoC.Unity;
 using Unity.WebApi;
 
 namespace BarraFisik.API

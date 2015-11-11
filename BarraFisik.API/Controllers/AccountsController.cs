@@ -4,8 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http;
 using BarraFisik.API.Models;
-using BarraFisik.Data.CrossCutting.Identity.Infra;
-using BarraFisik.Data.CrossCutting.Identity.Providers;
+using BarraFisik.Infra.CrossCutting.Identity.Infra;
+using BarraFisik.Infra.CrossCutting.Identity.Providers;
 using Microsoft.AspNet.Identity;
 
 namespace BarraFisik.API.Controllers

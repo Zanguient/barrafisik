@@ -7,8 +7,8 @@
     <ProjectGuid>{47B11C1A-51E9-422A-B69E-96B19B5956B8}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BarraFisik.Data.CrossCutting.Identity</RootNamespace>
-    <AssemblyName>BarraFisik.Data.CrossCutting.Identity</AssemblyName>
+    <RootNamespace>BarraFisik.Infra.CrossCutting.Identity</RootNamespace>
+    <AssemblyName>BarraFisik.Infra.CrossCutting.Identity</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

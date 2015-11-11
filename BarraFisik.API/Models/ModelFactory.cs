@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Net.Http;
 using System.Web.Http.Routing;
-using BarraFisik.Data.CrossCutting.Identity.Configuration;
-using BarraFisik.Data.CrossCutting.Identity.Infra;
+using BarraFisik.Infra.CrossCutting.Identity.Configuration;
+using BarraFisik.Infra.CrossCutting.Identity.Infra;
 using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace BarraFisik.API.Models

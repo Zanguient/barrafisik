@@ -1,6 +1,6 @@
 ﻿using System.Security.Claims;
 
-namespace BarraFisik.Data.CrossCutting.Identity.Providers
+namespace BarraFisik.Infra.CrossCutting.Identity.Providers
 {
     public class ExtendedClaimsProvider
     {

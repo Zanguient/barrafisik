@@ -7,8 +7,8 @@
     <ProjectGuid>{95CF2F05-422C-4C5E-BDB3-471ACA3F08FD}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BarraFisik.CrossCutting.IoC.Unity</RootNamespace>
-    <AssemblyName>BarraFisik.CrossCutting.IoC.Unity</AssemblyName>
+    <RootNamespace>BarraFisik.Infra.CrossCutting.IoC.Unity</RootNamespace>
+    <AssemblyName>BarraFisik.Infra.CrossCutting.IoC.Unity</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

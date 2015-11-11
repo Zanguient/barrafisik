@@ -27,7 +27,7 @@
 
         $scope.tableParams = new ngTableParams({
             page: 1, // show first page
-            count: 20, // count per page
+            count: 40, // count per page
             sorting: {
                 Tipo: 'asc', // initial sorting
                 Categoria: 'asc'
