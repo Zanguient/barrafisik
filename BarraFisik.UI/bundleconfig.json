@@ -1,0 +1,139 @@
+[
+  {
+    "outputFileName": "app/directives/bundleAppDirectives.js",
+    "inputFiles": [
+      "app/directives/bundleAppDirectives.js"
+    ]
+  },
+  {
+    "outputFileName": "assets/css/bundleCss.css",
+    "inputFiles": [
+      "assets/css/fonts.css",
+      "assets/css/plugins.css",
+      "assets/css/styles.css"
+    ]
+  },
+  {
+    "outputFileName": "bower_components/jquery/dist/bundleJS.js",
+    "inputFiles": [
+      "bower_components/jquery/dist/jquery.min.js",
+      "bower_components/fastclick/lib/fastclick.js",
+      "bower_components/angular/angular.min.js",
+      "bower_components/angular-cookies/angular-cookies.min.js"
+    ]
+  },
+  {
+    "outputFileName": "assets/js/bundleJS.js",
+    "inputFiles": [
+      "bower_components/jquery/dist/jquery.min.js",
+      "bower_components/fastclick/lib/fastclick.min.js",
+      "bower_components/angular/angular.min.js",
+      "bower_components/angular-animate/angular-animate.min.js",
+      "bower_components/angular-cookies/angular-cookies.min.js",
+      "bower_components/angular-touch/angular-touch.min.js",
+      "bower_components/angular-sanitize/angular-sanitize.min.js",
+      "bower_components/angular-ui-router/release/angular-ui-router.min.js",
+      "bower_components/locale/angular-locale_pt-br.js",
+      "bower_components/MaskMoney/jquery.maskMoney.js",
+      "bower_components/ngstorage/ngStorage.min.js",
+      "bower_components/oclazyload/dist/ocLazyLoad.min.js",
+      "bower_components/angular-breadcrumb/dist/angular-breadcrumb.min.js",
+      "bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js",
+      "bower_components/angular-loading-bar/build/loading-bar.min.js",
+      "bower_components/angular-scroll/angular-scroll.min.js"
+    ]
+  },
+  {
+    "outputFileName": "assets/js/directives/empty-links.js",
+    "inputFiles": [
+      "assets/js/directives/empty-links.js"
+    ]
+  },
+  {
+    "outputFileName": "assets/js/directives/file-upload.js",
+    "inputFiles": [
+      "assets/js/directives/file-upload.js"
+    ]
+  },
+  {
+    "outputFileName": "assets/js/directives/full-height.js",
+    "inputFiles": [
+      "assets/js/directives/full-height.js"
+    ]
+  },
+  {
+    "outputFileName": "assets/js/directives/messages.js",
+    "inputFiles": [
+      "assets/js/directives/messages.js"
+    ]
+  },
+  {
+    "outputFileName": "assets/js/directives/off-click.js",
+    "inputFiles": [
+      "assets/js/directives/off-click.js"
+    ]
+  },
+  {
+    "outputFileName": "assets/js/directives/panel-tools.js",
+    "inputFiles": [
+      "assets/js/directives/panel-tools.js"
+    ]
+  },
+  {
+    "outputFileName": "assets/js/directives/perfect-scrollbar.js",
+    "inputFiles": [
+      "assets/js/directives/perfect-scrollbar.js"
+    ]
+  },
+  {
+    "outputFileName": "assets/js/directives/select.js",
+    "inputFiles": [
+      "assets/js/directives/select.js"
+    ]
+  },
+  {
+    "outputFileName": "assets/js/directives/sidebars.js",
+    "inputFiles": [
+      "assets/js/directives/sidebars.js"
+    ]
+  },
+  {
+    "outputFileName": "assets/js/directives/sparkline.js",
+    "inputFiles": [
+      "assets/js/directives/sparkline.js"
+    ]
+  },
+  {
+    "outputFileName": "assets/js/directives/toggle.js",
+    "inputFiles": [
+      "assets/js/directives/toggle.js"
+    ]
+  },
+  {
+    "outputFileName": "assets/js/directives/touchspin.js",
+    "inputFiles": [
+      "assets/js/directives/touchspin.js"
+    ]
+  },
+  {
+    "outputFileName": "assets/js/directives/bundleDirectives-min.js",
+    "inputFiles": [
+      "assets/js/directives/char-limit.min.js",
+      "assets/js/directives/chat.min.js",
+      "assets/js/directives/compare-to.min.js",
+      "assets/js/directives/dismiss.min.js",
+      "assets/js/directives/empty-links.min.js",
+      "assets/js/directives/file-upload.min.js",
+      "assets/js/directives/full-height.min.js",
+      "assets/js/directives/messages.min.js",
+      "assets/js/directives/off-click.min.js",
+      "assets/js/directives/panel-tools.min.js",
+      "assets/js/directives/perfect-scrollbar.min.js",
+      "assets/js/directives/sidebars.min.js",
+      "assets/js/directives/select.min.js",
+      "assets/js/directives/sparkline.min.js",
+      "assets/js/directives/toggle.min.js",
+      "assets/js/directives/touchspin.min.js"
+    ]
+  }
+]

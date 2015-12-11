@@ -69,6 +69,7 @@
     <Content Include="app\controllers\receitasAvaliacaoFisica\receitasAvaliacaoFisicaCtrl.js" />
     <Content Include="app\controllers\receitas\receitasCtrl.js" />
     <Content Include="app\controllers\relatorioFinanceiro\relatorioFinanceiroCtrl.js" />
+    <Content Include="app\directives\bundleAppDirectives.js" />
     <Content Include="app\directives\equals.js" />
     <Content Include="app\directives\exportTable.js" />
     <Content Include="app\directives\xngFocus.js" />
@@ -130,6 +131,7 @@
     <Content Include="app\views\valores\edit.html" />
     <Content Include="app\views\valores\valores.html" />
     <Content Include="assets\api\groups.js" />
+    <Content Include="assets\css\bundleCss.css" />
     <Content Include="assets\css\fonts.css" />
     <Content Include="assets\css\plugins.css" />
     <Content Include="assets\css\styles.css" />
@@ -186,6 +188,7 @@
     <Content Include="assets\images\picture.svg" />
     <Content Include="assets\images\plane.png" />
     <Content Include="assets\js\app.js" />
+    <Content Include="assets\js\bundleJS.js" />
     <Content Include="assets\js\config.constant.js" />
     <Content Include="assets\js\config.router.js" />
     <Content Include="assets\js\config\config-xeditable.js" />
@@ -215,22 +218,74 @@
     <Content Include="assets\js\controllers\validationCtrl.js" />
     <Content Include="assets\js\controllers\wizardCtrl.js" />
     <Content Include="assets\js\controllers\xeditableCtrl.js" />
+    <Content Include="assets\js\directives\bundleDirectives-min.js" />
+    <Content Include="assets\js\directives\bundleDirectives-min.min.js">
+      <DependentUpon>bundleDirectives-min.js</DependentUpon>
+    </Content>
     <Content Include="assets\js\directives\char-limit.js" />
+    <Content Include="assets\js\directives\char-limit.min.js">
+      <DependentUpon>char-limit.js</DependentUpon>
+    </Content>
     <Content Include="assets\js\directives\chat.js" />
+    <Content Include="assets\js\directives\chat.min.js">
+      <DependentUpon>chat.js</DependentUpon>
+    </Content>
     <Content Include="assets\js\directives\compare-to.js" />
+    <Content Include="assets\js\directives\compare-to.min.js">
+      <DependentUpon>compare-to.js</DependentUpon>
+    </Content>
     <Content Include="assets\js\directives\dismiss.js" />
+    <Content Include="assets\js\directives\dismiss.min.js">
+      <DependentUpon>dismiss.js</DependentUpon>
+    </Content>
     <Content Include="assets\js\directives\empty-links.js" />
+    <Content Include="assets\js\directives\empty-links.min.js">
+      <DependentUpon>empty-links.js</DependentUpon>
+    </Content>
     <Content Include="assets\js\directives\file-upload.js" />
+    <Content Include="assets\js\directives\file-upload.min.js">
+      <DependentUpon>file-upload.js</DependentUpon>
+    </Content>
     <Content Include="assets\js\directives\full-height.js" />
+    <Content Include="assets\js\directives\full-height.min.js">
+      <DependentUpon>full-height.js</DependentUpon>
+    </Content>
     <Content Include="assets\js\directives\messages.js" />
+    <Content Include="assets\js\directives\messages.min.js">
+      <DependentUpon>messages.js</DependentUpon>
+    </Content>
     <Content Include="assets\js\directives\off-click.js" />
+    <Content Include="assets\js\directives\off-click.min.js">
+      <DependentUpon>off-click.js</DependentUpon>
+    </Content>
     <Content Include="assets\js\directives\panel-tools.js" />
+    <Content Include="assets\js\directives\panel-tools.min.js">
+      <DependentUpon>panel-tools.js</DependentUpon>
+    </Content>
     <Content Include="assets\js\directives\perfect-scrollbar.js" />
+    <Content Include="assets\js\directives\perfect-scrollbar.min.js">
+      <DependentUpon>perfect-scrollbar.js</DependentUpon>
+    </Content>
     <Content Include="assets\js\directives\select.js" />
+    <Content Include="assets\js\directives\select.min.js">
+      <DependentUpon>select.js</DependentUpon>
+    </Content>
     <Content Include="assets\js\directives\sidebars.js" />
+    <Content Include="assets\js\directives\sidebars.min.js">
+      <DependentUpon>sidebars.js</DependentUpon>
+    </Content>
     <Content Include="assets\js\directives\sparkline.js" />
+    <Content Include="assets\js\directives\sparkline.min.js">
+      <DependentUpon>sparkline.js</DependentUpon>
+    </Content>
     <Content Include="assets\js\directives\toggle.js" />
+    <Content Include="assets\js\directives\toggle.min.js">
+      <DependentUpon>toggle.js</DependentUpon>
+    </Content>
     <Content Include="assets\js\directives\touchspin.js" />
+    <Content Include="assets\js\directives\touchspin.min.js">
+      <DependentUpon>touchspin.js</DependentUpon>
+    </Content>
     <Content Include="assets\js\filters\htmlToPlaintext.js" />
     <Content Include="assets\js\main.js" />
     <Content Include="assets\views\app.html" />
@@ -3051,6 +3106,9 @@
     <Content Include="bower_components\exportTable\jspdf\libs\sprintf.js" />
     <Content Include="bower_components\exportTable\tableExport.js" />
     <Content Include="bower_components\fastclick\lib\fastclick.js" />
+    <Content Include="bower_components\fastclick\lib\fastclick.min.js">
+      <DependentUpon>fastclick.js</DependentUpon>
+    </Content>
     <Content Include="bower_components\flow.js\dist\flow.js" />
     <Content Include="bower_components\flow.js\dist\flow.min.js" />
     <Content Include="bower_components\font-awesome\.gitignore" />
@@ -3085,6 +3143,7 @@
     <Content Include="bower_components\jquery.sparkline.build\src\vcanvas-canvas.js" />
     <Content Include="bower_components\jquery.sparkline.build\src\vcanvas-vml.js" />
     <Content Include="bower_components\jquery.sparkline.build\version.txt" />
+    <Content Include="bower_components\jquery\dist\bundleJS.js" />
     <Content Include="bower_components\jquery\dist\jquery.js" />
     <Content Include="bower_components\jquery\dist\jquery.min.js" />
     <Content Include="bower_components\jquery\MIT-LICENSE.txt" />
@@ -4628,6 +4687,22 @@
     <Content Include="assets\images\Thumbs.db" />
     <Content Include="bower_components\webcam\webcam.min.js" />
     <Content Include="app\directives\angular.maskMoney.js" />
+    <Content Include="fonts\1YwB1sO8YE1Lyjf12WNiUA.woff2" />
+    <Content Include="fonts\-_Ctzj9b56b8RgXW8FArifk_vArhqVIZ0nv9q090hN8.woff2" />
+    <Content Include="fonts\5xAt7XK2vkUdjhGtt98uncu2Q0OS-KeTAWjgkS85mDg.woff2" />
+    <Content Include="fonts\5xAt7XK2vkUdjhGtt98unU_0lycXMw8PhobHtu2Qgco.woff2" />
+    <Content Include="fonts\CcKI4k9un7TZVWzRVT-T8_k_vArhqVIZ0nv9q090hN8.woff2" />
+    <Content Include="fonts\dPJ5r9gl3kK6ijoeP1IRsvY6323mHUZFJMgTvxaG2iE.woff2" />
+    <Content Include="fonts\EsvMC5un3kjyUhB9ZEPPwg.woff2" />
+    <Content Include="fonts\H2DMvhDLycM56KNuAtbJYA.woff2" />
+    <Content Include="fonts\JbtMzqLaYbbbCL9X6EvaI_k_vArhqVIZ0nv9q090hN8.woff2" />
+    <Content Include="fonts\ObQr5XYcoH0WBoUxiaYK3_Y6323mHUZFJMgTvxaG2iE.woff2" />
+    <Content Include="fonts\PLygLKRVCQnA5fhu3qk5fQ.woff2" />
+    <Content Include="fonts\UyBMtLsHKBKXelqf4x7VRQ.woff2" />
+    <Content Include="fonts\xkvoNo9fC8O2RDydKj12b_k_vArhqVIZ0nv9q090hN8.woff2" />
+    <Content Include="fonts\YMOYVM-eg6Qs9YzV9OSqZfesZW2xOQ-xsNqO47m55DA.woff2" />
+    <Content Include="fonts\0dTEPzkLWceF7z0koJaX1A.woff2" />
+    <None Include="bundleconfig.json" />
     <None Include="Properties\PublishProfiles\BarraFisikUI.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

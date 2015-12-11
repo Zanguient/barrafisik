@@ -148,7 +148,8 @@ namespace BarraFisik.API.Controllers
                 if (clienteHorario.Path == null)
                 {
                     //Remove image from Disk
-                    var path = "C:/Users/jefferson/Documents/Visual Studio 2015/Projects/BarraFisik/BarraFisik.UI/assets/images/fotos/";
+                    //var path = "C:/Users/jefferson/Documents/Visual Studio 2015/Projects/BarraFisik/BarraFisik.UI/assets/images/fotos/";
+                    var path = "C:/SisBarraFisik/BarraFisikUI/assets/images/fotos/";
                     var fileName = clienteHorario.ClienteId + ".jpg";
                     var fullPath = Path.Combine(path, fileName);
                     if (File.Exists(fullPath))
@@ -222,7 +223,7 @@ namespace BarraFisik.API.Controllers
             var image = Image.FromStream(ms, true);
 
             //Save image to Disk
-            var path = "C:/Users/jefferson/Documents/Visual Studio 2015/Projects/BarraFisik/BarraFisik.UI/assets/images/fotos/";
+            var path = "C:/C:/SisBarraFisik/BarraFisik.UI/assets/images/fotos/";
             var fileName = id + ".jpg";
             var fullPath = Path.Combine(path, fileName);
             image.Save(fullPath);
