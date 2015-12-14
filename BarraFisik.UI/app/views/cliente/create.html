@@ -12,11 +12,7 @@
 <!-- start: FORM VALIDATION -->
 <div class="container-fluid container-fullw bg-white">
     <div class="row">
-        <div class="col-md-12">
-            <ul>
-                <li ng-repeat="error in vm.errors" class="text-danger">{{error}}</li>
-            </ul>
-
+        <div class="col-md-12">           
             <span class="symbol required"> Campos Obrigatórios</span>
 
             <form name="Form" id="form" novalidate ng-submit="form.submit(Form)">

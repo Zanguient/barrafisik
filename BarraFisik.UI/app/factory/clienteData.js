@@ -17,8 +17,8 @@
             return $http.get(apiUrl + 'api/cliente/' + idCliente);
         }
 
-        function editCliente(cliente) {
-            return $http.put(apiUrl + 'api/clientes', cliente);
+        function editCliente(clienteHorario) {
+            return $http.put(apiUrl + 'api/clienteUpdate', clienteHorario);
         }
 
         function getClientePerfil(id) {
@@ -41,8 +41,8 @@
             return $http.get(apiUrl + "api/aniversariantes/" + mes);
         }
 
-        function updateClientesPendentes() {
-            return $http.get(apiUrl + 'api/clientes/updateClientesPendentes');
+        function updateClientesPendentes(mes, ano) {
+            return $http.get(apiUrl + 'api/clientes/updateClientesPendentes/'+mes+"/"+ano);
         }
 
         function getClientesSituacao(situacao) {

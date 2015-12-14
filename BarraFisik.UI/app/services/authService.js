@@ -70,6 +70,8 @@ app.factory('authService', [
             _authentication.userName = "";
             _authentication.isAdmin = false;
             _authentication.token = "";
+
+            $rootScope.updateClientes = false;
         };
 
         var _fillAuthData = function () {

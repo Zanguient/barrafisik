@@ -79,7 +79,7 @@
                                             <td>Telefone</td>
                                             <td>Celular</td>
                                         </tr>
-                                        <tr ng-repeat="cliente in clientesPendentes">
+                                        <tr ng-repeat="cliente in clientesPendentes | orderBy: 'Nome'">
                                             <td>
                                                 <div class="checkbox clip-check check-primary">
                                                     <input type="checkbox" id="{{cliente.ClienteId}}" value="{{cliente}}"

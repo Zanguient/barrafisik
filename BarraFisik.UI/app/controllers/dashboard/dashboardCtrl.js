@@ -9,7 +9,15 @@ app.controller('ClientesPendentesCtrl', ["$scope", "clienteData", "$rootScope", 
     //Atualiza clientes para pendente caso dia do mes for maior que 10 e não tenha mensalidade paga para o mês atual
     var today = new Date();
     if (today.getDate() > 10 && $rootScope.updateClientes === false) {
-        clienteData.updateClientesPendentes(today.getMonth(), today.getFullYear()).then(function (data) { });
+        clienteData.updateClientesPendentes(today.getMonth() + 1, today.getFullYear()).then(function(data) {
+            //Lista os pendentes quando atualiza os status dos clientes
+            $scope.clientesPendentes = [];
+            clienteData.getClientesSituacao('Pendente').then(function (result) {
+                $scope.clientesPendentes = result.data;
+            }), function (error) {
+                console.log(error);
+            }
+        });
         $rootScope.updateClientes = true;
     }
 
@@ -100,7 +108,7 @@ app.controller('ClientesPendentesCtrl', ["$scope", "clienteData", "$rootScope", 
 app.controller('InscritosCtrl', ["$scope", "clienteData", "$rootScope", function ($scope, clienteData, $rootScope) {
 
     $scope.ano1 = new Date().getFullYear();
-    $scope.ano2 = new Date().getFullYear()-1;
+    $scope.ano2 = new Date().getFullYear() - 1;
     $scope.selectAno = [];
 
     $scope.getAno = function () {
@@ -111,16 +119,16 @@ app.controller('InscritosCtrl', ["$scope", "clienteData", "$rootScope", function
     activate();
 
     function activate() {
-        clienteData.getInscritos($scope.ano1).then(function(result) {
+        clienteData.getInscritos($scope.ano1).then(function (result) {
             var i = result.data;
 
             $scope.inscritos = [i.Janeiro, i.Fevereiro, i.Marco, i.Abril, i.Maio, i.Junho, i.Julho, i.Agosto, i.Setembro, i.Outubro, i.Novembro, i.Dezembro];
 
-            clienteData.getInscritos($scope.ano2).then(function(result2) {
+            clienteData.getInscritos($scope.ano2).then(function (result2) {
                 var i2 = result2.data;
 
                 $scope.UltimoAno = i2.UltimoAno;
-                $scope.PrimeiroAno = i2.PrimeiroAno;                
+                $scope.PrimeiroAno = i2.PrimeiroAno;
                 for (var x = i2.UltimoAno; x >= i2.PrimeiroAno; x--) {
                     $scope.selectAno.push({ ano: x });
                 }
@@ -153,11 +161,11 @@ app.controller('InscritosCtrl', ["$scope", "clienteData", "$rootScope", function
                     ]
                 };
             });
-        }).catch(function(error) {
+        }).catch(function (error) {
             console.log(error);
         });
     }
-   
+
 
     $scope.options = {
 

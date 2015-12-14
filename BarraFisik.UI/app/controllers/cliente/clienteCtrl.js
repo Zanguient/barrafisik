@@ -172,9 +172,21 @@
             vm.modalInstance.result.then(function (data) {
             }, function () {
                 console.log('Cancelled');
-                clienteData.getClientes().then(function (result) {
-                    vm.clientes = result.data;
-                });
+                if ($scope.inativos) {
+                    clienteData.getClientesAll().then(function (result) {
+                        vm.clientes = result.data;
+                        $scope.tableParams.reload();
+                    });
+                } else {
+                    clienteData.getClientes().then(function (result) {
+                        vm.clientes = result.data;
+                        $scope.tableParams.reload();
+                    });
+                }
+
+                //clienteData.getClientes().then(function (result) {
+                //    vm.clientes = result.data;
+                //});
             });
         }
 
@@ -198,9 +210,17 @@
             });
             vm.modalInstance.result.then(function (data) {
                 SweetAlert.swal("Sucesso!", "Mensalidade foi cadastrada com sucesso!", "success");
-                clienteData.getClientes().then(function (result) {
-                    vm.clientes = result.data;
-                });
+                if ($scope.inativos) {
+                    clienteData.getClientesAll().then(function (result) {
+                        vm.clientes = result.data;
+                        $scope.tableParams.reload();
+                    });
+                } else {
+                    clienteData.getClientes().then(function (result) {
+                        vm.clientes = result.data;
+                        $scope.tableParams.reload();
+                    });
+                }
             }, function () {
                 console.log('Cancelled');
             });
@@ -226,9 +246,9 @@
             });
             vm.modalInstance.result.then(function (data) {
                 SweetAlert.swal("Sucesso!", "Avaliação Física paga com sucesso!", "success");
-                clienteData.getClientes().then(function (result) {
-                    vm.clientes = result.data;
-                });
+                //clienteData.getClientes().then(function (result) {
+                //    vm.clientes = result.data;
+                //});
             }, function () {
                 console.log('Cancelled');
             });
@@ -255,9 +275,9 @@
             vm.modalInstance.result.then(function (data) {
             }, function () {
                 console.log('Cancelled');
-                clienteData.getClientes().then(function (result) {
-                    vm.clientes = result.data;
-                });
+                //clienteData.getClientes().then(function (result) {
+                //    vm.clientes = result.data;
+                //});
             });
         }
     };

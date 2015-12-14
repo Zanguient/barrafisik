@@ -54,10 +54,12 @@ namespace BarraFisik.Application.App
             if (mensalidadesViewModel.MesReferencia >= today.Month && mensalidadesViewModel.AnoReferencia >= today.Year)
             {
                 var cliente = _clienteService.GetById(mensalidadesViewModel.ClienteId);
-                cliente.Situacao = "Regular";
-                _clienteService.Update(cliente);
+                if (cliente.IsAtivo) {
+                    cliente.Situacao = "Regular";
+                    _clienteService.Update(cliente);
 
-                _logSistemaService.AddLog("Cliente", cliente.ClienteId, "Update", "Alteração da situacao para: REGULAR. Adicionado mensalidade: "+mensalidade.MensalidadesId);
+                    _logSistemaService.AddLog("Cliente", cliente.ClienteId, "Update", "Alteração da situacao para: REGULAR. Adicionado mensalidade: " + mensalidade.MensalidadesId);
+                }                
             }
 
             _logMensalidadesService.AddLog("Cadastro", mensalidade);
@@ -111,18 +113,22 @@ namespace BarraFisik.Application.App
                     existeMensalidade = true;
                 }
             }
-
-            if (existeMensalidade && cliente.Situacao != "Regular")
+            if (cliente.IsAtivo)
             {
-                cliente.Situacao = "Regular";
-                _clienteService.Update(cliente);
-                _logSistemaService.AddLog("Cliente", cliente.ClienteId, "Update", "Alteração da situacao para: REGULAR. Atualizado mensalidade: " + mensalidade.MensalidadesId);
-            }
-            else if((!existeMensalidade))
-            {
-                cliente.Situacao = "Pendente";
-                _clienteService.Update(cliente);
-                _logSistemaService.AddLog("Cliente", cliente.ClienteId, "Update", "Alteração da situacao para: PENDENTE. Atualizado mensalidade: " + mensalidade.MensalidadesId);
+                if (existeMensalidade && cliente.Situacao != "Regular")
+                {
+                    cliente.Situacao = "Regular";
+                    _clienteService.Update(cliente);
+                    _logSistemaService.AddLog("Cliente", cliente.ClienteId, "Update",
+                        "Alteração da situacao para: REGULAR. Atualizado mensalidade: " + mensalidade.MensalidadesId);
+                }
+                else if ((!existeMensalidade))
+                {
+                    cliente.Situacao = "Pendente";
+                    _clienteService.Update(cliente);
+                    _logSistemaService.AddLog("Cliente", cliente.ClienteId, "Update",
+                        "Alteração da situacao para: PENDENTE. Atualizado mensalidade: " + mensalidade.MensalidadesId);
+                }
             }
 
             _logMensalidadesService.AddLog("Update", mensalidade);

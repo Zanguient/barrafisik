@@ -39,7 +39,7 @@ namespace BarraFisik.Application.ViewModels
         public DateTime DtInscricao { get; set; }
 
         [MaxLength(100, ErrorMessage = "Máximo {0} caracteres")]
-        [EmailAddress(ErrorMessage = "Preencha um E-mail válido")]
+        //[EmailAddress(ErrorMessage = "Preencha um E-mail válido")]
         [DisplayName("E-mail")]
         public string Email { get; set; }
 

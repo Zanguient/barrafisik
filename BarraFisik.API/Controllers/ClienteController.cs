@@ -96,13 +96,17 @@ namespace BarraFisik.API.Controllers
         {
             if (ModelState.IsValid)
             {
-                var result = _clienteApp.Add(clienteHorario);
-
-                if (result == null)
+                if (clienteHorario.IsAtivo)
                 {
-                    ModelState.AddModelError(string.Empty, "Favor Preencher o horário");
-                    return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
+                    if (clienteHorario.HSegunda == null && clienteHorario.HTerca == null && clienteHorario.HQuarta == null &&
+                        clienteHorario.HQuinta == null && clienteHorario.HSexta == null)
+                    {
+                        ModelState.AddModelError(string.Empty, "Informe o horário de treino");
+                        return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
+                    }
                 }
+
+                var result = _clienteApp.Add(clienteHorario);                
 
                 if (!result.IsValid)
                 {
@@ -112,8 +116,6 @@ namespace BarraFisik.API.Controllers
                     }
                     return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
                 }
-
-                
 
                 if (clienteHorario.Foto != null)
                 {
@@ -125,15 +127,28 @@ namespace BarraFisik.API.Controllers
 
                 return Request.CreateResponse(HttpStatusCode.Created, clienteHorario.ClienteId);
             }
+
+            
+
             return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
         }
 
         [HttpPut]
-        [Route("clientes")]
-        public HttpResponseMessage Put(ClienteHorarioViewModel clienteHorario)
+        [Route("clienteUpdate")]
+        public HttpResponseMessage ClienteUpdate(ClienteHorarioViewModel clienteHorario)
         {
             if (ModelState.IsValid)
             {
+                if (clienteHorario.IsAtivo)
+                {
+                    if (clienteHorario.HSegunda == null && clienteHorario.HTerca == null && clienteHorario.HQuarta == null &&
+                        clienteHorario.HQuinta == null && clienteHorario.HSexta == null)
+                    {
+                        ModelState.AddModelError(string.Empty, "Informe o horário de treino");
+                        return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
+                    }
+                }
+
                 var result = _clienteApp.Update(clienteHorario);
 
                 if (!result.IsValid)
@@ -186,7 +201,7 @@ namespace BarraFisik.API.Controllers
         }
 
         [HttpGet]
-        [Route("clientes/updateClientesPendentes")]
+        [Route("clientes/updateClientesPendentes/{mes:int}/{ano:int}")]
         public HttpResponseMessage UpdateClientesPendentes(int mes, int ano)
         {
             _clienteApp.UpdateClientesPendentes(mes, ano);
@@ -223,7 +238,7 @@ namespace BarraFisik.API.Controllers
             var image = Image.FromStream(ms, true);
 
             //Save image to Disk
-            var path = "C:/C:/SisBarraFisik/BarraFisik.UI/assets/images/fotos/";
+            var path = "C:/SisBarraFisik/BarraFisik.UI/assets/images/fotos/";
             var fileName = id + ".jpg";
             var fullPath = Path.Combine(path, fileName);
             image.Save(fullPath);

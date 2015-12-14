@@ -112,8 +112,8 @@ namespace BarraFisik.Application.App
                 }
 
             }
-
-            c.ValoresId = valor.ValoresId;
+            if(c.IsAtivo)
+                c.ValoresId = valor.ValoresId;
             var result = _clienteService.AtualizarCliente(c);
 
             if (!result.IsValid)

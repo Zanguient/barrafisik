@@ -6,17 +6,11 @@
     function mensalidadesCtrl($scope, ClienteId, modalService, $modalInstance, mensalidadesData, ngTableParams, $filter, $timeout, SweetAlert, toaster) {
         var vm = this;
         vm.mensalidades = [];
-        $scope.teste = "teste";
 
         vm.cancel = function () {
             $modalInstance.dismiss('cancel');
         };
-
-        mensalidadesData.getMensalidades(ClienteId).then(function (result) {
-            vm.mensalidades = result.data;
-            loadTable(vm.mensalidades);
-        });
-
+      
         function loadTable(data) {
             $scope.tableParams = new ngTableParams({
                 page: 1, // show first page
@@ -38,6 +32,11 @@
                 $scope.tableParams.reload();
             });
         }
+
+        mensalidadesData.getMensalidades(ClienteId).then(function (result) {
+            vm.mensalidades = result.data;
+            loadTable(vm.mensalidades);
+        });
 
         vm.delete = function (id) {            
             var modalOptions = {

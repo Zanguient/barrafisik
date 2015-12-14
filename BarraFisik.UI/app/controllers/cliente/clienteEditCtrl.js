@@ -132,7 +132,7 @@
                     // Salva dados do cliente
                     if ($scope.excluirFoto)
                         $scope.cliente.Path = null;
-                    clienteData.editCliente($scope.cliente).then(function () {
+                    clienteData.editCliente($scope.cliente).success(function () {
                         //$scope.horario.ClienteId = $stateParams.id;
                         //horarioData.editHorario($scope.cliente).then(function () {});
 
@@ -141,7 +141,7 @@
                         //Retorna para lista de clientes
                         $state.go('app.clientes.listar', {}, {reload: true});
 
-                    }, function (error) {
+                    }).error (function (error) {
                         var errors = [];
                         for (var key in error.ModelState) {
                             for (var i = 0; i < error.ModelState[key].length; i++) {
