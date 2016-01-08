@@ -19,7 +19,11 @@ namespace BarraFisik.Domain.Specification.Clientes
             //Cadastro            
             var clienteBase = _clienteRepository.GetById(cliente.ClienteId);
 
-            //// Se forem iguais estou editando sem alterar o cpf do mesmo
+            //CPF Vazio
+            if(string.IsNullOrEmpty(cliente.Cpf))
+                return true;
+
+            // Se forem iguais estou editando sem alterar o cpf do mesmo
             if (clienteBase != null && clienteBase.Cpf == cliente.Cpf)
                 return true;
             return !_clienteRepository.Find(c => c.Cpf == cliente.Cpf).Any();

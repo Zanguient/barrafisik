@@ -9,28 +9,15 @@ namespace BarraFisik.Infra.Data.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = true;
+            AutomaticMigrationsEnabled = false;
         }
 
         protected override void Seed(BarraFisikContext context)
         {
-            context.CategoriaFinanceira.AddOrUpdate(
-                c => c.Categoria, 
-                new CategoriaFinanceira { CategoriaFinanceiraId = new Guid("1c1278df-f5a5-4407-a0c4-bdbb71c362b1") ,Categoria = "Serviços", Tipo = "Receitas"}
-            );
-
-            //  This method will be called after migrating to the latest version.
-
-            //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
-            //  to avoid creating duplicate seed data. E.g.
-            //
-            //    context.People.AddOrUpdate(
-            //      p => p.FullName,
-            //      new Person { FullName = "Andrew Peters" },
-            //      new Person { FullName = "Brice Lambson" },
-            //      new Person { FullName = "Rowan Miller" }
-            //    );
-            //
+            //context.CategoriaFinanceira.AddOrUpdate(
+            //    c => c.Categoria, 
+            //    new CategoriaFinanceira { CategoriaFinanceiraId = new Guid("1c1278df-f5a5-4407-a0c4-bdbb71c362b1") ,Categoria = "Serviços", Tipo = "Receitas"}
+            //);            
         }
     }
 }

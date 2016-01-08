@@ -43,7 +43,7 @@ namespace BarraFisik.Application.ViewModels
         [DisplayName("E-mail")]
         public string Email { get; set; }
 
-        [Required(ErrorMessage = "Informe o CPF")]
+        //[Required(ErrorMessage = "Informe o CPF")]
         [MaxLength(11, ErrorMessage = "Máximo {0} caracteres")]
         public string Cpf { get; set; }
 

@@ -35,6 +35,9 @@ namespace BarraFisik.Application.App
 
             var valor = GetValor(horario);
 
+            if (cliente.Cpf == "")
+                cliente.Cpf = null;
+
             if (valor != null)
                 cliente.ValoresId = valor.ValoresId;
 

@@ -2,7 +2,7 @@
 <section id="page-title">
     <div class="row">
         <div class="col-sm-8">
-            <h1 class="mainTitle">Cadatrar Cliente</h1>
+            <h1 class="mainTitle">Cadastrar Cliente</h1>
             <span class="mainDescription">Formulário de cadastro do cliente.</span>
         </div>
         <div ncy-breadcrumb></div>
@@ -44,7 +44,8 @@
                                     <label class="control-label">
                                         CPF <span class="symbol required"></span>
                                     </label>
-                                    <input type="text" class="form-control" name="cpf" ng-model="cliente.Cpf" ng-cpf ui-mask="999.999.999-99" required />
+                                    <!--<input type="text" class="form-control" name="cpf" ng-model="cliente.Cpf" ng-cpf ui-mask="999.999.999-99" required />-->
+                                    <input type="text" class="form-control" name="cpf" ng-model="cliente.Cpf" ng-cpf ui-mask="999.999.999-99" />
                                     <span class="error text-small block" ng-if="Form.cpf.$dirty && Form.cpf.$invalid">Informe um CPF válido</span>
                                 </div>
 

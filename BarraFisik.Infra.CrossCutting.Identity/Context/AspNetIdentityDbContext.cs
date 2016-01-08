@@ -17,13 +17,13 @@ namespace BarraFisik.Infra.CrossCutting.Identity.Context
             return new AspNetIdentityDbContext();
         }
 
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        {
-            //General custom properties
-            modelBuilder.Properties<string>().Configure(p => p.HasColumnType("varchar"));
-            modelBuilder.Properties<string>().Configure(p => p.HasMaxLength(100));
+        //protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        //{
+        //    //General custom properties
+        //    modelBuilder.Properties<string>().Configure(p => p.HasColumnType("varchar"));
+        //    modelBuilder.Properties<string>().Configure(p => p.HasMaxLength(100));
 
-            base.OnModelCreating(modelBuilder);
-        }
+        //    base.OnModelCreating(modelBuilder);
+        //}
     }
 }

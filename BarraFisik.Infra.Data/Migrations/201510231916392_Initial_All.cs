@@ -29,7 +29,7 @@ namespace BarraFisik.Infra.Data.Migrations
                         DtNascimento = c.DateTime(nullable: false),
                         DtInscricao = c.DateTime(nullable: false),
                         Email = c.String(maxLength: 100, unicode: false),
-                        Cpf = c.String(nullable: false, maxLength: 20, unicode: false),
+                        Cpf = c.String(nullable: true, maxLength: 20, unicode: false),
                         Rg = c.String(maxLength: 20, unicode: false),
                         Sexo = c.String(maxLength: 1, fixedLength: true, unicode: false),
                         QtdFilhos = c.Int(),

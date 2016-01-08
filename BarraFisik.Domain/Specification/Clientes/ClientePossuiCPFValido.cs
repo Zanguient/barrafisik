@@ -8,6 +8,10 @@ namespace BarraFisik.Domain.Specification.Clientes
     {
         public bool IsSatisfiedBy(Cliente cliente)
         {
+            //CPF vazio
+            if (string.IsNullOrEmpty(cliente.Cpf))
+                return true;
+
             return CPFValidation.Validar(cliente.Cpf);
         }
     }

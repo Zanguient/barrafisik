@@ -12,7 +12,7 @@ namespace BarraFisik.Infra.Data.EntityConfig
             HasKey(c => c.ClienteId);
 
             Property(c => c.Nome).IsRequired();
-            Property(c => c.Cpf).IsRequired().HasMaxLength(20);
+            Property(c => c.Cpf).IsOptional().HasMaxLength(20);
             Property(c => c.Endereco).IsRequired().HasMaxLength(200);
             Property(c => c.DtNascimento).IsRequired();
             Property(c => c.DtInscricao).IsRequired();
