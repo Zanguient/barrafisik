@@ -47,16 +47,21 @@ namespace BarraFisik.Infra.CrossCutting.Identity.Migrations
                         EmailConfirmed = true,
                         Name = "admin"
                     };
-                    userManager.Create(newUser, "adminadmin");
+                    userManager.Create(newUser, "Pa$$word0");
                     userManager.SetLockoutEnabled(newUser.Id, false);
                     userManager.AddToRole(newUser.Id, "Admin");
                 }
             }
             //var manager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>());
 
-            ////var manager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new AspNetIdentityDbContext()));
+            //var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new AspNetIdentityDbContext()));
 
-            ////var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(new AspNetIdentityDbContext()));        
+            //var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(new AspNetIdentityDbContext()));        
+
+            //var roleStore = new RoleStore<IdentityRole>(context);
+            //var roleManager = new RoleManager<IdentityRole>(roleStore);
+            //var userStore = new UserStore<ApplicationUser>(context);
+            //var userManager = new UserManager<ApplicationUser>(userStore);
 
             //var user = new ApplicationUser
             //{
@@ -66,16 +71,16 @@ namespace BarraFisik.Infra.CrossCutting.Identity.Migrations
             //    Name = "admin"
             //};
 
-            //manager.Create(user, "admin");
+            //userManager.Create(user, "admin");
 
             //if (!roleManager.Roles.Any())
             //{
             //    roleManager.Create(new IdentityRole { Name = "Admin" });
             //}
 
-            //var adminUser = manager.FindByName("admin");
+            //var adminUser = userManager.FindByName("admin");
 
-            //manager.AddToRoles(adminUser.Id, new string[] { "Admin" });
+            //userManager.AddToRoles(adminUser.Id, new string[] { "Admin" });
         }
     }
 }

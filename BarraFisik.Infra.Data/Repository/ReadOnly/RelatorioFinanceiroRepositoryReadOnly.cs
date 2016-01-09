@@ -34,8 +34,8 @@ namespace BarraFisik.Infra.Data.Repository.ReadOnly
                             if (filters.Nome != null)
                                 query = query + " and d.Nome like '%" + filters.Nome + "%' ";
 
-                query = query +
-                        " union" +
+                query = query +                   
+                   " union" +
                         " select " +
                         "    r.Data as Data, " +
                         "    r.Nome as Nome, " +
@@ -82,7 +82,29 @@ namespace BarraFisik.Infra.Data.Repository.ReadOnly
                 if (filters.Nome != null)
                     query = query + " and m.Nome like '%" + filters.Nome + "%' ";
 
+                query = query +
+                        "union " +
+                        " select  " +
+                        "    af.DataPagamento as Data," +
+                        "    af.Nome as Nome, " +
+                        "    c.Nome as Observacao, " +
+                        "    af.Valor as Valor, " +
+                        "    cf.Categoria as Categoria," +
+                        "    af.ReceitasAvaliacaoFisicaId as RegistroId," +
+                        "    cf.Tipo  as Tipo" +
+                        " from ReceitasAvaliacoesFisicas af, CategoriaFinanceira cf, Cliente c " +
+                        " where af.CategoriaFinanceiraId = cf.CategoriaFinanceiraId and af.ClienteId = c.ClienteId ";
 
+                if (filters.Tipo != null && filters.Tipo != "Todos")
+                    query = query + " and cf.Tipo = '" + filters.Tipo + "' ";
+                if (filters.DataInicio != null)
+                    query = query + " and af.DataPagamento >= '" + filters.DataInicio + "' ";
+                if (filters.DataFim != null)
+                    query = query + " and af.DataPagamento <= '" + filters.DataFim + "' ";
+                if (filters.Categoria != null)
+                    query = query + " and cf.Categoria = '" + filters.Categoria + "' ";
+                if (filters.Nome != null)
+                    query = query + " and af.Nome like '%" + filters.Nome + "%' ";
                 cn.Open();
                 var relatorio = cn.Query<RelatorioFinanceiro>(query);
                 cn.Close();

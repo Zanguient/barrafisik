@@ -52,7 +52,9 @@ namespace BarraFisik.API.Controllers
         [Route("receitasAvaliacaoFisica")]
         public HttpResponseMessage Post(ReceitasAvaliacaoFisicaViewModel receitasAvaliacaoFisicaViewModel)
         {
-            receitasAvaliacaoFisicaViewModel.DataPagamento = DateTime.Now;
+            receitasAvaliacaoFisicaViewModel.Nome = "Avaliação Fisica";
+            receitasAvaliacaoFisicaViewModel.CategoriaFinanceiraId = new Guid("1c1278df-f5a5-4407-a0c4-bdbb71c362b1");
+            //receitasAvaliacaoFisicaViewModel.DataPagamento = DateTime.Now;
             if (ModelState.IsValid)
             {
                 _receitasAvaliacaoFisicaApp.Add(receitasAvaliacaoFisicaViewModel);

@@ -3,7 +3,7 @@ namespace BarraFisik.Infra.Data.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class Initial_All : DbMigration
+    public partial class Initial : DbMigration
     {
         public override void Up()
         {
@@ -29,7 +29,7 @@ namespace BarraFisik.Infra.Data.Migrations
                         DtNascimento = c.DateTime(nullable: false),
                         DtInscricao = c.DateTime(nullable: false),
                         Email = c.String(maxLength: 100, unicode: false),
-                        Cpf = c.String(nullable: true, maxLength: 20, unicode: false),
+                        Cpf = c.String(maxLength: 20, unicode: false),
                         Rg = c.String(maxLength: 20, unicode: false),
                         Sexo = c.String(maxLength: 1, fixedLength: true, unicode: false),
                         QtdFilhos = c.Int(),
@@ -146,7 +146,7 @@ namespace BarraFisik.Infra.Data.Migrations
                     {
                         LogMensalidadesId = c.Guid(nullable: false),
                         MensalidadesId = c.Guid(nullable: false),
-                        ValorPago = c.Decimal(nullable: false, precision: 6, scale: 2),
+                        ValorPago = c.Decimal(nullable: false, precision: 7, scale: 2),
                         MesReferencia = c.Int(nullable: false),
                         AnoReferencia = c.Int(nullable: false),
                         ClienteId = c.Guid(nullable: false),
@@ -155,6 +155,8 @@ namespace BarraFisik.Infra.Data.Migrations
                         Data = c.DateTime(nullable: false),
                         UserId = c.String(nullable: false, maxLength: 100, unicode: false),
                         UsuarioNome = c.String(nullable: false, maxLength: 100, unicode: false),
+                        isPersonal = c.Boolean(nullable: false),
+                        ValorPersonal = c.Decimal(precision: 7, scale: 2),
                     })
                 .PrimaryKey(t => t.LogMensalidadesId);
             
@@ -199,22 +201,28 @@ namespace BarraFisik.Infra.Data.Migrations
                         Valor = c.Decimal(nullable: false, precision: 5, scale: 2),
                         ClienteId = c.Guid(nullable: false),
                         DataPagamento = c.DateTime(nullable: false),
+                        CategoriaFinanceiraId = c.Guid(nullable: false),
+                        Nome = c.String(maxLength: 100, unicode: false),
                     })
                 .PrimaryKey(t => t.ReceitasAvaliacaoFisicaId)
+                .ForeignKey("dbo.CategoriaFinanceira", t => t.CategoriaFinanceiraId)
                 .ForeignKey("dbo.Cliente", t => t.ClienteId)
-                .Index(t => t.ClienteId);
+                .Index(t => t.ClienteId)
+                .Index(t => t.CategoriaFinanceiraId);
             
         }
         
         public override void Down()
         {
             DropForeignKey("dbo.ReceitasAvaliacoesFisicas", "ClienteId", "dbo.Cliente");
+            DropForeignKey("dbo.ReceitasAvaliacoesFisicas", "CategoriaFinanceiraId", "dbo.CategoriaFinanceira");
             DropForeignKey("dbo.Receitas", "CategoriaFinanceiraId", "dbo.CategoriaFinanceira");
             DropForeignKey("dbo.Horario", "ClienteId", "dbo.Cliente");
             DropForeignKey("dbo.Despesas", "CategoriaFinanceiraId", "dbo.CategoriaFinanceira");
             DropForeignKey("dbo.Cliente", "ValoresId", "dbo.Valores");
             DropForeignKey("dbo.Mensalidades", "ClienteId", "dbo.Cliente");
             DropForeignKey("dbo.Mensalidades", "CategoriaFinanceiraId", "dbo.CategoriaFinanceira");
+            DropIndex("dbo.ReceitasAvaliacoesFisicas", new[] { "CategoriaFinanceiraId" });
             DropIndex("dbo.ReceitasAvaliacoesFisicas", new[] { "ClienteId" });
             DropIndex("dbo.Receitas", new[] { "CategoriaFinanceiraId" });
             DropIndex("dbo.Horario", new[] { "ClienteId" });

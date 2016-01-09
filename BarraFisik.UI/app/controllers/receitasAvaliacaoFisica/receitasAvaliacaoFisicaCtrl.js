@@ -108,6 +108,38 @@
             $scope.editId = pid;
         };
 
+        /**
+         * /
+         * @returns {DatePicker} 
+         */
+        $scope.today = function () {
+            $scope.DataPagamento = new Date();
+        };
+        $scope.today();
+
+
+        $scope.clear = function () {
+            $scope.DataPagamento = null;
+        };
+
+        $scope.toggleMin = function () {
+            $scope.minDate = ($scope.minDate) ? null : new Date();
+        };
+        $scope.toggleMin();
+
+        $scope.opened = [];
+        $scope.open = function ($event, index) {
+            $event.preventDefault();
+            $event.stopPropagation();
+            $timeout(function () {
+                $scope.opened[index] = true;
+            });
+        };
+
+        $scope.dateOptions = {
+            'year-format': "'yyyy'",
+            'starting-day': 1
+        };
 
     };
 

@@ -9,15 +9,15 @@ namespace BarraFisik.Infra.Data.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
         }
 
         protected override void Seed(BarraFisikContext context)
         {
-            //context.CategoriaFinanceira.AddOrUpdate(
-            //    c => c.Categoria, 
-            //    new CategoriaFinanceira { CategoriaFinanceiraId = new Guid("1c1278df-f5a5-4407-a0c4-bdbb71c362b1") ,Categoria = "Serviços", Tipo = "Receitas"}
-            //);            
+            context.CategoriaFinanceira.AddOrUpdate(
+                c => c.Categoria,
+                new CategoriaFinanceira { CategoriaFinanceiraId = new Guid("1c1278df-f5a5-4407-a0c4-bdbb71c362b1"), Categoria = "Serviços", Tipo = "Receitas" }
+            );
         }
     }
 }

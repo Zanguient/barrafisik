@@ -230,7 +230,7 @@
         $scope.createAvaliacaoFisica = function (cliente) {
             vm.modalInstance = $modal.open({
                 templateUrl: 'app/views/receitasAvaliacaoFisica/create.html',
-                size: '',
+                size: 'lg',
                 resolve: {
                     Cliente: function () {
                         return cliente;
@@ -258,7 +258,7 @@
         $scope.openReceitasAvaliacaoFisica = function (id) {
             vm.modalInstance = $modal.open({
                 templateUrl: 'app/views/receitasAvaliacaoFisica/listaPorCliente.html',
-                size: '',
+                size: 'lg',
                 resolve: {
                     ClienteId: function () {
                         return id;

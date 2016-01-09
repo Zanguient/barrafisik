@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity.ModelConfiguration;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Data.Entity.ModelConfiguration;
 using BarraFisik.Domain.Entities;
 
 namespace BarraFisik.Infra.Data.EntityConfig
@@ -19,6 +14,7 @@ namespace BarraFisik.Infra.Data.EntityConfig
             Property(r => r.Valor).HasPrecision(5, 2);
 
             HasRequired(r => r.Cliente).WithMany().HasForeignKey(r => r.ClienteId);
+            HasRequired(m => m.CategoriaFinanceira).WithMany().HasForeignKey(m => m.CategoriaFinanceiraId);
         }
     }
 }

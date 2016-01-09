@@ -14,5 +14,10 @@ namespace BarraFisik.Domain.Entities
         public Guid ClienteId { get; set; }
         public DateTime DataPagamento { get; set; }
         public virtual Cliente Cliente { get; set; }
+
+        public Guid CategoriaFinanceiraId { get; set; }
+        public virtual CategoriaFinanceira CategoriaFinanceira { get; set; }
+
+        public string Nome { get; set; }
     }
 }
