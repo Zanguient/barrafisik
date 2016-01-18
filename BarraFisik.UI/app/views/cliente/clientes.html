@@ -85,7 +85,7 @@
                                 </span>
                                 
                                 <!--<a ng-click="createMensalidade(p)" class="btn btn-transparent btn-xs tooltips" tooltip-placement="top" tooltip="Pagamento"><i class="fa fa-dollar"></i></a>-->
-                                <span class="dropdown" dropdown>
+                                <span class="dropdown" dropdown ng-if="userInfo.isAdmin">
                                     <a class="btn btn-transparent btn-xs tooltips" dropdown-toggle tooltip-placement="top" tooltip="Pagar"><i class="fa fa-dollar"></i></a>
                                     <ul class="dropdown-menu pull-right">
                                         <li><a ng-click="createMensalidade(p)"> Mensalidade</a></li>

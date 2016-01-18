@@ -10,7 +10,7 @@
                     <td class="rowTd" data-title="'Ano'"            sortable="'AnoReferencia'">{{m.AnoReferencia}}</td>
                     <td class="rowTd" data-title="'Valor Pago'"     sortable="'ValorPago'">    {{m.ValorPago | currency:"R$"}}</td>
                     <td class="rowTd" data-title="'Data Pagamento'" sortable="'DataPagamento'">{{m.DataPagamento | date:'dd/MM/yyyy'}}</td>
-                    <td class="center">
+                    <td class="center" ng-if="userInfo.isAdmin">
                         <div class="visible-md visible-lg hidden-sm hidden-xs">
                             <a ng-click="setEditId(m.MensalidadesId)" class="btn btn-transparent btn-xs" tooltip-placement="top" tooltip="Editar" id="editRowBtn{{m.MensalidadesId}}"><i class="fa fa-pencil"></i></a>
                             <a ng-click="vm.delete(m.MensalidadesId)" class="btn btn-transparent btn-xs" tooltip-placement="top" tooltip="Excluir"><i class="fa fa-times"></i></a>

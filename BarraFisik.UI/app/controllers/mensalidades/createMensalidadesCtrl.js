@@ -27,8 +27,8 @@
         $scope.mensalidade = {
             DataPagamento: today,
             AnoReferencia: yyyy,
-            MesReferencia: mm,
-            ValorPago: Cliente.Valor,
+            MesReferencia: parseInt(mm),
+            ValorPago: Cliente.Valor
         }
 
         vm.cancel = function () {

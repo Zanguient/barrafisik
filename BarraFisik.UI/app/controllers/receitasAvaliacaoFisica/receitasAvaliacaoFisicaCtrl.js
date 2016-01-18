@@ -25,7 +25,6 @@
             counts: [],
             total: vm.avaliacoes.length, // length of data
             getData: function ($defer, params) {
-                // use build-in angular filter
                 var orderedData = params.sorting() ? $filter('orderBy')(vm.avaliacoes, params.orderBy()) : vm.avaliacoes;
                 $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
             }
