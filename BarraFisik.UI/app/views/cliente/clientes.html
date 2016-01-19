@@ -64,7 +64,7 @@
                             <td class="rowTd" title="vm.cols[3].title" ng-show="vm.cols[3].show">{{p.Cpf | cpf}}</td>
                             <td class="rowTd" title="vm.cols[4].title" ng-show="vm.cols[4].show" sortable="'Email'">{{p.Email}}</td>
                             <td class="rowTd" title="vm.cols[5].title" ng-show="vm.cols[5].show">{{p.Telefone | telefone}}</td>
-                            <td class="rowTd" title="vm.cols[6].title" ng-show="vm.cols[6].show">{{p.Celular | telefone}}</td>
+                            <td class="rowTd" title="vm.cols[6].title" ng-show="vm.cols[6].show">{{p.Celular | celular}}</td>
                             <td class="rowTd" title="vm.cols[7].title" ng-show="vm.cols[7].show" sortable="'DtNascimento'">{{p.DtNascimento | date:'dd/MM/yyyy'}}</td>
                             <td class="rowTd" title="vm.cols[8].title" ng-show="vm.cols[8].show" sortable="'DtInscricao'">{{p.DtInscricao | date: 'dd/MM/yyyy'}}</td>
                             <td class="rowTd" title="vm.cols[9].title" ng-show="vm.cols[9].show"><span class="label" ng-class="{'label-warning': p.Situacao == 'Pendente', 'label-success': p.Situacao == 'Regular', 'label-inverse': p.Situacao == 'Inativo'}"> {{p.Situacao}}</span></td>

@@ -16,10 +16,10 @@ app.filter('telefone', function () {
 app.filter('celular', function () {
     return function (celular) {
         if (celular != null)
-            if (celular.length === 8) {
-                return celular.substr(0, 4) + '-' + celular.substr(4, 4);
+            if (celular.length === 10) {
+                return '('+celular.substr(0, 2)+') '+ celular.substr(2, 4) + '-' + celular.substr(6, 4);
             } else {
-                return celular.substr(0, 5) + '-' + celular.substr(5, 4);
+                return '('+celular.substr(0, 2)+') ' + celular.substr(2, 5) + '-' + celular.substr(7, 4);
             }
             
     };
