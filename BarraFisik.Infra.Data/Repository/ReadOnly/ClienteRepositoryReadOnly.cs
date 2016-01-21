@@ -15,10 +15,21 @@ namespace BarraFisik.Infra.Data.Repository.ReadOnly
         {
             using (IDbConnection cn = Connection)
             {
-                var query = @"Select * from cliente c 
-                                inner join Horario h on c.ClienteId = h.ClienteId 
-                                left join Valores v on c.ValoresId = v.ValoresId
-                            where c.IsAtivo = 1";
+                //var query = @"
+                //            declare @skip int = " + skip + 
+                //            "declare @take int = "+ take +
+                //            "Select * from cliente c "+
+                //            "    inner join Horario h on c.ClienteId = h.ClienteId    "+
+                //            "    left join Valores v on c.ValoresId = v.ValoresId     "+
+                //            "where c.IsAtivo = 1                                      "+
+                //            "order by c.Nome                                          "+
+                //            "OFFSET (@skip) ROWS FETCH NEXT (@take) ROWS ONLY";
+
+                var query = @"
+                            Select * from cliente c 
+                                inner join Horario h on c.ClienteId = h.ClienteId    
+                                left join Valores v on c.ValoresId = v.ValoresId     
+                            where c.IsAtivo = 1 ";         
 
                 cn.Open();
                 var clientes = cn.Query<ClienteHorario>(query);
@@ -151,6 +162,18 @@ namespace BarraFisik.Infra.Data.Repository.ReadOnly
 
                 cn.Close();
                 return resultList.FirstOrDefault();
+            }
+        }
+
+        public void AtualizaValores(Guid ClienteId, Guid ValoresId)
+        {
+            using (IDbConnection cn = Connection)
+            {
+                var query = @"update cliente set ValoresId = '"+ValoresId+"' where ClienteId = '"+ ClienteId +"'";
+
+                cn.Open();
+                var clientes = cn.Query<Cliente>(query);
+                cn.Close();                
             }
         }
     }

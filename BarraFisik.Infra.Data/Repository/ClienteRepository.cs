@@ -24,5 +24,10 @@ namespace BarraFisik.Infra.Data.Repository
                     .ThenBy(c => c.Nome)
                     .ToList();
         }
+
+        public IEnumerable<Cliente> GetClientes()
+        {
+            return DbSet.Where(c => c.IsAtivo).ToList();
+        }
     }
 }

@@ -14,5 +14,6 @@ namespace BarraFisik.Domain.Interfaces.Repository.ReadOnly
         IEnumerable<Cliente> GetClientesSituacao(string situacao);
         TotalInscritos GetTotalInscritos(int ano);
         ClienteHorario GetClientePerfil(Guid id);
+        void AtualizaValores(Guid ClienteId, Guid ValoresId);
     }
 }

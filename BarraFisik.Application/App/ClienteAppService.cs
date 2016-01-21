@@ -58,6 +58,22 @@ namespace BarraFisik.Application.App
             return DomainToApplicationResult(result);
         }
 
+        public void AtualizaValores()
+        {
+            BeginTransaction();
+            foreach (var cliente in _clienteService.GetClientes())
+            {
+                var horario = _horarioService.GetHorarioCliente(cliente.ClienteId);
+                var valor = GetValor(horario);
+                if (valor != null)
+                {
+                    _clienteService.AtualizaValores(cliente.ClienteId, valor.ValoresId);
+                }
+                
+            }
+            Commit();
+        }
+
         public ClienteViewModel GetById(Guid id)
         {
             throw new NotImplementedException();

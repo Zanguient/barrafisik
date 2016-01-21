@@ -3,9 +3,11 @@
 
     app.controller("receitasAvaliacaoFisicaCtrl", receitasAvaliacaoFisicaCtrl);
 
-    function receitasAvaliacaoFisicaCtrl($scope, ClienteId, modalService, $modalInstance, receitasAvaliacaoFisicaData, ngTableParams, $filter, $timeout, SweetAlert, toaster) {
+    function receitasAvaliacaoFisicaCtrl($scope, ClienteId, modalService, $modalInstance, tipoPagamentoData, receitasAvaliacaoFisicaData, ngTableParams, $filter, $timeout, SweetAlert, toaster) {
         var vm = this;
         vm.avaliacoes = [];
+
+        
 
         vm.cancel = function () {
             $modalInstance.dismiss('cancel');
@@ -28,6 +30,11 @@
                 var orderedData = params.sorting() ? $filter('orderBy')(vm.avaliacoes, params.orderBy()) : vm.avaliacoes;
                 $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
             }
+        });
+
+        //List Tipos de Pagamento
+        tipoPagamentoData.getTipos().then(function (tipos) {
+            $scope.tipos = tipos.data;
         });
 
         $scope.$watch('vm.avaliacoes', function () {
@@ -85,6 +92,9 @@
                     avaliacaoFisica.Valor = avaliacaoFisica.Valor.toString().replace(",", ".");
                     receitasAvaliacaoFisicaData.editReceitaAvaliacao(avaliacaoFisica).success(function () {
                         toaster.pop('success', '', 'Dado Atualizado com Sucesso!');
+                        receitasAvaliacaoFisicaData.getByCliente(ClienteId).then(function (result) {
+                            vm.avaliacoes = result.data;
+                        });
                         $scope.editId = -1;
                     }).error(function (error) {
                         var errors = [];

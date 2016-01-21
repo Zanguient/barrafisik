@@ -31,6 +31,15 @@
                     <span class="error text-small block" ng-if="Form.DataPagamento.$dirty && Form.DataPagamento.$invalid">Informe a Data de Pagamento</span>
                 </td>
             </tr>
+            <tr>
+                <td>Tipo de Pagamento: <span class="symbol required"></span></td>
+                <td ng-class="{'has-error':Form.TiposPag.$dirty && Form.TiposPag.$invalid, 'has-success':Form.TiposPag.$valid}">                     
+                    <select name="TiposPag" id="TiposPag" ng-model="avaliacaofisica.TipoPagamentoId" required>
+                        <option ng-repeat="t in tipos" value="{{t.TipoPagamentoId}}">{{t.Sigla}} - {{t.Descricao}}</option>
+                    </select>
+                    <span class="error text-small block" ng-if="Form.TiposPag.$dirty && Form.TiposPag.$invalid">Informe o Tipo de Pagamento</span>
+                </td>
+            </tr>
         </table>
         <!-- class="editRowTd" -->
         <div class="modal-footer">

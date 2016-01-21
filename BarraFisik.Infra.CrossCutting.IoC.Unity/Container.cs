@@ -42,6 +42,7 @@ namespace BarraFisik.Infra.CrossCutting.IoC.Unity
             container.RegisterType<IReceitasAppService, ReceitasAppService>();
             container.RegisterType<IDespesasAppService, DespesasAppService>();
             container.RegisterType<IRelatorioFinanceiroAppService, RelatorioFinanceiroAppService>();
+            container.RegisterType<ITipoPagamentoAppService, TipoPagamentoAppService>();
 
             //Services
             container.RegisterType(typeof (IServiceBase<>), typeof (ServiceBase<>));
@@ -58,6 +59,7 @@ namespace BarraFisik.Infra.CrossCutting.IoC.Unity
             container.RegisterType<IReceitasService, ReceitasService>();
             container.RegisterType<IDespesasService, DespesasService>();
             container.RegisterType<IRelatorioFinanceiroService, RelatorioFinanceiroService>();
+            container.RegisterType<ITipoPagamentoService, TipoPagamentoService>();
 
             //Data Repos
             container.RegisterType(typeof (IRepositoryBase<>), typeof (RepositoryBase<,>));
@@ -74,6 +76,7 @@ namespace BarraFisik.Infra.CrossCutting.IoC.Unity
             container.RegisterType<IReceitasRepository, ReceitasRepository>();
             container.RegisterType<IDespesasRepository, DespesasRepository>();
             container.RegisterType<IRelatorioFinanceiroRepository, RelatorioFinanceiroRepository>();
+            container.RegisterType<ITipoPagamentoRepository, TipoPagamentoRepository>();
 
             //Data Repos Read Only
             container.RegisterType<IClienteRepositoryReadOnly, ClienteRepositoryReadOnly>();

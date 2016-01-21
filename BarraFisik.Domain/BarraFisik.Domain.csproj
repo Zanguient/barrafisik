@@ -48,6 +48,7 @@
     <Compile Include="Entities\LogReceitasDespesas.cs" />
     <Compile Include="Entities\Receitas.cs" />
     <Compile Include="Entities\ReceitasAvaliacaoFisica.cs" />
+    <Compile Include="Entities\TipoPagamento.cs" />
     <Compile Include="Entities\Valores.cs" />
     <Compile Include="Exceptions\CustomException.cs" />
     <Compile Include="Interfaces\Repository\IClienteRepository.cs" />
@@ -59,6 +60,7 @@
     <Compile Include="Interfaces\Repository\IDespesasRepository.cs" />
     <Compile Include="Interfaces\Repository\ILogReceitasDespesasRepository.cs" />
     <Compile Include="Interfaces\Repository\IReceitasRepository.cs" />
+    <Compile Include="Interfaces\Repository\ITipoPagamentoRepository.cs" />
     <Compile Include="Interfaces\Repository\IValoresRepository.cs" />
     <Compile Include="Interfaces\Repository\IMensalidadesRepository.cs" />
     <Compile Include="Interfaces\Repository\IFilaEsperaRepository.cs" />
@@ -80,6 +82,7 @@
     <Compile Include="Interfaces\Services\IDespesasService.cs" />
     <Compile Include="Interfaces\Services\ILogReceitasDespesasService.cs" />
     <Compile Include="Interfaces\Services\IReceitasService.cs" />
+    <Compile Include="Interfaces\Services\ITipoPagamentoService.cs" />
     <Compile Include="Interfaces\Services\IValoresService.cs" />
     <Compile Include="Interfaces\Services\IMensalidadesService.cs" />
     <Compile Include="Interfaces\Services\IFilaEsperaService.cs" />
@@ -99,6 +102,7 @@
     <Compile Include="Services\DespesasService.cs" />
     <Compile Include="Services\LogReceitasDespesasService.cs" />
     <Compile Include="Services\ReceitasService.cs" />
+    <Compile Include="Services\TipoPagamentoService.cs" />
     <Compile Include="Services\ValoresService.cs" />
     <Compile Include="Services\MensalidadesService.cs" />
     <Compile Include="Services\FilaEsperaService.cs" />

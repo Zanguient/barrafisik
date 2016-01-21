@@ -91,6 +91,19 @@ namespace BarraFisik.API.Controllers
         }
 
         [HttpPost]
+        [Route("atualizaValores")]
+        //[GzipCompression]
+        public async Task<HttpResponseMessage> AtualizaValores()
+        {
+            _clienteApp.AtualizaValores();
+            var response = Request.CreateResponse(HttpStatusCode.OK);
+
+            var tsc = new TaskCompletionSource<HttpResponseMessage>();
+            tsc.SetResult(response);
+            return await tsc.Task;
+        }
+
+        [HttpPost]
         [Route("clientes")]
         public HttpResponseMessage Post(ClienteHorarioViewModel clienteHorario)
         {

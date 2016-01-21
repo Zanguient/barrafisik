@@ -204,6 +204,7 @@
     <Compile Include="Controllers\ReceitasAvaliacaoFisicaController.cs" />
     <Compile Include="Controllers\DespesasController.cs" />
     <Compile Include="Controllers\ReceitasController.cs" />
+    <Compile Include="Controllers\TipoPagamentoController.cs" />
     <Compile Include="Controllers\ValoresController.cs" />
     <Compile Include="Filters\GzipCompressionAttribute.cs" />
     <Compile Include="helpers\UnityResolver.cs" />

@@ -3,9 +3,13 @@
 
     app.controller('createReceitasAvaliacaoFisicaCtrl', createReceitasAvaliacaoFisicaCtrl);
 
-    function createReceitasAvaliacaoFisicaCtrl($scope, Cliente, $modalInstance, receitasAvaliacaoFisicaData, $timeout) {
-        var vm = this;
-        
+    function createReceitasAvaliacaoFisicaCtrl($scope, Cliente, $modalInstance, tipoPagamentoData, receitasAvaliacaoFisicaData, $timeout) {
+        var vm = this;              
+
+        //List Tipos de Pagamento
+        tipoPagamentoData.getTipos().then(function (tipos) {
+            $scope.tipos = tipos.data;
+        });
 
         //Format Data Atual
         var today = new Date();
@@ -80,7 +84,7 @@
                     return;
 
                 } else {
-                    // Cadastra mensalidade
+                    // Cadastra
                     if (avaliacaoFisica.DataPagamento === today)
                         avaliacaoFisica.DataPagamento = new Date();
 

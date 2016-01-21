@@ -22,7 +22,7 @@
 
         function activate() {
             $scope.$emit('LOAD');
-            clienteData.getClientes().then(function (result) {
+            clienteData.getClientes(0, 10).then(function (result) {
                 vm.clientes = result.data;
                 $scope.$emit('UNLOAD');
             });
@@ -69,7 +69,7 @@
         $scope.tableParams = new ngTableParams({
 
             page: 1, // show first page
-            count: 30, // count per page
+            count: 10, // count per page
             sorting: {
                 Nome: 'asc' // initial sorting
             },
@@ -124,6 +124,34 @@
 
         $scope.refresh = function () {
             $window.location.reload();
+        }
+
+        $scope.atualizaValores = function () {
+            SweetAlert.swal({
+                title: "Confirmar Atualização?",
+                text: "Os valores das mensalidades dos clientes serão atualizadas, Deseja Continuar?",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "Confirmar",
+                cancelButtonText: "Cancelar",
+                closeOnConfirm: false,
+                closeOnCancel: false
+            }, function (isConfirm) {
+                if (isConfirm) {
+                    SweetAlert.swal("Sucesso", "Os valores foram atualizados!", "success");
+                    clienteData.atualizaValores().then(function () {                       
+                        $scope.tableParams.reload();
+                    });
+                } else {
+                    SweetAlert.swal({
+                        title: "Cancelado",
+                        text: "Operação de atualização cancelada",
+                        type: "error",
+                        confirmButtonColor: "#007AFF"
+                    });
+                }
+            });
         }
 
         //Horários
@@ -238,7 +266,7 @@
                     deps: [
                         '$ocLazyLoad',
                         function ($ocLazyLoad) {
-                            return $ocLazyLoad.load(['app/controllers/receitasAvaliacaoFisica/createReceitasAvaliacaoFisicaCtrl.js', 'app/factory/receitasAvaliacaoFisicaData.js']);
+                            return $ocLazyLoad.load(['app/controllers/receitasAvaliacaoFisica/createReceitasAvaliacaoFisicaCtrl.js', 'app/factory/receitasAvaliacaoFisicaData.js', 'app/factory/tipoPagamentoData.js']);
                         }
                     ]
                 },
@@ -266,7 +294,7 @@
                     deps: [
                         '$ocLazyLoad',
                         function ($ocLazyLoad) {
-                            return $ocLazyLoad.load(['app/controllers/receitasAvaliacaoFisica/receitasAvaliacaoFisicaCtrl.js', 'app/factory/receitasAvaliacaoFisicaData.js']);
+                            return $ocLazyLoad.load(['app/controllers/receitasAvaliacaoFisica/receitasAvaliacaoFisicaCtrl.js', 'app/factory/receitasAvaliacaoFisicaData.js', 'app/factory/tipoPagamentoData.js']);
                         }
                     ]
                 },

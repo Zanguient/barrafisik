@@ -45,7 +45,8 @@ app.constant('JS_REQUIRES', {
         'categoriaFinanceiraCtrl': 'app/controllers/categoriaFinanceira/categoriaFinanceiraCtrl.js',
         'receitasCtrl': 'app/controllers/receitas/receitasCtrl.js',
         'despesasCtrl': 'app/controllers/despesas/despesasCtrl.js',
-        'relatorioFinanceiroCtrl': 'app/controllers/relatorioFinanceiro/relatorioFinanceiroCtrl.js',        
+        'relatorioFinanceiroCtrl': 'app/controllers/relatorioFinanceiro/relatorioFinanceiroCtrl.js',
+        'tipoPagamentoCtrl': 'app/controllers/tipoPagamento/tipoPagamentoCtrl.js',
 
         //*** Factories
         'clienteData' : 'app/factory/clienteData.js',
@@ -59,6 +60,7 @@ app.constant('JS_REQUIRES', {
         'receitasData': 'app/factory/receitasData.js',
         'despesasData': 'app/factory/despesasData.js',
         'relatorioFinanceiroData': 'app/factory/relatorioFinanceiroData.js',
+        'tipoPagamentoData': 'app/factory/tipoPagamentoData.js',
 
         //*** Controllers
         //'dashboardCtrl': 'assets/js/controllers/dashboardCtrl.js',

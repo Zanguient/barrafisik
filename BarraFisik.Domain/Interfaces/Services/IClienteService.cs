@@ -18,6 +18,7 @@ namespace BarraFisik.Domain.Interfaces.Services
         IEnumerable<Cliente> GetAniversariantes(int mes);
         void UpdateClientesPendentes(int mes, int ano);
         void InativarClientes(IEnumerable<Cliente> listClientes);
+        void AtualizaValores(Guid ClienteId, Guid ValoresId);
         ClienteHorario GetClientePerfil(Guid id);
     }
 }

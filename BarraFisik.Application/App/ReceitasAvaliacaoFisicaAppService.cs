@@ -29,7 +29,7 @@ namespace BarraFisik.Application.App
             BeginTransaction();
             _receitasAvaliacaoFisicaService.Add(receitaAvaliacaoFisica);
 
-            _logSistemaService.AddLog("ReceitasAvaliacaoFisica", receitasAvaliacaoFisicaViewModel.ReceitasAvaliacaoFisicaId, "Cadastro", "");
+            _logSistemaService.AddLog("ReceitasAvaliacaoFisica", receitasAvaliacaoFisicaViewModel.ReceitasAvaliacaoFisicaId, "Cadastro", "Valor:" + receitaAvaliacaoFisica.Valor + " / Data: " + receitaAvaliacaoFisica.DataPagamento + " / Tipo pagamento: " + receitaAvaliacaoFisica.TipoPagamentoId);
             Commit();
         }
 
@@ -55,7 +55,7 @@ namespace BarraFisik.Application.App
             BeginTransaction();
             _receitasAvaliacaoFisicaService.Add(receitaAvaliacaoFisica);
 
-            _logSistemaService.AddLog("ReceitasAvaliacaoFisica", receitasAvaliacaoFisicaViewModel.ReceitasAvaliacaoFisicaId, "Update", "");
+            _logSistemaService.AddLog("ReceitasAvaliacaoFisica", receitasAvaliacaoFisicaViewModel.ReceitasAvaliacaoFisicaId, "Update", "Valor:" + receitaAvaliacaoFisica.Valor + " / Data: " + receitaAvaliacaoFisica.DataPagamento + " / Tipo pagamento:" + receitaAvaliacaoFisica.TipoPagamentoId);
             Commit();
         }
 
@@ -64,9 +64,9 @@ namespace BarraFisik.Application.App
             var receitaAvaliacaoFisica = Mapper.Map<ReceitasAvaliacaoFisicaViewModel, ReceitasAvaliacaoFisica>(GetById(id));
 
             BeginTransaction();
-            _receitasAvaliacaoFisicaService.Add(receitaAvaliacaoFisica);
+            _receitasAvaliacaoFisicaService.Remove(receitaAvaliacaoFisica);
 
-            _logSistemaService.AddLog("ReceitasAvaliacaoFisica", id, "Remove", "");
+            _logSistemaService.AddLog("ReceitasAvaliacaoFisica", id, "Remove", "Valor:" + receitaAvaliacaoFisica.Valor + " / Data: " + receitaAvaliacaoFisica.DataPagamento + " / Tipo pagamento:" + receitaAvaliacaoFisica.TipoPagamentoId);
             Commit();
         }
 

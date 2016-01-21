@@ -69,10 +69,12 @@
     <Content Include="app\controllers\receitasAvaliacaoFisica\receitasAvaliacaoFisicaCtrl.js" />
     <Content Include="app\controllers\receitas\receitasCtrl.js" />
     <Content Include="app\controllers\relatorioFinanceiro\relatorioFinanceiroCtrl.js" />
+    <Content Include="app\controllers\tipoPagamento\tipoPagamentoCtrl.js" />
     <Content Include="app\directives\bundleAppDirectives.js" />
     <Content Include="app\directives\equals.js" />
     <Content Include="app\directives\exportTable.js" />
     <Content Include="app\directives\xngFocus.js" />
+    <Content Include="app\factory\tipoPagamentoData.js" />
     <Content Include="app\factory\relatorioFinanceiroData.js" />
     <Content Include="app\factory\dashboardData.js" />
     <Content Include="app\factory\accountsData.js" />
@@ -127,6 +129,9 @@
     <Content Include="app\views\receitas\receitas.html" />
     <Content Include="app\views\relatorioFinanceiro\partial\partialSearch.html" />
     <Content Include="app\views\relatorioFinanceiro\relatorioFinanceiro.html" />
+    <Content Include="app\views\tipoPagamento\create.html" />
+    <Content Include="app\views\tipoPagamento\edit.html" />
+    <Content Include="app\views\tipoPagamento\tipoPagamento.html" />
     <Content Include="app\views\valores\create.html" />
     <Content Include="app\views\valores\edit.html" />
     <Content Include="app\views\valores\valores.html" />
@@ -4752,7 +4757,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>49778</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:49778/</IISUrl>
+          <IISUrl>http://localhost:49779/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

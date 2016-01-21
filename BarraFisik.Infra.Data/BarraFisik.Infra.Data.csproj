@@ -73,6 +73,7 @@
     <Compile Include="EntityConfig\ReceitasAvaliacaoFisicaConfiguration.cs" />
     <Compile Include="EntityConfig\DespesasConfiguration.cs" />
     <Compile Include="EntityConfig\ReceitasConfiguration.cs" />
+    <Compile Include="EntityConfig\TipoPagamentoConfiguration.cs" />
     <Compile Include="EntityConfig\ValoresConfiguration.cs" />
     <Compile Include="Interfaces\IContextManager.cs" />
     <Compile Include="Interfaces\IDbContext.cs" />
@@ -80,6 +81,14 @@
     <Compile Include="Migrations\201601091026061_Initial.cs" />
     <Compile Include="Migrations\201601091026061_Initial.Designer.cs">
       <DependentUpon>201601091026061_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201601201858081_AddTipoPagamento.cs" />
+    <Compile Include="Migrations\201601201858081_AddTipoPagamento.Designer.cs">
+      <DependentUpon>201601201858081_AddTipoPagamento.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201601211728282_Add_TipoPagamento_AvaliacaoFisica.cs" />
+    <Compile Include="Migrations\201601211728282_Add_TipoPagamento_AvaliacaoFisica.Designer.cs">
+      <DependentUpon>201601211728282_Add_TipoPagamento_AvaliacaoFisica.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -96,6 +105,7 @@
     <Compile Include="Repository\CategoriaFinanceiraRepository.cs" />
     <Compile Include="Repository\DespesasRepository.cs" />
     <Compile Include="Repository\ReceitasRepository.cs" />
+    <Compile Include="Repository\TipoPagamentoRepository.cs" />
     <Compile Include="Repository\ValoresRepository.cs" />
     <Compile Include="Repository\MensalidadesRepository.cs" />
     <Compile Include="Repository\FilaEsperaRepository.cs" />
@@ -120,6 +130,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201601091026061_Initial.resx">
       <DependentUpon>201601091026061_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201601201858081_AddTipoPagamento.resx">
+      <DependentUpon>201601201858081_AddTipoPagamento.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201601211728282_Add_TipoPagamento_AvaliacaoFisica.resx">
+      <DependentUpon>201601211728282_Add_TipoPagamento_AvaliacaoFisica.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

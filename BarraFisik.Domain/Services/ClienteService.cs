@@ -15,12 +15,14 @@ namespace BarraFisik.Domain.Services
         private readonly IClienteRepository _clienteRepository;
         private readonly IClienteRepositoryReadOnly _clienteRepositoryReadOnly;
         private readonly IHorarioRepository _horarioRepository;
+        private readonly IValoresRepository _valoresRepository;
 
-        public ClienteService(IClienteRepository clienteRepository, IClienteRepositoryReadOnly clienteRepositoryReadOnly, IHorarioRepository horarioRepository) : base(clienteRepository)
+        public ClienteService(IClienteRepository clienteRepository, IClienteRepositoryReadOnly clienteRepositoryReadOnly, IHorarioRepository horarioRepository, IValoresRepository valoresRepository) : base(clienteRepository)
         {
             _clienteRepository = clienteRepository;
             _clienteRepositoryReadOnly = clienteRepositoryReadOnly;
             _horarioRepository = horarioRepository;
+            _valoresRepository = valoresRepository;
         }
 
         public ValidationResult AdicionarCliente(Cliente cliente)
@@ -63,6 +65,11 @@ namespace BarraFisik.Domain.Services
 
             base.Update(cliente);
             return resultado;
+        }
+
+        public void AtualizaValores(Guid ClienteId, Guid ValoresId)
+        {
+            _clienteRepositoryReadOnly.AtualizaValores(ClienteId, ValoresId);
         }
 
         public IEnumerable<ClienteHorario> GetClientes()
@@ -134,5 +141,6 @@ namespace BarraFisik.Domain.Services
             return result;
         }
 
+        
     }
 }

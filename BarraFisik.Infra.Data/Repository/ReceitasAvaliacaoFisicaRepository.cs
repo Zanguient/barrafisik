@@ -4,6 +4,7 @@ using System.Linq;
 using BarraFisik.Domain.Entities;
 using BarraFisik.Domain.Interfaces.Repository;
 using BarraFisik.Infra.Data.Context;
+using System.Data.Entity;
 
 namespace BarraFisik.Infra.Data.Repository
 {
@@ -11,7 +12,7 @@ namespace BarraFisik.Infra.Data.Repository
     {
         public IEnumerable<ReceitasAvaliacaoFisica> GetByCliente(Guid id)
         {
-            return base.DbSet.Where(r => r.ClienteId == id);
+            return DbSet.Include("TipoPagamento").Where(r => r.ClienteId == id).ToList();
         }
     }
 }

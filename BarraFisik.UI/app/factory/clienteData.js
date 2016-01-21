@@ -9,8 +9,8 @@
     function clienteData($http, apiUrl) {
 
 
-        function getClientes() {
-            return $http.get(apiUrl+'api/clientes');
+        function getClientes(skip, take) {
+            return $http.get(apiUrl+'api/clientes?skip='+skip+'&take='+take);
         }
 
         function getCliente(idCliente) {
@@ -61,6 +61,10 @@
             return $http.get(apiUrl + 'api/clientes/inscritos/'+ano);
         }
 
+        function atualizaValores() {
+            return $http.post(apiUrl + 'api/atualizaValores');
+        }
+
         var service = {
             getClientes: getClientes,
             getCliente: getCliente,
@@ -74,7 +78,8 @@
             inativarClientes: inativarClientes,
             getClientesAll: getClientesAll,
             getInscritos: getInscritos,
-            getClientePerfil: getClientePerfil
+            getClientePerfil: getClientePerfil,
+            atualizaValores: atualizaValores
         };
 
         return service;

@@ -189,6 +189,16 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
             ncyBreadcrumb: {
                 label: 'Categorias'
             }
+        }).state('app.financeiro.tipoPagamento', {
+            url: '/tipoPagamento',
+            templateUrl: "app/views/tipoPagamento/tipoPagamento.html",
+            title: 'Tipos de Pagamento',
+            icon: 'ti-layout-media-left-alt',
+            resolve: loadSequence('tipoPagamentoCtrl', 'ngTable', 'tipoPagamentoData'),
+            controller: "tipoPagamentoCtrl as vm",
+            ncyBreadcrumb: {
+                label: 'Tipos de Pagamento'
+            }
         }).state('app.financeiro.relatorioFinanceiro', {
             url: '/relatoriofinanceiro',
             templateUrl: "app/views/relatorioFinanceiro/relatorioFinanceiro.html",

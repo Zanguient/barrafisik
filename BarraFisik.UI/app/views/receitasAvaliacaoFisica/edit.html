@@ -23,8 +23,16 @@
                 </div>
                 <span class="error text-small block" ng-if="FormEdit.DataPagamento.$dirty && FormEdit.DataPagamento.$invalid">Informe a Data de Pagamento</span>
             </td>
-           
-            <td>
+        </tr>   
+        <tr>
+            <td>Tipo de Pagamento: <span class="symbol required"></span></td>
+            <td ng-class="{'has-error':Form.TiposPag.$dirty && Form.TiposPag.$invalid, 'has-success':Form.TiposPag.$valid}">
+                <select class="form-control" ng-model="r.TipoPagamentoId">
+                    <option ng-selected="r.TipoPagamentoId == item.TipoPagamentoId" ng-repeat="item in tipos" ng-value="item.TipoPagamentoId">{{item.Descricao}}</option>
+                </select>
+                <span class="error text-small block" ng-if="Form.TiposPag.$dirty && Form.TiposPag.$invalid">Informe o Tipo de Pagamento</span>
+            </td>
+            <td colspan="2">
                 <div class="pull-right">
                     <input type="submit" class="btn btn-primary btn-sm margin-right-15" value="Salvar">
                     <input type="button" class="btn btn-primary btn-sm margin-right-15" value="Cancelar" ng-click="setEditId(-1)">

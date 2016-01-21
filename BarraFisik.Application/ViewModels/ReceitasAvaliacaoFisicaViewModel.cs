@@ -9,6 +9,7 @@ namespace BarraFisik.Application.ViewModels
         public ReceitasAvaliacaoFisicaViewModel()
         {
             ReceitasAvaliacaoFisicaId = Guid.NewGuid();
+            TipoPagamentoId = 0;
         }
 
         [Key]
@@ -25,6 +26,9 @@ namespace BarraFisik.Application.ViewModels
 
         public Guid CategoriaFinanceiraId { get; set; }
         public virtual CategoriaFinanceira CategoriaFinanceira { get; set; }
+
+        public int TipoPagamentoId { get; set; }
+        public virtual TipoPagamento TipoPagamento { get; set; }
 
         public string Nome { get; set; }
     }
