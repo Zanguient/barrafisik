@@ -191,7 +191,7 @@
                     deps: [
                         '$ocLazyLoad',
                         function ($ocLazyLoad) {
-                            return $ocLazyLoad.load(['app/controllers/mensalidades/mensalidadesCtrl.js', 'app/factory/mensalidadesData.js']);
+                            return $ocLazyLoad.load(['app/controllers/mensalidades/mensalidadesCtrl.js', 'app/factory/mensalidadesData.js', 'app/factory/tipoPagamentoData.js']);
                         }
                     ]
                 },
@@ -230,7 +230,7 @@
                     deps: [
                         '$ocLazyLoad',
                         function ($ocLazyLoad) {
-                            return $ocLazyLoad.load(['app/controllers/mensalidades/createMensalidadesCtrl.js', 'app/factory/mensalidadesData.js']);
+                            return $ocLazyLoad.load(['app/controllers/mensalidades/createMensalidadesCtrl.js', 'app/factory/mensalidadesData.js', 'app/factory/tipoPagamentoData.js']);
                         }
                     ]
                 },

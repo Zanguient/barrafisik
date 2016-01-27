@@ -10,6 +10,8 @@
                     <td class="rowTd" data-title="'Ano'"            sortable="'AnoReferencia'">{{m.AnoReferencia}}</td>
                     <td class="rowTd" data-title="'Valor Pago'"     sortable="'ValorPago'">    {{m.ValorPago | currency:"R$"}}</td>
                     <td class="rowTd" data-title="'Data Pagamento'" sortable="'DataPagamento'">{{m.DataPagamento | date:'dd/MM/yyyy'}}</td>
+                    <td class="rowTd" data-title="'Personal'"       sortable="'isPersonal'">  <div ng-show="m.isPersonal"> {{m.ValorPersonal | currency:"R$ "}} </div> <div ng-show="!m.isPersonal"> - </div> </td>
+                    <td class="rowTd" data-title="'Tipo Pagamento'" sortable="'TipoPagamento'">({{m.TipoPagamento.Sigla}}) {{m.TipoPagamento.Descricao}}</td>
                     <td class="center" ng-if="userInfo.isAdmin">
                         <div class="visible-md visible-lg hidden-sm hidden-xs">
                             <a ng-click="setEditId(m.MensalidadesId)" class="btn btn-transparent btn-xs" tooltip-placement="top" tooltip="Editar" id="editRowBtn{{m.MensalidadesId}}"><i class="fa fa-pencil"></i></a>
@@ -18,7 +20,7 @@
                     </td>
                 </tr>
                 <tr ng-show="editId===m.MensalidadesId" ng-if="editId===m.MensalidadesId">
-                    <td colspan="5" ng-include src="'app/views/mensalidades/edit.html'"></td>
+                    <td colspan="7" ng-include src="'app/views/mensalidades/edit.html'"></td>
                 </tr>
             </tbody>
         </table>

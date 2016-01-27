@@ -3,9 +3,14 @@
 
     app.controller('createMensalidadesCtrl', createMensalidadesCtrl);
 
-    function createMensalidadesCtrl($scope, Cliente, $modalInstance, mensalidadesData, $timeout, SweetAlert) {
+    function createMensalidadesCtrl($scope, Cliente, $modalInstance, tipoPagamentoData, mensalidadesData, $timeout, SweetAlert) {
         var vm = this;
         vm.mensalidades = [];
+
+        //List Tipos de Pagamento
+        tipoPagamentoData.getTipos().then(function (tipos) {
+            $scope.tipos = tipos.data;
+        });
 
         //Format Data Atual
         var today = new Date();
@@ -72,7 +77,6 @@
             submit: function (form, mensalidade) {
                 var firstError = null;
                 if (form.$invalid) {
-
                     var field = null, firstError = null;
                     for (field in form) {
                         if (field[0] != '$') {

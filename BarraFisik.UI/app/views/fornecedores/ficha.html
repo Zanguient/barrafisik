@@ -1,0 +1,35 @@
+﻿<div class="modal-header">
+    <h3 class="modal-title">Ficha - {{fornecedor.Nome}}</h3>   
+</div>
+<div class="modal-body">
+        <table class="table no-bg">
+            <tr>
+                <td class="text-bold">Razão Social: </td>
+                <td colspan="3"> {{fornecedor.RazaoSocial}} </td>
+                <td class="text-bold">CPF / CNPJ: </td>
+                <td colspan="2"> {{fornecedor.CpfCnpj | cpfcnpj}} </td>
+            </tr>
+            <tr>
+                <td class="text-bold">Telefones: </td>
+                <td colspan="2"> {{fornecedor.Telefone1 | telefone}} / {{fornecedor.Telefone2 | telefone}} </td>
+                <td class="text-bold">Celular: </td>
+                <td> {{fornecedor.Celular | celular}} </td>
+                <td class="text-bold">Fax: </td>
+                <td> {{fornecedor.Fax | telefone}} </td>
+            </tr>
+            <tr>
+                <td class="text-bold">Endereço: </td>
+                <td colspan="4"> {{fornecedor.Endereco}}, {{fornecedor.Numero}} - {{fornecedor.Bairro}} - {{fornecedor.Cidade}}</td>
+                <td class="text-bold">CEP: </td>
+                <td> {{fornecedor.Cep | cep}} </td>
+            </tr>
+        </table>
+    <div class="modal-footer">
+        <div class="pull-left">
+            <span ng-if="fornecedor.isAtivo" class="label label-sm label-success">Ativo</span>
+            <span ng-if="!fornecedor.isAtivo" class="label label-sm label-inverse">Inativo</span>
+        </div>
+        <button type="button" class="btn btn-primary btn-o" ng-click="vm.cancel()">Fechar</button>
+    </div>
+</div>
+                

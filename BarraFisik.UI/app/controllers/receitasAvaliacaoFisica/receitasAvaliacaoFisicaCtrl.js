@@ -7,8 +7,6 @@
         var vm = this;
         vm.avaliacoes = [];
 
-        
-
         vm.cancel = function () {
             $modalInstance.dismiss('cancel');
         };

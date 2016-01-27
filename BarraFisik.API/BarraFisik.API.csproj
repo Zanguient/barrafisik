@@ -194,6 +194,8 @@
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountsController.cs" />
+    <Compile Include="Controllers\FornecedoresController.cs" />
+    <Compile Include="Controllers\FuncionariosController.cs" />
     <Compile Include="Controllers\BaseApiController.cs" />
     <Compile Include="Controllers\ClienteController.cs" />
     <Compile Include="Controllers\CategoriaFinanceiraController.cs" />
@@ -204,6 +206,7 @@
     <Compile Include="Controllers\ReceitasAvaliacaoFisicaController.cs" />
     <Compile Include="Controllers\DespesasController.cs" />
     <Compile Include="Controllers\ReceitasController.cs" />
+    <Compile Include="Controllers\ArmazemController.cs" />
     <Compile Include="Controllers\TipoPagamentoController.cs" />
     <Compile Include="Controllers\ValoresController.cs" />
     <Compile Include="Filters\GzipCompressionAttribute.cs" />

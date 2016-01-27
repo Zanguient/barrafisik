@@ -38,6 +38,7 @@ namespace BarraFisik.Domain.Services
                 logMensalidade.DataPagamento = mensalidade.DataPagamento;
                 logMensalidade.isPersonal = mensalidade.isPersonal;
                 logMensalidade.ValorPersonal = mensalidade.ValorPersonal;
+                logMensalidade.TipoPagamentoId = mensalidade.TipoPagamentoId;
             };
 
             return logMensalidade;

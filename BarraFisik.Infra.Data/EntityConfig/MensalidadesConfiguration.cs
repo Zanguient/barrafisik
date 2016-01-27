@@ -24,6 +24,8 @@ namespace BarraFisik.Infra.Data.EntityConfig
                 .WithMany(m => m.Mensalidades)
                 .HasForeignKey(m => m.ClienteId);
 
+            HasRequired(m => m.TipoPagamento).WithMany().HasForeignKey(m => m.TipoPagamentoId);
+
             HasRequired(m => m.CategoriaFinanceira).WithMany().HasForeignKey(m => m.CategoriaFinanceiraId);
         }
     }

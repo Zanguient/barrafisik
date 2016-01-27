@@ -22,5 +22,7 @@ namespace BarraFisik.Domain.Entities
         public string UsuarioNome { get; set; }
         public bool isPersonal { get; set; }
         public decimal ValorPersonal { get; set; }
+
+        public int TipoPagamentoId { get; set; }
     }
 }

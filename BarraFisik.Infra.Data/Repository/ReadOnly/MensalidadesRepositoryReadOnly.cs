@@ -13,11 +13,17 @@ namespace BarraFisik.Infra.Data.Repository.ReadOnly
         {
             using (var cn = Connection)
             {
-                var query = @"  Select distinct * from mensalidades m                                 
+                var query = @"  Select distinct * from mensalidades m 
+                                inner join TipoPagamento tp on m.TipoPagamentoId = tp.TipoPagamentoId
                                 where m.ClienteId = '" + id + "'";
 
                 cn.Open();
-                var mensalidades = cn.Query<Mensalidades>(query);
+                var mensalidades = cn.Query<Mensalidades, TipoPagamento, Mensalidades>(
+                    query,
+                    (m, tp) => {
+                        m.TipoPagamento = tp;
+                        return m;
+                    }, splitOn: "MensalidadesId, TipoPagamentoId");                    
                 cn.Close();
 
                 return mensalidades;

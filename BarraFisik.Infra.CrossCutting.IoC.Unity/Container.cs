@@ -43,6 +43,9 @@ namespace BarraFisik.Infra.CrossCutting.IoC.Unity
             container.RegisterType<IDespesasAppService, DespesasAppService>();
             container.RegisterType<IRelatorioFinanceiroAppService, RelatorioFinanceiroAppService>();
             container.RegisterType<ITipoPagamentoAppService, TipoPagamentoAppService>();
+            container.RegisterType<IArmazemAppService, ArmazemAppService>();
+            container.RegisterType<IFuncionariosAppService, FuncionariosAppService>();
+            container.RegisterType<IFornecedoresAppService, FornecedoresAppService>();
 
             //Services
             container.RegisterType(typeof (IServiceBase<>), typeof (ServiceBase<>));
@@ -60,6 +63,9 @@ namespace BarraFisik.Infra.CrossCutting.IoC.Unity
             container.RegisterType<IDespesasService, DespesasService>();
             container.RegisterType<IRelatorioFinanceiroService, RelatorioFinanceiroService>();
             container.RegisterType<ITipoPagamentoService, TipoPagamentoService>();
+            container.RegisterType<IArmazemService, ArmazemService>();
+            container.RegisterType<IFuncionariosService, FuncionariosService>();
+            container.RegisterType<IFornecedoresService, FornecedoresService>();
 
             //Data Repos
             container.RegisterType(typeof (IRepositoryBase<>), typeof (RepositoryBase<,>));
@@ -77,6 +83,9 @@ namespace BarraFisik.Infra.CrossCutting.IoC.Unity
             container.RegisterType<IDespesasRepository, DespesasRepository>();
             container.RegisterType<IRelatorioFinanceiroRepository, RelatorioFinanceiroRepository>();
             container.RegisterType<ITipoPagamentoRepository, TipoPagamentoRepository>();
+            container.RegisterType<IArmazemRepository, ArmazemRepository>();
+            container.RegisterType<IFuncionariosRepository, FuncionariosRepository>();
+            container.RegisterType<IFornecedoresRepository, FornecedoresRepository>();
 
             //Data Repos Read Only
             container.RegisterType<IClienteRepositoryReadOnly, ClienteRepositoryReadOnly>();

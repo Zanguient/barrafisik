@@ -47,8 +47,6 @@ namespace BarraFisik.Application.App
 
         public void Remove(int id)
         {
-            //var tipoPagamento = Mapper.Map<TipoPagamentoViewModel, TipoPagamento>(GetById(id));
-
             BeginTransaction();
             _tipoPagamentoService.Delete(id);
             Commit();

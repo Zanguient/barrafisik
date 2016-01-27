@@ -45,7 +45,13 @@
 
 	        </tr>
 	        <tr>
-                <td colspan="2"></td>
+                <td>Tipo de Pagamento: <span class="symbol required"></span></td>
+                <td ng-class="{'has-error':Form.TiposPag.$dirty && Form.TiposPag.$invalid, 'has-success':Form.TiposPag.$valid}">
+                    <select name="TiposPag" id="TiposPag" ng-model="mensalidade.TipoPagamentoId" required>
+                        <option ng-repeat="t in tipos" value="{{t.TipoPagamentoId}}">{{t.Sigla}} - {{t.Descricao}}</option>
+                    </select>
+                    <span class="error text-small block" ng-if="Form.TiposPag.$dirty && Form.TiposPag.$invalid">Informe o Tipo de Pagamento</span>
+                </td>
 		        <td>
 			        <div class="checkbox clip-check check-primary">
 				        <input type="checkbox" id="isPersonal"

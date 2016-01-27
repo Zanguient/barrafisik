@@ -47,6 +47,9 @@ app.constant('JS_REQUIRES', {
         'despesasCtrl': 'app/controllers/despesas/despesasCtrl.js',
         'relatorioFinanceiroCtrl': 'app/controllers/relatorioFinanceiro/relatorioFinanceiroCtrl.js',
         'tipoPagamentoCtrl': 'app/controllers/tipoPagamento/tipoPagamentoCtrl.js',
+        'armazemCtrl': 'app/controllers/armazem/armazemCtrl.js',
+        'funcionariosCtrl': 'app/controllers/funcionarios/funcionariosCtrl.js',
+        'fornecedoresCtrl': 'app/controllers/fornecedores/fornecedoresCtrl.js',
 
         //*** Factories
         'clienteData' : 'app/factory/clienteData.js',
@@ -61,6 +64,9 @@ app.constant('JS_REQUIRES', {
         'despesasData': 'app/factory/despesasData.js',
         'relatorioFinanceiroData': 'app/factory/relatorioFinanceiroData.js',
         'tipoPagamentoData': 'app/factory/tipoPagamentoData.js',
+        'armazemData': 'app/factory/armazemData.js',
+        'funcionariosData': 'app/factory/funcionariosData.js',
+        'fornecedoresData': 'app/factory/fornecedoresData.js',
 
         //*** Controllers
         //'dashboardCtrl': 'assets/js/controllers/dashboardCtrl.js',

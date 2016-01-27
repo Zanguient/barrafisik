@@ -1,6 +1,4 @@
 ﻿using System;
-using BarraFisik.Domain.Interfaces.Validation;
-using BarraFisik.Domain.Validation.Mensalidades;
 using BarraFisik.Domain.ValueObjects;
 
 namespace BarraFisik.Domain.Entities
@@ -27,6 +25,9 @@ namespace BarraFisik.Domain.Entities
 
         public bool isPersonal { get; set; }
         public decimal ValorPersonal { get; set; }
+
+        public int TipoPagamentoId { get; set; }
+        public virtual TipoPagamento TipoPagamento { get; set; }
 
         public ValidationResult ResultadoValidacao { get; private set; }
     }

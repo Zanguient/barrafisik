@@ -35,10 +35,30 @@
                 </div>
                 <span class="error text-small block" ng-if="FormEdit.DataPagamento.$dirty && FormEdit.DataPagamento.$invalid">Informe a Data de Pagamento</span>
             </td>
-            <td colspan="2">
-                <div class="pull-right">
-                    <input type="submit" class="btn btn-primary btn-sm margin-right-15" value="Salvar">
-                    <input type="button" class="btn btn-primary btn-sm margin-right-15" value="Cancelar" ng-click="setEditId(-1)">
+        </tr>
+        <tr>
+            <td>Tipo de Pagamento: <span class="symbol required"></span></td>
+            <td ng-class="{'has-error':Form.TiposPag.$dirty && Form.TiposPag.$invalid, 'has-success':Form.TiposPag.$valid}">
+                <select class="form-control" ng-model="m.TipoPagamentoId">
+                    <option ng-selected="m.TipoPagamentoId == item.TipoPagamentoId" ng-repeat="item in tipos" ng-value="item.TipoPagamentoId">{{item.Descricao}}</option>
+                </select>
+                <span class="error text-small block" ng-if="FormEdit.TiposPag.$dirty && FormEdit.TiposPag.$invalid">Informe o Tipo de Pagamento</span>
+            </td>
+            <td>
+                <div class="checkbox clip-check check-primary">
+                    <input type="checkbox" id="isPersonal"
+                           ng-model="m.isPersonal">
+                    <label for="isPersonal"> Personal </label>
+                </div>
+            </td>
+            <td  ng-class="{'has-error':FormEdit.ValorPersonal.$dirty && FormEdit.ValorPersonal.$invalid, 'has-success':FormEdit.ValorPersonal.$valid}" class="width-200">
+                <input name="ValorPersonal" ng-if="m.isPersonal" ng-disabled="!m.isPersonal" class="form-control" type="text" ng-model="m.ValorPersonal" placeholder="Valor Pago Personal R$..." required/>
+                <span class="error text-small block" ng-if="FormEdit.ValorPersonal.$dirty && FormEdit.ValorPersonal.$invalid">Informe o Valor do Personal</span>
+            </td>
+            <td>
+                <div class="pull-right">              
+                    <button type="submit" class="btn btn-primary btn-sm" tooltip-placement="top" tooltip="Salvar"><i class="fa fa-check" /></button>
+                    <button type="submit" class="btn btn-primary btn-sm" tooltip-placement="top" tooltip="Cancelar" ng-click="setEditId(-1)"><i class="fa fa-close" /></button>           
                 </div>
             </td>
         </tr>

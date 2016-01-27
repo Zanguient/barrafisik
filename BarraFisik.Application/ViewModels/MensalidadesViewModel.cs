@@ -36,5 +36,8 @@ namespace BarraFisik.Application.ViewModels
 
         public bool isPersonal { get; set; }
         public decimal ValorPersonal { get; set; }
+
+        public int TipoPagamentoId { get; set; }
+        public virtual TipoPagamento TipoPagamento { get; set; }
     }
 }

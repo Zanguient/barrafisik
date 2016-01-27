@@ -1,0 +1,36 @@
+﻿<div class="modal-header">
+    <h3 class="modal-title">Ficha - {{funcionario.Nome}}</h3>   
+</div>
+<div class="modal-body">
+
+        <table class="table no-bg">
+            <tr>
+                <td>CPF: </td>
+                <td> {{funcionario.Cpf | cpf}} </td>
+                <td>E-mail: </td>
+                <td> {{funcionario.Email}} </td>
+            </tr>
+            <tr>
+                <td>Telefone: </td>
+                <td> {{funcionario.Telefone | telefone}} </td>
+                <td>Celular: </td>
+                <td> {{funcionario.Ceular | celular}} </td>
+            </tr>
+            <tr>
+                <td>Endereço: </td>
+                <td colspan="3"> {{funcionario.Endereco}} - {{funcionario.Bairro}} </td>
+            </tr>
+            <tr>
+                <td>Data Nascimento: </td>
+                <td> {{funcionario.DataNascimento | date: 'dd/MM/yyyy'}} ( {{Idade}} anos ) </td>
+            </tr> 
+        </table>
+    <div class="modal-footer">
+        <div class="pull-left">
+            <span ng-if="funcionario.isAtivo" class="label label-sm label-success">Ativo</span>
+            <span ng-if="!funcionario.isAtivo" class="label label-sm label-inverse">Inativo</span>
+        </div>
+        <button type="button" class="btn btn-primary btn-o" ng-click="vm.cancel()">Fechar</button>
+    </div>
+</div>
+                

@@ -3,42 +3,44 @@
 
     app.controller('mensalidadesCtrl', mensalidadesCtrl);
 
-    function mensalidadesCtrl($scope, ClienteId, modalService, $modalInstance, mensalidadesData, ngTableParams, $filter, $timeout, SweetAlert, toaster) {
+    function mensalidadesCtrl($scope, ClienteId, modalService, $modalInstance, tipoPagamentoData, mensalidadesData, ngTableParams, $filter, $timeout, SweetAlert, toaster) {
         var vm = this;
         vm.mensalidades = [];
 
         vm.cancel = function () {
             $modalInstance.dismiss('cancel');
         };
-      
-        function loadTable(data) {
-            $scope.tableParams = new ngTableParams({
-                page: 1, // show first page
-                count: 12, // count per page
-                sorting: {
-                    DataPagamento: 'desc' // initial sorting
-                }
-            }, {
-                counts: [],
-                total: data.length, // length of data
-                getData: function ($defer, params) {
-                    // use build-in angular filter
-                    var orderedData = params.sorting() ? $filter('orderBy')(data, params.orderBy()) : data;
-                    $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
-                }
-            });
-
-            $scope.$watch('vm.mensalidades', function () {
-                $scope.tableParams.reload();
-            });
-        }
 
         mensalidadesData.getMensalidades(ClienteId).then(function (result) {
             vm.mensalidades = result.data;
-            loadTable(vm.mensalidades);
         });
 
-        vm.delete = function (id) {            
+        //List Tipos de Pagamento
+        tipoPagamentoData.getTipos().then(function (tipos) {
+            $scope.tipos = tipos.data;
+        });
+
+        $scope.tableParams = new ngTableParams({
+            page: 1, // show first page
+            count: 12, // count per page
+            sorting: {
+                DataPagamento: 'desc' // initial sorting
+            }
+        }, {
+            counts: [],
+            total: vm.mensalidades.length, // length of data
+            getData: function ($defer, params) {
+                // use build-in angular filter
+                var orderedData = params.sorting() ? $filter('orderBy')(vm.mensalidades, params.orderBy()) : vm.mensalidades;
+                $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+            }
+        });
+
+        $scope.$watch('vm.mensalidades', function () {
+            $scope.tableParams.reload();
+        });
+
+        vm.delete = function (id) {
             var modalOptions = {
                 closeButtonText: 'Cancelar',
                 actionButtonText: 'Excluir',
@@ -57,7 +59,7 @@
                     });
                     $scope.tableParams.reload();
                 }), function (data) {
-                    
+
                 };
             });
         }
@@ -79,7 +81,7 @@
                             }
                         }
                     }
-                    angular.element('.ng-invalid[name=' + firstError + ']').focus();                    
+                    angular.element('.ng-invalid[name=' + firstError + ']').focus();
                     return;
 
                 } else {
@@ -88,6 +90,9 @@
                     mensalidade.ValorPago = mensalidade.ValorPago.toString().replace(",", ".");
                     mensalidadesData.editMensalidade(mensalidade).success(function () {
                         toaster.pop('success', '', 'Mensalidade Atualizada com Sucesso!');
+                        mensalidadesData.getMensalidades(ClienteId).then(function (result) {
+                            vm.mensalidades = result.data;
+                        });
                         $scope.editId = -1;
                     }).error(function (error) {
                         var errors = [];

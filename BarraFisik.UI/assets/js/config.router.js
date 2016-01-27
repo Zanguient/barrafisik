@@ -211,6 +211,41 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
             }
         })
 
+        //CADASTROS BÁSICOS
+        //Armazem
+        .state('app.armazem', {
+            url: "/armazem",
+            templateUrl: "app/views/armazem/armazem.html",
+            resolve: loadSequence('armazemCtrl', 'armazemData', 'ngTable', 'ui.mask'),
+            title: 'Armaz&eacute;m',
+            ncyBreadcrumb: {
+                label: 'Armaz&eacute;m'
+            },
+            controller: 'armazemCtrl as vm'
+        })
+        //Funcionarios
+        .state('app.funcionarios', {
+            url: "/funcionarios",
+            templateUrl: "app/views/funcionarios/funcionarios.html",
+            resolve: loadSequence('funcionariosCtrl', 'funcionariosData', 'ngTable', 'ui.mask', 'clienteFilters'),
+            title: 'Funcionarios',
+            ncyBreadcrumb: {
+                label: 'Funcionarios'
+            },
+            controller: 'funcionariosCtrl as vm'
+        })
+        //Fornecedores
+        .state('app.fornecedores', {
+            url: "/fornecedores",
+            templateUrl: "app/views/fornecedores/fornecedores.html",
+            resolve: loadSequence('fornecedoresCtrl', 'fornecedoresData', 'ngTable', 'ui.mask', 'clienteFilters'),
+            title: 'Fornecedores',
+            ncyBreadcrumb: {
+                label: 'Fornecedores'
+            },
+            controller: 'fornecedoresCtrl as vm'
+        })
+
         //Valores
      .state('app.valores', {
          url: "/valores",
@@ -222,6 +257,8 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
          },
          controller: 'valoresCtrl as vm'
      });
+
+
 
     // Generates a resolve object previously configured in constant.JS_REQUIRES (config.constant.js)
     function loadSequence() {

@@ -75,6 +75,9 @@ namespace BarraFisik.API.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (mensalidade.isPersonal == false)
+                    mensalidade.ValorPersonal = 0;
+
                 var result = _mensalidadesApp.Update(mensalidade);
 
                 if (!result.IsValid)

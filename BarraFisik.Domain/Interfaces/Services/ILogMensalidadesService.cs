@@ -1,5 +1,4 @@
-﻿using System;
-using BarraFisik.Domain.Entities;
+﻿using BarraFisik.Domain.Entities;
 
 namespace BarraFisik.Domain.Interfaces.Services
 {

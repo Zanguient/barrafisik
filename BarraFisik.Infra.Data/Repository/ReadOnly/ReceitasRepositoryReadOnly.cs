@@ -40,10 +40,11 @@ namespace BarraFisik.Infra.Data.Repository.ReadOnly
 	                            af.Valor as Valor, 
 	                            cf.Categoria as Categoria,
 	                            af.ReceitasAvaliacaoFisicaId as ReceitasId,
-	                            af.Nome as Cliente,
+	                            c.Nome as Cliente,
 	                            cf.CategoriaFinanceiraId as CategoriaFinanceiraId
                             from ReceitasAvaliacoesFisicas af
                             inner join CategoriaFinanceira cf on af.CategoriaFinanceiraId = cf.CategoriaFinanceiraId
+                            left join Cliente c on af.ClienteId = c.ClienteId
                             union
                             select 
 	                            CONVERT(varchar(10), m.DataPagamento, 103) as DataReceita, 

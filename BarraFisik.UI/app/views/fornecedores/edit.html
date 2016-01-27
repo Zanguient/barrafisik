@@ -1,0 +1,105 @@
+﻿<div class="modal-header">
+    <h3 class="modal-title">Fornecedor</h3>
+</div>
+<div class="modal-body">
+    <ul>
+        <li ng-repeat="error in vm.errors" class="text-danger">{{error}}</li>
+    </ul>
+    <form name="FormEdit" novalidate ng-submit="formEdit.submit(FormEdit, fornecedor)">
+        <div class="checkbox clip-check check-primary check-md">
+        </div>
+        <table class="table no-bg">
+            <tr>
+                <td>Nome: <span class="symbol required"></span></td>
+                <td colspan="2" ng-class="{'has-error':FormEdit.Nome.$dirty && FormEdit.Nome.$invalid, 'has-success':FormEdit.Nome.$valid}">
+                    <input class="form-control" type="text" name="Nome" ng-model="fornecedor.Nome" required>
+                    <span class="error text-small block" ng-if="FormEdit.Nome.$dirty && FormEdit.Nome.$invalid">Informe o Nome</span>
+                </td>
+                <td>
+                    <div class="radio clip-radio radio-primary radio-inline">
+                        <input type="radio" id="CPF" name="cpfcnpj" ng-click="cpfmask()" ng-value="CPF" ng-model="cpfcheked">
+                        <label for="CPF">
+                            CPF
+                        </label>
+                    </div>
+                    <div class="radio clip-radio radio-primary radio-inline">
+                        <input type="radio" id="CNPJ" name="cpfcnpj" ng-click="cnpjmask()" ng-value="CNPJ" ng-model="cnpjcheked">
+                        <label for="CNPJ">
+                            CNPJ
+                        </label>
+                    </div>
+                </td>
+                <td colspan="2">
+                    <input class="form-control" type="text" name="cpfcnpj" ng-model="fornecedor.CpfCnpj" ui-mask="{{cpfcnpj}}">
+                </td>
+            </tr>
+            <tr>
+                <td>Razão Social: </td>
+                <td colspan="2">
+                    <input class="form-control" type="text" ng-model="fornecedor.RazaoSocial">
+                </td>
+                <td>E-mail: </td>
+                <td colspan="2" ng-class="{'has-error':FormEdit.email.$dirty && FormEdit.email.$invalid, 'has-success':FormEdit.email.$valid}">
+                    <input class="form-control" type="email" name="email" ng-model="fornecedor.Email">
+                    <span class="error text-small block" ng-if="FormEdit.email.$error.email">E-mail inválido.</span>
+                </td>
+            </tr>
+            <tr>
+                <td>Telefone: </td>
+                <td>
+                    <input class="form-control" type="text" ng-model="fornecedor.Telefone1" ui-mask="?(99) 9999-9999">
+                </td>
+                <td>Telefone 2: </td>
+                <td>
+                    <input class="form-control" type="text" ng-model="fornecedor.Telefone2" ui-mask="?(99) 9999-9999">
+                </td>
+                <td>Celular: </td>
+                <td>
+                    <input class="form-control" type="text" ng-model="fornecedor.Celular" ui-mask="?(99) 99999-9999">
+                </td>
+            </tr>
+            <tr>
+                <td>Fax: </td>
+                <td>
+                    <input class="form-control" type="text" ng-model="fornecedor.Fax" ui-mask="?(99) 9999-9999">
+                </td>
+                <td>Endereço: </td>
+                <td colspan="3">
+                    <input class="form-control" type="text" ng-model="fornecedor.Endereco">
+                </td>
+            </tr>
+            <tr>
+                <td>Número: </td>
+                <td>
+                    <input class="form-control" type="text" ng-model="fornecedor.Numero">
+                </td>
+                <td>Bairro: </td>
+                <td>
+                    <input class="form-control" type="text" ng-model="fornecedor.Bairro">
+                </td>
+                <td>Cidade: </td>
+                <td>
+                    <input class="form-control" type="text" ng-model="fornecedor.Cidade">
+                </td>
+            </tr>
+            <tr>
+                <td>CEP: </td>
+                <td>
+                    <input class="form-control" type="text" ng-model="fornecedor.Cep" ui-mask="99999-999">
+                </td>
+            </tr>
+        </table>
+
+        <!-- class="editRowTd" -->
+        <div class="modal-footer">
+            <div class="pull-left">
+                <div class="checkbox text-left" id="isAtivo">
+                    <switch ng-model="fornecedor.isAtivo" on="Ativo" off="Inativo" class="green"></switch>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary btn-o">Salvar</button>
+            <button type="button" class="btn btn-primary btn-o" ng-click="vm.cancel()">Fechar</button>
+        </div>
+    </form>
+</div>
+

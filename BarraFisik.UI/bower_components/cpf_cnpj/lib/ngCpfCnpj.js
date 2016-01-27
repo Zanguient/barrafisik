@@ -33,7 +33,7 @@
         module.directive('ngCpf', function () {
             return {
 
-                restrict: 'A',
+                restrict: 'AC',
 
                 require: 'ngModel',
 
@@ -50,7 +50,7 @@
         module.directive('ngCnpj', function () {
             return {
 
-                restrict: 'A',
+                restrict: 'AC',
 
                 require: 'ngModel',
 

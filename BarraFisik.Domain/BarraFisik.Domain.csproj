@@ -37,9 +37,12 @@
     <Reference Include="System.Web" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities\Armazem.cs" />
     <Compile Include="Entities\CategoriaFinanceira.cs" />
     <Compile Include="Entities\Cliente.cs" />
     <Compile Include="Entities\Despesas.cs" />
+    <Compile Include="Entities\Fornecedores.cs" />
+    <Compile Include="Entities\Funcionarios.cs" />
     <Compile Include="Entities\LogMensalidades.cs" />
     <Compile Include="Entities\LogSistema.cs" />
     <Compile Include="Entities\FilaEspera.cs" />
@@ -51,6 +54,9 @@
     <Compile Include="Entities\TipoPagamento.cs" />
     <Compile Include="Entities\Valores.cs" />
     <Compile Include="Exceptions\CustomException.cs" />
+    <Compile Include="Interfaces\Repository\IFornecedoresRepository.cs" />
+    <Compile Include="Interfaces\Repository\IArmazemRepository.cs" />
+    <Compile Include="Interfaces\Repository\IFuncionariosRepository.cs" />
     <Compile Include="Interfaces\Repository\IClienteRepository.cs" />
     <Compile Include="Interfaces\Repository\IRelatorioFinanceiroRepository.cs" />
     <Compile Include="Interfaces\Repository\ILogMensalidadesRepository.cs" />
@@ -73,6 +79,9 @@
     <Compile Include="Interfaces\Repository\ReadOnly\IClienteRepositoryReadOnly.cs" />
     <Compile Include="Interfaces\Repository\ReadOnly\IHorarioRepositoryReadOnly.cs" />
     <Compile Include="Interfaces\Repository\ReadOnly\IValoresRepositoryReadOnly.cs" />
+    <Compile Include="Interfaces\Services\IFornecedoresService.cs" />
+    <Compile Include="Interfaces\Services\IFuncionariosService.cs" />
+    <Compile Include="Interfaces\Services\IArmazemService.cs" />
     <Compile Include="Interfaces\Services\IClienteService.cs" />
     <Compile Include="Interfaces\Services\IRelatorioFinanceiroService.cs" />
     <Compile Include="Interfaces\Services\ILogMensalidadesService.cs" />
@@ -93,6 +102,9 @@
     <Compile Include="Interfaces\Validation\IRegra.cs" />
     <Compile Include="Interfaces\Validation\ISelfValidation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\FornecedoresService.cs" />
+    <Compile Include="Services\FuncionariosService.cs" />
+    <Compile Include="Services\ArmazemService.cs" />
     <Compile Include="Services\ClienteService.cs" />
     <Compile Include="Services\CategoriaFinanceiraService.cs" />
     <Compile Include="Services\RelatorioFinanceiroService.cs" />
