@@ -34,6 +34,7 @@ namespace BarraFisik.Application.AutoMapper
             Mapper.CreateMap<Armazem, ArmazemViewModel>();
             Mapper.CreateMap<Funcionarios, FuncionariosViewModel>();
             Mapper.CreateMap<Fornecedores, FornecedoresViewModel>();
+            Mapper.CreateMap<SearchDespesa, SearchDespesasViewModel>();
         }
     }
 }

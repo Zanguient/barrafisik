@@ -17,6 +17,10 @@
             return $http.get(apiUrl + 'api/fornecedoresAtivos');
         }
 
+        function getById(id) {
+            return $http.get(apiUrl + 'api/fornecedores/'+id);
+        }
+
         function add(fornecedor) {
             return $http.post(apiUrl + 'api/fornecedores', fornecedor);
         }
@@ -32,6 +36,7 @@
         var service = {
             getAll: getAll,
             getAllAtivos: getAllAtivos,
+            getById: getById,
             add: add,
             edit: edit,
             remove: remove

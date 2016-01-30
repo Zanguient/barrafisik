@@ -24,23 +24,23 @@ namespace BarraFisik.Application.App
         {
             var receitas = Mapper.Map<ReceitasViewModel, Receitas>(receitasViewModel);            
 
-            BeginTransaction();
+            //BeginTransaction();
 
-            _receitasService.Add(receitas);
+            //_receitasService.Add(receitas);
 
-            //Log
-            var logRecDesp = new LogReceitasDespesas
-            {
-                Data = receitas.Data,
-                Valor = receitas.Valor,
-                Nome = receitas.Nome,
-                Observacao = receitas.Observacao,
-                CategoriaFinanceiraId = receitas.CategoriaFinanceiraId.ToString(),
-                RegistroId = receitas.ReceitasId.ToString()
-            };
+            ////Log
+            //var logRecDesp = new LogReceitasDespesas
+            //{
+            //    Data = receitas.Data,
+            //    Valor = receitas.Valor,
+            //    Nome = receitas.Nome,
+            //    Observacao = receitas.Observacao,
+            //    CategoriaFinanceiraId = receitas.CategoriaFinanceiraId.ToString(),
+            //    RegistroId = receitas.ReceitasId.ToString()
+            //};
 
-            _logReceitasDespesasService.AddLog("Cadastro", logRecDesp);
-            Commit();
+            //_logReceitasDespesasService.AddLog("Cadastro", logRecDesp);
+            //Commit();
         }
 
         public ReceitasViewModel GetById(Guid id)
@@ -62,44 +62,44 @@ namespace BarraFisik.Application.App
         {
             var receitas = Mapper.Map<ReceitasViewModel, Receitas>(receitasViewModel);
 
-            BeginTransaction();
-            _receitasService.Update(receitas);
+            //BeginTransaction();
+            //_receitasService.Update(receitas);
 
-            //Log
-            var logRecDesp = new LogReceitasDespesas
-            {
-                Data = receitas.Data,
-                Valor = receitas.Valor,
-                Nome = receitas.Nome,
-                Observacao = receitas.Observacao,
-                CategoriaFinanceiraId = receitas.CategoriaFinanceiraId.ToString(),
-                RegistroId = receitas.ReceitasId.ToString()
-            };
+            ////Log
+            //var logRecDesp = new LogReceitasDespesas
+            //{
+            //    Data = receitas.Data,
+            //    Valor = receitas.Valor,
+            //    Nome = receitas.Nome,
+            //    Observacao = receitas.Observacao,
+            //    CategoriaFinanceiraId = receitas.CategoriaFinanceiraId.ToString(),
+            //    RegistroId = receitas.ReceitasId.ToString()
+            //};
 
-            _logReceitasDespesasService.AddLog("Cadastro", logRecDesp);
-            Commit();
+            //_logReceitasDespesasService.AddLog("Cadastro", logRecDesp);
+            //Commit();
         }
 
         public void Remove(Guid id)
         {
             var receitas = Mapper.Map<ReceitasViewModel, Receitas>(GetById(id));
 
-            BeginTransaction();
-            _receitasService.Remove(receitas);
+            //BeginTransaction();
+            //_receitasService.Remove(receitas);
 
-            //Log
-            var logRecDesp = new LogReceitasDespesas
-            {
-                Data = receitas.Data,
-                Valor = receitas.Valor,
-                Nome = receitas.Nome,
-                Observacao = receitas.Observacao,
-                CategoriaFinanceiraId = receitas.CategoriaFinanceiraId.ToString(),
-                RegistroId = receitas.ReceitasId.ToString()
-            };
+            ////Log
+            //var logRecDesp = new LogReceitasDespesas
+            //{
+            //    Data = receitas.Data,
+            //    Valor = receitas.Valor,
+            //    Nome = receitas.Nome,
+            //    Observacao = receitas.Observacao,
+            //    CategoriaFinanceiraId = receitas.CategoriaFinanceiraId.ToString(),
+            //    RegistroId = receitas.ReceitasId.ToString()
+            //};
 
-            _logReceitasDespesasService.AddLog("Cadastro", logRecDesp);
-            Commit();
+            //_logReceitasDespesasService.AddLog("Cadastro", logRecDesp);
+            //Commit();
         }
 
         public void Dispose()

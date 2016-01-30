@@ -5,6 +5,7 @@ using BarraFisik.Application.Interfaces;
 using BarraFisik.Application.ViewModels;
 using BarraFisik.Domain.Entities;
 using BarraFisik.Domain.Interfaces.Services;
+using BarraFisik.Domain.ValueObjects;
 using BarraFisik.Infra.Data.Context;
 
 namespace BarraFisik.Application.App
@@ -24,23 +25,12 @@ namespace BarraFisik.Application.App
         {
             var despesas = Mapper.Map<DespesasViewModel, Despesas>(despesasViewModel);
 
-            despesas.Data = DateTime.Now;
-
             BeginTransaction();
+            despesas.DataEmissao = DateTime.Now;
             _despesasService.Add(despesas);
 
             //Log
-            var logRecDesp = new LogReceitasDespesas
-            {
-                Data = despesas.Data,
-                Valor = despesas.Valor,
-                Nome = despesas.Nome,
-                Observacao = despesas.Observacao,
-                CategoriaFinanceiraId = despesas.CategoriaFinanceiraId.ToString(),
-                RegistroId = despesas.DespesasId.ToString()
-            };
-
-            _logReceitasDespesasService.AddLog("Cadastro", logRecDesp);
+            _logReceitasDespesasService.AddLog("Cadastro", GetLog(despesas));
             Commit();
         }
 
@@ -59,25 +49,27 @@ namespace BarraFisik.Application.App
             return Mapper.Map<IEnumerable<Despesas>, IEnumerable<DespesasViewModel>>(_despesasService.GetDespesas());
         }
 
+        public IEnumerable<DespesasViewModel> GetDespesasAll()
+        {
+            return Mapper.Map<IEnumerable<Despesas>, IEnumerable<DespesasViewModel>>(_despesasService.GetDespesasAll());
+        }
+
+        public IEnumerable<DespesasViewModel> SearchDespesas(SearchDespesasViewModel searchViewModel)
+        {
+            var search = Mapper.Map<SearchDespesasViewModel, SearchDespesa>(searchViewModel);
+            return Mapper.Map<IEnumerable<Despesas>, IEnumerable<DespesasViewModel>>(_despesasService.SearchDespesas(search));
+        }
+
         public void Update(DespesasViewModel despesasViewModel)
         {
             var despesas = Mapper.Map<DespesasViewModel, Despesas>(despesasViewModel);
 
             BeginTransaction();
-            _despesasService.Update(despesas);
+            _despesasService.Add(despesas);
 
-            //Log
-            var logRecDesp = new LogReceitasDespesas
-            {
-                Data = despesas.Data,
-                Valor = despesas.Valor,
-                Nome = despesas.Nome,
-                Observacao = despesas.Observacao,
-                CategoriaFinanceiraId = despesas.CategoriaFinanceiraId.ToString(),
-                RegistroId = despesas.DespesasId.ToString()
-            };
+            ////Log
+            _logReceitasDespesasService.AddLog("Update", GetLog(despesas));
 
-            _logReceitasDespesasService.AddLog("Update", logRecDesp);
             Commit();
         }
 
@@ -88,18 +80,8 @@ namespace BarraFisik.Application.App
             BeginTransaction();
             _despesasService.Remove(despesas);
 
-            //Log
-            var logRecDesp = new LogReceitasDespesas
-            {
-                Data = despesas.Data,
-                Valor = despesas.Valor,
-                Nome = despesas.Nome,
-                Observacao = despesas.Observacao,
-                CategoriaFinanceiraId = despesas.CategoriaFinanceiraId.ToString(),
-                RegistroId = despesas.DespesasId.ToString()
-            };
-
-            _logReceitasDespesasService.AddLog("Remove", logRecDesp);
+            //Log       
+            _logReceitasDespesasService.AddLog("Remove", GetLog(despesas));
             Commit();
         }
 
@@ -107,5 +89,31 @@ namespace BarraFisik.Application.App
         {
             _despesasService.Dispose();
         }
+
+        private static LogReceitasDespesas GetLog(Despesas d)
+        {
+            var logRecDesp = new LogReceitasDespesas
+            {
+                Documento = d.Documento,
+                DataVencimento = d.DataVencimento,
+                DataPagamento = d.DataPagamento,
+                DataEmissao = d.DataEmissao,
+                Valor = d.Valor,
+                Juros = d.Juros,
+                Multa = d.Multa,
+                ValorTotal = d.ValorTotal,
+                Observacao = d.Observacao,
+                Situacao = d.Situacao,
+                CategoriaFinanceiraId = d.CategoriaFinanceiraId.ToString(),
+                FornecedorId = d.FornecedorId.ToString(),
+                FuncionarioId = d.FuncionarioId.ToString(),                
+                TipoPagamentoId = d.TipoPagamentoId,
+                RegistroId = d.DespesasId.ToString()
+            };
+
+            return logRecDesp;
+        }
+
+        
     }
 }

@@ -1,4 +1,102 @@
-﻿<form name="Form" id="form" novalidate ng-submit="form.submit(Form, despesa)">
+﻿<div class="modal-header">
+    <h3 class="modal-title">Despesa</h3>
+</div>
+<div class="modal-body">
+    <ul>
+        <li ng-repeat="error in vm.errors" class="text-danger">{{error}}</li>
+    </ul>
+    <form name="Form" id="form" novalidate ng-submit="form.submit(Form, despesa)">
+        <div class="checkbox clip-check check-primary check-md">
+        </div>
+        <table class="table no-bg">
+            <tr>
+                <td>Documento: </td>
+                <td colspan="2"> <input class="form-control input-sm" type="text" name="Nome" ng-model="despesa.Documento"> </td>
+                <td>Categoria: </td>
+                <td colspan="2" ng-class="{'has-error':Form.CategoriaFinanceira.$dirty && Form.CategoriaFinanceira.$invalid, 'has-success':Form.CategoriaFinanceira.$valid}">
+                    <select name="CategoriaFinanceira" ng-model="despesa.CategoriaFinanceiraId" class="text-bold" required>
+                        <option value="">Selecione...</option>
+                        <option ng-repeat="c in categorias" value="{{c.CategoriaFinanceiraId}}">{{c.Categoria}}</option>
+                    </select>
+                    <span class="error text-small block" ng-if="Form.CategoriaFinanceira.$dirty && Form.CategoriaFinanceira.$invalid">Informe a Categoria</span>
+                </td>               
+            </tr>
+            <tr>
+                <td>Fornecedor: </td>
+                <td colspan="2">
+                    <select name="Fornecedores" ng-model="despesa.FornecedorId" class="text-bold">
+                        <option value=""><b>Selecione...</b></option>
+                        <option ng-repeat="fo in fornecedores   " value="{{fo.FornecedorId}}">{{fo.Nome}}</option>
+                    </select>
+                </td>
+                <td>Funcionário: </td>
+                <td colspan="2">
+                    <select name="Funcionarios" ng-model="despesa.FuncionarioId" class="text-bold">
+                        <option value="">Selecione...</option>
+                        <option ng-repeat="f in funcionarios" value="{{f.FuncionarioId}}">{{f.Nome}}</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Valor: <span class="symbol required"></span></td>
+                <td ng-class="{'has-error':Form.Valor.$dirty && Form.Valor.$invalid}">
+                    <input class="form-control input-sm" name="Valor" type="text" ng-model="despesa.Valor" ng-blur="soma()" mask-money requied>
+                    <span class="error text-small block" ng-if="Form.Valor.$dirty && Form.Valor.$invalid">Informe o Valor</span>
+                </td>
+                <td>Juros: </td>
+                <td>
+                    <input class="form-control input-sm" mask-money type="text" ng-model="despesa.Juros">
+                </td>
+                <td>Multa: </td>
+                <td>
+                    <input class="form-control input-sm" mask-money type="text" ng-model="despesa.Multa">
+                </td>
+            </tr>
+            <tr>
+                <td>Tipo Pagamento: </td>
+                <td colspan="3">
+                    <select name="TiposPag" ng-model="despesa.TipoPagamentoId" class="text-bold">
+                        <option value="">Selecione... </option>
+                        <option ng-repeat="t in tiposPagamento" value="{{t.TipoPagamentoId}}">{{t.Sigla}} - {{t.Descricao}}</option>
+                    </select>                   
+                </td>
+                <td>Valor Total: </td>
+                <td>{{despesa.ValorTotal = despesa.Valor + despesa.Juros + despesa.Multa | currency:'R$ '}}<td>
+            </tr>
+            <tr>
+                <td >Data Vencimento: <span class="symbol required"></span></td>
+                <td colspan="2" ng-class="{'has-error':Form.Vencimento.$dirty && Form.Vencimento.$invalid, 'has-success':Form.Vencimento.$valid}">
+                    <input class="form-control input-sm" name="Vencimento" type="date" ng-model="despesa.DataVencimento" required>
+                    <span class="error text-small block" ng-if="Form.Vencimento.$error.date">Data de Nascimento inválida.</span>
+                    <span class="error text-small block" ng-if="Form.Vencimento.$dirty && Form.Vencimento.$invalid">Informe a Data de Vencimento</span>
+                </td>
+                <td >Data Pagamento: </td>
+                <td colspan="2" ng-class="{'has-error':Form.Pagamento.$dirty && Form.Pagamento.$invalid}">
+                    <input class="form-control input-sm" name="Pagamento" type="date" ng-model="despesa.DataPagamento">
+                    <span class="error text-small block" ng-if="Form.Pagamento.$error.date">Data de Nascimento inválida.</span>
+                </td>
+                
+            </tr>
+            
+            <tr>
+                <td>Observação: </td>
+                <td colspan="5">
+                    <textarea class="form-control input-sm" style="resize: none;" ng-model="despesa.Observacao" rows="3"></textarea>
+                </td>
+            </tr>
+        </table>
+
+        <!-- class="editRowTd" -->
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-primary btn-o">Cadastrar</button>
+            <button type="button" class="btn btn-primary btn-o" ng-click="vm.cancel()">Fechar</button>
+        </div>
+    </form>
+</div>
+
+
+
+<!--<form name="Form" id="form" novalidate ng-submit="form.submit(Form, despesa)">
 	<table class="table no-bg">
 		<tr>
 			<td>Categoria: <span class="symbol required"></span></td>
@@ -31,4 +129,4 @@
 			</td>
 		</tr>
 	</table>
-</form>
+</form>-->

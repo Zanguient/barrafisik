@@ -13,24 +13,31 @@ namespace BarraFisik.Application.ViewModels
 
         [Key]
         public Guid DespesasId { get; set; }
-        public DateTime Data { get; set; }
+        public string Documento { get; set; }
+        public DateTime? DataPagamento { get; set; }
 
-        [Required(ErrorMessage = "Informe o Valor")]
-        //[RegularExpression(@"^\d+.\d{0,2}$", ErrorMessage = "Máximo de 2 casas decimais")]
+        [Required(ErrorMessage = "Informe a Data de Vencimento")]
+        public DateTime DataVencimento { get; set; }
+        public DateTime DataEmissao { get; set; }
         public decimal Valor { get; set; }
-
-        [Required(ErrorMessage = "Informe o Nome da Despesa")]
-        [MaxLength(100, ErrorMessage = "Máximo {0} caracteres")]
-        [MinLength(2, ErrorMessage = "Mínimo {0} caracteres")]
-        public string Nome { get; set; }
-
-
-        [MaxLength(250, ErrorMessage = "Máximo {0} caracteres")]
+        public decimal Juros { get; set; }
+        public decimal Multa { get; set; }
+        public decimal ValorTotal { get; set; }
         public string Observacao { get; set; }
+        public string Situacao { get; set; }
 
         [Required(ErrorMessage = "Informe a Categoria Financeira")]
         public Guid CategoriaFinanceiraId { get; set; }
         public virtual CategoriaFinanceira CategoriaFinanceira { get; set; }
+        
+        public int? TipoPagamentoId { get; set; }
+        public virtual TipoPagamento TipoPagamento { get; set; }
+
+        public Guid? FornecedorId { get; set; }
+        public virtual Fornecedores Fornecedores { get; set; }
+
+        public Guid? FuncionarioId { get; set; }
+        public virtual Funcionarios Funcionarios { get; set; }
 
         public string DataDespesa { get; set; }
     }

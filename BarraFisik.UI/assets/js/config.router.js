@@ -174,7 +174,7 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
             templateUrl: "app/views/despesas/despesas.html",
             title: 'Lista das Despesas',
             icon: 'ti-layout-media-left-alt',
-            resolve: loadSequence('despesasCtrl', 'ngTable', 'despesasData', 'categoriaFinanceiraData'),
+            resolve: loadSequence('despesasCtrl', 'ngTable', 'despesasData', 'categoriaFinanceiraData', 'tipoPagamentoData', 'funcionariosData', 'fornecedoresData'),
             controller: "despesasCtrl as vm",
             ncyBreadcrumb: {
                 label: 'Despesas'

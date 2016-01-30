@@ -36,8 +36,7 @@
             counts: [],
             total: vm.categorias.length, // length of data
             getData: function ($defer, params) {
-                // use build-in angular filter
-                var orderedData = params.sorting() ? $filter('orderBy')(vm.categorias, params.orderBy()) : vm.categorias;
+                var orderedData = params.sorting() ? $filter('orderBy')(vm.categorias, params.orderBy()) : m.categorias;
                 $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
             }
         });

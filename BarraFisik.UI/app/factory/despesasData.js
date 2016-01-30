@@ -22,11 +22,16 @@
             return $http.delete(apiUrl + "api/despesas/" + id);
         }
 
+        function searchDespesas(search) {
+            return $http.post(apiUrl + "api/despesas/search", search);
+        }
+
         var service = {
             getDespesas: getDespesas,
             addDespesa: addDespesa,
             editDespesa: editDespesa,
-            deleteDespesa: deleteDespesa
+            deleteDespesa: deleteDespesa,
+            searchDespesas: searchDespesas
         };
 
         return service;

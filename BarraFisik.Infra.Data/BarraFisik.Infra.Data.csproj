@@ -113,6 +113,26 @@
     <Compile Include="Migrations\201601251537490_Add_isAtivo_Fornecedores.Designer.cs">
       <DependentUpon>201601251537490_Add_isAtivo_Fornecedores.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201601271921059_Add_Update_Despesas.cs" />
+    <Compile Include="Migrations\201601271921059_Add_Update_Despesas.Designer.cs">
+      <DependentUpon>201601271921059_Add_Update_Despesas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201601271935219_Add_Update_LogRecDesp.cs" />
+    <Compile Include="Migrations\201601271935219_Add_Update_LogRecDesp.Designer.cs">
+      <DependentUpon>201601271935219_Add_Update_LogRecDesp.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201601281809425_Add_DataEmissao_Despesa_LogRecDesp.cs" />
+    <Compile Include="Migrations\201601281809425_Add_DataEmissao_Despesa_LogRecDesp.Designer.cs">
+      <DependentUpon>201601281809425_Add_DataEmissao_Despesa_LogRecDesp.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201601281843413_Add_TipoPagamento_Despesa.cs" />
+    <Compile Include="Migrations\201601281843413_Add_TipoPagamento_Despesa.Designer.cs">
+      <DependentUpon>201601281843413_Add_TipoPagamento_Despesa.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201601301316270_Add_TipoPagamento_LogRecDesp.cs" />
+    <Compile Include="Migrations\201601301316270_Add_TipoPagamento_LogRecDesp.Designer.cs">
+      <DependentUpon>201601301316270_Add_TipoPagamento_LogRecDesp.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\FonecedoresRepository.cs" />
@@ -177,6 +197,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201601251537490_Add_isAtivo_Fornecedores.resx">
       <DependentUpon>201601251537490_Add_isAtivo_Fornecedores.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201601271921059_Add_Update_Despesas.resx">
+      <DependentUpon>201601271921059_Add_Update_Despesas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201601271935219_Add_Update_LogRecDesp.resx">
+      <DependentUpon>201601271935219_Add_Update_LogRecDesp.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201601281809425_Add_DataEmissao_Despesa_LogRecDesp.resx">
+      <DependentUpon>201601281809425_Add_DataEmissao_Despesa_LogRecDesp.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201601281843413_Add_TipoPagamento_Despesa.resx">
+      <DependentUpon>201601281843413_Add_TipoPagamento_Despesa.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201601301316270_Add_TipoPagamento_LogRecDesp.resx">
+      <DependentUpon>201601301316270_Add_TipoPagamento_LogRecDesp.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

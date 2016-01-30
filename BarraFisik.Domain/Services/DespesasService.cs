@@ -3,6 +3,7 @@ using BarraFisik.Domain.Entities;
 using BarraFisik.Domain.Interfaces.Repository;
 using BarraFisik.Domain.Interfaces.Repository.ReadOnly;
 using BarraFisik.Domain.Interfaces.Services;
+using BarraFisik.Domain.ValueObjects;
 
 namespace BarraFisik.Domain.Services
 {
@@ -20,6 +21,16 @@ namespace BarraFisik.Domain.Services
         public IEnumerable<Despesas> GetDespesas()
         {
             return _despesasRepositoryReadOnly.GetDespesas();
+        }
+
+        public IEnumerable<Despesas> GetDespesasAll()
+        {
+            return _despesasRepository.GetDespesasAll();
+        }
+
+        public IEnumerable<Despesas> SearchDespesas(SearchDespesa sd)
+        {
+            return _despesasRepositoryReadOnly.SearchDespesas(sd);
         }
     }
 }

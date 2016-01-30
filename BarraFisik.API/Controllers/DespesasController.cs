@@ -1,4 +1,6 @@
 ﻿using System;
+using System.ComponentModel.Design;
+using System.Dynamic;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -19,7 +21,6 @@ namespace BarraFisik.API.Controllers
         {
             _despesasApp = despesasApp;
         }
-
 
         [HttpGet]
         [Route("despesas")]
@@ -81,6 +82,27 @@ namespace BarraFisik.API.Controllers
             _despesasApp.Remove(id);
 
             return Request.CreateResponse(HttpStatusCode.OK, "Dado excluído com sucesso!");
+        }
+
+        [HttpPost]
+        [Route("despesas/search")]
+        [GzipCompression]
+        public async Task<HttpResponseMessage> Search(SearchDespesasViewModel searchViewModel)
+        {           
+            if (searchViewModel == null)
+            {
+                var result = _despesasApp.GetDespesasAll();
+                var response = Request.CreateResponse(HttpStatusCode.OK, result);
+                var tsc = new TaskCompletionSource<HttpResponseMessage>();
+                tsc.SetResult(response);
+                return await tsc.Task;
+            } else {
+                var result = _despesasApp.SearchDespesas(searchViewModel);
+                var response = Request.CreateResponse(HttpStatusCode.OK, result);
+                var tsc = new TaskCompletionSource<HttpResponseMessage>();
+                tsc.SetResult(response);
+                return await tsc.Task;
+            }            
         }
     }
 }

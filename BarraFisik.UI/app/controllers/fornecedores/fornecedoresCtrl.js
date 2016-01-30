@@ -105,7 +105,7 @@
                 controller: 'fornecedoresEditCtrl as vm'
             });
             vm.modalInstance.result.then(function (data) {
-                SweetAlert.swal("Sucesso!", "Funcionário cadastrado com sucesso!", "success");
+                SweetAlert.swal("Sucesso!", "Fornecedor salvo com sucesso!", "success");
                 if (vm.isAtivos) {
                     fornecedoresData.getAllAtivos().then(function (result) {
                         vm.fornecedores = result.data;
@@ -120,7 +120,7 @@
             });
         }
 
-        //Editar
+        //Ficha
         $scope.openFicha = function (fornecedor) {
             vm.modalInstance = $modal.open({
                 templateUrl: 'app/views/fornecedores/ficha.html',

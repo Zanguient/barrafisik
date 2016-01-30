@@ -11,6 +11,8 @@ namespace BarraFisik.Application.Interfaces
         DespesasViewModel GetById(Guid id);
         IEnumerable<DespesasViewModel> GetAll();
         IEnumerable<DespesasViewModel> GetDespesas();
+        IEnumerable<DespesasViewModel> GetDespesasAll();
+        IEnumerable<DespesasViewModel> SearchDespesas(SearchDespesasViewModel sd);
         void Update(DespesasViewModel despesasViewModel);
         void Remove(Guid id);
     }

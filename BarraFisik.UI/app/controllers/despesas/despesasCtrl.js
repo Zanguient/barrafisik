@@ -3,7 +3,7 @@
 
     app.controller('despesasCtrl', despesasCtrl);
 
-    function despesasCtrl($scope, ngTableParams, despesasData, SweetAlert, $filter, categoriaFinanceiraData, $state) {
+    function despesasCtrl($scope, ngTableParams, despesasData, tipoPagamentoData, funcionariosData, fornecedoresData, categoriaFinanceiraData, SweetAlert, $filter, $state, $modal) {
         var vm = this;
         vm.despesas = [];
         vm.categorias = [];
@@ -19,11 +19,7 @@
             });
 
             categoriaFinanceiraData.getCategoriaByTipo("Despesas").then(function (cat) {
-                vm.categorias = cat.data;
-                
-                angular.forEach(vm.categorias, function (value, key) {
-                    $scope.categorias.push({ id: value.CategoriaFinanceiraId, title: value.Categoria });
-                });
+                vm.categorias = cat.data;                                
             });
 
             $scope.$emit('UNLOAD');
@@ -33,7 +29,7 @@
             page: 1, // show first page
             count: 50, // count per page
             sorting: {
-                Data: 'desc'
+                DataVencimento: 'asc'
             }            
         }, {
             counts: [],
@@ -50,125 +46,107 @@
             }
         });
 
-        $scope.$watch('vm.despesas', function () {
+        $scope.$watch('vm.despesas', function() {
+            $scope.totalQuitado = 0;
+            $scope.totalPendente = 0;
+            $scope.totalVencido = 0;
+            angular.forEach(vm.despesas, function (value, key) {               
+                if (value.Situacao === "Quitado") {
+                    $scope.totalQuitado = $scope.totalQuitado + value.ValorTotal;
+                } else if (value.Situacao === "Pendente") {
+                    $scope.totalPendente = $scope.totalPendente + value.ValorTotal;
+                } else $scope.totalVencido = $scope.totalVencido + value.ValorTotal;
+            });
             $scope.tableParams.reload();
         });
 
-        $scope.editId = -1;
-
-        $scope.setEditId = function (pid) {
-            $scope.editId = pid;
+        //Search
+        $scope.pesquisar = function (search) {
+            despesasData.searchDespesas(search).then(function (result) {
+                vm.despesas = result.data;
+            });
         };
 
-        $scope.despesa = {
-            Nome: null,
-            Valor: null,
-            Observacao: null,
-        };
-
-        $scope.cancelCreate = function (form) {
-            $scope.createDespesa = false;
-            $scope.despesa = {
-                Nome: null,
-                Valor: null,
-                Observacao: null,
-            };
-            form.$setPristine(true);
+        //Cadastrar
+        $scope.openCadastrar = function () {
+            vm.modalInstance = $modal.open({
+                templateUrl: 'app/views/despesas/create.html',
+                size: 'lg',
+                resolve: {
+                    deps: [
+                        '$ocLazyLoad',
+                        function ($ocLazyLoad) {
+                            return $ocLazyLoad.load(['app/controllers/despesas/despesasCreateCtrl.js', 'ui.mask']);
+                        }
+                    ]
+                },
+                controller: 'despesasCreateCtrl as vm'
+            });
+            vm.modalInstance.result.then(function (data) {
+                SweetAlert.swal("Sucesso!", "Fornecedor cadastrado com sucesso!", "success");
+                despesasData.getDespesas().then(function(result) {
+                    vm.despesas = result.data;
+                });
+            }, function () {
+                console.log('Cancelled');
+            });
         }
 
-        $scope.form = {
-            submit: function (form, despesa) {
-                var firstError = null;
-                if (form.$invalid) {
-
-                    var field = null, firstError = null;
-                    for (field in form) {
-                        if (field[0] != '$') {
-                            if (firstError === null && !form[field].$valid) {
-                                firstError = form[field].$name;
-                            }
-
-                            if (form[field].$pristine) {
-                                form[field].$dirty = true;
-                            }
+        //Editar
+        $scope.openEditar = function (despesa) {
+            vm.modalInstance = $modal.open({
+                templateUrl: 'app/views/despesas/edit.html',
+                size: 'lg',
+                resolve: {
+                    despesa: function () {
+                        return despesa;
+                    },
+                    deps: [
+                        '$ocLazyLoad',
+                        function ($ocLazyLoad) {
+                            return $ocLazyLoad.load(['app/controllers/despesas/despesasEditCtrl.js', 'ui.mask']);
                         }
-                    }
+                    ]
+                },
+                controller: 'despesasEditCtrl as vm'
+            });
+            vm.modalInstance.result.then(function (data) {
+                SweetAlert.swal("Sucesso!", "Despesa salva com sucesso!", "success");
+                despesasData.getDespesas().then(function (result) {
+                    vm.despesas = result.data;
+                });
+            }, function () {
+                console.log('Cancelled');
+            });
+        }
 
-                    angular.element('.ng-invalid[name=' + firstError + ']').focus();
-                    return;
-
-                } else {
-                    // Cadastra a receita
-                    despesa.Valor = despesa.Valor.toString().replace(",", ".");
-                    despesasData.addDespesa(despesa).success(function (despesa) {
-                        //Limpa o formulario
-                        form.$setPristine(true);
-                        $scope.despesa = {
-                            Nome: null,
-                            Valor: null,
-                            Observacao: null,
-                        };
-                        SweetAlert.swal("Cadastrado!", "Despesa cadastrada com sucesso!", "success");
-                        $scope.createDespesa = false;
-                        $state.go($state.current, {}, { reload: true });
-                    }).error(function (error) {
-                        var errors = [];
-                        for (var key in error.ModelState) {
-                            for (var i = 0; i < error.ModelState[key].length; i++) {
-                                errors.push(error.ModelState[key][i]);
-                                SweetAlert.swal("Erro ao cadastrar!", error.ModelState[key][i], "error");
-                            }
+        //Ficha
+        $scope.openFicha = function (despesa) {
+            vm.modalInstance = $modal.open({
+                templateUrl: 'app/views/despesas/ficha.html',
+                size: 'lg',
+                resolve: {
+                    despesa: function () {
+                        return despesa;
+                    },
+                    deps: [
+                        '$ocLazyLoad',
+                        function ($ocLazyLoad) {
+                            return $ocLazyLoad.load(['app/controllers/despesas/despesasFichaCtrl.js', 'app/factory/funcionariosData.js', 'app/factory/fornecedoresData.js']);
                         }
-                        vm.errors = errors;
-                    });
-                }
+                    ]
+                },
+                controller: 'despesasFichaCtrl as vm'
+            });
+            vm.modalInstance.result.then(function () {
 
-            }
-        };
+            }, function () {
+                console.log('Cancelled');
+            });
+        }
 
-        $scope.formEdit = {
-            submit: function (form, despesa) {
-                var firstError = null;
-                if (form.$invalid) {
 
-                    var field = null, firstError = null;
-                    for (field in form) {
-                        if (field[0] != '$') {
-                            if (firstError === null && !form[field].$valid) {
-                                firstError = form[field].$name;
-                            }
-
-                            if (form[field].$pristine) {
-                                form[field].$dirty = true;
-                            }
-                        }
-                    }
-
-                    angular.element('.ng-invalid[name=' + firstError + ']').focus();
-                    return;
-
-                } else {
-                    // Cadastra a receita
-                    despesa.Valor = despesa.Valor.toString().replace(",", ".");
-                    despesasData.editDespesa(despesa).success(function (despesa) {
-                        SweetAlert.swal("Atualizado!", "Despesa salva com sucesso!", "success");
-                        $scope.editId = -1;
-                        $state.go($state.current, {}, { reload: true });
-                    }).error(function (error) {
-                        var errors = [];
-                        for (var key in error.ModelState) {
-                            for (var i = 0; i < error.ModelState[key].length; i++) {
-                                errors.push(error.ModelState[key][i]);
-                                SweetAlert.swal("Erro ao cadastrar!", error.ModelState[key][i], "error");
-                            }
-                        }
-                        vm.errors = errors;
-                    });
-                }
-
-            }
-        };
-
+        
         $scope.delete = function (id) {
             SweetAlert.swal({
                 title: "Confirmar Exclusão?",

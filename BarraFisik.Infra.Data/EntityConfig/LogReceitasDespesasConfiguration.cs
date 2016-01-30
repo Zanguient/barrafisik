@@ -11,10 +11,17 @@ namespace BarraFisik.Infra.Data.EntityConfig
 
             HasKey(r => r.LogReceitasDespesasId);
 
-            Property(l => l.Observacao).IsOptional().HasMaxLength(250);
-            Property(l => l.Valor).HasPrecision(10, 2);
-            Property(l => l.Nome).IsRequired();
+            Property(d => d.Documento).IsOptional().HasMaxLength(100);
+            Property(d => d.Valor).HasPrecision(10, 2);
+            Property(d => d.Juros).HasPrecision(10, 2);
+            Property(d => d.Multa).HasPrecision(10, 2);
+            Property(d => d.ValorTotal).HasPrecision(10, 2);
+            Property(d => d.Observacao).IsOptional().HasMaxLength(250);
+            Property(d => d.Situacao).IsOptional().HasMaxLength(50);
             Property(l => l.CategoriaFinanceiraId).IsRequired();
+            Property(d => d.ClienteId).IsOptional();
+            Property(d => d.FornecedorId).IsOptional();
+            Property(d => d.FuncionarioId).IsOptional();
 
             //ID
             Property(l => l.RegistroId).IsRequired();

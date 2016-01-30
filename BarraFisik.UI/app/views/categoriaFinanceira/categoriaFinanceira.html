@@ -28,7 +28,7 @@
                     </table>
                     <table ng-table="tableParams" class="table">
 
-                        <tbody ng-repeat="c in vm.categorias">
+                        <tbody ng-repeat="c in $data">
                         <tr id="tr{{c.CategoriaFinanceiraId}}" ng-class-odd="'odd'" ng-class-even="'even'">
                             <td class="rowTd" data-title="'Tipo'" sortable="'Tipo'">{{c.Tipo}}</td>
                             <td class="rowTd" data-title="'Categoria'" sortable="'Categoria'">{{c.Categoria}}</td>                                             

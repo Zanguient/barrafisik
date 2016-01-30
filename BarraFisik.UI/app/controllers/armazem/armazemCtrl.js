@@ -1,61 +1,50 @@
 ﻿(function () {
     "use strict";
 
-    app.controller('filaEsperaCtrl', filaEsperaCtrl);
+    app.controller('armazemCtrl', armazemCtrl);
 
-    function filaEsperaCtrl($scope, ngTableParams, filaEsperaData, SweetAlert, $filter, $timeout, $state) {
+    function armazemCtrl($scope, ngTableParams, armazemData, SweetAlert, $filter, $timeout, $state) {
         var vm = this;
-        vm.fila = [];
-        $scope.createFila = false;
-
-
+        vm.armazem = [];
+        $scope.createArmazem = false;
 
         activate();
 
         function activate() {
             $scope.$emit('LOAD');
 
-            //if existe sessioStorage fila
-            if (window.sessionStorage.getItem('fila') != null)
-                window.sessionStorage.removeItem('fila');
-
-            filaEsperaData.getFila().then(function (result) {
-                vm.fila = result.data;
+            armazemData.getArmazem().then(function (result) {
+                vm.armazem = result.data;
                 $scope.$emit('UNLOAD');
             });
         }
-
 
         $scope.tableParams = new ngTableParams({
             page: 1, // show first page
             count: 40, // count per page
             sorting: {
-                DataReserva: 'asc' // initial sorting
+                Descricao: 'asc' // initial sorting
             }
         }, {
-            total: vm.fila.length, // length of data
+            counts: [],
+            total: vm.armazem.length, // length of data
             getData: function ($defer, params) {
                 // use build-in angular filter
-                var orderedData = params.sorting() ? $filter('orderBy')(vm.fila, params.orderBy()) : vm.fila;
+                var orderedData = params.sorting() ? $filter('orderBy')(vm.armazem, params.orderBy()) : vm.armazem;
                 $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
             }
         });
 
-        $scope.$watch('vm.fila', function () {
+        $scope.$watch('vm.armazem', function () {
             $scope.tableParams.reload();
         });
 
 
-        $scope.save = function (fila) {
-            filaEsperaData.editFila(fila).then(function () {
+        $scope.save = function (armazem) {
+            armazemData.editArmazem(armazem).then(function () {
                 SweetAlert.swal("Atualizado!", "Dados salvos com sucesso!", "success");
                 $scope.editId = -1;
             });
-        }
-
-        $scope.cadastrar = function (p) {
-            window.sessionStorage.setItem('fila', JSON.stringify(p));
-            $state.go('app.clientes.cadastrar');
         }
 
         $scope.delete = function (id) {
@@ -78,11 +67,11 @@
                         confirmButtonColor: "#007AFF"
                     });
 
-                    filaEsperaData.deleteFila(id).then(function () {
+                    armazemData.deleteArmazem(id).then(function () {
                         SweetAlert.swal("Excluído!", "Dados apgados com sucesso!", "success");
-                        $.each(vm.fila, function (i) {
-                            if (vm.fila[i].FilaEsperaId === id) {
-                                vm.fila.splice(i, 1);
+                        $.each(vm.armazem, function (i) {
+                            if (vm.armazem[i].ArmazemId === id) {
+                                vm.armazem.splice(i, 1);
                                 return false;
                             }
                         });
@@ -99,46 +88,21 @@
             });
         }
 
-        //Format Data Atual
-        var today = new Date();
-        var dd = today.getDate();
-        var mm = today.getMonth() + 1;
-        var yyyy = today.getFullYear();
-
-        if (dd < 10) {
-            dd = '0' + dd
-        }
-
-        if (mm < 10) {
-            mm = '0' + mm
-        }
-
-        today = dd + '/' + mm + '/' + yyyy;
-
-
-        $scope.fila = {
-            DataReserva: today,
-            Nome: null,
-            Telefone: "",
-            Celular: "",
-            Email: null
+        $scope.armazem = {
+            Descricao: null,
         };
 
         $scope.cancelCreate = function (form) {
-            $scope.createFila = false;
-            $scope.fila = {
-                DataReserva: new Date(),
-                Nome: null,
-                Telefone: "",
-                Celular: "",
-                Email: null
+            $scope.createArmazem = false;
+            $scope.Armazem = {
+                Descricao: null
             };
             form.$setPristine(true);
         }
 
         $scope.form = {
 
-            submit: function (form, fila) {
+            submit: function (form, armazem) {
                 var firstError = null;
                 if (form.$invalid) {
 
@@ -154,28 +118,19 @@
                             }
                         }
                     }
-
                     angular.element('.ng-invalid[name=' + firstError + ']').focus();
                     return;
 
                 } else {
-                    // Cadastra o fila
-                    if (fila.DataReserva === today)
-                        fila.DataReserva = new Date();
-                    filaEsperaData.addFila(fila).success(function (fila) {
+                    armazemData.addArmazem(armazem).success(function (armazem) {
                         //Limpa o formulario
                         form.$setPristine(true);
-                        $scope.fila = {
-                            DataReserva: today,
-                            Nome: null,
-                            Telefone: "",
-                            Celular: "",
-                            Email: null,
-                            Hora: ""
+                        $scope.armazem = {
+                            Descricao: null,
                         };
                         SweetAlert.swal("Cadastrado!", "Dados cadastrado com sucesso!", "success");
-                        $scope.createFila = false;
-                        vm.fila.push(fila);
+                        $scope.createArmazem = false;
+                        vm.armazem.push(armazem);
                         $scope.tableParams.reload();
                     }).error(function (error) {
                         var errors = [];
@@ -194,7 +149,7 @@
 
         $scope.formEdit = {
 
-            submit: function (form, fila) {
+            submit: function (form, armazem) {
                 var firstError = null;
                 if (form.$invalid) {
 
@@ -210,13 +165,11 @@
                             }
                         }
                     }
-
                     angular.element('.ng-invalid[name=' + firstError + ']').focus();
                     return;
 
-                } else {
-                    // Cadastra o fila
-                    filaEsperaData.editFila(fila).success(function () {
+                } else {                    
+                    armazemData.editArmazem(armazem).success(function () {
                         SweetAlert.swal("Atualizado!", "Dados salvos com sucesso!", "success");
                         $scope.editId = -1;
                     }).error(function (error) {
@@ -234,44 +187,10 @@
             }
         };
 
-
-
         $scope.editId = -1;
 
         $scope.setEditId = function (pid) {
             $scope.editId = pid;
-        };
-
-        $scope.today = function () {
-            $scope.DataReserva = new Date();
-        };
-        $scope.today();
-
-
-        $scope.clear = function () {
-            $scope.DataReserva = null;
-        };
-
-        // Disable weekend selection
-        //$scope.disabled = function (date, mode) {
-        //    return (mode === 'day' && (date.getDay() === 0 || date.getDay() === 7));
-        //};
-
-        $scope.toggleMin = function () {
-            $scope.minDate = ($scope.minDate) ? null : new Date();
-        };
-        $scope.toggleMin();
-
-        $scope.opened = [];
-        $scope.open = function (index) {
-            $timeout(function () {
-                $scope.opened[index] = true;
-            });
-        };
-
-        $scope.dateOptions = {
-            'year-format': "'yyyy'",
-            'starting-day': 1
         };
     };
 })();

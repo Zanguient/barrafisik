@@ -17,6 +17,10 @@
             return $http.get(apiUrl + 'api/funcionariosAtivos');
         }
 
+        function getById(id) {
+            return $http.get(apiUrl + 'api/funcionarios/'+id);
+        }
+
         function add(funcionario) {
             return $http.post(apiUrl + 'api/funcionarios', funcionario);
         }
@@ -32,6 +36,7 @@
         var service = {
             getAll: getAll,
             getAllAtivos: getAllAtivos,
+            getById: getById,
             add: add,
             edit: edit,
             remove: remove

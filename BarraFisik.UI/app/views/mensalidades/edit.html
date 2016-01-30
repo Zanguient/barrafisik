@@ -15,7 +15,7 @@
         <tr>
             <td>valor Pago: <span class="symbol required"></span></td>
             <td ng-class="{'has-error':FormEdit.ValorPago.$dirty && FormEdit.ValorPago.$invalid, 'has-success':FormEdit.ValorPago.$valid}" class="width-200">
-                <input class="form-control" type="text" name="ValorPago" ng-model="m.ValorPago" required>
+                <input class="form-control" type="text" name="ValorPago" ng-model="m.ValorPago" mask-money required>
                 <span class="error text-small block" ng-if="FormEdit.ValorPago.$dirty && FormEdit.ValorPago.$invalid">Informe o Valor Pago</span>
             </td>
             <td>Data Pagamento: <span class="symbol required"></span></td>

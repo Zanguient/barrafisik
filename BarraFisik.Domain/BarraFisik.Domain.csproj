@@ -133,6 +133,7 @@
     <Compile Include="ValueObjects\RelatorioFinanceiro.cs" />
     <Compile Include="ValueObjects\RelatorioFinanceiroSearch.cs" />
     <Compile Include="ValueObjects\RelatorioFinanceiroTotalMeses.cs" />
+    <Compile Include="ValueObjects\SearchDespesa.cs" />
     <Compile Include="ValueObjects\TotalHorario.cs" />
     <Compile Include="ValueObjects\TotalInscritos.cs" />
     <Compile Include="ValueObjects\ValidationError.cs" />

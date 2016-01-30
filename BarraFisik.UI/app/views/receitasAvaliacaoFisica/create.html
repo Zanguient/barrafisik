@@ -10,7 +10,7 @@
             <tr>
                 <td class="col-md-3">Valor Pago: <span class="symbol required"></span></td>
                 <td ng-class="{'has-error':Form.ValorPago.$dirty && Form.ValorPago.$invalid, 'has-success':Form.ValorPago.$valid}">
-                    <input class="form-control" type="text" name="ValorPago" ng-model="avaliacaofisica.Valor" required>
+                    <input class="form-control" type="text" name="ValorPago" ng-model="avaliacaofisica.Valor" mask-money required>
                     <span class="error text-small block" ng-if="Form.ValorPago.$dirty && Form.ValorPago.$invalid">Informe o Valor Pago</span>
                 </td>
                 <td>Data Pagamento: <span class="symbol required"></span></td>

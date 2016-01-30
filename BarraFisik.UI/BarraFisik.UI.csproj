@@ -58,7 +58,10 @@
     <Content Include="app\controllers\cliente\clienteCtrl.js" />
     <Content Include="app\controllers\cliente\clienteEditCtrl.js" />
     <Content Include="app\controllers\dashboard\dashboardCtrl.js" />
+    <Content Include="app\controllers\despesas\despesasEditCtrl.js" />
     <Content Include="app\controllers\despesas\despesasCtrl.js" />
+    <Content Include="app\controllers\despesas\despesasCreateCtrl.js" />
+    <Content Include="app\controllers\despesas\despesasFichaCtrl.js" />
     <Content Include="app\controllers\filaespera\filaEsperaCtrl.js" />
     <Content Include="app\controllers\fornecedores\fornecedoresCreateCtrl.js" />
     <Content Include="app\controllers\fornecedores\fornecedoresCtrl.js" />
@@ -121,9 +124,11 @@
     <Content Include="app\views\cliente\edit.html" />
     <Content Include="app\views\cliente\ficha.html" />
     <Content Include="app\views\cliente\partial\partialSearch.html" />
-    <Content Include="app\views\despesas\create.html" />
     <Content Include="app\views\despesas\edit.html" />
+    <Content Include="app\views\despesas\create.html" />
     <Content Include="app\views\despesas\despesas.html" />
+    <Content Include="app\views\despesas\ficha.html" />
+    <Content Include="app\views\despesas\partial\searchDespesas.html" />
     <Content Include="app\views\fornecedores\edit.html" />
     <Content Include="app\views\fornecedores\create.html" />
     <Content Include="app\views\fornecedores\ficha.html" />

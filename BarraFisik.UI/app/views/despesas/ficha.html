@@ -1,0 +1,51 @@
+﻿<div class="modal-header">
+    <h3 class="modal-title">Despesa</h3>   
+</div>
+<div class="modal-body">
+        <table class="table no-bg">
+            <tr>
+                <td class="text-bold">Documento: </td>
+                <td colspan="2"> {{despesa.Documento}} </td>
+                <td class="text-bold">Categoria: </td>
+                <td colspan="3"> {{despesa.CategoriaFinanceira.Categoria}} </td>
+            </tr>
+            <tr>
+                <td class="text-bold">Fornecedor: </td>
+                <td colspan="2"> {{despesa.Fornecedores.Nome}} </td>
+                <td class="text-bold">Funcionário: </td>
+                <td colspan="3"> {{despesa.Funcionarios.Nome}} </td>
+            </tr>
+            <tr>
+                <td class="text-bold">Valor: </td>
+                <td> {{despesa.Valor | currency: 'R$ '}} </td>
+                <td class="text-bold">Juros: </td>
+                <td> {{despesa.Juros | currency: 'R$ '}} </td>
+                <td class="text-bold">Multa: </td>
+                <td> {{despesa.Multa | currency: 'R$ '}} </td>
+                <td class="text-bold "> <div class="text-red">Total: {{despesa.ValorTotal | currency: 'R$ '}}</div> </td>
+            </tr>
+            <tr>
+                <td class="text-bold">Emissão: </td>
+                <td> {{despesa.DataEmissao | date:'dd/MM/yyyy'}} </td>
+                <td class="text-bold">Vencimento: </td>
+                <td> {{despesa.DataVencimento | date:'dd/MM/yyyy'}} </td>
+                <td class="text-bold">Pagamento: </td>
+                <td> {{despesa.DataPagamento | date:'dd/MM/yyyy'}} </td>
+            </tr>
+            <tr>
+                <td class="text-bold">Tipo Pagamento: </td>
+                <td > {{despesa.TipoPagamento.Descricao}} </td>
+                <td class="text-bold">Observação: </td>
+                <td colspan="4"> {{despesa.Observacao}} </td>
+            </tr>
+        </table>
+    <div class="modal-footer">
+        <div class="pull-left">
+            <span ng-if="despesa.Situacao == 'Quitado'" class="label label-sm label-success">Quitado</span>
+            <span ng-if="despesa.Situacao == 'Vencido'" class="label label-sm label-danger">Vencido</span>
+            <span ng-if="despesa.Situacao == 'Pendente'" class="label label-sm label-warning">Pendente</span>
+        </div>
+        <button type="button" class="btn btn-primary btn-o" ng-click="vm.cancel()">Fechar</button>
+    </div>
+</div>
+                
