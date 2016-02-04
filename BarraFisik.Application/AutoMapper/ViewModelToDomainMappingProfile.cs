@@ -26,6 +26,7 @@ namespace BarraFisik.Application.AutoMapper
             Mapper.CreateMap<ValoresViewModel, Valores>();
             Mapper.CreateMap<ReceitasAvaliacaoFisicaViewModel, ReceitasAvaliacaoFisica>();
             Mapper.CreateMap<CategoriaFinanceiraViewModel, CategoriaFinanceira>();
+            Mapper.CreateMap<SubCategoriaFinanceiraViewModel, SubCategoriaFinanceira>();
             Mapper.CreateMap<ReceitasViewModel, Receitas>();
             Mapper.CreateMap<DespesasViewModel, Despesas>();
             Mapper.CreateMap<RelatorioFinanceiroViewModel, RelatorioFinanceiro>();
@@ -35,6 +36,7 @@ namespace BarraFisik.Application.AutoMapper
             Mapper.CreateMap<FuncionariosViewModel, Funcionarios>();
             Mapper.CreateMap<FornecedoresViewModel, Fornecedores>();
             Mapper.CreateMap<SearchDespesasViewModel, SearchDespesa>();
+            Mapper.CreateMap<SearchReceitasViewModel, SearchReceita>();
         }
     }
 }

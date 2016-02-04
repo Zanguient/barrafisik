@@ -39,6 +39,7 @@ namespace BarraFisik.Infra.CrossCutting.IoC.Unity
             container.RegisterType<IValoresAppService, ValoresAppService>();
             container.RegisterType<IReceitasAvaliacaoFisicaAppService, ReceitasAvaliacaoFisicaAppService>();
             container.RegisterType<ICategoriaFinanceiraAppService, CategoriaFinanceiraAppService>();
+            container.RegisterType<ISubCategoriaFinanceiraAppService, SubCategoriaFinanceiraAppService>();
             container.RegisterType<IReceitasAppService, ReceitasAppService>();
             container.RegisterType<IDespesasAppService, DespesasAppService>();
             container.RegisterType<IRelatorioFinanceiroAppService, RelatorioFinanceiroAppService>();
@@ -59,6 +60,7 @@ namespace BarraFisik.Infra.CrossCutting.IoC.Unity
             container.RegisterType<ILogMensalidadesService, LogMensalidadesService>();
             container.RegisterType<IReceitasAvaliacaoFisicaService, ReceitasAvaliacaoFisicaService>();
             container.RegisterType<ICategoriaFinanceiraService, CategoriaFinanceiraService>();
+            container.RegisterType<ISubCategoriaFinanceiraService, SubCategoriaFinanceiraService>();
             container.RegisterType<IReceitasService, ReceitasService>();
             container.RegisterType<IDespesasService, DespesasService>();
             container.RegisterType<IRelatorioFinanceiroService, RelatorioFinanceiroService>();
@@ -79,6 +81,7 @@ namespace BarraFisik.Infra.CrossCutting.IoC.Unity
             container.RegisterType<ILogMensalidadesRepository, LogMensalidadesRepository>();
             container.RegisterType<IReceitasAvaliacaoFisicaRepository, ReceitasAvaliacaoFisicaRepository>();
             container.RegisterType<ICategoriaFinanceiraRepository, CategoriaFinanceiraRepository>();
+            container.RegisterType<ISubCategoriaFinanceiraRepository, SubCategoriaFinanceiraRepository>();
             container.RegisterType<IReceitasRepository, ReceitasRepository>();
             container.RegisterType<IDespesasRepository, DespesasRepository>();
             container.RegisterType<IRelatorioFinanceiroRepository, RelatorioFinanceiroRepository>();

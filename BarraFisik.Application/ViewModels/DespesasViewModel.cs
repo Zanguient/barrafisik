@@ -19,6 +19,8 @@ namespace BarraFisik.Application.ViewModels
         [Required(ErrorMessage = "Informe a Data de Vencimento")]
         public DateTime DataVencimento { get; set; }
         public DateTime DataEmissao { get; set; }
+
+        [Required(ErrorMessage = "Informe a Valor")]
         public decimal Valor { get; set; }
         public decimal Juros { get; set; }
         public decimal Multa { get; set; }
@@ -29,7 +31,10 @@ namespace BarraFisik.Application.ViewModels
         [Required(ErrorMessage = "Informe a Categoria Financeira")]
         public Guid CategoriaFinanceiraId { get; set; }
         public virtual CategoriaFinanceira CategoriaFinanceira { get; set; }
-        
+
+        public Guid? SubCategoriaFinanceiraId { get; set; }
+        public virtual SubCategoriaFinanceira SubCategoriaFinanceira { get; set; }
+
         public int? TipoPagamentoId { get; set; }
         public virtual TipoPagamento TipoPagamento { get; set; }
 
@@ -38,7 +43,5 @@ namespace BarraFisik.Application.ViewModels
 
         public Guid? FuncionarioId { get; set; }
         public virtual Funcionarios Funcionarios { get; set; }
-
-        public string DataDespesa { get; set; }
     }
 }

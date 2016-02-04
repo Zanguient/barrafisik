@@ -43,7 +43,7 @@
             </tr>
             <tr>
                 <td>E-mail: </td>
-                <td colspan="2" ng-class="{'has-error':Form.email.$dirty && Form.email.$invalid, 'has-success':Form.email.$valid}">
+                <td ng-class="{'has-error':Form.email.$dirty && Form.email.$invalid, 'has-success':Form.email.$valid}">
                     <input class="form-control" type="email" name="email" ng-model="funcionario.Email">
                     <span class="error text-small block" ng-if="Form.email.$error.email">E-mail inválido.</span>
                 </td>

@@ -24,6 +24,9 @@ namespace BarraFisik.Domain.Entities
         public Guid CategoriaFinanceiraId { get; set; }
         public virtual CategoriaFinanceira CategoriaFinanceira { get; set; }
 
+        public Guid? SubCategoriaFinanceiraId { get; set; }
+        public virtual SubCategoriaFinanceira SubCategoriaFinanceira { get; set; }
+
         public int? TipoPagamentoId { get; set; }
         public virtual TipoPagamento TipoPagamento { get; set; }
 
@@ -32,7 +35,5 @@ namespace BarraFisik.Domain.Entities
 
         public Guid? FuncionarioId { get; set; }
         public virtual Funcionarios Funcionarios { get; set; }
-
-        public string DataDespesa { get; set; }
     }
 }

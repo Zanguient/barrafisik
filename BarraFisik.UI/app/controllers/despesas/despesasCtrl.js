@@ -9,6 +9,7 @@
         vm.categorias = [];
         $scope.categorias = [{id: "", title: ""}];
         $scope.createDespesa = false;
+        $scope.search = null;
 
         activate();
 
@@ -47,17 +48,7 @@
         });
 
         $scope.$watch('vm.despesas', function() {
-            $scope.totalQuitado = 0;
-            $scope.totalPendente = 0;
-            $scope.totalVencido = 0;
-            angular.forEach(vm.despesas, function (value, key) {               
-                if (value.Situacao === "Quitado") {
-                    $scope.totalQuitado = $scope.totalQuitado + value.ValorTotal;
-                } else if (value.Situacao === "Pendente") {
-                    $scope.totalPendente = $scope.totalPendente + value.ValorTotal;
-                } else $scope.totalVencido = $scope.totalVencido + value.ValorTotal;
-            });
-            $scope.tableParams.reload();
+            atualizaValores();           
         });
 
         //Search
@@ -76,15 +67,15 @@
                     deps: [
                         '$ocLazyLoad',
                         function ($ocLazyLoad) {
-                            return $ocLazyLoad.load(['app/controllers/despesas/despesasCreateCtrl.js', 'ui.mask']);
+                            return $ocLazyLoad.load(['app/controllers/despesas/despesasCreateCtrl.js', 'ui.mask', 'app/factory/subCategoriaData.js']);
                         }
                     ]
                 },
                 controller: 'despesasCreateCtrl as vm'
             });
-            vm.modalInstance.result.then(function (data) {
-                SweetAlert.swal("Sucesso!", "Fornecedor cadastrado com sucesso!", "success");
-                despesasData.getDespesas().then(function(result) {
+            vm.modalInstance.result.then(function (result) {
+                SweetAlert.swal("Sucesso!", "Despesa cadastrada com sucesso!", "success");
+                despesasData.getDespesas().then(function (result) {
                     vm.despesas = result.data;
                 });
             }, function () {
@@ -104,7 +95,7 @@
                     deps: [
                         '$ocLazyLoad',
                         function ($ocLazyLoad) {
-                            return $ocLazyLoad.load(['app/controllers/despesas/despesasEditCtrl.js', 'ui.mask']);
+                            return $ocLazyLoad.load(['app/controllers/despesas/despesasEditCtrl.js', 'ui.mask', 'app/factory/subCategoriaData.js']);
                         }
                     ]
                 },
@@ -132,7 +123,7 @@
                     deps: [
                         '$ocLazyLoad',
                         function ($ocLazyLoad) {
-                            return $ocLazyLoad.load(['app/controllers/despesas/despesasFichaCtrl.js', 'app/factory/funcionariosData.js', 'app/factory/fornecedoresData.js']);
+                            return $ocLazyLoad.load(['app/controllers/despesas/despesasFichaCtrl.js', 'app/factory/funcionariosData.js', 'app/factory/fornecedoresData.js', 'app/factory/subCategoriaData.js']);
                         }
                     ]
                 },
@@ -145,8 +136,6 @@
             });
         }
 
-
-        
         $scope.delete = function (id) {
             SweetAlert.swal({
                 title: "Confirmar Exclusão?",
@@ -160,22 +149,15 @@
                 closeOnCancel: false
             }, function (isConfirm) {
                 if (isConfirm) {
-                    SweetAlert.swal({
-                        title: "Excluído!",
-                        text: "Registro excluído com sucesso.",
-                        type: "success",
-                        confirmButtonColor: "#007AFF"
-                    });
-
                     despesasData.deleteDespesa(id).then(function () {
-                        SweetAlert.swal("Excluído!", "Dados apgados com sucesso!", "success");
+                        SweetAlert.swal("Excluído!", "Registro excluído com sucesso!", "success");
                         $.each(vm.despesas, function (i) {
                             if (vm.despesas[i].DespesasId === id) {
                                 vm.despesas.splice(i, 1);
                                 return false;
                             }
                         });
-                        $scope.tableParams.reload();
+                        atualizaValores();
                     });
                 } else {
                     SweetAlert.swal({
@@ -186,6 +168,21 @@
                     });
                 }
             });
+        }
+
+        function atualizaValores() {
+            $scope.totalQuitado = 0;
+            $scope.totalPendente = 0;
+            $scope.totalVencido = 0;
+            angular.forEach(vm.despesas, function (value, key) {
+                if (value.Situacao === "Quitado") {
+                    $scope.totalQuitado = $scope.totalQuitado + value.ValorTotal;
+                } else if (value.Situacao === "Pendente") {
+                    $scope.totalPendente = $scope.totalPendente + value.ValorTotal;
+                } else $scope.totalVencido = $scope.totalVencido + value.ValorTotal;
+            });
+
+            $scope.tableParams.reload();
         }
     }
 })();

@@ -1,84 +1,56 @@
 ﻿(function () {
-    'use strict';
+    "use strict";
 
-    app.controller('categoriaFinanceiraCtrl', categoriaFinanceiraCtrl);
+    app.controller('tipoPagamentoCtrl', tipoPagamentoCtrl);
 
-    function categoriaFinanceiraCtrl($scope, categoriaFinanceiraData, ngTableParams, $filter, SweetAlert, $modal) {
+    function tipoPagamentoCtrl($scope, ngTableParams, tipoPagamentoData, SweetAlert, $filter, $timeout, $state) {
         var vm = this;
-        vm.categorias = [];
-        vm.title = 'categoriaFinanceiraCtrl';
-        $scope.createCategoria = false;
-
-        $scope.listTipo = {
-            data: [{
-                name: 'Receitas'
-            }, {
-                name: 'Despesas'
-            }]
-        };
+        vm.tipos = [];
+        $scope.createTipo = false;
 
         activate();
 
         function activate() {
-            categoriaFinanceiraData.getCategorias().then(function (result) {
-                vm.categorias = result.data;
+            $scope.$emit('LOAD');
+
+            tipoPagamentoData.getTipos().then(function (result) {
+                vm.tipos = result.data;
             });
+
+            $scope.$emit('UNLOAD');
         }
 
         $scope.tableParams = new ngTableParams({
             page: 1, // show first page
             count: 40, // count per page
             sorting: {
-                Tipo: 'asc', // initial sorting
-                Categoria: 'asc'
+                Descricao: 'asc' // initial sorting
             }
         }, {
             counts: [],
-            total: vm.categorias.length, // length of data
+            total: vm.tipos.length, // length of data
             getData: function ($defer, params) {
-                var orderedData = params.sorting() ? $filter('orderBy')(vm.categorias, params.orderBy()) : m.categorias;
+                // use build-in angular filter
+                var orderedData = params.sorting() ? $filter('orderBy')(vm.tipos, params.orderBy()) : vm.tipos;
                 $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
             }
         });
 
-        $scope.$watch('vm.categorias', function () {
+        $scope.$watch('vm.tipos', function () {
             $scope.tableParams.reload();
         });
 
-        $scope.editId = -1;
 
-        $scope.setEditId = function (pid) {
-            $scope.editId = pid;
-        };
-
-        //SubCategorias
-        $scope.openSubCategorias = function (categoria) {
-            vm.modalInstance = $modal.open({
-                templateUrl: 'app/views/subCategoriaFinanceira/SubCategoria.html',
-                size: 'lg',
-                resolve: {
-                    categoria: function () {
-                        return categoria;
-                    },
-                    deps: [
-                        '$ocLazyLoad',
-                        function ($ocLazyLoad) {
-                            return $ocLazyLoad.load(['app/controllers/subCategoriaFinanceira/subCategoriaCtrl.js', 'app/factory/subCategoriaData.js']);
-                        }
-                    ]
-                },
-                controller: 'subCategoriaCtrl as vm'
-            });
-            vm.modalInstance.result.then(function () {
-
-            }, function () {
-                console.log('Cancelled');
+        $scope.save = function (tipo) {
+            tipoPagamentoData.editTipo(tipo).then(function () {
+                SweetAlert.swal("Atualizado!", "Dados salvos com sucesso!", "success");
+                $scope.editId = -1;
             });
         }
 
         $scope.delete = function (id) {
             SweetAlert.swal({
-                title: "Confirmar Exclusão",
+                title: "Confirmar Exclusão?",
                 text: "Tem certeza que deseja excluir esse registro?",
                 type: "warning",
                 showCancelButton: true,
@@ -88,23 +60,23 @@
                 closeOnConfirm: false,
                 closeOnCancel: false
             }, function (isConfirm) {
-                if (isConfirm) {                   
-                    categoriaFinanceiraData.deleteCategoria(id).success(function () {
-                        SweetAlert.swal({
-                            title: "Excluído!",
-                            text: "Registro excluído com sucesso.",
-                            type: "success",
-                            confirmButtonColor: "#007AFF"
-                        });
-                        $.each(vm.categorias, function (i) {
-                            if (vm.categorias[i].CategoriaFinanceiraId === id) {
-                                vm.categorias.splice(i, 1);
+                if (isConfirm) {
+                    SweetAlert.swal({
+                        title: "Excluído!",
+                        text: "Registro excluído com sucesso.",
+                        type: "success",
+                        confirmButtonColor: "#007AFF"
+                    });
+
+                    tipoPagamentoData.deleteTipo(id).then(function () {
+                        SweetAlert.swal("Excluído!", "Dados apgados com sucesso!", "success");
+                        $.each(vm.tipos, function (i) {
+                            if (vm.tipos[i].TipoPagamentoId === id) {
+                                vm.tipos.splice(i, 1);
                                 return false;
                             }
                         });
                         $scope.tableParams.reload();
-                    }).error(function (error) {
-                        SweetAlert.swal("Erro!", error.Message, "error");
                     });
                 } else {
                     SweetAlert.swal({
@@ -115,29 +87,26 @@
                     });
                 }
             });
-
-
         }
 
-        $scope.categoria = {
-            Tipo: null,
-            Categoria: null,
-            SubCategoria: null
+
+        $scope.tipo = {
+            Sigla: null,
+            Descricao: null,
         };
 
         $scope.cancelCreate = function (form) {
-            $scope.createCategoria = false;
-            $scope.categoria = {
-                Tipo: null,
-                Categoria: null,
-                SubCategoria: null
+            $scope.createTipo = false;
+            $scope.tipo = {
+                Sigla: null,
+                Descricao: null
             };
             form.$setPristine(true);
         }
 
         $scope.form = {
 
-            submit: function (form, categoria) {
+            submit: function (form, tipo) {
                 var firstError = null;
                 if (form.$invalid) {
 
@@ -158,19 +127,18 @@
                     return;
 
                 } else {
-                    // Cadastra a categoria
-                    categoriaFinanceiraData.addCategoria(categoria).success(function (categoria) {
+                    tipoPagamentoData.addTipo(tipo).success(function (tipo) {
                         //Limpa o formulario
                         form.$setPristine(true);
-                        $scope.categoria = {
-                            Tipo: null,
-                            Categoria: null,
-                            SubCategoria: null
+                        $scope.tipo = {
+                            Sigla: null,
+                            Descricao: null,
                         };
-                        SweetAlert.swal("Cadastrado!", "Categoria cadastrada com sucesso!", "success");
-                        $scope.createCategoria = false;
-                        vm.categorias.push(categoria);
-                        $scope.tableParams.reload();
+                        SweetAlert.swal("Cadastrado!", "Dados cadastrado com sucesso!", "success");
+                        $scope.createTipo = false;
+                        tipoPagamentoData.getTipos().then(function (result) {
+                            vm.tipos = result.data;
+                        });
                     }).error(function (error) {
                         var errors = [];
                         for (var key in error.ModelState) {
@@ -188,7 +156,7 @@
 
         $scope.formEdit = {
 
-            submit: function (form, categoria) {
+            submit: function (form, tipo) {
                 var firstError = null;
                 if (form.$invalid) {
 
@@ -208,9 +176,10 @@
                     angular.element('.ng-invalid[name=' + firstError + ']').focus();
                     return;
 
-                } else {                    
-                    categoriaFinanceiraData.editCategoria(categoria).success(function () {
-                        SweetAlert.swal("Atualizado!", "Categoria atualizada com sucesso!", "success");
+                } else {
+                    // Cadastra o tipo
+                    tipoPagamentoData.editTipo(tipo).success(function () {
+                        SweetAlert.swal("Atualizado!", "Dados salvos com sucesso!", "success");
                         $scope.editId = -1;
                     }).error(function (error) {
                         var errors = [];
@@ -226,5 +195,11 @@
 
             }
         };
-    }
+
+        $scope.editId = -1;
+
+        $scope.setEditId = function (pid) {
+            $scope.editId = pid;
+        };
+    };
 })();

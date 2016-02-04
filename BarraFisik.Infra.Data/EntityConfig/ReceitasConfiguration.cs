@@ -11,15 +11,15 @@ namespace BarraFisik.Infra.Data.EntityConfig
 
             HasKey(r => r.ReceitasId);
 
-            Property(r => r.Observacao).IsOptional().HasMaxLength(250);
-            Property(r => r.Valor).HasPrecision(10, 2);
-            Property(r => r.Nome).IsRequired();
+            Property(d => d.Documento).IsOptional().HasMaxLength(100);
+            Property(d => d.Valor).HasPrecision(10, 2);
+            Property(d => d.Juros).HasPrecision(10, 2);
+            Property(d => d.Multa).HasPrecision(10, 2);
+            Property(d => d.ValorTotal).HasPrecision(10, 2);
+            Property(d => d.Observacao).IsOptional().HasMaxLength(250);
+            Property(d => d.Situacao).IsOptional().HasMaxLength(50);
 
-            HasRequired(r => r.CategoriaFinanceira).WithMany().HasForeignKey(r => r.CategoriaFinanceiraId);
-
-            Ignore(r => r.DataReceita);
-            Ignore(r => r.Cliente);
-            Ignore(r => r.Categoria);
+            HasRequired(d => d.CategoriaFinanceira).WithMany().HasForeignKey(r => r.CategoriaFinanceiraId);
         }
     }
 }

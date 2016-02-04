@@ -1,0 +1,17 @@
+﻿<form name="Form" id="form" novalidate ng-submit="form.submit(Form, sc)">
+    <table class="table no-bg">
+        <tr>            
+            <td>SubCategoria:  <span class="symbol required"></span></td>
+            <td ng-class="{'has-error':Form.SubCategoria.$dirty && Form.SubCategoria.$invalid, 'has-success':Form.SubCategoria.$valid}">
+                <input class="form-control" type="text" name="SubCategoria" ng-model="sc.SubCategoria" required>
+                <span class="error text-small block" ng-if="Form.SubCategoria.$dirty && Form.SubCategoria.$error.required">Informe a SubCategoria</span>
+            </td>
+            <td>
+                <div class="pull-right">
+                    <button type="submit" class="btn btn-primary btn-sm" tooltip-placement="top" tooltip="Cadastrar"><i class="fa fa-check" /></button>
+                    <button type="button" class="btn btn-primary btn-sm margin-right-15" tooltip-placement="top" tooltip="Cancelar" ng-click="cancelCreate(Form)"><i class="fa fa-close" /></button>           
+                </div>
+            </td>
+        </tr>
+    </table>
+</form>

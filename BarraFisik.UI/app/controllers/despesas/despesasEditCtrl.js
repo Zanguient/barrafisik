@@ -3,12 +3,12 @@
 
     app.controller('despesasEditCtrl', despesasEditCtrl);
 
-    function despesasEditCtrl($scope, $modalInstance, despesasData, funcionariosData, fornecedoresData, categoriaFinanceiraData, tipoPagamentoData, despesa) {
+    function despesasEditCtrl($scope, $modalInstance, despesasData, funcionariosData, fornecedoresData, categoriaFinanceiraData, tipoPagamentoData, despesa, subCategoriaData) {
         var vm = this;
 
         vm.cancel = function () {
             $modalInstance.dismiss('cancel');
-        }        
+        }
 
         if (despesa.DataPagamento !== null) {
             //Convert Data Pagamento
@@ -22,7 +22,25 @@
         dtVencimento = new Date(dtVencimento);
         despesa.DataVencimento = new Date(dtVencimento.getTime() + dtVencimento.getTimezoneOffset() * 60000);
 
+        if (despesa.SubCategoriaFinanceiraId != null) {
+            subCategoriaData.getByCategoria(despesa.CategoriaFinanceiraId).then(function (subcat) {
+                $scope.subcategorias = subcat.data;
+            });
+        }
+
         $scope.despesa = despesa;
+
+        //List SubCategorias
+        $scope.carregarSubcategorias = function () {
+            if ($scope.despesa.CategoriaFinanceiraId == undefined) {
+                $scope.despesa.SubCategoriaFinanceiraId = null;
+                $scope.subcategorias = [];
+            } else {
+                subCategoriaData.getByCategoria($scope.despesa.CategoriaFinanceiraId).then(function (subcat) {
+                    $scope.subcategorias = subcat.data;
+                });
+            }
+        }
 
         //List Tipos de Pagamento
         tipoPagamentoData.getTipos().then(function (tipos) {
@@ -92,5 +110,5 @@
         };
     }
 
-    
+
 }());

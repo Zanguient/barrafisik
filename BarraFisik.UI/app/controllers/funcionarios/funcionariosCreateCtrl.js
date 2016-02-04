@@ -33,11 +33,10 @@
                     }
                     angular.element('.ng-invalid[name=' + firstError + ']').focus();
                     return;
-
                 } else {
                     funcionariosData.add(funcionario).success(function () {
                         $modalInstance.close();
-                    }).error(function (error) {
+                    }).error(function (error) {                        
                         var errors = [];
                         for (var key in error.ModelState) {
                             for (var i = 0; i < error.ModelState[key].length; i++) {

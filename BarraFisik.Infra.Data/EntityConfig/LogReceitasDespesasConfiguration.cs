@@ -18,6 +18,7 @@ namespace BarraFisik.Infra.Data.EntityConfig
             Property(d => d.ValorTotal).HasPrecision(10, 2);
             Property(d => d.Observacao).IsOptional().HasMaxLength(250);
             Property(d => d.Situacao).IsOptional().HasMaxLength(50);
+            Property(d => d.Tipo).IsOptional().HasMaxLength(50);
             Property(l => l.CategoriaFinanceiraId).IsRequired();
             Property(d => d.ClienteId).IsOptional();
             Property(d => d.FornecedorId).IsOptional();

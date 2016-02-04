@@ -1,0 +1,52 @@
+﻿<!-- start: PAGE TITLE -->
+<section id="page-title">
+    <div class="row">
+        <div class="col-sm-8">
+            <h1 class="mainTitle">Tipos de Pagamento</h1>
+            <span class="mainDescription">
+            </span>
+        </div>
+        <div ncy-breadcrumb></div>
+    </div>
+</section>
+<div ng-show="loading"><img src="assets/images/loading.gif" />Carregando tipos de Pagamento...</div>
+<div class="container-fluid container-fullw bg-white" ng-show="!loading">
+    <div class="row">
+        <div class="col-md-6">
+            <button type="button" ng-disabled="createTipo" class="btn btn-primary btn-wide btn-scroll btn-scroll-top ti-plus" ng-click="createTipo = !createTipo">
+                <span>Cadastrar</span>
+            </button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="table-responsive">
+                <table class="table">
+                    <tr ng-show="createTipo">
+                        <td colspan="12" ng-include src="'app/views/tipoPagamento/create.html'"></td>
+                    </tr>
+                </table>
+                <table ng-table="tableParams" class="table">
+
+                    <tbody ng-repeat="t in $data" class="table">
+                        <tr id="tr{{t.TipoPagamentoId}}" ng-class-odd="'odd'" ng-class-even="'even'">
+                            <td class="rowTd" data-title="'Sigla'" sortable="'Sigla'">{{t.Sigla}}</td>
+                            <td class="rowTd" data-title="'Descricao'" sortable="'Descricao'">{{t.Descricao}}</td>                            
+                            <td class="text-right">
+                                <div class="visible-md visible-lg hidden-sm hidden-xs">
+                                    <a ng-click="setEditId(t.TipoPagamentoId)" class="btn btn-transparent btn-xs" tooltip-placement="top" tooltip="Editar" id="editRowBtn{{t.TipoPagamentoId}}"><i class="fa fa-pencil"></i></a>
+                                    <a ng-click="delete(t.TipoPagamentoId)" class="btn btn-transparent btn-xs tooltips" tooltip-placement="top" tooltip="Excluir"><i class="fa fa-times"></i></a>                                   
+                                </div>
+                            </td>
+                        </tr>
+                        <tr ng-show="editId===t.TipoPagamentoId" ng-if="editId===t.TipoPagamentoId">
+                            <td colspan="12" ng-include src="'app/views/tipoPagamento/edit.html'"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+

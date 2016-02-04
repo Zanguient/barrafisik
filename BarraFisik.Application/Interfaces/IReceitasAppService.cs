@@ -9,6 +9,7 @@ namespace BarraFisik.Application.Interfaces
     {
         void Add(ReceitasViewModel receitasViewModel);
         ReceitasViewModel GetById(Guid id);
+        IEnumerable<ReceitasViewModel> SearchReceitas(SearchReceitasViewModel sr);
         IEnumerable<ReceitasViewModel> GetAll();
         IEnumerable<ReceitasViewModel> GetReceitas();
         void Update(ReceitasViewModel receitasViewModel);

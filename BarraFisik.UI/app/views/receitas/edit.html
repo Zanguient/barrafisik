@@ -1,34 +1,101 @@
-﻿<Form name="FormEdit" id="formEdit" novalidate ng-submit="formEdit.submit(FormEdit, r)">
-    <table class="table no-bg">
-	    <tr>
-		    <td>Categoria: <span class="symbol required"></span></td>
-		    <td ng-class="{'has-error':FormEdit.Categoria.$dirty && FormEdit.Categoria.$invalid, 'has-success':FormEdit.Categoria.$valid}">
-			    <select id="sel" class="FormEdit-control" style="width: 100%" name="Categoria" ng-value="r.CategoriaFinanceiraId" ng-model="r.CategoriaFinanceiraId" ng-options="obj.CategoriaFinanceiraId as obj.Categoria for obj in vm.categorias" required>
-			    </select>
-			    <span class="error text-small block" ng-if="FormEdit.Categoria.$dirty && FormEdit.Categoria.$error.required">Informe a Categoria</span>
-		    </td>
-		    <td>Nome: <span class="symbol required"></span></td>
-		    <td colspan="2" ng-class="{'has-error':FormEdit.Nome.$dirty && FormEdit.Nome.$invalid, 'has-success':FormEdit.Nome.$valid}">
-			    <input class="FormEdit-control" style="width: 100%" type="text" name="Nome" ng-model="r.Nome" required>
-			    <span class="error text-small block" ng-if="FormEdit.Nome.$dirty && FormEdit.Nome.$error.required">Informe o Nome da Receita</span>
-		    </td>
-	    </tr>
-        <tr>
-			<td>Valor: <span class="symbol required"></span></td>
-			<td ng-class="{'has-error':FormEdit.Valor.$dirty && FormEdit.Valor.$invalid, 'has-success':FormEdit.Valor.$valid}">
-				<input class="FormEdit-control" mask-money  style="width: 100%" type="text" name="Valor" ng-model="r.Valor" required>
-				<span class="error text-small block" ng-if="FormEdit.Valor.$dirty && FormEdit.Valor.$error.required">Informe o Valor</span>                
-			</td>
-			<td>Observação: </td>
-			<td>
-				<textarea class="FormEdit-control"  style="width: 100%" rows="3" style="resize: vertical" name="Observacao" ng-model="r.Observacao"/>
-			</td>
-            <td>
-                <div class="pull-right">
-                    <input type="submit" class="btn btn-primary btn-sm margin-right-15" value="Salvar">
-                    <input type="button" class="btn btn-primary btn-sm margin-right-15" value="Cancelar" ng-click="setEditId(-1)">
-                </div>
-            </td>
-        </tr>
-    </table>
-</Form>
+﻿<div class="modal-header">
+    <h3 class="modal-title">Receita</h3>
+</div>
+<div class="modal-body">
+    <ul>
+        <li ng-repeat="error in vm.errors" class="text-danger">{{error}}</li>
+    </ul>
+    <form name="Form" id="form" novalidate ng-submit="form.submit(Form, receita)">
+        <div class="checkbox clip-check check-primary check-md">
+        </div>
+        <table class="table no-bg">
+            <tr>
+                <td>Documento: </td>
+                <td> <input class="form-control input-sm" type="text" name="Nome" ng-model="receita.Documento"> </td>
+                <td>Categoria: </td>
+                <td ng-class="{'has-error':Form.CategoriaFinanceira.$dirty && Form.CategoriaFinanceira.$invalid, 'has-success':Form.CategoriaFinanceira.$valid}">
+                    <select name="CategoriaFinanceira" ng-model="receita.CategoriaFinanceiraId" class="text-bold" ng-change="carregarSubcategorias()" required>
+                        <option ng-selected="receita.CategoriaFinanceiraId == null" value="">Selecione...</option>
+                        <option ng-selected="receita.CategoriaFinanceiraId == cf.CategoriaFinanceiraId" ng-repeat="cf in categorias" value="{{cf.CategoriaFinanceiraId}}">{{cf.Categoria}}</option>
+                    </select>
+                    <span class="error text-small block" ng-if="Form.CategoriaFinanceira.$dirty && Form.CategoriaFinanceira.$invalid">Informe a Categoria</span>
+                </td>
+                <td>SubCategoria:</td>
+                <td style="max-width:120px">
+                    <select ng-disabled="receita.CategoriaFinanceiraId == null" ng-model="receita.SubCategoriaFinanceiraId" name="SubCategoriaFinanceira" class="text-bold">
+                        <option ng-selected="receita.SubCategoriaFinanceiraId == null" value="">Selecione...</option>
+                        <option ng-selected="receita.SubCategoriaFinanceiraId == sc.SubCategoriaFinanceiraId" ng-repeat="sc in subcategorias" value="{{sc.SubCategoriaFinanceiraId}}">{{sc.SubCategoria}}</option>
+                    </select>
+                </td>   
+            </tr>
+            <tr>
+                <td>Clientes: </td>
+                <td colspan="2">
+                    <input type="text" class="form-control" placeholder="Selecione..."
+                           ng-model="receita.Cliente"
+                           typeahead="c as c.Nome for c in clientes | filter:{Nome:$viewValue}" typeahead-show-hint="true" typeahead-min-length="2">
+                </td>
+                <td>Funcionário: </td>
+                <td colspan="2">
+                    <select name="Funcionarios" ng-model="receita.FuncionarioId" class="text-bold">
+                        <option ng-selected="receita.FuncionarioId == null" value="">Selecione...</option>
+                        <option ng-selected="receita.FuncionarioId == f.FuncionarioId" ng-repeat="f in funcionarios" value="{{f.FuncionarioId}}">{{f.Nome}}</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Valor: <span class="symbol required"></span></td>
+                <td ng-class="{'has-error':Form.Valor.$dirty && Form.Valor.$invalid}">
+                    <input class="form-control input-sm" name="Valor" type="text" ng-model="receita.Valor" ng-blur="soma()" mask-money requied>
+                    <span class="error text-small block" ng-if="Form.Valor.$dirty && Form.Valor.$invalid">Informe o Valor</span>
+                </td>
+                <td>Juros: </td>
+                <td>
+                    <input class="form-control input-sm" mask-money type="text" ng-model="receita.Juros">
+                </td>
+                <td>Multa: </td>
+                <td>
+                    <input class="form-control input-sm" mask-money type="text" ng-model="receita.Multa">
+                </td>
+            </tr>
+            <tr>
+                <td>Tipo Pagamento: </td>
+                <td colspan="3">
+                    <select name="TiposPag" ng-model="receita.TipoPagamentoId" class="text-bold">
+                        <option ng-selected="receita.TipoPagamentoId == null" value="">Selecione... </option>
+                        <option ng-selected="receita.TipoPagamentoId == t.TipoPagamentoId" ng-repeat="t in tiposPagamento" value="{{t.TipoPagamentoId}}">{{t.Sigla}} - {{t.Descricao}}</option>
+                    </select>
+                </td>
+                <td>Valor Total: </td>
+                <td><b class="text-primary">{{receita.ValorTotal = receita.Valor + receita.Juros + receita.Multa | currency:'R$ '}}</b><td>
+            </tr>
+            <tr>
+                <td>Data Vencimento: <span class="symbol required"></span></td>
+                <td colspan="2" ng-class="{'has-error':Form.Vencimento.$dirty && Form.Vencimento.$invalid, 'has-success':Form.Vencimento.$valid}">
+                    <input class="form-control input-sm" name="Vencimento" type="date" ng-model="receita.DataVencimento" required>
+                    <span class="error text-small block" ng-if="Form.Vencimento.$error.date">Data de Vencimento inválida.</span>
+                    <span class="error text-small block" ng-if="Form.Vencimento.$dirty && Form.Vencimento.$invalid">Informe a Data de Vencimento</span>
+                </td>
+                <td>Data Pagamento: </td>
+                <td colspan="2" ng-class="{'has-error':Form.Pagamento.$dirty && Form.Pagamento.$invalid}">
+                    <input class="form-control input-sm" name="Pagamento" type="date" ng-model="receita.DataPagamento">
+                    <span class="error text-small block" ng-if="Form.Pagamento.$error.date">Data de Nascimento inválida.</span>
+                </td>
+
+            </tr>
+
+            <tr>
+                <td>Observação: </td>
+                <td colspan="5">
+                    <textarea class="form-control input-sm" style="resize: none;" ng-model="receita.Observacao" rows="3"></textarea>
+                </td>
+            </tr>
+        </table>
+
+        <!-- class="editRowTd" -->
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-primary btn-o">Salvar</button>
+            <button type="button" class="btn btn-primary btn-o" ng-click="vm.cancel()">Fechar</button>
+        </div>
+    </form>
+</div>

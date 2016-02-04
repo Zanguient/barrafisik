@@ -15,10 +15,6 @@ namespace BarraFisik.Infra.Data.Repository.ReadOnly
             {
                 cn.Open();
 
-                //var sql = @"select  *, CONVERT(varchar(10), d.Data, 103) as DataDespesa
-                //                from Despesas d
-                //                inner join CategoriaFinanceira cf on d.CategoriaFinanceiraId = cf.CategoriaFinanceiraId";
-
                 var sql = @"select * from Despesas d 
                                 inner join CategoriaFinanceira cf on d.CategoriaFinanceiraId = cf.CategoriaFinanceiraId
                                 left join TipoPagamento tp on d.TipoPagamentoId = tp.TipoPagamentoId
@@ -45,7 +41,7 @@ namespace BarraFisik.Infra.Data.Repository.ReadOnly
             using (var cn = Connection)
             {
                 cn.Open();
-
+                bool hasData = false;
                 var sql = @"select * from Despesas d 
                                 inner join CategoriaFinanceira cf on d.CategoriaFinanceiraId = cf.CategoriaFinanceiraId
                                 left join TipoPagamento tp on d.TipoPagamentoId = tp.TipoPagamentoId
@@ -54,19 +50,45 @@ namespace BarraFisik.Infra.Data.Repository.ReadOnly
                 var dt = new DateTime();
 
                 if (sd.EmissaoInicio != dt)
+                {
                     sql = sql + " AND d.DataEmissao >= '" + sd.EmissaoInicio.ToString("yyyy-MM-dd 00:00:00") + "'";
+                    hasData = true;
+                }
+                    
                 if (sd.EmissaoFim != dt)
+                {
                     sql = sql + " AND d.DataEmissao <= '" + sd.EmissaoFim.ToString("yyyy-MM-dd 23:59:59") + "'";
+                    hasData = true;
+                }
+                    
 
                 if (sd.PagamentoInicio != dt)
+                {
                     sql = sql + " AND d.DataPagamento >= '" + sd.PagamentoInicio.ToString("yyyy-MM-dd 00:00:00") + "'";
+                    hasData = true;
+                }
+                    
                 if (sd.PagamentoFim != dt)
+                {
                     sql = sql + " AND d.DataPagamento <= '" + sd.PagamentoFim.ToString("yyyy-MM-dd 23:59:59") + "'";
+                    hasData = true;
+                }
+                    
 
                 if (sd.VencimentoInicio != dt)
+                {
                     sql = sql + " AND d.DataVencimento >= '" + sd.VencimentoInicio.ToString("yyyy-MM-dd 00:00:00") + "'";
+                    hasData = true;
+                }
+                    
                 if (sd.VencimentoFim != dt)
+                {
                     sql = sql + " AND d.DataVencimento <= '" + sd.VencimentoFim.ToString("yyyy-MM-dd 23:59:59") + "'";
+                    hasData = true;
+                }
+
+                if (!hasData)
+                    sql = sql + " AND Month(d.DataVencimento) = Month(GetDate()) and YEAR(d.DataVencimento) = YEAR(getDate())";
 
                 var despesas = cn.Query<Despesas, CategoriaFinanceira, TipoPagamento, Despesas>(
                     sql,

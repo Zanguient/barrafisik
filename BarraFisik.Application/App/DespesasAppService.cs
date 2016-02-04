@@ -104,6 +104,7 @@ namespace BarraFisik.Application.App
                 ValorTotal = d.ValorTotal,
                 Observacao = d.Observacao,
                 Situacao = d.Situacao,
+                Tipo = "Despesa",
                 CategoriaFinanceiraId = d.CategoriaFinanceiraId.ToString(),
                 FornecedorId = d.FornecedorId.ToString(),
                 FuncionarioId = d.FuncionarioId.ToString(),                

@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using BarraFisik.Application.Interfaces;
 using BarraFisik.Application.ViewModels;
-using BarraFisik.API.Filters;
 
 namespace BarraFisik.API.Controllers
 {
@@ -43,7 +40,6 @@ namespace BarraFisik.API.Controllers
         {
             if (ModelState.IsValid)
             {
-                receitasViewModel.Data = DateTime.Now;
                 _receitasApp.Add(receitasViewModel);
 
                 return Request.CreateResponse(HttpStatusCode.Created, receitasViewModel);
@@ -58,7 +54,6 @@ namespace BarraFisik.API.Controllers
             if (ModelState.IsValid)
             {
                 _receitasApp.Update(receitasViewModel);
-
                 return Request.CreateResponse(HttpStatusCode.Created, "Update efetuado com sucesso!");
             }
             return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
@@ -68,14 +63,14 @@ namespace BarraFisik.API.Controllers
         [Route("receitas/{id:Guid}")]
         public HttpResponseMessage GetById(Guid id)
         {
-            var fila = _receitasApp.GetById(id);
+            var receita = _receitasApp.GetById(id);
 
-            if (fila == null)
+            if (receita == null)
             {
                 return Request.CreateResponse(HttpStatusCode.NotFound, "Receita Não Encontrada");
             }
 
-            return Request.CreateResponse(HttpStatusCode.OK, fila);
+            return Request.CreateResponse(HttpStatusCode.OK, receita);
         }
 
         [HttpDelete]
@@ -85,6 +80,28 @@ namespace BarraFisik.API.Controllers
             _receitasApp.Remove(id);
 
             return Request.CreateResponse(HttpStatusCode.OK, "Dado excluído com sucesso!");
+        }
+
+        [HttpPost]
+        [Route("receitas/search")]
+        public async Task<HttpResponseMessage> Search(SearchReceitasViewModel searchViewModel)
+        {
+            if (searchViewModel == null)
+            {
+                var result = _receitasApp.GetReceitas();
+                var response = Request.CreateResponse(HttpStatusCode.OK, result);
+                var tsc = new TaskCompletionSource<HttpResponseMessage>();
+                tsc.SetResult(response);
+                return await tsc.Task;
+            }
+            else
+            {
+                var result = _receitasApp.SearchReceitas(searchViewModel);
+                var response = Request.CreateResponse(HttpStatusCode.OK, result);
+                var tsc = new TaskCompletionSource<HttpResponseMessage>();
+                tsc.SetResult(response);
+                return await tsc.Task;
+            }
         }
     }
 }

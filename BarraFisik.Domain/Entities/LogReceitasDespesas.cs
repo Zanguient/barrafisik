@@ -20,8 +20,10 @@ namespace BarraFisik.Domain.Entities
         public decimal ValorTotal { get; set; }
         public string Observacao { get; set; }
         public string Situacao { get; set; }
+        public string Tipo { get; set; }
 
         public string CategoriaFinanceiraId { get; set; }
+        public string SubCategoriaFinanceiraId { get; set; }
         public string FornecedorId { get; set; }
         public string FuncionarioId { get; set; }
         public string ClienteId { get; set; }

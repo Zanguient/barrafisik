@@ -6,6 +6,7 @@ using System.Web.Http;
 using BarraFisik.Application.Interfaces;
 using BarraFisik.Application.ViewModels;
 using BarraFisik.API.Filters;
+using System.Data.Entity.Infrastructure;
 
 namespace BarraFisik.API.Controllers
 {
@@ -75,22 +76,29 @@ namespace BarraFisik.API.Controllers
         [Route("categoriafinanceira/{id:Guid}")]
         public HttpResponseMessage GetById(Guid id)
         {
-            var fila = _categoriaFinanceiraApp.GetById(id);
+            var categoria = _categoriaFinanceiraApp.GetById(id);
 
-            if (fila == null)
+            if (categoria == null)
             {
                 return Request.CreateResponse(HttpStatusCode.NotFound, "Categoria Não Encontrada");
             }
 
-            return Request.CreateResponse(HttpStatusCode.OK, fila);
+            return Request.CreateResponse(HttpStatusCode.OK, categoria);
         }
 
         [HttpDelete]
         [Route("categoriafinanceira/{id:Guid}")]
         public HttpResponseMessage Remove(Guid id)
         {
-            _categoriaFinanceiraApp.Remove(id);
-
+            try
+            {
+                _categoriaFinanceiraApp.Remove(id);
+            }
+            catch (DbUpdateException ex)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "Este registro não pode ser removido.");
+            }
+            
             return Request.CreateResponse(HttpStatusCode.OK, "Categoria excluída com sucesso!");
         }
     }

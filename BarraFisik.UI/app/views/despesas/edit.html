@@ -11,15 +11,22 @@
         <table class="table no-bg">
             <tr>
                 <td>Documento: </td>
-                <td colspan="2"> <input class="form-control input-sm" type="text" name="Nome" ng-model="despesa.Documento"> </td>
+                <td> <input class="form-control input-sm" type="text" name="Nome" ng-model="despesa.Documento"> </td>
                 <td>Categoria: </td>
-                <td colspan="2" ng-class="{'has-error':Form.CategoriaFinanceira.$dirty && Form.CategoriaFinanceira.$invalid, 'has-success':Form.CategoriaFinanceira.$valid}">
-                    <select name="CategoriaFinanceira" ng-model="despesa.CategoriaFinanceiraId" class="text-bold" required>
-                        <option value="">Selecione...</option>
+                <td ng-class="{'has-error':Form.CategoriaFinanceira.$dirty && Form.CategoriaFinanceira.$invalid, 'has-success':Form.CategoriaFinanceira.$valid}">
+                    <select name="CategoriaFinanceira" ng-model="despesa.CategoriaFinanceiraId" ng-change="carregarSubcategorias()" class="text-bold" required>
+                        <option ng-selected="despesa.CategoriaFinanceiraId == null" value="">Selecione...</option>
                         <option ng-selected="despesa.CategoriaFinanceiraId == c.CategoriaFinanceiraId" ng-repeat="c in categorias" ng-value="c.CategoriaFinanceiraId">{{c.Categoria}}</option>
                     </select>
                     <span class="error text-small block" ng-if="Form.CategoriaFinanceira.$dirty && Form.CategoriaFinanceira.$invalid">Informe a Categoria</span>
-                </td>               
+                </td>
+                <td>SubCategoria:</td>
+                <td style="max-width:120px">
+                    <select ng-disabled="despesa.CategoriaFinanceiraId == null" ng-model="despesa.SubCategoriaFinanceiraId" name="SubCategoriaFinanceira" class="text-bold">
+                        <option ng-selected="despesa.SubCategoriaFinanceiraId == null" value="">Selecione...</option>
+                        <option ng-selected="despesa.SubCategoriaFinanceiraId == sc.SubCategoriaFinanceiraId" ng-repeat="sc in subcategorias" value="{{sc.SubCategoriaFinanceiraId}}">{{sc.SubCategoria}}</option>
+                    </select>
+                </td>                 
             </tr>
             <tr>
                 <td>Fornecedor: </td>
@@ -67,7 +74,7 @@
                 <td >Data Vencimento: <span class="symbol required"></span></td>
                 <td colspan="2" ng-class="{'has-error':Form.Vencimento.$dirty && Form.Vencimento.$invalid, 'has-success':Form.Vencimento.$valid}">
                     <input class="form-control input-sm" name="Vencimento" type="date" ng-model="despesa.DataVencimento" required>
-                    <span class="error text-small block" ng-if="Form.Vencimento.$error.date">Data de Nascimento inválida.</span>
+                    <span class="error text-small block" ng-if="Form.Vencimento.$error.date">Data de Vencimento inválida.</span>
                     <span class="error text-small block" ng-if="Form.Vencimento.$dirty && Form.Vencimento.$invalid">Informe a Data de Vencimento</span>
                 </td>
                 <td >Data Pagamento: </td>

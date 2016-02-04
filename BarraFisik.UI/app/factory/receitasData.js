@@ -22,11 +22,16 @@
             return $http.delete(apiUrl + "api/receitas/"+id);
         }
 
+        function searchReceitas(search) {
+            return $http.post(apiUrl + "api/receitas/search", search);
+        }
+
         var service = {
             getReceitas: getReceitas,
             addReceita: addReceita,
             editReceita: editReceita,
-            deleteReceita: deleteReceita
+            deleteReceita: deleteReceita,
+            searchReceitas: searchReceitas
         };
 
         return service;

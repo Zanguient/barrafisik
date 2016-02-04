@@ -3,56 +3,61 @@
     <div class="row">
         <div class="col-sm-8">
             <h1 class="mainTitle">Receitas</h1>
-            <span class="mainDescription"></span>
+            <span class="mainDescription">Por padrão é listado os títulos do mês atual em ordem de vencimento. </span>
         </div>
         <div ncy-breadcrumb></div>
     </div>
 </section>
-<div ng-show="loading"><img src="/assets/images/loading.gif" />Carregando Receitas...</div>
+<div ng-show="loading">
+    <img src="/assets/images/loading.gif" />Carregando Receitas...</div>
 <div class="container-fluid container-fullw bg-white" ng-show="!loading">
+    <div ng-include src="'app/views/receitas/partial/searchReceitas.html'"></div>
     <div class="row">
-	    <div class="col-md-6">
-		    <button type="button" ng-disabled="createReceita" class="btn btn-primary btn-wide btn-scroll btn-scroll-top ti-plus" ng-click="createReceita = !createReceita">
-			    <span>Cadastrar</span>
-		    </button>
-	    </div>
+        <div class="col-md-6">
+            <button type="button" class="btn btn-primary btn-wide btn-scroll btn-scroll-top ti-plus" ng-click="openCadastrar()">
+                <span>Cadastrar</span>
+            </button><br/><br/>
+        </div>
         <div class="col-md-6">
             <h5 class="pull-right ">Total: <span class="badge badge-info">{{total}}</span></h5>
         </div>
-    </div>
+    </div>    
     <div class="row">
         <div class="col-md-12">
+            <span class="input-icon">
+                <input type="text" placeholder="Pesquisar por..." ng-model="searchText" class="form-control">
+                <i class="ti-search"></i>
+            </span><br/>
             <div class="table-responsive">
-                <table class="table">
-                    <tr ng-show="createReceita">
-                        <td colspan="12" ng-include src="'app/views/receitas/create.html'"></td>
+                <table ng-table="tableParams" class="table">
+                    <tbody ng-repeat="r in $data | filter:searchText">
+                    <tr ng-class-odd="'odd'" ng-class-even="'even'">
+                        <td class="rowTd" style="max-width: 25px;"><a ng-click="openFicha(r)" class="btn" tooltip-placement="top" tooltip="Ficha"><i class="ti-id-badge"></i></a></td>
+                        <td class="rowTd" data-title="'Categoria'" sortable="'CategoriaFinanceira.Categoria'">{{r.CategoriaFinanceira.Categoria}}</td>
+                        <td class="rowTd" data-title="'Tipo Pag.'" sortable="'TipoPagamento.Descricao'">({{r.TipoPagamento.Sigla}}) {{r.TipoPagamento.Descricao}}</td>
+                        <td class="rowTd" data-title="'Dt. Emissão'" sortable="'DataEmissao'">{{r.DataEmissao | date:'dd/MM/yyyy'}}</td>
+                        <td class="rowTd" data-title="'Dt. Vencimento'" sortable="'DataVencimento'">{{r.DataVencimento | date:'dd/MM/yyyy'}}</td>
+                        <td class="rowTd" data-title="'Dt. Pagamento'" sortable="'DataPagamento'">{{r.DataPagamento | date:'dd/MM/yyyy'}}</td>
+                        <td class="rowTd" data-title="'Valor Pago'" sortable="'ValorTotal'">
+                            <div class="text-primary">{{r.ValorTotal | currency: 'R$ '}}</div></td>
+                        <td class="rowTd" data-title="'Situacao'" sortable="'Situacao'">{{r.Situacao}}</td>
+                        <td class="text-right">
+                            <div class="visible-md visible-lg hidden-sm hidden-xs">
+                                <a ng-click="openEditar(r)" class="btn btn-xs" tooltip-placement="top" tooltip="Editar"><i class="fa fa-pencil"></i></a>
+                                <a ng-click="delete(r.ReceitasId)" class="btn btn-xs" tooltip-placement="top" tooltip="Excluir"><i class="fa fa-times"></i></a>
+                            </div>
+                        </td>
                     </tr>
-                </table>
-                <table ng-table="tableParams" class="table" show-filter="true">
-
-                    <tbody ng-repeat="r in $data">
-                        <tr id="tr{{r.ReceitasId}}" ng-class-odd="'odd'" ng-class-even="'even'">
-                            <td class="rowTd" data-title="'Categoria'"  filter="{CategoriaFinanceiraId: 'select'}" filter-data="categorias" sortable="'Categoria'">{{r.Categoria}}</td>
-                            <td class="rowTd" data-title="'Nome'" filter="{Nome: 'text'}" sortable="'Nome'">{{r.Nome}}</td>
-                            <td class="rowTd" data-title="'Valor'"  filter="{Valor: 'text'}" sortable="'Valor'">{{r.Valor | currency}}</td>
-                            <td class="rowTd" data-title="'Data'" filter="{ 'DataReceita': 'text' }" sortable="'Data'">{{r.DataReceita}}</td>
-                            <td ng-show="r.Nome != 'Mensalidade'" class="rowTd" style="max-width: 150px" filter="{Observacao: 'text'}"  data-title="'Observação'">{{r.Observacao}}</td>
-	                        <td colspan="2" ng-show="r.Nome == 'Mensalidade'"  filter="{Cliente: 'text'}">Cliente: {{r.Cliente}}</td>
-                            <td class="text-right">		                        
-		                        <div class="visible-md visible-lg hidden-sm hidden-xs" ng-show="r.Nome != 'Mensalidade'">
-			                        <a ng-click="setEditId(r.ReceitasId)" class="btn btn-transparent btn-xs" tooltip-placement="top" tooltip="Editar" id="editRowBtn{{r.ReceitasId}}"><i class="fa fa-pencil"></i></a>
-			                        <a ng-click="delete(r.ReceitasId)" class="btn btn-transparent btn-xs tooltips" tooltip-placement="top" tooltip="Excluir"><i class="fa fa-times"></i></a>
-		                        </div>
-	                        </td>
-                        </tr>
-                        <tr ng-show="editId===r.ReceitasId" ng-if="editId===r.ReceitasId">
-                            <td colspan="7" ng-include src="'app/views/receitas/edit.html'"></td>
-                        </tr>
                     </tbody>
+                    <tfoot>
+                    <tr height="70px">
+                        <td colspan="6" class="text-primary">Quitado: {{totalQuitado | currency:' R$ '}} | Pendente: {{totalPendente | currency:' R$ '}} | Vencido: {{totalVencido | currency:' R$ '}} </td>
+                        <td colspan="3" class="text-bold">
+                            <div class="text-primary">Total:{{totalQuitado + totalPendente + totalVencido | currency:' R$ '}}</div></td>
+                    </tr>
+                    </tfoot>
                 </table>
             </div>
         </div>
     </div>
 </div>
-
-

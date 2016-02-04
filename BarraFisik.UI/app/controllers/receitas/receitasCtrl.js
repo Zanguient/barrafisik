@@ -1,15 +1,36 @@
 ﻿(function () {
-    'use strict';
+    "use strict";
 
     app.controller('receitasCtrl', receitasCtrl);
 
-    function receitasCtrl($scope, ngTableParams, receitasData, SweetAlert, $filter, categoriaFinanceiraData, $state) {
+    function receitasCtrl($scope, ngTableParams, receitasData, tipoPagamentoData, funcionariosData, clienteData, categoriaFinanceiraData, SweetAlert, $filter, $state, $modal) {
         var vm = this;
-        vm.title = 'receitasCtrl';
         vm.receitas = [];
         vm.categorias = [];
-        $scope.categorias = [{ id: "", title: "" }];
-        $scope.createReceita = false;
+        $scope.categorias = [{id: "", title: ""}];
+        $scope.createDespesa = false;        
+
+        var _selected;
+
+        $scope.selected = undefined;
+        $scope.states = ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Dakota', 'North Carolina', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'];
+
+        $scope.ngModelOptionsSelected = function (value) {
+            if (arguments.length) {
+                _selected = value;
+            } else {
+                return _selected;
+            }
+        };
+
+        $scope.modelOptions = {
+            debounce: {
+                default: 500,
+                blur: 250
+            },
+            getterSetter: true
+        };
+
 
         activate();
 
@@ -20,12 +41,9 @@
             });
 
             categoriaFinanceiraData.getCategoriaByTipo("Receitas").then(function (cat) {
-                vm.categorias = cat.data;
-
-                angular.forEach(vm.categorias, function (value, key) {
-                    $scope.categorias.push({ id: value.CategoriaFinanceiraId, title: value.Categoria });
-                });
+                vm.categorias = cat.data;                                
             });
+
             $scope.$emit('UNLOAD');
         }
 
@@ -33,13 +51,13 @@
             page: 1, // show first page
             count: 50, // count per page
             sorting: {
-                Data: 'desc'
-            }
+                DataVencimento: 'asc'
+            }            
         }, {
             counts: [],
             total: vm.receitas.length, // length of data
             getData: function ($defer, params) {
-                // use build-in angular filter
+                // use build-in angular filter                   
                 var orderedData = params.sorting() ? $filter('orderBy')(vm.receitas, params.orderBy()) : vm.receitas;
                 orderedData = $filter('filter')(orderedData, params.filter());
 
@@ -51,125 +69,94 @@
         });
 
         $scope.$watch('vm.receitas', function () {
-            $scope.tableParams.reload();
+            atualizaValores();
         });
 
-        $scope.editId = -1;
-
-        $scope.setEditId = function (pid) {
-            $scope.editId = pid;
+        //Search
+        $scope.pesquisar = function (search) {
+            receitasData.searchReceitas(search).then(function (result) {
+                vm.receitas = result.data;
+            });
         };
 
-        $scope.receita = {
-            Nome: null,
-            Valor: null,
-            Observacao: null,
-        };
-
-        $scope.cancelCreate = function (form) {
-            $scope.createReceita = false;
-            $scope.receita = {
-                Nome: null,
-                Valor: null,
-                Observacao: null,
-            };
-            form.$setPristine(true);
+        //Cadastrar
+        $scope.openCadastrar = function () {
+            vm.modalInstance = $modal.open({
+                templateUrl: 'app/views/receitas/create.html',
+                size: 'lg',
+                resolve: {
+                    deps: [
+                        '$ocLazyLoad',
+                        function ($ocLazyLoad) {
+                            return $ocLazyLoad.load(['app/controllers/receitas/receitasCreateCtrl.js', 'ui.mask', 'app/factory/subCategoriaData.js']);
+                        }
+                    ]
+                },
+                controller: 'receitasCreateCtrl as vm'
+            });
+            vm.modalInstance.result.then(function (data) {
+                SweetAlert.swal("Sucesso!", "Receita cadastrada com sucesso!", "success");
+                receitasData.getReceitas().then(function(result) {
+                    vm.receitas = result.data;
+                });
+            }, function () {
+                console.log('Cancelled');
+            });
         }
 
-        $scope.form = {
-            submit: function (form, receita) {
-                var firstError = null;
-                if (form.$invalid) {
-
-                    var field = null, firstError = null;
-                    for (field in form) {
-                        if (field[0] != '$') {
-                            if (firstError === null && !form[field].$valid) {
-                                firstError = form[field].$name;
-                            }
-
-                            if (form[field].$pristine) {
-                                form[field].$dirty = true;
-                            }
+        //Editar
+        $scope.openEditar = function (receita) {
+            vm.modalInstance = $modal.open({
+                templateUrl: 'app/views/receitas/edit.html',
+                size: 'lg',
+                resolve: {
+                    receita: function () {
+                        return receita;
+                    },
+                    deps: [
+                        '$ocLazyLoad',
+                        function ($ocLazyLoad) {
+                            return $ocLazyLoad.load(['app/controllers/receitas/receitasEditCtrl.js', 'ui.mask', 'app/factory/subCategoriaData.js']);
                         }
-                    }
+                    ]
+                },
+                controller: 'receitasEditCtrl as vm'
+            });
+            vm.modalInstance.result.then(function (data) {
+                SweetAlert.swal("Sucesso!", "Receita salva com sucesso!", "success");
+                receitasData.getReceitas().then(function (result) {
+                    vm.receitas = result.data;
+                });
+                atualizaValores();
+            }, function () {
+                console.log('Cancelled');
+            });
+        }
 
-                    angular.element('.ng-invalid[name=' + firstError + ']').focus();
-                    return;
-
-                } else {
-                    // Cadastra a receita
-                    receita.Valor = receita.Valor.toString().replace(",", ".");
-                    receitasData.addReceita(receita).success(function (receita) {
-                        //Limpa o formulario
-                        form.$setPristine(true);
-                        $scope.receita = {
-                            Nome: null,
-                            Valor: null,
-                            Observacao: null,
-                        };
-                        SweetAlert.swal("Cadastrado!", "Receita cadastrada com sucesso!", "success");
-                        $scope.createReceita = false;
-                        $state.go($state.current, {}, { reload: true });
-                        //vm.receitas.push(receita);
-                        //$scope.tableParams.reload();
-                    }).error(function (error) {
-                        var errors = [];
-                        for (var key in error.ModelState) {
-                            for (var i = 0; i < error.ModelState[key].length; i++) {
-                                errors.push(error.ModelState[key][i]);
-                                SweetAlert.swal("Erro ao cadastrar!", error.ModelState[key][i], "error");
-                            }
+        //Ficha
+        $scope.openFicha = function (receita) {
+            vm.modalInstance = $modal.open({
+                templateUrl: 'app/views/receitas/ficha.html',
+                size: 'lg',
+                resolve: {
+                    receita: function () {
+                        return receita;
+                    },
+                    deps: [
+                        '$ocLazyLoad',
+                        function ($ocLazyLoad) {
+                            return $ocLazyLoad.load(['app/controllers/receitas/receitasFichaCtrl.js', 'app/factory/funcionariosData.js', 'app/factory/clienteData.js', 'app/factory/subCategoriaData.js']);
                         }
-                        vm.errors = errors;
-                    });
-                }
+                    ]
+                },
+                controller: 'receitasFichaCtrl as vm'
+            });
+            vm.modalInstance.result.then(function () {
 
-            }
-        };
-
-        $scope.formEdit = {
-            submit: function (form, receita) {
-                var firstError = null;
-                if (form.$invalid) {
-
-                    var field = null, firstError = null;
-                    for (field in form) {
-                        if (field[0] != '$') {
-                            if (firstError === null && !form[field].$valid) {
-                                firstError = form[field].$name;
-                            }
-
-                            if (form[field].$pristine) {
-                                form[field].$dirty = true;
-                            }
-                        }
-                    }
-
-                    angular.element('.ng-invalid[name=' + firstError + ']').focus();
-                    return;
-
-                } else {
-                    // Cadastra a receita
-                    receita.Valor = receita.Valor.toString().replace(",", ".");
-                    receitasData.editReceita(receita).success(function (receita) {
-                        SweetAlert.swal("Atualizado!", "Receita salva com sucesso!", "success");
-                        $scope.editId = -1;
-                        $state.go($state.current, {}, { reload: true });
-                    }).error(function (error) {
-                        var errors = [];
-                        for (var key in error.ModelState) {
-                            for (var i = 0; i < error.ModelState[key].length; i++) {
-                                errors.push(error.ModelState[key][i]);
-                                SweetAlert.swal("Erro ao cadastrar!", error.ModelState[key][i], "error");
-                            }
-                        }
-                        vm.errors = errors;
-                    });
-                }
-
-            }
-        };
+            }, function () {
+                console.log('Cancelled');
+            });
+        }
 
         $scope.delete = function (id) {
             SweetAlert.swal({
@@ -184,22 +171,15 @@
                 closeOnCancel: false
             }, function (isConfirm) {
                 if (isConfirm) {
-                    SweetAlert.swal({
-                        title: "Excluído!",
-                        text: "Registro excluído com sucesso.",
-                        type: "success",
-                        confirmButtonColor: "#007AFF"
-                    });
-
                     receitasData.deleteReceita(id).then(function () {
-                        SweetAlert.swal("Excluído!", "Dados apgados com sucesso!", "success");
+                        SweetAlert.swal("Excluído!", "Registro excluído com sucesso!", "success");
                         $.each(vm.receitas, function (i) {
                             if (vm.receitas[i].ReceitasId === id) {
                                 vm.receitas.splice(i, 1);
                                 return false;
                             }
                         });
-                        $scope.tableParams.reload();
+                        atualizaValores();
                     });
                 } else {
                     SweetAlert.swal({
@@ -210,6 +190,20 @@
                     });
                 }
             });
+        }
+
+        function atualizaValores() {
+            $scope.totalQuitado = 0;
+            $scope.totalPendente = 0;
+            $scope.totalVencido = 0;
+            angular.forEach(vm.receitas, function (value, key) {
+                if (value.Situacao === "Quitado") {
+                    $scope.totalQuitado = $scope.totalQuitado + value.ValorTotal;
+                } else if (value.Situacao === "Pendente") {
+                    $scope.totalPendente = $scope.totalPendente + value.ValorTotal;
+                } else $scope.totalVencido = $scope.totalVencido + value.ValorTotal;
+            });
+            $scope.tableParams.reload();
         }
 
     }

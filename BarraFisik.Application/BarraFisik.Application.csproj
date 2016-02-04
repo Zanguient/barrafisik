@@ -58,6 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App\AppServiceBase.cs" />
+    <Compile Include="App\SubCategoriaFinanceiraAppService.cs" />
     <Compile Include="App\FornecedoresAppService.cs" />
     <Compile Include="App\FuncionariosAppService.cs" />
     <Compile Include="App\ClienteAppService.cs" />
@@ -77,6 +78,7 @@
     <Compile Include="AutoMapper\DomainToViewModelMappingProfile.cs" />
     <Compile Include="AutoMapper\ViewModelToDomainMappingProfile.cs" />
     <Compile Include="Interfaces\IAppServiceBase.cs" />
+    <Compile Include="Interfaces\ISubCategoriaFinanceiraAppService.cs" />
     <Compile Include="Interfaces\IFornecedoresAppService.cs" />
     <Compile Include="Interfaces\IFuncionariosAppService.cs" />
     <Compile Include="Interfaces\IArmazemAppService.cs" />
@@ -96,6 +98,7 @@
     <Compile Include="Validation\ValidationAppError.cs" />
     <Compile Include="Validation\ValidationAppResult.cs" />
     <Compile Include="ViewModels\ArmazemViewModel.cs" />
+    <Compile Include="ViewModels\SubCategoriaFinanceiraViewModel.cs" />
     <Compile Include="ViewModels\ClienteHorarioViewModel.cs" />
     <Compile Include="ViewModels\ClienteViewModel.cs" />
     <Compile Include="ViewModels\CategoriaFinanceiraViewModel.cs" />
@@ -107,6 +110,7 @@
     <Compile Include="ViewModels\RelatorioFinanceiroSearchViewModel.cs" />
     <Compile Include="ViewModels\RelatorioFinanceiroTotalMesesViewModel.cs" />
     <Compile Include="ViewModels\RelatorioFinanceiroViewModel.cs" />
+    <Compile Include="ViewModels\SearchReceitasViewModel.cs" />
     <Compile Include="ViewModels\SearchDespesasViewModel.cs" />
     <Compile Include="ViewModels\TipoPagamentoViewModel.cs" />
     <Compile Include="ViewModels\ValoresViewModel.cs" />

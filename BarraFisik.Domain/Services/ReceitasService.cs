@@ -1,8 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using BarraFisik.Domain.Entities;
 using BarraFisik.Domain.Interfaces.Repository;
 using BarraFisik.Domain.Interfaces.Repository.ReadOnly;
 using BarraFisik.Domain.Interfaces.Services;
+using BarraFisik.Domain.ValueObjects;
 
 namespace BarraFisik.Domain.Services
 {
@@ -20,6 +22,11 @@ namespace BarraFisik.Domain.Services
         public IEnumerable<Receitas> GetReceitas()
         {
             return _receitasRepositoryReadOnly.GetReceitas();
+        }
+
+        public IEnumerable<Receitas> SearchReceitas(SearchReceita sr)
+        {
+            return _receitasRepositoryReadOnly.SearchReceitas(sr);
         }
     }
 }

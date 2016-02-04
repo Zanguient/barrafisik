@@ -3,7 +3,7 @@
 
     app.controller('despesasCreateCtrl', despesasCreateCtrl);
 
-    function despesasCreateCtrl($scope, $modalInstance, despesasData, funcionariosData, fornecedoresData, categoriaFinanceiraData, tipoPagamentoData) {
+    function despesasCreateCtrl($scope, $modalInstance, despesasData, funcionariosData, fornecedoresData, categoriaFinanceiraData, tipoPagamentoData, subCategoriaData) {
         var vm = this;
 
         vm.cancel = function () {
@@ -14,6 +14,18 @@
         tipoPagamentoData.getTipos().then(function (tipos) {
             $scope.tiposPagamento = tipos.data;
         });
+
+        //List SubCategorias
+        $scope.carregarSubcategorias = function () {            
+            if ($scope.despesa.CategoriaFinanceiraId == undefined) {
+                $scope.despesa.SubCategoriaFinanceiraId = null;
+                $scope.subcategorias = [];
+            } else {                
+                subCategoriaData.getByCategoria($scope.despesa.CategoriaFinanceiraId).then(function (subcat) {
+                    $scope.subcategorias = subcat.data;
+                });
+            }
+        }
 
         //List Funcionarios
         funcionariosData.getAllAtivos().then(function (funcionariosList) {

@@ -164,7 +164,7 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
             templateUrl: "app/views/receitas/receitas.html",
             title: 'Lista das Receitas',
             icon: 'ti-layout-media-left-alt',
-            resolve: loadSequence('receitasCtrl', 'ngTable', 'receitasData', 'categoriaFinanceiraData'),
+            resolve: loadSequence('receitasCtrl', 'ngTable', 'receitasData', 'categoriaFinanceiraData', 'tipoPagamentoData', 'funcionariosData', 'clienteData'),
             controller: "receitasCtrl as vm",
             ncyBreadcrumb: {
                 label: 'Receitas'

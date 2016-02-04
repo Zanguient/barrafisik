@@ -159,14 +159,7 @@
                 closeOnCancel: false
             }, function (isConfirm) {
                 if (isConfirm) {
-                    SweetAlert.swal({
-                        title: "Excluído!",
-                        text: "Registro excluído com sucesso.",
-                        type: "success",
-                        confirmButtonColor: "#007AFF"
-                    });
-
-                    fornecedoresData.remove(id).then(function () {
+                    fornecedoresData.remove(id).success(function () {
                         SweetAlert.swal("Excluído!", "Dados apgados com sucesso!", "success");
                         $.each(vm.fornecedores, function (i) {
                             if (vm.fornecedores[i].FornecedorId === id) {
@@ -175,6 +168,8 @@
                             }
                         });
                         $scope.tableParams.reload();
+                    }).error(function (error) {
+                        SweetAlert.swal("Erro!", error.Message, "error");
                     });
                 } else {
                     SweetAlert.swal({

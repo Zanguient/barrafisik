@@ -21,6 +21,10 @@
             return $http.put(apiUrl + 'api/clienteUpdate', clienteHorario);
         }
 
+        function getById(id) {
+            return $http.get(apiUrl + 'api/cliente/' + id);
+        }
+
         function getClientePerfil(id) {
             return $http.get(apiUrl + 'api/cliente/perfil/' + id);
         }
@@ -70,6 +74,7 @@
             getCliente: getCliente,
             addCliente: addCliente,
             editCliente: editCliente,
+            getById: getById,
             desativarCliente: desativarCliente,
             ativarCliente: ativarCliente,
             getAniversariantes: getAniversariantes,

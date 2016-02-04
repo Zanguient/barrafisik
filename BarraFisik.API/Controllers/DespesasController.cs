@@ -80,7 +80,6 @@ namespace BarraFisik.API.Controllers
         public HttpResponseMessage Remove(Guid id)
         {
             _despesasApp.Remove(id);
-
             return Request.CreateResponse(HttpStatusCode.OK, "Dado excluído com sucesso!");
         }
 
@@ -91,7 +90,7 @@ namespace BarraFisik.API.Controllers
         {           
             if (searchViewModel == null)
             {
-                var result = _despesasApp.GetDespesasAll();
+                var result = _despesasApp.GetDespesas();
                 var response = Request.CreateResponse(HttpStatusCode.OK, result);
                 var tsc = new TaskCompletionSource<HttpResponseMessage>();
                 tsc.SetResult(response);

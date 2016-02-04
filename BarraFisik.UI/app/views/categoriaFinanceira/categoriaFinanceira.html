@@ -29,19 +29,20 @@
                     <table ng-table="tableParams" class="table">
 
                         <tbody ng-repeat="c in $data">
-                        <tr id="tr{{c.CategoriaFinanceiraId}}" ng-class-odd="'odd'" ng-class-even="'even'">
-                            <td class="rowTd" data-title="'Tipo'" sortable="'Tipo'">{{c.Tipo}}</td>
-                            <td class="rowTd" data-title="'Categoria'" sortable="'Categoria'">{{c.Categoria}}</td>                                             
-                            <td class="text-right">
-                                <div class="visible-md visible-lg hidden-sm hidden-xs">
-                                    <a ng-click="setEditId(c.CategoriaFinanceiraId)" class="btn btn-transparent btn-xs" tooltip-placement="top" tooltip="Editar" id="editRowBtn{{c.CategoriaFinanceiraId}}"><i class="fa fa-pencil"></i></a>
-                                    <a ng-click="delete(c.CategoriaFinanceiraId)" ng-if="c.CategoriaFinanceiraId != '1c1278df-f5a5-4407-a0c4-bdbb71c362b1'" class="btn btn-transparent btn-xs tooltips" tooltip-placement="top" tooltip="Excluir"><i class="fa fa-times"></i></a>                                    
-                                </div>
-                            </td>
-                        </tr>
-                        <tr ng-show="editId===c.CategoriaFinanceiraId" ng-if="editId===c.CategoriaFinanceiraId">
-                            <td colspan="7" ng-include src="'app/views/categoriaFinanceira/edit.html'"></td>
-                        </tr>
+                            <tr id="tr{{c.CategoriaFinanceiraId}}" ng-class-odd="'odd'" ng-class-even="'even'">
+                                <td class="rowTd" data-title="'Tipo'" sortable="'Tipo'">{{c.Tipo}}</td>
+                                <td class="rowTd" data-title="'Categoria'" sortable="'Categoria'">{{c.Categoria}}</td>
+                                <td class="text-right">
+                                    <div class="visible-md visible-lg hidden-sm hidden-xs">
+                                        <a ng-click="openSubCategorias(c)" class="btn btn-transparent btn-xs" tooltip-placement="top" tooltip="SubCategorias" id="editRowBtn{{c.CategoriaFinanceiraId}}"><i class="fa fa-list-alt"></i></a>
+                                        <a ng-click="setEditId(c.CategoriaFinanceiraId)" class="btn btn-transparent btn-xs" tooltip-placement="top" tooltip="Editar" id="editRowBtn{{c.CategoriaFinanceiraId}}"><i class="fa fa-pencil"></i></a>
+                                        <a ng-click="delete(c.CategoriaFinanceiraId)" ng-disabled="c.CategoriaFinanceiraId == '1c1278df-f5a5-4407-a0c4-bdbb71c362b1'" class="btn btn-transparent btn-xs tooltips" tooltip-placement="top" tooltip="Excluir"><i class="fa fa-times"></i></a>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr ng-show="editId===c.CategoriaFinanceiraId" ng-if="editId===c.CategoriaFinanceiraId">
+                                <td colspan="3" ng-include src="'app/views/categoriaFinanceira/edit.html'"></td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>

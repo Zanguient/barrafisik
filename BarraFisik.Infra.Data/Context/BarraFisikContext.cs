@@ -22,6 +22,7 @@ namespace BarraFisik.Infra.Data.Context
         public IDbSet<LogMensalidades> LogMensalidades { get; set; }
         public IDbSet<ReceitasAvaliacaoFisica> ReceitasAvaliacaoFisica { get; set; }
         public IDbSet<CategoriaFinanceira> CategoriaFinanceira { get; set; }
+        public IDbSet<SubCategoriaFinanceira> SubCategoriaFinanceira { get; set; }
         public IDbSet<Receitas> Receitas { get; set; }
         public IDbSet<Despesas> Despesas { get; set; }
         public IDbSet<LogReceitasDespesas> LogReceitasDespesas { get; set; }
@@ -54,6 +55,7 @@ namespace BarraFisik.Infra.Data.Context
             modelBuilder.Configurations.Add(new LogMensalidadesConfiguration());
             modelBuilder.Configurations.Add(new ReceitasAvaliacaoFisicaConfiguration());
             modelBuilder.Configurations.Add(new CategoriaFinanceiraConfiguration());
+            modelBuilder.Configurations.Add(new SubCategoriaFinanceiraConfiguration());
             modelBuilder.Configurations.Add(new ReceitasConfiguration());
             modelBuilder.Configurations.Add(new DespesasConfiguration());
             modelBuilder.Configurations.Add(new LogReceitasDespesasConfiguration());

@@ -1,0 +1,38 @@
+﻿<div class="modal-header">
+    <h3 class="modal-title">SubCategorias de {{categoria.Categoria}}</h3>
+</div>
+<div class="modal-body" data-backdrop="static">
+    <button type="button" ng-disabled="createSubCategoria" class="btn btn-primary btn-wide btn-scroll btn-scroll-top ti-plus" ng-click="createSubCategoria = !createSubCategoria">
+        <span>Cadastrar</span>
+    </button>
+    <table class="table">
+        <tr ng-show="createSubCategoria">
+            <td colspan="2" ng-include src="'app/views/subCategoriaFinanceira/create.html'"></td>
+        </tr>
+    </table>
+    <div ng-show="vm.subCategorias != ''">
+        <table ng-table="tableParams" class="table">
+            <tbody ng-repeat="s in $data">
+                <tr id="tr{{s.SubCategoriaFinanceiraId}}" ng-class-odd="'odd'" ng-class-even="'even'">
+                    <td class="rowTd" data-title="'SubCategoria'" sortable="'SubCategoria'">{{s.SubCategoria}}</td>                                       
+                    <td class="text-right">
+                        <div class="visible-md visible-lg hidden-sm hidden-xs" ng-if="s.SubCategoriaFinanceiraId != 'ecaac024-15bd-4ee0-8422-07d809bb1be9' && s.SubCategoriaFinanceiraId != '0d57c87d-3bd9-420b-ab98-123fdb75a269'">
+                            <a ng-click="setEditId(s.SubCategoriaFinanceiraId)" class="btn btn-transparent btn-xs" tooltip-placement="top" tooltip="Editar" id="editRowBtn{{s.SubCategoriaFinanceiraId}}"><i class="fa fa-pencil"></i></a>
+                            <a ng-click="delete(s.SubCategoriaFinanceiraId)" class="btn btn-transparent btn-xs" tooltip-placement="top" tooltip="Excluir"><i class="fa fa-times"></i></a>
+                        </div>
+                    </td>
+                </tr>
+                <tr ng-show="editId===s.SubCategoriaFinanceiraId" ng-if="editId===s.SubCategoriaFinanceiraId">
+                    <td colspan="2" ng-include src="'app/views/subCategoriaFinanceira/edit.html'"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div ng-show="vm.subCategorias == ''">
+        - Nenhuma subcategoria registrada para essa Categoria
+    </div>
+
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary btn-o" ng-click="vm.cancel()">Fechar</button>
+</div>
