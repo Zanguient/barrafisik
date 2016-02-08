@@ -78,10 +78,10 @@ namespace BarraFisik.Infra.Data.Repository.ReadOnly
                                 from Cliente c
                                 where not exists 
                                         (
-                                            select * from Mensalidades m 
-                                                where m.MesReferencia >= "+mes+ "and "+ 
-                                                "m.AnoReferencia = "+ano+" and "+  
-                                                "c.ClienteId = m.ClienteId" +
+                                            select * from Receitas r 
+                                                where r.MesReferencia >= "+mes+ "and "+ 
+                                                "r.AnoReferencia = "+ano+" and "+  
+                                                "c.ClienteId = r.ClienteId" +
                                         ") and c.IsAtivo = 1 and c.Situacao != 'Pendente'";
 
                 cn.Open();

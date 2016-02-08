@@ -15,7 +15,7 @@
         <tr>
             <td>valor Pago: <span class="symbol required"></span></td>
             <td ng-class="{'has-error':FormEdit.ValorPago.$dirty && FormEdit.ValorPago.$invalid, 'has-success':FormEdit.ValorPago.$valid}" class="width-200">
-                <input class="form-control" type="text" name="ValorPago" ng-model="m.ValorPago" mask-money required>
+                <input class="form-control" type="text" name="ValorPago" ng-model="m.Valor" mask-money required>
                 <span class="error text-small block" ng-if="FormEdit.ValorPago.$dirty && FormEdit.ValorPago.$invalid">Informe o Valor Pago</span>
             </td>
             <td>Data Pagamento: <span class="symbol required"></span></td>
@@ -52,7 +52,7 @@
                 </div>
             </td>
             <td  ng-class="{'has-error':FormEdit.ValorPersonal.$dirty && FormEdit.ValorPersonal.$invalid, 'has-success':FormEdit.ValorPersonal.$valid}" class="width-200">
-                <input name="ValorPersonal" ng-if="m.isPersonal" ng-disabled="!m.isPersonal" class="form-control" type="text" ng-model="m.ValorPersonal" placeholder="Valor Pago Personal R$..." required/>
+                <input name="ValorPersonal" ng-if="m.isPersonal" ng-disabled="!m.isPersonal" mask-money class="form-control" type="text" ng-model="m.ValorPersonal" placeholder="Valor Pago Personal R$..." required/>
                 <span class="error text-small block" ng-if="FormEdit.ValorPersonal.$dirty && FormEdit.ValorPersonal.$invalid">Informe o Valor do Personal</span>
             </td>
             <td>

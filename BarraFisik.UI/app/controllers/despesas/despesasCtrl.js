@@ -7,9 +7,6 @@
         var vm = this;
         vm.despesas = [];
         vm.categorias = [];
-        $scope.categorias = [{id: "", title: ""}];
-        $scope.createDespesa = false;
-        $scope.search = null;
 
         activate();
 
@@ -33,22 +30,28 @@
                 DataVencimento: 'asc'
             }            
         }, {
-            counts: [],
+            counts: [10,20,30,40,50],
             total: vm.despesas.length, // length of data
             getData: function ($defer, params) {
-                // use build-in angular filter                   
-                var orderedData = params.sorting() ? $filter('orderBy')(vm.despesas, params.orderBy()) : vm.despesas;
-                orderedData = $filter('filter')(orderedData, params.filter());
-
-                params.total(orderedData.length);
-                $scope.total = orderedData.length;
-
+                var filteredData = params.filter() ?
+                        $filter('filter')(vm.despesas, $scope.searchText) :
+                        vm.despesas;
+                var orderedData = params.sorting() ?
+                        $filter('orderBy')(filteredData, params.orderBy()) :
+                        vm.despesas;
+                $scope.total = filteredData.length;
+                $scope.filtered = filteredData;
+                params.total(orderedData.length); // set total for recalc pagination
                 $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
             }
         });
 
         $scope.$watch('vm.despesas', function() {
-            atualizaValores();           
+            atualizaValores(vm.despesas);
+        });
+
+        $scope.$watch("searchText", function () {
+            atualizaValores($scope.filtered);
         });
 
         //Search
@@ -170,18 +173,16 @@
             });
         }
 
-        function atualizaValores() {
+        function atualizaValores(despesas) {
             $scope.totalQuitado = 0;
             $scope.totalPendente = 0;
-            $scope.totalVencido = 0;
-            angular.forEach(vm.despesas, function (value, key) {
+            angular.forEach(despesas, function (value, key) {
                 if (value.Situacao === "Quitado") {
                     $scope.totalQuitado = $scope.totalQuitado + value.ValorTotal;
                 } else if (value.Situacao === "Pendente") {
                     $scope.totalPendente = $scope.totalPendente + value.ValorTotal;
-                } else $scope.totalVencido = $scope.totalVencido + value.ValorTotal;
+                } 
             });
-
             $scope.tableParams.reload();
         }
     }

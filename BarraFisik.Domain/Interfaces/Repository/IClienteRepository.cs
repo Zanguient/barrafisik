@@ -9,5 +9,6 @@ namespace BarraFisik.Domain.Interfaces.Repository
         Cliente GetClienteHorario(Guid id);
         IEnumerable<Cliente> GetAniversariantes(int mes);
         IEnumerable<Cliente> GetClientes();
+        Cliente GetByIdMensalidade(Guid? id);
     }
 }

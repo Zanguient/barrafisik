@@ -5,21 +5,21 @@
     <div ng-show="vm.mensalidades != ''">
         <table ng-table="tableParams" class="table">
             <tbody ng-repeat="m in $data">
-                <tr id="tr{{m.MensalidadesId}}" ng-class-odd="'odd'" ng-class-even="'even'">
+                <tr id="tr{{m.ReceitasId}}" ng-class-odd="'odd'" ng-class-even="'even'">
                     <td class="rowTd" data-title="'Mês'"            sortable="'MesReferencia'">{{m.MesReferencia}}</td>
                     <td class="rowTd" data-title="'Ano'"            sortable="'AnoReferencia'">{{m.AnoReferencia}}</td>
-                    <td class="rowTd" data-title="'Valor Pago'"     sortable="'ValorPago'">    {{m.ValorPago | currency:"R$"}}</td>
+                    <td class="rowTd" data-title="'Valor Pago'"     sortable="'ValorPago'">    {{m.Valor | currency:"R$"}}</td>
                     <td class="rowTd" data-title="'Data Pagamento'" sortable="'DataPagamento'">{{m.DataPagamento | date:'dd/MM/yyyy'}}</td>
                     <td class="rowTd" data-title="'Personal'"       sortable="'isPersonal'">  <div ng-show="m.isPersonal"> {{m.ValorPersonal | currency:"R$ "}} </div> <div ng-show="!m.isPersonal"> - </div> </td>
                     <td class="rowTd" data-title="'Tipo Pagamento'" sortable="'TipoPagamento'">({{m.TipoPagamento.Sigla}}) {{m.TipoPagamento.Descricao}}</td>
                     <td class="center" ng-if="userInfo.isAdmin">
                         <div class="visible-md visible-lg hidden-sm hidden-xs">
-                            <a ng-click="setEditId(m.MensalidadesId)" class="btn btn-transparent btn-xs" tooltip-placement="top" tooltip="Editar" id="editRowBtn{{m.MensalidadesId}}"><i class="fa fa-pencil"></i></a>
-                            <a ng-click="vm.delete(m.MensalidadesId)" class="btn btn-transparent btn-xs" tooltip-placement="top" tooltip="Excluir"><i class="fa fa-times"></i></a>
+                            <a ng-click="setEditId(m.ReceitasId)" class="btn btn-transparent btn-xs" tooltip-placement="top" tooltip="Editar" id="editRowBtn{{m.ReceitasId}}"><i class="fa fa-pencil"></i></a>
+                            <a ng-click="vm.delete(m.ReceitasId)" class="btn btn-transparent btn-xs" tooltip-placement="top" tooltip="Excluir"><i class="fa fa-times"></i></a>
                         </div>
                     </td>
                 </tr>
-                <tr ng-show="editId===m.MensalidadesId" ng-if="editId===m.MensalidadesId">
+                <tr ng-show="editId===m.ReceitasId" ng-if="editId===m.ReceitasId">
                     <td colspan="7" ng-include src="'app/views/mensalidades/edit.html'"></td>
                 </tr>
             </tbody>

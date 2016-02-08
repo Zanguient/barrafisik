@@ -50,7 +50,7 @@ namespace BarraFisik.API.Controllers
         [Route("mensalidades")]
         public HttpResponseMessage Post(MensalidadesViewModel mensalidade)
         {
-            mensalidade.Nome = "Mensalidade";
+            mensalidade.SubCategoriaFinanceiraId = new Guid("0d57c87d-3bd9-420b-ab98-123fdb75a269");
             mensalidade.CategoriaFinanceiraId = new Guid("1c1278df-f5a5-4407-a0c4-bdbb71c362b1");
             if (ModelState.IsValid)
             {

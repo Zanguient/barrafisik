@@ -7,30 +7,6 @@
         var vm = this;
         vm.receitas = [];
         vm.categorias = [];
-        $scope.categorias = [{id: "", title: ""}];
-        $scope.createDespesa = false;        
-
-        var _selected;
-
-        $scope.selected = undefined;
-        $scope.states = ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Dakota', 'North Carolina', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'];
-
-        $scope.ngModelOptionsSelected = function (value) {
-            if (arguments.length) {
-                _selected = value;
-            } else {
-                return _selected;
-            }
-        };
-
-        $scope.modelOptions = {
-            debounce: {
-                default: 500,
-                blur: 250
-            },
-            getterSetter: true
-        };
-
 
         activate();
 
@@ -48,28 +24,35 @@
         }
 
         $scope.tableParams = new ngTableParams({
-            page: 1, // show first page
-            count: 50, // count per page
+            page: 1,            // show first page
+            count: 20,          // count per page
             sorting: {
-                DataVencimento: 'asc'
-            }            
+                DataVencimento: 'asc'     // initial sorting
+            },
         }, {
-            counts: [],
+            counts: [10, 20, 30, 50],
             total: vm.receitas.length, // length of data
             getData: function ($defer, params) {
-                // use build-in angular filter                   
-                var orderedData = params.sorting() ? $filter('orderBy')(vm.receitas, params.orderBy()) : vm.receitas;
-                orderedData = $filter('filter')(orderedData, params.filter());
-
-                params.total(orderedData.length);
-                $scope.total = orderedData.length;
-
+                // use build-in angular filter
+                var filteredData = params.filter() ?
+                        $filter('filter')(vm.receitas, $scope.searchText) :
+                        vm.receitas;
+                var orderedData = params.sorting() ?
+                        $filter('orderBy')(filteredData, params.orderBy()) :
+                        vm.receitas;
+                $scope.total = filteredData.length;
+                $scope.filtered = filteredData;
+                params.total(orderedData.length); // set total for recalc pagination
                 $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
             }
         });
 
-        $scope.$watch('vm.receitas', function () {
-            atualizaValores();
+        $scope.$watch('vm.receitas', function () {            
+            atualizaValores(vm.receitas);            
+        });
+
+        $scope.$watch("searchText", function () {                      
+            atualizaValores($scope.filtered);
         });
 
         //Search
@@ -127,7 +110,7 @@
                 receitasData.getReceitas().then(function (result) {
                     vm.receitas = result.data;
                 });
-                atualizaValores();
+                atualizaValores(vm.receitas);
             }, function () {
                 console.log('Cancelled');
             });
@@ -179,7 +162,7 @@
                                 return false;
                             }
                         });
-                        atualizaValores();
+                        atualizaValores(vm.receitas);
                     });
                 } else {
                     SweetAlert.swal({
@@ -192,16 +175,16 @@
             });
         }
 
-        function atualizaValores() {
+        function atualizaValores(receitas) {
             $scope.totalQuitado = 0;
             $scope.totalPendente = 0;
-            $scope.totalVencido = 0;
-            angular.forEach(vm.receitas, function (value, key) {
+            //$scope.totalVencido = 0;
+            angular.forEach(receitas, function (value, key) {
                 if (value.Situacao === "Quitado") {
                     $scope.totalQuitado = $scope.totalQuitado + value.ValorTotal;
                 } else if (value.Situacao === "Pendente") {
                     $scope.totalPendente = $scope.totalPendente + value.ValorTotal;
-                } else $scope.totalVencido = $scope.totalVencido + value.ValorTotal;
+                } //else $scope.totalVencido = $scope.totalVencido + value.ValorTotal;
             });
             $scope.tableParams.reload();
         }

@@ -13,8 +13,12 @@
             return $http.get(apiUrl+'api/mensalidades/'+id);
         }
 
+        //function addMensalidade(mensalidade) {
+        //    return $http.post(apiUrl+'api/mensalidades', mensalidade);
+        //}
+
         function addMensalidade(mensalidade) {
-            return $http.post(apiUrl+'api/mensalidades', mensalidade);
+            return $http.post(apiUrl + 'api/receitas/mensalidade', mensalidade);
         }
 
         function editMensalidade(mensalidade) {

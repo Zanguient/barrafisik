@@ -1,16 +1,83 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.SqlClient;
 using BarraFisik.Domain.Entities;
 using BarraFisik.Domain.Interfaces.Repository.ReadOnly;
 using BarraFisik.Domain.ValueObjects;
 using Dapper;
+using System.Linq;
 
 namespace BarraFisik.Infra.Data.Repository.ReadOnly
 {
     public class ReceitasRepositoryReadOnly : RepositoryBaseReadOnly, IReceitasRepositoryReadOnly
     {
+        public bool ExisteMensalidade(Receitas mensalidade)
+        {
+            using (var cn = Connection)
+            {
+                var query = @"  SELECT CASE WHEN EXISTS (
+                                SELECT *
+                                FROM Receitas r 
+                                WHERE	r.ClienteId = '" + mensalidade.ClienteId + "' and " +
+                                        "r.AnoReferencia = '" + mensalidade.AnoReferencia + "' and " +
+                                        "r.MesReferencia = '" + mensalidade.MesReferencia + "' and " +
+                                        "r.ReceitasId != '" + mensalidade.ReceitasId + "' " +
+                                ") THEN CAST(1 AS INT) ELSE CAST(0 AS INT) END ";
+
+                cn.Open();
+                var valido = cn.Query<int>(query).First();
+                cn.Close();
+                if (valido == 1)
+                {
+                    return true;
+                }
+                return false;
+            }
+        }
+
+        public IEnumerable<Receitas> GetMensalidadesCliente(Guid? idCliente)
+        {
+            using (var cn = Connection)
+            {
+                var query = @"  Select distinct * from Receitas r 
+                                inner join TipoPagamento tp on r.TipoPagamentoId = tp.TipoPagamentoId
+                                where r.ClienteId = '" + idCliente + 
+                                "' and r.CategoriaFinanceiraId = '1c1278df-f5a5-4407-a0c4-bdbb71c362b1' and r.SubCategoriaFinanceiraId = '0d57c87d-3bd9-420b-ab98-123fdb75a269'";
+
+                cn.Open();
+                var receitas = cn.Query<Receitas, TipoPagamento, Receitas>(
+                    query,
+                    (r, tp) => {
+                        r.TipoPagamento = tp;
+                        return r;
+                    }, splitOn: "ReceitasId, TipoPagamentoId");
+                cn.Close();
+
+                return receitas;
+            }
+        }
+
+        public IEnumerable<Receitas> GetAvaliacaoCliente(Guid? idCliente)
+        {
+            using (var cn = Connection)
+            {
+                var query = @"  Select distinct * from Receitas r 
+                                left join TipoPagamento tp on r.TipoPagamentoId = tp.TipoPagamentoId
+                                where r.ClienteId = '" + idCliente +
+                                "' and r.CategoriaFinanceiraId = '1c1278df-f5a5-4407-a0c4-bdbb71c362b1' and r.SubCategoriaFinanceiraId = 'ecaac024-15bd-4ee0-8422-07d809bb1be9'";
+
+                cn.Open();
+                var receitas = cn.Query<Receitas, TipoPagamento, Receitas>(
+                    query,
+                    (r, tp) => {
+                        r.TipoPagamento = tp;
+                        return r;
+                    }, splitOn: "ReceitasId, TipoPagamentoId");
+                cn.Close();
+
+                return receitas;
+            }
+        }
+
         public IEnumerable<Receitas> GetReceitas()
         {
             using (var cn = Connection)
@@ -65,17 +132,19 @@ namespace BarraFisik.Infra.Data.Repository.ReadOnly
                 var sql = @"select * from Receitas r 
                                 inner join CategoriaFinanceira cf on r.CategoriaFinanceiraId = cf.CategoriaFinanceiraId
                                 left join TipoPagamento tp on r.TipoPagamentoId = tp.TipoPagamentoId
+                                left join SubCategoriaFinanceira sc on r.SubCategoriaFinanceiraId = sc.SubCategoriaFinanceiraId
                                 where Month(r.DataVencimento) = Month(GetDate()) and YEAR(r.DataVencimento) = YEAR(getDate()) ";
 
-                var receitas = cn.Query<Receitas, CategoriaFinanceira, TipoPagamento, Receitas>(
+                var receitas = cn.Query<Receitas, CategoriaFinanceira, TipoPagamento, SubCategoriaFinanceira, Receitas>(
                     sql,
-                    (r, cf, tp) =>
+                    (r, cf, tp, sc) =>
                     {
                         r.CategoriaFinanceiraId = cf.CategoriaFinanceiraId;
                         r.CategoriaFinanceira = cf;
                         r.TipoPagamento = tp;
+                        r.SubCategoriaFinanceira = sc;
                         return r;
-                    }, splitOn: "ReceitasId, CategoriaFinanceiraId, TipoPagamentoId");
+                    }, splitOn: "ReceitasId, CategoriaFinanceiraId, TipoPagamentoId, SubCategoriaFinanceiraId");
 
                 cn.Close();
                 return receitas;
@@ -91,6 +160,7 @@ namespace BarraFisik.Infra.Data.Repository.ReadOnly
                 var sql = @"select * from Receitas r 
                                 inner join CategoriaFinanceira cf on r.CategoriaFinanceiraId = cf.CategoriaFinanceiraId
                                 left join TipoPagamento tp on r.TipoPagamentoId = tp.TipoPagamentoId
+                                left join SubCategoriaFinanceira sc on r.SubCategoriaFinanceiraId = sc.SubCategoriaFinanceiraId
                                 where 1 = 1";
 
                 var dt = new DateTime();
@@ -136,15 +206,16 @@ namespace BarraFisik.Infra.Data.Repository.ReadOnly
                 if (!hasData)
                     sql = sql + " AND Month(r.DataVencimento) = Month(GetDate()) and YEAR(r.DataVencimento) = YEAR(getDate())";
 
-                var receitas = cn.Query<Receitas, CategoriaFinanceira, TipoPagamento, Receitas>(
+                var receitas = cn.Query<Receitas, CategoriaFinanceira, TipoPagamento, SubCategoriaFinanceira, Receitas >(
                     sql,
-                    (r, cf, tp) =>
+                    (r, cf, tp, sc) =>
                     {
                         r.CategoriaFinanceiraId = cf.CategoriaFinanceiraId;
                         r.CategoriaFinanceira = cf;
                         r.TipoPagamento = tp;
+                        r.SubCategoriaFinanceira = sc;
                         return r;
-                    }, splitOn: "DespesasId, CategoriaFinanceiraId, TipoPagamentoId");
+                    }, splitOn: "DespesasId, CategoriaFinanceiraId, TipoPagamentoId, SubCategoriaFinanceiraId");
 
 
                 cn.Close();

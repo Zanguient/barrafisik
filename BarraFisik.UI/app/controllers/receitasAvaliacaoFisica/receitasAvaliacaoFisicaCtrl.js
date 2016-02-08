@@ -3,7 +3,7 @@
 
     app.controller("receitasAvaliacaoFisicaCtrl", receitasAvaliacaoFisicaCtrl);
 
-    function receitasAvaliacaoFisicaCtrl($scope, ClienteId, modalService, $modalInstance, tipoPagamentoData, receitasAvaliacaoFisicaData, ngTableParams, $filter, $timeout, SweetAlert, toaster) {
+    function receitasAvaliacaoFisicaCtrl($scope, ClienteId, modalService, $modalInstance, tipoPagamentoData, receitasAvaliacaoFisicaData, ngTableParams, $filter, $timeout, SweetAlert, toaster, receitasData) {
         var vm = this;
         vm.avaliacoes = [];
 
@@ -11,8 +11,8 @@
             $modalInstance.dismiss('cancel');
         };
 
-        receitasAvaliacaoFisicaData.getByCliente(ClienteId).then(function (result) {
-            vm.avaliacoes = result.data;
+        receitasData.getAvaliacaoCliente(ClienteId).then(function (result) {
+            vm.avaliacoes = result.data;                        
         });
 
         $scope.tableParams = new ngTableParams({
@@ -85,12 +85,16 @@
                     return;
 
                 } else {
+                    //Situação
+                    if (avaliacaoFisica.DataPagamento != null) {
+                        avaliacaoFisica.Situacao = "Quitado";
+                    } else avaliacaoFisica.Situacao = "Pendente";
+
                     // Cadastra/Atualiza mensalidade
                     avaliacaoFisica.ClienteId = ClienteId;
-                    avaliacaoFisica.Valor = avaliacaoFisica.Valor.toString().replace(",", ".");
-                    receitasAvaliacaoFisicaData.editReceitaAvaliacao(avaliacaoFisica).success(function () {
+                    receitasData.editReceita(avaliacaoFisica).success(function () {
                         toaster.pop('success', '', 'Dado Atualizado com Sucesso!');
-                        receitasAvaliacaoFisicaData.getByCliente(ClienteId).then(function (result) {
+                        receitasData.getAvaliacaoCliente(ClienteId).then(function (result) {
                             vm.avaliacoes = result.data;
                         });
                         $scope.editId = -1;
@@ -113,12 +117,12 @@
 
         $scope.setEditId = function (pid) {
             $scope.editId = pid;
-        };
+        };        
 
         /**
-         * /
-         * @returns {DatePicker} 
-         */
+        * /
+        * @returns {DatePicker} 
+        */
         $scope.today = function () {
             $scope.DataPagamento = new Date();
         };

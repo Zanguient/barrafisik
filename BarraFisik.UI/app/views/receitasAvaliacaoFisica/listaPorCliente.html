@@ -5,18 +5,20 @@
     <div ng-show="vm.avaliacoes != ''">
         <table ng-table="tableParams" class="table">
             <tbody ng-repeat="r in $data">
-                <tr id="tr{{r.ReceitasAvaliacaoFisicaId}}" ng-class-odd="'odd'" ng-class-even="'even'">
+                <tr id="tr{{r.ReceitasId}}" ng-class-odd="'odd'" ng-class-even="'even'">
                     <td class="rowTd" data-title="'Data Pagamento'"   sortable="'DataPagamento'">{{r.DataPagamento | date:'dd/MM/yyyy'}}</td>
+                    <td class="rowTd" data-title="'Data Vencimento'" sortable="'DataVencimento'">{{r.DataPagamento | date:'dd/MM/yyyy'}}</td>
                     <td class="rowTd" data-title="'Valor'"            sortable="'Valor'">{{r.Valor| currency}}</td>
                     <td class="rowTd" data-title="'Tipo Pagamento'"    sortable="'TipoPagamento.Descricao'">({{r.TipoPagamento.Sigla}}) {{r.TipoPagamento.Descricao}}</td>
+                    <td class="rowTd" data-title="'Situação'" sortable="'Situacao'">{{r.Situacao}}</td>
                     <td class="text-right" ng-if="userInfo.isAdmin">
                         <div class="visible-md visible-lg hidden-sm hidden-xs">
-                            <a ng-click="setEditId(r.ReceitasAvaliacaoFisicaId)" class="btn btn-transparent btn-xs" tooltip-placement="top" tooltip="Editar" id="editRowBtn{{r.ReceitasAvaliacaoFisica}}"><i class="fa fa-pencil"></i></a>
-                            <a ng-click="vm.delete(r.ReceitasAvaliacaoFisicaId)" class="btn btn-transparent btn-xs" tooltip-placement="top" tooltip="Excluir"><i class="fa fa-times"></i></a>
+                            <a ng-click="setEditId(r.ReceitasId)" class="btn btn-transparent btn-xs" tooltip-placement="top" tooltip="Editar" id="editRowBtn{{r.ReceitasId}}"><i class="fa fa-pencil"></i></a>
+                            <a ng-click="vm.delete(r.ReceitasId)" class="btn btn-transparent btn-xs" tooltip-placement="top" tooltip="Excluir"><i class="fa fa-times"></i></a>
                         </div>
                     </td>
                 </tr>
-                <tr ng-show="editId===r.ReceitasAvaliacaoFisicaId" ng-if="editId===r.ReceitasAvaliacaoFisicaId">
+                <tr ng-show="editId===r.ReceitasId" ng-if="editId===r.ReceitasId">
                     <td colspan="5" ng-include src="'app/views/receitasAvaliacaoFisica/edit.html'"></td>
                 </tr>
             </tbody>

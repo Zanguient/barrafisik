@@ -10,7 +10,7 @@
         </div>
         <table class="table no-bg">
             <tr>
-                <td>Documento: </td>
+                <td style="min-width: 130px">Documento: </td>
                 <td> <input class="form-control input-sm" type="text" name="Nome" ng-model="receita.Documento"> </td>
                 <td>Categoria: </td>
                 <td ng-class="{'has-error':Form.CategoriaFinanceira.$dirty && Form.CategoriaFinanceira.$invalid, 'has-success':Form.CategoriaFinanceira.$valid}">
@@ -27,6 +27,28 @@
                         <option ng-selected="receita.SubCategoriaFinanceiraId == sc.SubCategoriaFinanceiraId" ng-repeat="sc in subcategorias" value="{{sc.SubCategoriaFinanceiraId}}">{{sc.SubCategoria}}</option>
                     </select>
                 </td>   
+            </tr>
+            <tr ng-if="receita.SubCategoriaFinanceiraId == '0d57c87d-3bd9-420b-ab98-123fdb75a269'">
+                <td>Mês: <span class="symbol required"></span></td>
+                <td ng-class="{'has-error':Form.MesReferencia.$dirty && Form.MesReferencia.$invalid, 'has-success':Form.MesReferencia.$valid}">
+                    <input class="form-control" type="number" min="01" max="12" name="MesReferencia" ng-model="receita.MesReferencia" required>
+                    <span class="error text-small block" ng-if="Form.MesReferencia.$dirty && Form.MesReferencia.$invalid">Informe o Mês</span>
+                </td>
+                <td>Ano: <span class="symbol required"></span></td>
+                <td ng-class="{'has-error':Form.AnoReferencia.$dirty && Form.AnoReferencia.$invalid, 'has-success':Form.AnoReferencia.$valid}">
+                    <input class="form-control" type="number" name="AnoReferencia" ng-model="receita.AnoReferencia" required>
+                    <span class="error text-small block" ng-if="Form.AnoReferencia.$dirty && Form.AnoReferencia.$invalid">Informe o Ano</span>
+                </td>
+                <td>
+                    <div class="checkbox clip-check check-primary">
+                        <input type="checkbox" id="isPersonal"
+                               ng-model="receita.isPersonal">
+                        <label for="isPersonal"> Personal </label>
+                    </div>
+                </td>
+                <td>
+                    <input ng-show="receita.isPersonal" ng-disabled="!receita.isPersonal" mask-money class="form-control" type="text" ng-model="receita.ValorPersonal" placeholder="Valor Pago Personal R$..." />
+                </td>
             </tr>
             <tr>
                 <td>Clientes: </td>
@@ -67,7 +89,7 @@
                     </select>
                 </td>
                 <td>Valor Total: </td>
-                <td><b class="text-primary">{{receita.ValorTotal = receita.Valor + receita.Juros + receita.Multa | currency:'R$ '}}</b><td>
+                <td><b class="text-primary">{{receita.ValorTotal = receita.Valor + receita.Juros + receita.Multa + receita.ValorPersonal | currency:'R$ '}}</b><td>
             </tr>
             <tr>
                 <td>Data Vencimento: <span class="symbol required"></span></td>

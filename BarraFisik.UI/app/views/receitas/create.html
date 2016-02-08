@@ -28,14 +28,44 @@
                     </select>
                 </td>
             </tr>
+            <tr ng-if="receita.CategoriaFinanceiraId == '1c1278df-f5a5-4407-a0c4-bdbb71c362b1' && receita.SubCategoriaFinanceiraId == '0d57c87d-3bd9-420b-ab98-123fdb75a269'">
+                <td>Mês: <span class="symbol required"></span></td>
+                <td ng-class="{'has-error':Form.MesReferencia.$dirty && Form.MesReferencia.$invalid, 'has-success':Form.MesReferencia.$valid}">
+                    <input class="form-control" type="number" min="01" max="12" name="MesReferencia" ng-model="receita.MesReferencia" required>
+                    <span class="error text-small block" ng-if="Form.MesReferencia.$dirty && Form.MesReferencia.$invalid">Informe o Mês</span>
+                </td>
+                <td>Ano: <span class="symbol required"></span></td>
+                <td ng-class="{'has-error':Form.AnoReferencia.$dirty && Form.AnoReferencia.$invalid, 'has-success':Form.AnoReferencia.$valid}">
+                    <input class="form-control" type="number" name="AnoReferencia" ng-model="receita.AnoReferencia" required>
+                    <span class="error text-small block" ng-if="Form.AnoReferencia.$dirty && Form.AnoReferencia.$invalid">Informe o Ano</span>
+                </td>
+                <td>
+                    <div class="checkbox clip-check check-primary">
+                        <input type="checkbox" id="isPersonal"
+                               ng-model="receita.isPersonal">
+                        <label for="isPersonal"> Personal </label>
+                    </div>
+                </td>
+                <td>
+                    <input ng-show="receita.isPersonal" ng-disabled="!receita.isPersonal" mask-money class="form-control" type="text" ng-model="receita.ValorPersonal" placeholder="Valor Pago Personal R$..." />
+                </td>
+            </tr>
             <tr>
                 <td class="form-inline">
-                    <a ng-click="isCliente=true" ng-class="{'text-light':!isCliente, 'text-dark': isCliente}"> Cliente </a> / <a ng-click="isCliente=false" ng-class="{'text-light':isCliente, 'text-dark': !isCliente}"> Outro: </a>
+                    <a ng-click="isCliente=true" ng-class="{'text-light':!isCliente, 'text-dark': isCliente}"> Cliente </a> / <a ng-click="isCliente=false" ng-show="receita.SubCategoriaFinanceiraId != '0d57c87d-3bd9-420b-ab98-123fdb75a269'" ng-class="{'text-light':isCliente, 'text-dark': !isCliente}"> Outro: </a>
                 </td>
-                <td ng-if="isCliente" colspan="2">
+                <td ng-if="isCliente && receita.SubCategoriaFinanceiraId != '0d57c87d-3bd9-420b-ab98-123fdb75a269'" colspan="2">
                     <input type="text" class="form-control input-sm" placeholder="Selecione..."
                            ng-model="receita.Cliente"
                            typeahead="c as c.Nome for c in clientes | filter:{Nome:$viewValue}" typeahead-show-hint="true" typeahead-min-length="2">
+
+                </td>
+                <td ng-class="{'has-error':Form.Cliente.$dirty && Form.Cliente.$invalid}" 
+                    ng-if="isCliente && receita.SubCategoriaFinanceiraId == '0d57c87d-3bd9-420b-ab98-123fdb75a269'" colspan="2">
+                    <input type="text" class="form-control input-sm" placeholder="Selecione..."
+                           ng-model="receita.Cliente" name="Cliente" required
+                           typeahead="c as c.Nome for c in clientes | filter:{Nome:$viewValue}" typeahead-show-hint="true" typeahead-min-length="2">
+                    <span class="error text-small block" ng-if="Form.Cliente.$dirty && Form.Cliente.$invalid">Informe o Cliente</span>
 
                 </td>
                 <td ng-if="!isCliente" colspan="3" class="form-inline">
@@ -78,7 +108,7 @@
                     </select>
                 </td>
                 <td>Valor Total: </td>
-                <td><b class="text-primary">{{receita.ValorTotal = receita.Valor + receita.Juros + receita.Multa | currency:'R$ '}}</b>
+                <td><b class="text-primary">{{receita.ValorTotal = receita.Valor + receita.Juros + receita.Multa + receita.ValorPersonal | currency:'R$ '}}</b>
                 <td>
             </tr>
             <tr>

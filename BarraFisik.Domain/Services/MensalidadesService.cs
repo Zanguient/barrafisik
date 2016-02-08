@@ -24,12 +24,12 @@ namespace BarraFisik.Domain.Services
         {
             var resultado = new ValidationResult();
 
-            resultado = VerificaMensalidadeUnica(mensalidade);
-            if (!resultado.IsValid)
-            {
-                resultado.AdicionarErro(mensalidade.ResultadoValidacao);
-                return resultado;
-            }
+            //resultado = VerificaMensalidadeUnica(mensalidade);
+            //if (!resultado.IsValid)
+            //{
+            //    resultado.AdicionarErro(mensalidade.ResultadoValidacao);
+            //    return resultado;
+            //}
 
             base.Add(mensalidade);
             return resultado;
@@ -40,13 +40,13 @@ namespace BarraFisik.Domain.Services
             return _mensalidadesRepositoryReadOnly.GetMensalidadesCliente(id);
         }
 
-        public ValidationResult VerificaMensalidadeUnica(Mensalidades mensalidade)
-        {
-            var fiscal = new MensalidadeUnica(_mensalidadesRepositoryReadOnly, _mensalidadesRepository);
+        //public ValidationResult VerificaMensalidadeUnica(Mensalidades mensalidade)
+        //{
+        //    var fiscal = new MensalidadeUnica(_mensalidadesRepositoryReadOnly, _mensalidadesRepository);
 
-            var result = fiscal.Validar(mensalidade);
+        //    var result = fiscal.Validar(mensalidade);
 
-            return result;
-        }
+        //    return result;
+        //}
     }
 }

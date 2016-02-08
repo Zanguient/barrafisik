@@ -8,8 +8,6 @@
         vm.fila = [];
         $scope.createFila = false;
 
-
-
         activate();
 
         function activate() {
@@ -117,7 +115,7 @@
 
 
         $scope.fila = {
-            DataReserva: today,
+            DataReserva: new Date(),
             Nome: null,
             Telefone: "",
             Celular: "",
@@ -137,11 +135,9 @@
         }
 
         $scope.form = {
-
             submit: function (form, fila) {
                 var firstError = null;
                 if (form.$invalid) {
-
                     var field = null, firstError = null;
                     for (field in form) {
                         if (field[0] != '$') {
@@ -154,19 +150,14 @@
                             }
                         }
                     }
-
                     angular.element('.ng-invalid[name=' + firstError + ']').focus();
                     return;
-
                 } else {
-                    // Cadastra o fila
-                    if (fila.DataReserva === today)
-                        fila.DataReserva = new Date();
                     filaEsperaData.addFila(fila).success(function (fila) {
                         //Limpa o formulario
                         form.$setPristine(true);
                         $scope.fila = {
-                            DataReserva: today,
+                            DataReserva: new Date(),
                             Nome: null,
                             Telefone: "",
                             Celular: "",
@@ -175,7 +166,9 @@
                         };
                         SweetAlert.swal("Cadastrado!", "Dados cadastrado com sucesso!", "success");
                         $scope.createFila = false;
-                        vm.fila.push(fila);
+                        filaEsperaData.getFila().then(function (result) {
+                            vm.fila = result.data;
+                        });
                         $scope.tableParams.reload();
                     }).error(function (error) {
                         var errors = [];
@@ -188,7 +181,6 @@
                         vm.errors = errors;
                     });
                 }
-
             }
         };
 
@@ -197,7 +189,6 @@
             submit: function (form, fila) {
                 var firstError = null;
                 if (form.$invalid) {
-
                     var field = null, firstError = null;
                     for (field in form) {
                         if (field[0] != '$') {
@@ -210,10 +201,8 @@
                             }
                         }
                     }
-
                     angular.element('.ng-invalid[name=' + firstError + ']').focus();
                     return;
-
                 } else {
                     // Cadastra o fila
                     filaEsperaData.editFila(fila).success(function () {
@@ -230,11 +219,8 @@
                         vm.errors = errors;
                     });
                 }
-
             }
         };
-
-
 
         $scope.editId = -1;
 

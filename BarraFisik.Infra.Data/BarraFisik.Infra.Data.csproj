@@ -150,6 +150,22 @@
     <Compile Include="Migrations\201602031832088_Add_SubCategoria_RecDesp_Log.Designer.cs">
       <DependentUpon>201602031832088_Add_SubCategoria_RecDesp_Log.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201602041443136_Add_SubCategoria_Mensalidade.cs" />
+    <Compile Include="Migrations\201602041443136_Add_SubCategoria_Mensalidade.Designer.cs">
+      <DependentUpon>201602041443136_Add_SubCategoria_Mensalidade.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201602041511164_Add_DataEmissao_Mensalidades.cs" />
+    <Compile Include="Migrations\201602041511164_Add_DataEmissao_Mensalidades.Designer.cs">
+      <DependentUpon>201602041511164_Add_DataEmissao_Mensalidades.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201602041820121_Add_SubCategoria_AvaliacaoFisica.cs" />
+    <Compile Include="Migrations\201602041820121_Add_SubCategoria_AvaliacaoFisica.Designer.cs">
+      <DependentUpon>201602041820121_Add_SubCategoria_AvaliacaoFisica.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201602042016430_Update_Receita_DadosMensalidade.cs" />
+    <Compile Include="Migrations\201602042016430_Update_Receita_DadosMensalidade.Designer.cs">
+      <DependentUpon>201602042016430_Update_Receita_DadosMensalidade.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\SubCategoriaFinanceiraRepository.cs" />
@@ -242,6 +258,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201602031832088_Add_SubCategoria_RecDesp_Log.resx">
       <DependentUpon>201602031832088_Add_SubCategoria_RecDesp_Log.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602041443136_Add_SubCategoria_Mensalidade.resx">
+      <DependentUpon>201602041443136_Add_SubCategoria_Mensalidade.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602041511164_Add_DataEmissao_Mensalidades.resx">
+      <DependentUpon>201602041511164_Add_DataEmissao_Mensalidades.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602041820121_Add_SubCategoria_AvaliacaoFisica.resx">
+      <DependentUpon>201602041820121_Add_SubCategoria_AvaliacaoFisica.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602042016430_Update_Receita_DadosMensalidade.resx">
+      <DependentUpon>201602042016430_Update_Receita_DadosMensalidade.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

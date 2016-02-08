@@ -62,13 +62,6 @@
             $scope.categorias = categoriasList.data;
         });
 
-        function getSituacao(vencimento, atual) {
-            if (vencimento.getTime() >= atual.getTime()) {
-                return "Pendente";
-            }
-            return "Vencido";
-        };
-
         $scope.form = {
             submit: function (form, despesa) {
                 var firstError = null;
@@ -92,7 +85,7 @@
                     //Situação
                     if (despesa.DataPagamento != null) {
                         despesa.Situacao = "Quitado";
-                    } else despesa.Situacao = getSituacao(despesa.DataVencimento, new Date());
+                    } else despesa.Situacao = "Pendente";
 
                     despesasData.editDespesa(despesa).success(function () {
                         $modalInstance.close();

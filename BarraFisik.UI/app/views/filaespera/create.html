@@ -2,7 +2,7 @@
     <table class="table no-bg">
         <tr>
             <td>Data Reserva: <span class="symbol required"></span></td>
-            <td ng-class="{'has-error':Form.DataReserva.$dirty && Form.DataReserva.$invalid, 'has-success':Form.DataReserva.$valid}">
+            <!--<td ng-class="{'has-error':Form.DataReserva.$dirty && Form.DataReserva.$invalid, 'has-success':Form.DataReserva.$valid}">
                 <div class="form-horizontal">
                     <p class="input-group  margin-top-10">
                         <input type="text" name="DataReserva" disabled class="form-control" datepicker-popup="dd/MM/yyyy" ng-model="fila.DataReserva"
@@ -17,6 +17,11 @@
                     </p>
                 </div>
                 <span class="error text-small block" ng-if="Form.DataReserva.$dirty && Form.DataReserva.$invalid">Informe a Data da Reserva</span>
+            </td>-->
+            <td ng-class="{'has-error':Form.DataReserva.$dirty && Form.DataReserva.$invalid, 'has-success':Form.DataReserva.$valid}">
+                <input class="form-control input-sm" name="DataReserva" type="date" ng-model="fila.DataReserva" required>
+                <span class="error text-small block" ng-if="Form.DataReserva.$dirty && Form.DataReserva.$invalid">Informe a Data Reserva</span>
+                <span class="error text-small block" ng-if="Form.DataReserva.$dirty && Form.DataReserva.$error.date">Data inválida</span>
             </td>
             <td>Nome: <span class="symbol required"></span></td>
             <td ng-class="{'has-error':Form.Nome.$dirty && Form.Nome.$invalid, 'has-success':Form.Nome.$valid}">

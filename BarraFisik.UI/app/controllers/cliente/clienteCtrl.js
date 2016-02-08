@@ -106,6 +106,7 @@
             { show: true, title: "Situação" },
             { show: false, title: "Qtd. Dias" },
             { show: false, title: "Valor" },
+            { show: true, title: 'Dias' },
         ];
 
         //$scope.Ativar = function (id) {
@@ -191,7 +192,7 @@
                     deps: [
                         '$ocLazyLoad',
                         function ($ocLazyLoad) {
-                            return $ocLazyLoad.load(['app/controllers/mensalidades/mensalidadesCtrl.js', 'app/factory/mensalidadesData.js', 'app/factory/tipoPagamentoData.js']);
+                            return $ocLazyLoad.load(['app/controllers/mensalidades/mensalidadesCtrl.js', 'app/factory/mensalidadesData.js', 'app/factory/tipoPagamentoData.js', 'app/factory/receitasData.js']);
                         }
                     ]
                 },
@@ -230,7 +231,7 @@
                     deps: [
                         '$ocLazyLoad',
                         function ($ocLazyLoad) {
-                            return $ocLazyLoad.load(['app/controllers/mensalidades/createMensalidadesCtrl.js', 'app/factory/mensalidadesData.js', 'app/factory/tipoPagamentoData.js']);
+                            return $ocLazyLoad.load(['app/controllers/mensalidades/createMensalidadesCtrl.js', 'app/factory/mensalidadesData.js', 'app/factory/tipoPagamentoData.js', 'app/factory/receitasData.js']);
                         }
                     ]
                 },
@@ -266,7 +267,7 @@
                     deps: [
                         '$ocLazyLoad',
                         function ($ocLazyLoad) {
-                            return $ocLazyLoad.load(['app/controllers/receitasAvaliacaoFisica/createReceitasAvaliacaoFisicaCtrl.js', 'app/factory/receitasAvaliacaoFisicaData.js', 'app/factory/tipoPagamentoData.js']);
+                            return $ocLazyLoad.load(['app/controllers/receitasAvaliacaoFisica/createReceitasAvaliacaoFisicaCtrl.js', 'app/factory/receitasAvaliacaoFisicaData.js', 'app/factory/tipoPagamentoData.js', 'app/factory/receitasData.js']);
                         }
                     ]
                 },
@@ -294,7 +295,7 @@
                     deps: [
                         '$ocLazyLoad',
                         function ($ocLazyLoad) {
-                            return $ocLazyLoad.load(['app/controllers/receitasAvaliacaoFisica/receitasAvaliacaoFisicaCtrl.js', 'app/factory/receitasAvaliacaoFisicaData.js', 'app/factory/tipoPagamentoData.js']);
+                            return $ocLazyLoad.load(['app/controllers/receitasAvaliacaoFisica/receitasAvaliacaoFisicaCtrl.js', 'app/factory/receitasAvaliacaoFisicaData.js', 'app/factory/tipoPagamentoData.js', 'app/factory/receitasData.js']);
                         }
                     ]
                 },

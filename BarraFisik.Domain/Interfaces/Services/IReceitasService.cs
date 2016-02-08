@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using BarraFisik.Domain.Entities;
 using BarraFisik.Domain.ValueObjects;
+using System;
 
 namespace BarraFisik.Domain.Interfaces.Services
 {
@@ -8,5 +9,8 @@ namespace BarraFisik.Domain.Interfaces.Services
     {
         IEnumerable<Receitas> GetReceitas();
         IEnumerable<Receitas> SearchReceitas(SearchReceita sr);
+        ValidationResult AddMensalidade(Receitas receita);
+        IEnumerable<Receitas> GetMensalidadesCliente(Guid? idCliente);
+        IEnumerable<Receitas> GetAvaliacaoCliente(Guid? idCliente);
     }
 }

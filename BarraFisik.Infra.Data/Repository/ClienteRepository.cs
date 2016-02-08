@@ -29,5 +29,10 @@ namespace BarraFisik.Infra.Data.Repository
         {
             return DbSet.Where(c => c.IsAtivo).ToList();
         }
+
+        public Cliente GetByIdMensalidade(Guid? id)
+        {
+            return DbSet.Where(c => c.ClienteId == id).FirstOrDefault();
+        }
     }
 }

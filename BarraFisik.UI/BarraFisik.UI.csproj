@@ -89,6 +89,7 @@
     <Content Include="app\directives\bundleAppDirectives.js" />
     <Content Include="app\directives\equals.js" />
     <Content Include="app\directives\exportTable.js" />
+    <Content Include="app\directives\fixedTableHeaders.js" />
     <Content Include="app\directives\xngFocus.js" />
     <Content Include="app\factory\subCategoriaData.js" />
     <Content Include="app\factory\fornecedoresData.js" />
@@ -4750,6 +4751,7 @@
     <Content Include="fonts\xkvoNo9fC8O2RDydKj12b_k_vArhqVIZ0nv9q090hN8.woff2" />
     <Content Include="fonts\YMOYVM-eg6Qs9YzV9OSqZfesZW2xOQ-xsNqO47m55DA.woff2" />
     <Content Include="fonts\0dTEPzkLWceF7z0koJaX1A.woff2" />
+    <Content Include="bower_components\stickyTableHeaders\jquery.stickytableheaders.min.js" />
     <None Include="bundleconfig.json" />
     <None Include="Properties\PublishProfiles\BarraFisikUI.pubxml" />
     <None Include="Web.Debug.config">
@@ -4800,7 +4802,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>49778</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:49779/</IISUrl>
+          <IISUrl>http://localhost:49000/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

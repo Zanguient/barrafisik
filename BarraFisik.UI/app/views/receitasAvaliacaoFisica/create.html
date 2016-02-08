@@ -8,37 +8,33 @@
     <form name="Form" id="form" novalidate ng-submit="form.submit(Form, avaliacaofisica)">
         <table class="table no-bg">
             <tr>
-                <td class="col-md-3">Valor Pago: <span class="symbol required"></span></td>
-                <td ng-class="{'has-error':Form.ValorPago.$dirty && Form.ValorPago.$invalid, 'has-success':Form.ValorPago.$valid}">
-                    <input class="form-control" type="text" name="ValorPago" ng-model="avaliacaofisica.Valor" mask-money required>
-                    <span class="error text-small block" ng-if="Form.ValorPago.$dirty && Form.ValorPago.$invalid">Informe o Valor Pago</span>
+                <td class="col-md-3">Valor: </td>
+                <td ng-class="{'has-error':Form.Valor.$dirty && Form.ValorPago.$invalid, 'has-success':Form.Valor.$valid}">
+                    <input class="form-control" type="text" name="Valor" ng-model="avaliacaofisica.Valor" mask-money>
+                    <span class="error text-small block" ng-if="Form.Valor.$dirty && Form.Valor.$invalid">Informe o Valor Pago</span>
                 </td>
-                <td>Data Pagamento: <span class="symbol required"></span></td>
-                <td ng-class="{'has-error':Form.DataPagamento.$dirty && Form.DataPagamento.$invalid, 'has-success':Form.DataPagamento.$valid}">
-                    <div class="form-horizontal width-200">
-                        <p class="input-group  margin-top-10">
-                            <input type="text" name="DataPagamento" disabled class="form-control" datepicker-popup="dd/MM/yyyy" ng-model="avaliacaofisica.DataPagamento"
-                                   is-open="opened[$index]" datepicker-options="dateOptions"
-                                   ng-required="true" close-text="Fechar" />
-                            <span class="input-group-btn">
-                                <button type="button" class="btn btn-default" ng-click="open($index)">
-                                    <i class="glyphicon glyphicon-calendar"></i>
-                                </button>
-                            </span>
-
-                        </p>
-                    </div>
-                    <span class="error text-small block" ng-if="Form.DataPagamento.$dirty && Form.DataPagamento.$invalid">Informe a Data de Pagamento</span>
-                </td>
-            </tr>
-            <tr>
-                <td>Tipo de Pagamento: <span class="symbol required"></span></td>
-                <td ng-class="{'has-error':Form.TiposPag.$dirty && Form.TiposPag.$invalid, 'has-success':Form.TiposPag.$valid}">                     
-                    <select name="TiposPag" id="TiposPag" ng-model="avaliacaofisica.TipoPagamentoId" required>
+                <td>Tipo de Pagamento: </td>
+                <td>
+                    <select name="TiposPag" id="TiposPag" ng-model="avaliacaofisica.TipoPagamentoId">
+                        <option value=""><b>Selecione...</b></option>
                         <option ng-repeat="t in tipos" value="{{t.TipoPagamentoId}}">{{t.Sigla}} - {{t.Descricao}}</option>
-                    </select>
-                    <span class="error text-small block" ng-if="Form.TiposPag.$dirty && Form.TiposPag.$invalid">Informe o Tipo de Pagamento</span>
+                    </select>                    
+                </td>                
+            </tr>
+
+            <tr>
+                <td>Data Vencimento: <span class="symbol required"></span></td>
+                <td  ng-class="{'has-error':Form.DataVencimento.$dirty && Form.DataVencimento.$invalid, 'has-success':Form.DataVencimento.$valid}">
+                    <input class="form-control input-sm" name="DataVencimento" type="date" ng-model="avaliacaofisica.DataVencimento" required>
+                    <span class="error text-small block" ng-if="Form.DataVencimento.$dirty && Form.DataVencimento.$invalid">Informe a Data de Vencimento</span>
+                    <span class="error text-small block" ng-if="Form.DataVencimento.$error.date">Data inválida.</span>
                 </td>
+                <td>Data Pagamento:</td>
+                <td ng-class="{'has-error':Form.DataPagamento.$dirty && Form.DataPagamento.$invalid}">
+                    <input class="form-control input-sm" name="DataPagamento" type="date" ng-model="avaliacaofisica.DataPagamento">
+                    <span class="error text-small block" ng-if="Form.DataPagamento.$error.date">Data inválida.</span>         
+                </td>
+               
             </tr>
         </table>
         <!-- class="editRowTd" -->

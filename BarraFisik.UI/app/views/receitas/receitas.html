@@ -25,21 +25,22 @@
     <div class="row">
         <div class="col-md-12">
             <span class="input-icon">
-                <input type="text" placeholder="Pesquisar por..." ng-model="searchText" class="form-control">
+                <input type="text" ng-model="searchText" class="input-sm form-control" placeholder="Pesquisar...">
                 <i class="ti-search"></i>
             </span><br/>
             <div class="table-responsive">
                 <table ng-table="tableParams" class="table">
-                    <tbody ng-repeat="r in $data | filter:searchText">
+                    <tbody ng-repeat="r in $data">
                     <tr ng-class-odd="'odd'" ng-class-even="'even'">
                         <td class="rowTd" style="max-width: 25px;"><a ng-click="openFicha(r)" class="btn" tooltip-placement="top" tooltip="Ficha"><i class="ti-id-badge"></i></a></td>
-                        <td class="rowTd" data-title="'Categoria'" sortable="'CategoriaFinanceira.Categoria'">{{r.CategoriaFinanceira.Categoria}}</td>
+                        <td class="rowTd" data-title="'Categoria'" sortable="'CategoriaFinanceira.Categoria'">{{r.CategoriaFinanceira.Categoria}}  </td>
+                        <td class="rowTd" data-title="'SubCategoria'" sortable="'SubCategoriaFinanceira.SubCategoria'">{{r.SubCategoriaFinanceira.SubCategoria}}</td>
                         <td class="rowTd" data-title="'Tipo Pag.'" sortable="'TipoPagamento.Descricao'">({{r.TipoPagamento.Sigla}}) {{r.TipoPagamento.Descricao}}</td>
                         <td class="rowTd" data-title="'Dt. Emissão'" sortable="'DataEmissao'">{{r.DataEmissao | date:'dd/MM/yyyy'}}</td>
                         <td class="rowTd" data-title="'Dt. Vencimento'" sortable="'DataVencimento'">{{r.DataVencimento | date:'dd/MM/yyyy'}}</td>
                         <td class="rowTd" data-title="'Dt. Pagamento'" sortable="'DataPagamento'">{{r.DataPagamento | date:'dd/MM/yyyy'}}</td>
                         <td class="rowTd" data-title="'Valor Pago'" sortable="'ValorTotal'">
-                            <div class="text-primary">{{r.ValorTotal | currency: 'R$ '}}</div></td>
+                        <div class="text-primary">{{r.ValorTotal | currency: 'R$ '}}</div></td>
                         <td class="rowTd" data-title="'Situacao'" sortable="'Situacao'">{{r.Situacao}}</td>
                         <td class="text-right">
                             <div class="visible-md visible-lg hidden-sm hidden-xs">
@@ -51,7 +52,7 @@
                     </tbody>
                     <tfoot>
                     <tr height="70px">
-                        <td colspan="6" class="text-primary">Quitado: {{totalQuitado | currency:' R$ '}} | Pendente: {{totalPendente | currency:' R$ '}} | Vencido: {{totalVencido | currency:' R$ '}} </td>
+                        <td colspan="7" class="text-primary">Quitado: <b class="text-primary"> {{totalQuitado | currency:' R$ '}}  | </b> Pendente: <b class="text-danger">{{totalPendente | currency:' R$ '}}</b></td>
                         <td colspan="3" class="text-bold">
                             <div class="text-primary">Total:{{totalQuitado + totalPendente + totalVencido | currency:' R$ '}}</div></td>
                     </tr>

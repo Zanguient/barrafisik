@@ -68,15 +68,19 @@
                             <td class="rowTd" title="vm.cols[5].title" ng-show="vm.cols[5].show">{{p.Telefone | telefone}}</td>
                             <td class="rowTd" title="vm.cols[6].title" ng-show="vm.cols[6].show">{{p.Celular | celular}}</td>
                             <td class="rowTd" title="vm.cols[7].title" ng-show="vm.cols[7].show" sortable="'DtNascimento'">{{p.DtNascimento | date:'dd/MM/yyyy'}}</td>
-                            <td class="rowTd" title="vm.cols[8].title" ng-show="vm.cols[8].show" sortable="'DtInscricao'">{{p.DtInscricao | date: 'dd/MM/yyyy'}}</td>
+                            <td class="rowTd" title="vm.cols[8].title" ng-show="vm.cols[8].show" sortable="'DtInscricao'">{{p.DtInscricao | date: 'dd/MM/yyyy'}}</td>                            
                             <td class="rowTd" title="vm.cols[9].title" ng-show="vm.cols[9].show"><span class="label" ng-class="{'label-warning': p.Situacao == 'Pendente', 'label-success': p.Situacao == 'Regular', 'label-inverse': p.Situacao == 'Inativo'}"> {{p.Situacao}}</span></td>
                             <td class="rowTd" title="vm.cols[10].title" ng-show="vm.cols[10].show">{{p.QtdDias}}</td>
                             <td class="rowTd" title="vm.cols[11].title" ng-show="vm.cols[11].show">{{p.Valor | currency}}</td>
+                            <td class="rowTd" style="width:2px; border-left: 1px gray solid" ng-show="vm.cols[12].show" data-title="'S'"><div ng-if="p.Segunda" class="text-green">X</div></td>
+                            <td class="rowTd" style="width:2px; border-left: 1px gray solid" ng-show="vm.cols[12].show" data-title="'T'"><div ng-if="p.Terca" class="text-green">X</div></td>
+                            <td class="rowTd" style="width:2px; border-left: 1px gray solid" ng-show="vm.cols[12].show" data-title="'Q'"><div ng-if="p.Quarta" class="text-green">X</div></td>
+                            <td class="rowTd" style="width:2px; border-left: 1px gray solid" ng-show="vm.cols[12].show" data-title="'Q'"><div ng-if="p.Quinta" class="text-green">X</div></td>
+                            <td class="rowTd" style="width:2px; border-left: 1px gray solid; border-right: 1px gray solid" ng-show="vm.cols[12].show" data-title="'S'"><div ng-if="p.Sexta" class="text-green">X</div></td>
 
                             <td class="text-right">
                                 <a ui-sref="app.clientes.editar({id: p.ClienteId})" class="btn btn-transparent btn-xs" tooltip-placement="top" tooltip="Editar"><i class="fa fa-pencil"></i></a>
                                 <a ng-click="openHorarios(p)" class="btn btn-transparent btn-xs" tooltip-placement="top" tooltip="Horários"><i class="fa fa-clock-o"></i></a>
-                                <!--<a ng-click="openMensalidades(p.ClienteId)" class="btn btn-transparent btn-xs tooltips" tooltip-placement="top" tooltip="Mensalidades"><i class="fa fa-money"></i></a>-->
                                 
                                 <span class="dropdown" dropdown>
                                     <a class="btn btn-transparent btn-xs tooltips" dropdown-toggle tooltip-placement="top" tooltip="Listar"><i class="fa fa-money"></i></a>

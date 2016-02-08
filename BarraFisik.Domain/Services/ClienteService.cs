@@ -67,6 +67,11 @@ namespace BarraFisik.Domain.Services
             return resultado;
         }
 
+        public Cliente GetByIdMensalidade(Guid? id)
+        {
+            return _clienteRepository.GetByIdMensalidade(id);
+        }
+
         public void AtualizaValores(Guid ClienteId, Guid ValoresId)
         {
             _clienteRepositoryReadOnly.AtualizaValores(ClienteId, ValoresId);

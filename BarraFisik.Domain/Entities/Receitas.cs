@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BarraFisik.Domain.ValueObjects;
+using System;
 
 namespace BarraFisik.Domain.Entities
 {
@@ -23,6 +24,12 @@ namespace BarraFisik.Domain.Entities
         public string Nome { get; set; }
         public string CpfCnpj { get; set; }
 
+        //Referente á mensalidade
+        public int? MesReferencia { get; set; }
+        public int? AnoReferencia { get; set; }
+        public bool isPersonal { get; set; }
+        public decimal ValorPersonal { get; set; }
+
         public Guid CategoriaFinanceiraId { get; set; }
         public virtual CategoriaFinanceira CategoriaFinanceira { get; set; }
 
@@ -37,5 +44,7 @@ namespace BarraFisik.Domain.Entities
 
         public Guid? ClienteId { get; set; }
         public virtual Cliente Cliente { get; set; }
+
+        public ValidationResult ResultadoValidacao { get; private set; }
     }
 }

@@ -32,7 +32,14 @@ namespace BarraFisik.Application.ViewModels
         public string CpfCnpj { get; set; }
 
 
-        [Required(ErrorMessage = "Informe a Categoria Financeira")]
+        //Referente à mensalidade
+        public int? MesReferencia { get; set; }
+        public int? AnoReferencia { get; set; }
+        public bool isPersonal { get; set; }
+        public decimal ValorPersonal { get; set; }
+
+
+        //[Required(ErrorMessage = "Informe a Categoria Financeira")]
         public Guid CategoriaFinanceiraId { get; set; }
         public virtual CategoriaFinanceira CategoriaFinanceira { get; set; }
 

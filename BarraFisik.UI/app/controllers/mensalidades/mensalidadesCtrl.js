@@ -3,7 +3,7 @@
 
     app.controller('mensalidadesCtrl', mensalidadesCtrl);
 
-    function mensalidadesCtrl($scope, ClienteId, modalService, $modalInstance, tipoPagamentoData, mensalidadesData, ngTableParams, $filter, $timeout, SweetAlert, toaster) {
+    function mensalidadesCtrl($scope, ClienteId, modalService, $modalInstance, tipoPagamentoData, mensalidadesData, receitasData, ngTableParams, $filter, $timeout, SweetAlert, toaster) {
         var vm = this;
         vm.mensalidades = [];
 
@@ -11,7 +11,7 @@
             $modalInstance.dismiss('cancel');
         };
 
-        mensalidadesData.getMensalidades(ClienteId).then(function (result) {
+        receitasData.getMensalidades(ClienteId).then(function (result) {
             vm.mensalidades = result.data;
         });
 
@@ -49,10 +49,10 @@
             };
 
             modalService.showModal({}, modalOptions).then(function () {
-                mensalidadesData.deleteMensalidade(id).then(function () {
+                receitasData.deleteMensalidade(id).then(function () {
                     toaster.pop('success', '', 'Mensalidade Excluída com Sucesso!');
                     $.each(vm.mensalidades, function (i) {
-                        if (vm.mensalidades[i].MensalidadesId === id) {
+                        if (vm.mensalidades[i].ReceitasId === id) {
                             vm.mensalidades.splice(i, 1);
                             return false;
                         }
@@ -83,14 +83,12 @@
                     }
                     angular.element('.ng-invalid[name=' + firstError + ']').focus();
                     return;
-
                 } else {
                     // Cadastra/Atualiza mensalidade
                     mensalidade.ClienteId = ClienteId;
-                    mensalidade.ValorPago = mensalidade.ValorPago.toString().replace(",", ".");
-                    mensalidadesData.editMensalidade(mensalidade).success(function () {
+                    receitasData.editMensalidade(mensalidade).success(function () {
                         toaster.pop('success', '', 'Mensalidade Atualizada com Sucesso!');
-                        mensalidadesData.getMensalidades(ClienteId).then(function (result) {
+                        receitasData.getMensalidades(ClienteId).then(function (result) {
                             vm.mensalidades = result.data;
                         });
                         $scope.editId = -1;

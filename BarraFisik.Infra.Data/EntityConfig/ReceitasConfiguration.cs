@@ -19,6 +19,8 @@ namespace BarraFisik.Infra.Data.EntityConfig
             Property(d => d.Observacao).IsOptional().HasMaxLength(250);
             Property(d => d.Situacao).IsOptional().HasMaxLength(50);
 
+            Ignore(m => m.ResultadoValidacao);
+
             HasRequired(d => d.CategoriaFinanceira).WithMany().HasForeignKey(r => r.CategoriaFinanceiraId);
         }
     }

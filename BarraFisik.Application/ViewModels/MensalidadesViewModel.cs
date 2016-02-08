@@ -9,6 +9,7 @@ namespace BarraFisik.Application.ViewModels
         public MensalidadesViewModel()
         {
             MensalidadesId = Guid.NewGuid();
+            DataEmissao = DateTime.Now;
         }
 
         [Key]
@@ -23,6 +24,8 @@ namespace BarraFisik.Application.ViewModels
         [Required(ErrorMessage = "Informe a data do pagamento")]
         public DateTime DataPagamento { get; set; }
 
+        public DateTime DataEmissao { get; set; }
+
         [Required(ErrorMessage = "Favor selecionar cliente")]
         public Guid ClienteId { get; set; }
 
@@ -32,7 +35,8 @@ namespace BarraFisik.Application.ViewModels
         public Guid CategoriaFinanceiraId { get; set; }
         public virtual CategoriaFinanceira CategoriaFinanceira { get; set; }
 
-        public string Nome { get; set; }
+        public Guid SubCategoriaFinanceiraId { get; set; }
+        public virtual SubCategoriaFinanceira SubCategoriaFinanceira { get; set; }
 
         public bool isPersonal { get; set; }
         public decimal ValorPersonal { get; set; }

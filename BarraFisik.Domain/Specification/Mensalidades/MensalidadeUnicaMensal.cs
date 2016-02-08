@@ -5,27 +5,27 @@ using BarraFisik.Domain.Interfaces.Specification;
 
 namespace BarraFisik.Domain.Specification.Mensalidades
 {
-    public class MensalidadeUnicaMensal : ISpecification<Entities.Mensalidades>
+    public class MensalidadeUnicaMensal : ISpecification<Entities.Receitas>
     {
-        private readonly IMensalidadesRepository _mensalidadesRepository;
-        private readonly IMensalidadesRepositoryReadOnly _mensalidadesRepositoryReadOnly;
+        private readonly IReceitasRepository _receitasRepository;
+        private readonly IReceitasRepositoryReadOnly _receitasRepositoryReadOnly;
 
-        public MensalidadeUnicaMensal(IMensalidadesRepositoryReadOnly mensalidadesRepositoryReadOnly, IMensalidadesRepository mensalidadesRepository)
+        public MensalidadeUnicaMensal(IReceitasRepositoryReadOnly receitasRepositoryReadOnly, IReceitasRepository receitasRepository)
         {
-            _mensalidadesRepositoryReadOnly = mensalidadesRepositoryReadOnly;
-            _mensalidadesRepository = mensalidadesRepository;
+            _receitasRepositoryReadOnly = receitasRepositoryReadOnly;
+            _receitasRepository = receitasRepository;
         }
 
 
-        public bool IsSatisfiedBy(Entities.Mensalidades mensalidade)
+        public bool IsSatisfiedBy(Entities.Receitas mensalidade)
         {
             //Caso esteja editando
-            var mensalidadeBase = _mensalidadesRepository.GetById(mensalidade.MensalidadesId);
+            var mensalidadeBase = _receitasRepository.GetById(mensalidade.ReceitasId);
 
             if (mensalidadeBase != null && mensalidadeBase.MesReferencia == mensalidade.MesReferencia &&
                 mensalidadeBase.AnoReferencia == mensalidade.AnoReferencia)
                 return true;
-            return !_mensalidadesRepositoryReadOnly.ExisteMensalidade(mensalidade);
+            return !_receitasRepositoryReadOnly.ExisteMensalidade(mensalidade);
         }
     }
 }

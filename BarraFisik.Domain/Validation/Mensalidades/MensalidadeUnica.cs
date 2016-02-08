@@ -5,13 +5,13 @@ using BarraFisik.Domain.Validation.Base;
 
 namespace BarraFisik.Domain.Validation.Mensalidades
 {
-    public class MensalidadeUnica : FiscalBase<Entities.Mensalidades>
+    public class MensalidadeUnica : FiscalBase<Entities.Receitas>
     {
-        public MensalidadeUnica(IMensalidadesRepositoryReadOnly mensalidadesRepositoryReadOnly, IMensalidadesRepository mensalidadesRepository)
+        public MensalidadeUnica(IReceitasRepositoryReadOnly receitasRepositoryReadOnly, IReceitasRepository receitasRepository)
         {
-            var mensalidadeUnica = new MensalidadeUnicaMensal(mensalidadesRepositoryReadOnly, mensalidadesRepository);
+            var mensalidadeUnica = new MensalidadeUnicaMensal(receitasRepositoryReadOnly, receitasRepository);
 
-            base.AdicionarRegra("MensalidadeUnico", new Regra<Entities.Mensalidades>(mensalidadeUnica, "Já existe mensalidade vinculada a esta data"));
+            base.AdicionarRegra("MensalidadeUnico", new Regra<Entities.Receitas>(mensalidadeUnica, "Já existe mensalidade vinculada a esta data"));
         }
     }
 }

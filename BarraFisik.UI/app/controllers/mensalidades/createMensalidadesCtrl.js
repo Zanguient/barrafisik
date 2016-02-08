@@ -3,7 +3,7 @@
 
     app.controller('createMensalidadesCtrl', createMensalidadesCtrl);
 
-    function createMensalidadesCtrl($scope, Cliente, $modalInstance, tipoPagamentoData, mensalidadesData, $timeout, SweetAlert) {
+    function createMensalidadesCtrl($scope, Cliente, $modalInstance, tipoPagamentoData, mensalidadesData, receitasData, $timeout, SweetAlert) {
         var vm = this;
         vm.mensalidades = [];
 
@@ -28,12 +28,11 @@
 
         today = dd + '/' + mm + '/' + yyyy;
 
-
         $scope.mensalidade = {
             DataPagamento: today,
             AnoReferencia: yyyy,
             MesReferencia: parseInt(mm),
-            ValorPago: Cliente.Valor
+            Valor: Cliente.Valor
         }
 
         vm.cancel = function () {
@@ -98,8 +97,9 @@
                         mensalidade.DataPagamento = new Date();
 
                     mensalidade.ClienteId = Cliente.ClienteId;
-                    mensalidade.ValorPago = mensalidade.ValorPago.toString().replace(",",".");
-                    mensalidadesData.addMensalidade(mensalidade).success(function () {
+                    mensalidade.ValorTotal = mensalidade.Valor + mensalidade.ValorPersonal;
+                    mensalidade.Situacao = 'Quitado';
+                    receitasData.addMensalidade(mensalidade).success(function () {
                         $modalInstance.close();
                     }).error(function (error) {
                         var errors = [];

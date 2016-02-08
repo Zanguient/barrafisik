@@ -8,6 +8,7 @@ namespace BarraFisik.Domain.Entities
         public Mensalidades()
         {
             MensalidadesId = Guid.NewGuid();
+            DataEmissao = DateTime.Now;
         }
 
         public Guid MensalidadesId { get; set; }
@@ -15,13 +16,15 @@ namespace BarraFisik.Domain.Entities
         public int MesReferencia { get; set; }
         public int AnoReferencia { get; set; }
         public Guid ClienteId { get; set; }
+        public DateTime DataEmissao{ get; set; }
         public DateTime DataPagamento { get; set; }
         public virtual Cliente Cliente { get; set; }
 
         public Guid CategoriaFinanceiraId { get; set; }
         public virtual CategoriaFinanceira CategoriaFinanceira { get; set; }
 
-        public string Nome { get; set; }
+        public Guid SubCategoriaFinanceiraId { get; set; }
+        public virtual SubCategoriaFinanceira SubCategoriaFinanceira { get; set; }
 
         public bool isPersonal { get; set; }
         public decimal ValorPersonal { get; set; }
