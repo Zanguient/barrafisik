@@ -11,7 +11,7 @@ namespace BarraFisik.Domain.Validation.Mensalidades
         {
             var mensalidadeUnica = new MensalidadeUnicaMensal(receitasRepositoryReadOnly, receitasRepository);
 
-            base.AdicionarRegra("MensalidadeUnico", new Regra<Entities.Receitas>(mensalidadeUnica, "Já existe mensalidade vinculada a esta data"));
+            base.AdicionarRegra("MensalidadeUnico", new Regra<Entities.Receitas>(mensalidadeUnica, "Já existe mensalidade vinculada a esta data para este cliente"));
         }
     }
 }

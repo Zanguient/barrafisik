@@ -191,18 +191,26 @@
 						<table class="table" id="mensalidadesTab">
 							<thead>
 								<tr>
-									<th>Mês</th>
-									<th>Ano</th>
-									<th>Data</th>
-                                    <th>Valor</th>
+									<th>Referência</th>
+									<th>Data Emissão</th>
+                                    <th>Data Pag.</th>
+                                    <th>Personal</th>
+                                    <th>Valor Mensalidade</th>
+                                    <th>Tipo Pag.</th>
+                                    <th>Valor Total</th>
+                                    <th>Status</th>
 								</tr>
 							</thead>
 							<tbody>
-							<tr ng-repeat="c in vm.cliente.Mensalidades | orderBy: ['MesReferencia', 'AnoReferencia']">
-								<td>{{c.MesReferencia}}</td>
-								<td>{{c.AnoReferencia}}</td>
-								<td>{{c.DataPagamento | date: 'dd/MM/yyyy'}}</td>
-                                <td><span class="text-primary">{{c.ValorPago | currency}}</span></td>
+							<tr ng-repeat="c in vm.mensalidades | orderBy: ['MesReferencia', 'AnoReferencia']">
+								<td>{{c.MesReferencia}}/{{c.AnoReferencia}}</td>
+								<td>{{c.DataEmissao | date: 'dd/MM/yyyy'}}</td> 
+                                <td>{{c.DataPagamento | date: 'dd/MM/yyyy'}}</td>                                
+                                <td><span ng-show="c.isPersonal" class="text-primary">{{c.ValorPersonal | currency: 'R$ '}}</span><span  ng-show="!c.isPersonal"> -</span></td>
+                                <td><span class="text-primary">{{c.Valor | currency}}</span></td>
+                                <td>{{c.TipoPagamento.Sigla}} - {{c.TipoPagamento.Descricao}}</td>  
+                                <td><span ng-class="{'text-primary': c.Situacao == 'Quitado', 'text-danger': c.Situacao == 'Pendente'}">{{c.ValorTotal | currency}} </span></td>
+                                <td><span ng-class="{'text-green': c.Situacao == 'Quitado', 'text-danger': c.Situacao == 'Pendente'}">{{c.Situacao}} </span></td>
 							</tr>
 							</tbody>
 						</table>
@@ -212,19 +220,26 @@
                     <!-- start: TAB AVALIACOES -->
 					<tab heading="Avaliações Físicas" active="avaliacoesActive">
 						<table class="table" id="avaliacoesTab">
-							<thead>
-								<tr>
-                                    <th>Data Pagamento</th>
-									<th>Valor</th>									
-								</tr>
-							</thead>
-							<tbody>
-							<tr ng-repeat="af in vm.avaliacoesFisicas | orderBy:'DataPagamento'">								
-								<td>{{af.DataPagamento | date: 'dd/MM/yyyy'}}</td>
-                                <td><span class="text-primary">{{af.Valor | currency}}</span></td>
-							</tr>
-							</tbody>
-						</table>
+                            <thead>
+                                <tr>
+                                    <th>Data Emissão.</th>
+                                    <th>Data Venc.</th>
+                                    <th>Data Pag.</th>
+                                    <th>Tipo Pag.</th>
+                                    <th>Valor Total</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="c in vm.avaliacoesFisicas | orderBy: ['DataPagamento']">
+                                    <td>{{c.DataEmissao | date: 'dd/MM/yyyy'}}</td>
+                                    <td>{{c.DataVencimento | date: 'dd/MM/yyyy'}}</td>
+                                    <td>{{c.DataPagamento | date: 'dd/MM/yyyy'}}</td>     
+                                    <td>{{c.TipoPagamento.Sigla}} - {{c.TipoPagamento.Descricao}}</td>                               
+                                    <td><span ng-class="{'text-primary': c.Situacao == 'Quitado', 'text-danger': c.Situacao == 'Pendente'}">{{c.ValorTotal | currency}} </span></td>
+                                    <td><span ng-class="{'text-green': c.Situacao == 'Quitado', 'text-danger': c.Situacao == 'Pendente'}">{{c.Situacao}} </span></td>
+                                </tr>
+</table>
 					</tab>
 					<!-- end: TAB AVALIACOES -->
 				</tabset>

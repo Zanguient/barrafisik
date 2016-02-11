@@ -3,7 +3,7 @@
 
     app.controller('clienteCtrl', clienteCtrl);
 
-    function clienteCtrl($scope, ngTableParams, clienteData, SweetAlert, $filter, $state, $stateParams, $window, $modal) {
+    function clienteCtrl($scope, ngTableParams, clienteData, SweetAlert, $filter, $state, $stateParams, $window, $modal, toaster) {
         var vm = this;
         vm.clientes = [];
         vm.cols = [];
@@ -154,7 +154,7 @@
                 }
             });
         }
-
+        
         //Horários
         $scope.openHorarios = function (cliente) {
             vm.modalInstance = $modal.open({
@@ -181,13 +181,13 @@
         }
 
         //Mensalidades
-        $scope.openMensalidades = function (id) {
+        $scope.openMensalidades = function (cliente) {
             vm.modalInstance = $modal.open({
                 templateUrl: 'app/views/mensalidades/mensalidades.html',
                 size: 'lg',
                 resolve: {
-                    ClienteId: function () {
-                        return id;
+                    Cliente: function () {
+                        return cliente;
                     },
                     deps: [
                         '$ocLazyLoad',
@@ -217,9 +217,9 @@
                 //    vm.clientes = result.data;
                 //});
             });
-        }
-
-        //Mensalidades
+        }        
+        
+        //Cadastra Mensalidade
         $scope.createMensalidade = function (cliente) {
             vm.modalInstance = $modal.open({
                 templateUrl: 'app/views/mensalidades/create.html',
@@ -237,8 +237,9 @@
                 },
                 controller: 'createMensalidadesCtrl as vm'
             });
-            vm.modalInstance.result.then(function (data) {
-                SweetAlert.swal("Sucesso!", "Mensalidade foi cadastrada com sucesso!", "success");
+            vm.modalInstance.result.then(function (mensalidade) {                
+                toaster.pop('success', '', 'Mensalidade Salva com Sucesso!');
+                window.open("http://localhost:49000/app/views/mensalidades/comprovante.html?mes="+mensalidade.MesReferencia+"&ano="+mensalidade.AnoReferencia+"&valor="+mensalidade.ValorTotal+"&cliente="+cliente.Nome, "minhaJanela", "height=250,width=370");
                 if ($scope.inativos) {
                     clienteData.getClientesAll().then(function (result) {
                         vm.clientes = result.data;

@@ -26,11 +26,11 @@ namespace BarraFisik.API.Controllers
         //[GzipCompression]
         public async Task<HttpResponseMessage> GetRelatorio(RelatorioFinanceiroSearchViewModel filters)
         {
-            if (filters.DataInicio != null)                
-                filters.DataInicio = new DateTime(filters.DataInicio.Value.Year, filters.DataInicio.Value.Month, filters.DataInicio.Value.Day, 01, 00, 00);
+            //if (filters.DataInicio != null)                
+            //    filters.DataInicio = new DateTime(filters.DataInicio.Value.Year, filters.DataInicio.Value.Month, filters.DataInicio.Value.Day, 01, 00, 00);
 
-            if (filters.DataFim != null)
-                filters.DataFim = new DateTime(filters.DataFim.Value.Year, filters.DataFim.Value.Month, filters.DataFim.Value.Day, 23, 59, 59);
+            //if (filters.DataFim != null)
+            //    filters.DataFim = new DateTime(filters.DataFim.Value.Year, filters.DataFim.Value.Month, filters.DataFim.Value.Day, 23, 59, 59);
 
             var result = _relatorioFinanceiroApp.GetRelatorio(filters);
             var response = Request.CreateResponse(HttpStatusCode.OK, result);

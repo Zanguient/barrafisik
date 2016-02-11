@@ -17,7 +17,7 @@
             });
 
             categoriaFinanceiraData.getCategoriaByTipo("Receitas").then(function (cat) {
-                vm.categorias = cat.data;                                
+                vm.categorias = cat.data;
             });
 
             $scope.$emit('UNLOAD');
@@ -47,11 +47,11 @@
             }
         });
 
-        $scope.$watch('vm.receitas', function () {            
-            atualizaValores(vm.receitas);            
+        $scope.$watch('vm.receitas', function () {
+            atualizaValores(vm.receitas);
         });
 
-        $scope.$watch("searchText", function () {                      
+        $scope.$watch("searchText", function () {
             atualizaValores($scope.filtered);
         });
 
@@ -61,6 +61,15 @@
                 vm.receitas = result.data;
             });
         };
+
+        $scope.print = function () {
+            var doc = new jsPDF('p', 'pt');
+            doc.text("From HTML", 40, 50);
+            document.getElementById('icons').className = 'hidden';
+            var res = doc.autoTableHtmlToJson(document.getElementById("table"));
+            doc.autoTable(res.columns, res.data, { startY: 60 });
+            doc.output("dataurlnewwindow");
+        }
 
         //Cadastrar
         $scope.openCadastrar = function () {
@@ -79,7 +88,7 @@
             });
             vm.modalInstance.result.then(function (data) {
                 SweetAlert.swal("Sucesso!", "Receita cadastrada com sucesso!", "success");
-                receitasData.getReceitas().then(function(result) {
+                receitasData.getReceitas().then(function (result) {
                     vm.receitas = result.data;
                 });
             }, function () {
@@ -141,7 +150,7 @@
             });
         }
 
-        $scope.delete = function (id) {
+        $scope.delete = function (receita) {
             SweetAlert.swal({
                 title: "Confirmar Exclusão?",
                 text: "Tem certeza que deseja excluir esse registro?",
@@ -154,16 +163,29 @@
                 closeOnCancel: false
             }, function (isConfirm) {
                 if (isConfirm) {
-                    receitasData.deleteReceita(id).then(function () {
-                        SweetAlert.swal("Excluído!", "Registro excluído com sucesso!", "success");
-                        $.each(vm.receitas, function (i) {
-                            if (vm.receitas[i].ReceitasId === id) {
-                                vm.receitas.splice(i, 1);
-                                return false;
-                            }
+                    if (receita.SubCategoriaFinanceiraId == '0d57c87d-3bd9-420b-ab98-123fdb75a269') {
+                        receitasData.deleteMensalidade(receita.ReceitasId).then(function () {
+                            SweetAlert.swal("Excluído!", "Registro excluído com sucesso!", "success");
+                            $.each(vm.receitas, function (i) {
+                                if (vm.receitas[i].ReceitasId === receita.ReceitasId) {
+                                    vm.receitas.splice(i, 1);
+                                    return false;
+                                }
+                            });
+                            atualizaValores(vm.receitas);
                         });
-                        atualizaValores(vm.receitas);
-                    });
+                    } else {
+                        receitasData.deleteReceita(receita.ReceitasId).then(function () {
+                            SweetAlert.swal("Excluído!", "Registro excluído com sucesso!", "success");
+                            $.each(vm.receitas, function (i) {
+                                if (vm.receitas[i].ReceitasId === receita.ReceitasId) {
+                                    vm.receitas.splice(i, 1);
+                                    return false;
+                                }
+                            });
+                            atualizaValores(vm.receitas);
+                        });
+                    }                    
                 } else {
                     SweetAlert.swal({
                         title: "Cancelado",

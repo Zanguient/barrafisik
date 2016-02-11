@@ -86,7 +86,7 @@ namespace BarraFisik.Application.ViewModels
         public int HorarioInicio { get; set; }
         public int HorarioFim { get; set; }
 
-        public virtual ICollection<MensalidadesViewModel> Mensalidades { get; set; }
-        public virtual ICollection<ReceitasAvaliacaoFisica> AvaliacoesFisicas { get; set; }
+        //public virtual ICollection<MensalidadesViewModel> Mensalidades { get; set; }
+        //public virtual ICollection<ReceitasAvaliacaoFisica> AvaliacoesFisicas { get; set; }
     }
 }

@@ -1,49 +1,35 @@
 ﻿<form name="FormEdit" id="formEdit" novalidate ng-submit="formEdit.submit(FormEdit, m)">
+    <ul>
+        <li ng-repeat="error in vm.errors" class="text-danger">{{error}}</li>
+    </ul>
     <table class="table no-bg">
         <tr>
             <td>Mês: <span class="symbol required"></span></td>
-            <td ng-class="{'has-error':FormEdit.Mes.$dirty && FormEdit.Mes.$invalid, 'has-success':FormEdit.Mes.$valid}">
-                <input class="form-control" type="number" min="01" max="12" name="Mes" ng-model="m.MesReferencia" required>
-                <span class="error text-small block" ng-if="FormEdit.Mes.$dirty && FormEdit.Mes.$invalid">Informe o Mês</span>
+            <td ng-class="{'has-error':Form.MesReferencia.$dirty && Form.MesReferencia.$invalid, 'has-success':Form.MesReferencia.$valid}">
+                <input class="form-control" type="number" min="01" max="12" name="MesReferencia" ng-model="m.MesReferencia" required>
+                <span class="error text-small block" ng-if="Form.MesReferencia.$dirty && Form.MesReferencia.$invalid">Informe o Mês</span>
             </td>
             <td>Ano: <span class="symbol required"></span></td>
-            <td ng-class="{'has-error':FormEdit.Ano.$dirty && FormEdit.Ano.$invalid, 'has-success':FormEdit.Ano.$valid}">
-                <input class="form-control" type="number" name="Ano" ng-model="m.AnoReferencia" required>
-                <span class="error text-small block" ng-if="FormEdit.Ano.$dirty && FormEdit.Ano.$invalid">Informe o Ano</span>
+            <td ng-class="{'has-error':Form.AnoReferencia.$dirty && Form.AnoReferencia.$invalid, 'has-success':Form.AnoReferencia.$valid}">
+                <input class="form-control" type="number" name="AnoReferencia" ng-model="m.AnoReferencia" required>
+                <span class="error text-small block" ng-if="Form.AnoReferencia.$dirty && Form.AnoReferencia.$invalid">Informe o Ano</span>
             </td>
-        </tr>
-        <tr>
-            <td>valor Pago: <span class="symbol required"></span></td>
-            <td ng-class="{'has-error':FormEdit.ValorPago.$dirty && FormEdit.ValorPago.$invalid, 'has-success':FormEdit.ValorPago.$valid}" class="width-200">
-                <input class="form-control" type="text" name="ValorPago" ng-model="m.Valor" mask-money required>
-                <span class="error text-small block" ng-if="FormEdit.ValorPago.$dirty && FormEdit.ValorPago.$invalid">Informe o Valor Pago</span>
-            </td>
-            <td>Data Pagamento: <span class="symbol required"></span></td>
-            <td ng-class="{'has-error':FormEdit.DataPagamento.$dirty && FormEdit.DataPagamento.$invalid, 'has-success':FormEdit.DataPagamento.$valid}">
-                <div class="form-horizontal">
-                    <p class="input-group  margin-top-10">
-                        <input type="text" name="DataReserva" disabled class="form-control" datepicker-popup="dd/MM/yyyy" ng-model="m.DataPagamento"
-                               is-open="opened[$index]" datepicker-options="dateOptions"
-                               ng-required="true" close-text="Fechar"/>
-                        <span class="input-group-btn">
-                            <button type="button" class="btn btn-default" ng-click="open($event, $index)">
-                                <i class="glyphicon glyphicon-calendar"></i>
-                            </button>
-                        </span>
-
-                    </p>
-                </div>
-                <span class="error text-small block" ng-if="FormEdit.DataPagamento.$dirty && FormEdit.DataPagamento.$invalid">Informe a Data de Pagamento</span>
-            </td>
-        </tr>
-        <tr>
-            <td>Tipo de Pagamento: <span class="symbol required"></span></td>
-            <td ng-class="{'has-error':Form.TiposPag.$dirty && Form.TiposPag.$invalid, 'has-success':Form.TiposPag.$valid}">
-                <select class="form-control" ng-model="m.TipoPagamentoId">
-                    <option ng-selected="m.TipoPagamentoId == item.TipoPagamentoId" ng-repeat="item in tipos" ng-value="item.TipoPagamentoId">{{item.Descricao}}</option>
+            <td>Tipo Pag.: </td>
+            <td>
+                <select name="TiposPag" id="TiposPag" ng-model="m.TipoPagamentoId"  class="text-bold">
+                    <option ng-selected="m.TipoPagamentoId == null" value="">Selecione...</option>
+                    <option ng-selected="m.TipoPagamentoId == t.TipoPagamentoId" ng-repeat="t in tipos" value="{{t.TipoPagamentoId}}">{{t.Sigla}} - {{t.Descricao}}</option>
                 </select>
-                <span class="error text-small block" ng-if="FormEdit.TiposPag.$dirty && FormEdit.TiposPag.$invalid">Informe o Tipo de Pagamento</span>
             </td>
+        </tr>
+        <tr>
+            <td>Valor: <span class="symbol required"></span></td>
+            <td ng-class="{'has-error':Form.Valor.$dirty && Form.ValorPago.$invalid, 'has-success':Form.Valor.$valid}">
+                <input class="form-control" type="text" name="Valor" mask-money ng-model="m.Valor" required>
+                <span class="error text-small block" ng-if="Form.Valor.$dirty && Form.ValorPago.$invalid">Informe o Valor</span>
+            </td>
+            <td>Multa: </td>
+            <td><input class="form-control" type="text" name="Valor" mask-money ng-model="m.Multa"></td>
             <td>
                 <div class="checkbox clip-check check-primary">
                     <input type="checkbox" id="isPersonal"
@@ -51,17 +37,55 @@
                     <label for="isPersonal"> Personal </label>
                 </div>
             </td>
-            <td  ng-class="{'has-error':FormEdit.ValorPersonal.$dirty && FormEdit.ValorPersonal.$invalid, 'has-success':FormEdit.ValorPersonal.$valid}" class="width-200">
-                <input name="ValorPersonal" ng-if="m.isPersonal" ng-disabled="!m.isPersonal" mask-money class="form-control" type="text" ng-model="m.ValorPersonal" placeholder="Valor Pago Personal R$..." required/>
-                <span class="error text-small block" ng-if="FormEdit.ValorPersonal.$dirty && FormEdit.ValorPersonal.$invalid">Informe o Valor do Personal</span>
-            </td>
             <td>
-                <div class="pull-right">              
-                    <button type="submit" class="btn btn-primary btn-sm" tooltip-placement="top" tooltip="Salvar"><i class="fa fa-check" /></button>
-                    <button type="submit" class="btn btn-primary btn-sm" tooltip-placement="top" tooltip="Cancelar" ng-click="setEditId(-1)"><i class="fa fa-close" /></button>           
+                <input ng-show="m.isPersonal" ng-disabled="!m.isPersonal" mask-money class="form-control" type="text" ng-model="m.ValorPersonal" placeholder="Valor Pago Personal R$..." />
+            </td>
+        </tr>
+        <tr>
+            <td>Vencimento.: </td>
+            <td ng-class="{'has-error':Form.DataVencimento.$dirty && Form.DataVencimento.$invalid, 'has-success':Form.DataVencimento.$valid}">
+                <div class="form-horizontal width-150">
+                    <p class="input-group  margin-top-10">
+                        <input type="text" name="DataVencimento" disabled class="form-control" datepicker-popup="dd/MM/yyyy" ng-model="m.DataVencimento"
+                               is-open="opened[$index]" datepicker-options="dateOptions"
+                               ng-required="true" close-text="Fechar" />
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="open($event, $index)">
+                                <i class="glyphicon glyphicon-calendar"></i>
+                            </button>
+                        </span>
+                    </p>
                 </div>
+                <span class="error text-small block" ng-if="Form.DataVencimento.$dirty && Form.DataVencimento.$invalid">Informe o Vencimento</span>
+            </td>
+            <td style="min-width: 80px">Pagamento: </td>
+            <td>
+                <div class="form-horizontal width-150">
+                    <p class="input-group  margin-top-10">
+                        <input type="text" name="DataPagamento" disabled class="form-control" datepicker-popup="dd/MM/yyyy" ng-model="m.DataPagamento"
+                               is-open="opened[$index+1]" datepicker-options="dateOptions"
+                               ng-required="false" close-text="Fechar" />
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="open($event, $index+1)">
+                                <i class="glyphicon glyphicon-calendar"></i>
+                            </button>
+                        </span>
+                    </p>
+                </div>
+            </td>
+            <td>Valor Total: </td>
+            <td><b class="text-primary">{{m.ValorTotal = m.Valor + m.Multa + m.ValorPersonal | currency:'R$ '}}</b></td>
+        </tr>
+        <tr>
+            <td>Observação: </td>
+            <td colspan="5">
+                <textarea class="form-control input-sm" style="resize: none;" ng-model="m.Observacao" rows="3"></textarea>
             </td>
         </tr>
     </table>
     <!-- class="editRowTd" -->
+    <div class="modal-footer">
+        <input type="submit" class="btn btn-primary btn-sm margin-right-15" value="Salvar">
+        <input type="button" class="btn btn-primary btn-sm margin-right-15" value="Cancelar" ng-click="setEditId(-1)">
+    </div>
 </form>

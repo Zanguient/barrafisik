@@ -18,49 +18,72 @@
                     <input class="form-control" type="number" name="AnoReferencia" ng-model="mensalidade.AnoReferencia" required>
                     <span class="error text-small block" ng-if="Form.AnoReferencia.$dirty && Form.AnoReferencia.$invalid">Informe o Ano</span>
                 </td>
+                <td>Tipo Pag.: </td>
+                <td>
+                    <select name="TiposPag" id="TiposPag" ng-model="mensalidade.TipoPagamentoId">
+                        <option ng-repeat="t in tipos" value="{{t.TipoPagamentoId}}">{{t.Sigla}} - {{t.Descricao}}</option>
+                    </select>
+                </td>
             </tr>
 	        <tr>
-		        <td>Valor Pago: <span class="symbol required"></span></td>
-		        <td ng-class="{'has-error':Form.ValorPago.$dirty && Form.ValorPago.$invalid, 'has-success':Form.Valor.$valid}" class="width-200">
-			        <input class="form-control" type="text" name="ValorPago" mask-money ng-model="mensalidade.Valor" required>
-			        <span class="error text-small block" ng-if="Form.ValorPago.$dirty && Form.ValorPago.$invalid">Informe o Valor Pago</span>
+		        <td>Valor: <span class="symbol required"></span></td>
+		        <td ng-class="{'has-error':Form.Valor.$dirty && Form.ValorPago.$invalid, 'has-success':Form.Valor.$valid}">
+			        <input class="form-control" type="text" name="Valor" mask-money ng-model="mensalidade.Valor" required>
+			        <span class="error text-small block" ng-if="Form.Valor.$dirty && Form.ValorPago.$invalid">Informe o Valor</span>
 		        </td>
-		        <td>Data Pagamento: <span class="symbol required"></span></td>
-		        <td ng-class="{'has-error':Form.DataPagamento.$dirty && Form.DataPagamento.$invalid, 'has-success':Form.DataPagamento.$valid}">
-			        <div class="form-horizontal width-200">
-				        <p class="input-group  margin-top-10">
-					        <input type="text" name="DataPagamento" disabled class="form-control" datepicker-popup="dd/MM/yyyy" ng-model="mensalidade.DataPagamento"
-					               is-open="opened[$index]" datepicker-options="dateOptions"
-					               ng-required="true" close-text="Fechar"/>
-					        <span class="input-group-btn">
+                <td>Multa: </td>
+                <td><input class="form-control" type="text" name="Valor" mask-money ng-model="mensalidade.Multa"></td>
+                <td>
+                    <div class="checkbox clip-check check-primary">
+                        <input type="checkbox" id="isPersonal"
+                               ng-model="mensalidade.isPersonal">
+                        <label for="isPersonal"> Personal </label>
+                    </div>
+                </td>
+                <td>
+                    <input ng-show="mensalidade.isPersonal" ng-disabled="!mensalidade.isPersonal" mask-money class="form-control" type="text" ng-model="mensalidade.ValorPersonal" placeholder="Valor Pago Personal R$..." />
+                </td>         
+	        </tr>
+	        <tr>       
+                <td>Vencimento.: </td>
+                <td ng-class="{'has-error':Form.DataVencimento.$dirty && Form.DataVencimento.$invalid, 'has-success':Form.DataVencimento.$valid}">
+                    <div class="form-horizontal width-150">
+                        <p class="input-group  margin-top-10">
+                            <input type="text" name="DataVencimento" disabled class="form-control" datepicker-popup="dd/MM/yyyy" ng-model="mensalidade.DataVencimento"
+                                   is-open="opened[$index]" datepicker-options="dateOptions"
+                                   ng-required="true" close-text="Fechar" />
+                            <span class="input-group-btn">
                                 <button type="button" class="btn btn-default" ng-click="open($index)">
                                     <i class="glyphicon glyphicon-calendar"></i>
                                 </button>
                             </span>
-
-				        </p>
-			        </div>
-			        <span class="error text-small block" ng-if="Form.DataPagamento.$dirty && Form.DataPagamento.$invalid">Informe a Data de Pagamento</span>
-		        </td>                
-	        </tr>
-	        <tr>                
-                <td>Tipo de Pagamento: <span class="symbol required"></span></td>
-                <td ng-class="{'has-error':Form.TiposPag.$dirty && Form.TiposPag.$invalid, 'has-success':Form.TiposPag.$valid}">
-                    <select name="TiposPag" id="TiposPag" ng-model="mensalidade.TipoPagamentoId" required>
-                        <option ng-repeat="t in tipos" value="{{t.TipoPagamentoId}}">{{t.Sigla}} - {{t.Descricao}}</option>
-                    </select>
-                    <span class="error text-small block" ng-if="Form.TiposPag.$dirty && Form.TiposPag.$invalid">Informe o Tipo de Pagamento</span>
+                        </p>
+                    </div>
+                    <span class="error text-small block" ng-if="Form.DataVencimento.$dirty && Form.DataVencimento.$invalid">Informe o Vencimento</span>
+                </td>           
+                <td style="min-width: 80px">Pagamento: </td>
+                <td>
+                    <div class="form-horizontal width-150">
+                        <p class="input-group  margin-top-10">
+                            <input type="text" name="DataPagamento" disabled class="form-control" datepicker-popup="dd/MM/yyyy" ng-model="mensalidade.DataPagamento"
+                                   is-open="opened[$index+1]" datepicker-options="dateOptions"
+                                   ng-required="false" close-text="Fechar" />
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default" ng-click="open($index+1)">
+                                    <i class="glyphicon glyphicon-calendar"></i>
+                                </button>
+                            </span>
+                        </p>
+                    </div>
+                </td>  
+                <td>Valor Total: </td>
+                <td><b class="text-primary">{{mensalidade.ValorTotal = mensalidade.Valor + mensalidade.Multa + mensalidade.ValorPersonal | currency:'R$ '}}</b></td>  
+            </tr>
+            <tr>
+                <td>Observação: </td>
+                <td colspan="5">
+                    <textarea class="form-control input-sm" style="resize: none;" ng-model="mensalidade.Observacao" rows="3"></textarea>
                 </td>
-		        <td>
-			        <div class="checkbox clip-check check-primary">
-				        <input type="checkbox" id="isPersonal"
-				               ng-model="mensalidade.isPersonal">
-				        <label for="isPersonal"> Personal </label>
-			        </div>
-		        </td>
-		        <td>
-			        <input ng-show="mensalidade.isPersonal" ng-disabled="!mensalidade.isPersonal" mask-money class="form-control" type="text" ng-model="mensalidade.ValorPersonal" placeholder="Valor Pago Personal R$..."/>
-		        </td>
             </tr>
         </table>
         <!-- class="editRowTd" -->

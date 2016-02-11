@@ -97,7 +97,7 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
             url: '/perfil/{id}',
             templateUrl: "app/views/cliente/clientePerfil.html",
             title: 'Perfil Cliente',
-            resolve: loadSequence('clientePerfilCtrl', 'ngTable', 'clienteData', 'horarioData', 'clienteFilters', 'receitasAvaliacaoFisicaData'),
+            resolve: loadSequence('clientePerfilCtrl', 'ngTable', 'clienteData', 'horarioData', 'clienteFilters', 'receitasData'),
             ncyBreadcrumb: {
                 label: 'Perfil do Cliente'
             },
@@ -204,7 +204,7 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
             templateUrl: "app/views/relatorioFinanceiro/relatorioFinanceiro.html",
             title: 'Relatorio Financeiro',
             icon: 'ti-layout-media-left-alt',
-            resolve: loadSequence('relatorioFinanceiroCtrl', 'ngTable', 'relatorioFinanceiroData', 'categoriaFinanceiraData'),
+            resolve: loadSequence('relatorioFinanceiroCtrl', 'ngTable', 'relatorioFinanceiroData', 'categoriaFinanceiraData', 'subCategoriaData'),
             controller: "relatorioFinanceiroCtrl as vm",
             ncyBreadcrumb: {
                 label: 'Relatorio Financeiro'

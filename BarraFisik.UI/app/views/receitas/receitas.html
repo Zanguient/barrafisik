@@ -18,7 +18,7 @@
                 <span>Cadastrar</span>
             </button><br/><br/>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-6">            
             <h5 class="pull-right ">Total: <span class="badge badge-info">{{total}}</span></h5>
         </div>
     </div>    
@@ -29,10 +29,10 @@
                 <i class="ti-search"></i>
             </span><br/>
             <div class="table-responsive">
-                <table ng-table="tableParams" class="table">
+                <table ng-table="tableParams" class="table" id="table">
                     <tbody ng-repeat="r in $data">
                     <tr ng-class-odd="'odd'" ng-class-even="'even'">
-                        <td class="rowTd" style="max-width: 25px;"><a ng-click="openFicha(r)" class="btn" tooltip-placement="top" tooltip="Ficha"><i class="ti-id-badge"></i></a></td>
+                        <td class="rowTd" id="ficha" style="max-width: 25px;"><a ng-click="openFicha(r)" class="btn" tooltip-placement="top" tooltip="Ficha"><i class="ti-id-badge"></i></a></td>
                         <td class="rowTd" data-title="'Categoria'" sortable="'CategoriaFinanceira.Categoria'">{{r.CategoriaFinanceira.Categoria}}  </td>
                         <td class="rowTd" data-title="'SubCategoria'" sortable="'SubCategoriaFinanceira.SubCategoria'">{{r.SubCategoriaFinanceira.SubCategoria}}</td>
                         <td class="rowTd" data-title="'Tipo Pag.'" sortable="'TipoPagamento.Descricao'">({{r.TipoPagamento.Sigla}}) {{r.TipoPagamento.Descricao}}</td>
@@ -42,10 +42,10 @@
                         <td class="rowTd" data-title="'Valor Pago'" sortable="'ValorTotal'">
                         <div class="text-primary">{{r.ValorTotal | currency: 'R$ '}}</div></td>
                         <td class="rowTd" data-title="'Situacao'" sortable="'Situacao'">{{r.Situacao}}</td>
-                        <td class="text-right">
+                        <td class="text-right" id="icons">
                             <div class="visible-md visible-lg hidden-sm hidden-xs">
                                 <a ng-click="openEditar(r)" class="btn btn-xs" tooltip-placement="top" tooltip="Editar"><i class="fa fa-pencil"></i></a>
-                                <a ng-click="delete(r.ReceitasId)" class="btn btn-xs" tooltip-placement="top" tooltip="Excluir"><i class="fa fa-times"></i></a>
+                                <a ng-click="delete(r)" class="btn btn-xs" tooltip-placement="top" tooltip="Excluir"><i class="fa fa-times"></i></a>
                             </div>
                         </td>
                     </tr>

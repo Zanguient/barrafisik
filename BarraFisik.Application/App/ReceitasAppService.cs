@@ -52,7 +52,7 @@ namespace BarraFisik.Application.App
 
             //Atualiza situacao do cliente caso a mensalidade que esta sendo paga se refere ao mês atual
             var today = DateTime.Now;
-            if (receitasViewModel.MesReferencia >= today.Month && receitasViewModel.AnoReferencia >= today.Year)
+            if (receitasViewModel.MesReferencia >= today.Month && receitasViewModel.AnoReferencia >= today.Year && receitasViewModel.DataPagamento != null)
             {
                 var cliente = _clienteService.GetByIdMensalidade(receitasViewModel.ClienteId);
                 if (cliente.IsAtivo)
@@ -142,14 +142,20 @@ namespace BarraFisik.Application.App
             }
             if (cliente.IsAtivo)
             {
-                if (existeMensalidade && cliente.Situacao != "Regular")
+                if (existeMensalidade && cliente.Situacao != "Regular" && mensalidade.DataPagamento != null)
                 {
                     cliente.Situacao = "Regular";
                     _clienteService.Update(cliente);
                     _logSistemaService.AddLog("Cliente", cliente.ClienteId, "Update",
                         "Alteração da situacao para: REGULAR. Atualizado mensalidade: " + mensalidade.ReceitasId);
                 }
-                else if ((!existeMensalidade))
+                else if ((!existeMensalidade && cliente.Situacao != "Pendente"))
+                {
+                    cliente.Situacao = "Pendente";
+                    _clienteService.Update(cliente);
+                    _logSistemaService.AddLog("Cliente", cliente.ClienteId, "Update",
+                        "Alteração da situacao para: PENDENTE. Atualizado mensalidade: " + mensalidade.ReceitasId);
+                } else if(existeMensalidade && mensalidade.DataPagamento == null) //Existe mensalidade mas não existe data de pagamento (não está quitado) - status para pendente
                 {
                     cliente.Situacao = "Pendente";
                     _clienteService.Update(cliente);
@@ -198,7 +204,7 @@ namespace BarraFisik.Application.App
                 }
             }
 
-            if (existeMensalidade && cliente.Situacao != "Regular")
+            if (existeMensalidade && cliente.Situacao != "Regular" && mensalidade.DataPagamento != null)
             {
                 cliente.Situacao = "Regular";
                 _clienteService.Update(cliente);

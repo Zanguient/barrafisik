@@ -39,7 +39,7 @@ namespace BarraFisik.Infra.Data.Repository.ReadOnly
             using (var cn = Connection)
             {
                 var query = @"  Select distinct * from Receitas r 
-                                inner join TipoPagamento tp on r.TipoPagamentoId = tp.TipoPagamentoId
+                                left join TipoPagamento tp on r.TipoPagamentoId = tp.TipoPagamentoId
                                 where r.ClienteId = '" + idCliente + 
                                 "' and r.CategoriaFinanceiraId = '1c1278df-f5a5-4407-a0c4-bdbb71c362b1' and r.SubCategoriaFinanceiraId = '0d57c87d-3bd9-420b-ab98-123fdb75a269'";
 

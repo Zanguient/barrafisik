@@ -3,7 +3,7 @@
 
     app.controller('mensalidadesCtrl', mensalidadesCtrl);
 
-    function mensalidadesCtrl($scope, ClienteId, modalService, $modalInstance, tipoPagamentoData, mensalidadesData, receitasData, ngTableParams, $filter, $timeout, SweetAlert, toaster) {
+    function mensalidadesCtrl($scope, Cliente, $modal, modalService, $modalInstance, tipoPagamentoData, mensalidadesData, receitasData, ngTableParams, $filter, $timeout, SweetAlert, toaster) {
         var vm = this;
         vm.mensalidades = [];
 
@@ -11,7 +11,7 @@
             $modalInstance.dismiss('cancel');
         };
 
-        receitasData.getMensalidades(ClienteId).then(function (result) {
+        receitasData.getMensalidades(Cliente.ClienteId).then(function (result) {
             vm.mensalidades = result.data;
         });
 
@@ -22,9 +22,9 @@
 
         $scope.tableParams = new ngTableParams({
             page: 1, // show first page
-            count: 12, // count per page
+            count: 8, // count per page
             sorting: {
-                DataPagamento: 'desc' // initial sorting
+                DataPagamento: 'asc' // initial sorting
             }
         }, {
             counts: [],
@@ -39,6 +39,18 @@
         $scope.$watch('vm.mensalidades', function () {
             $scope.tableParams.reload();
         });
+
+        //Comprovante
+        $scope.openComprovante = function (m) {
+            if (m.DataPagamento == null) {
+                toaster.pop('error', '', 'Mensalidade Pendente!');
+            } else {
+                window.open("http://localhost:49000/app/views/mensalidades/comprovante.html?mes=" + m.MesReferencia +
+                "&ano=" + m.AnoReferencia + "&valor=" + m.ValorTotal +
+                "&cliente=" + Cliente.Nome,
+                "minhaJanela", "height=250,width=370");
+            }
+        }
 
         vm.delete = function (id) {
             var modalOptions = {
@@ -85,10 +97,10 @@
                     return;
                 } else {
                     // Cadastra/Atualiza mensalidade
-                    mensalidade.ClienteId = ClienteId;
+                    mensalidade.ClienteId = Cliente.ClienteId;
                     receitasData.editMensalidade(mensalidade).success(function () {
                         toaster.pop('success', '', 'Mensalidade Atualizada com Sucesso!');
-                        receitasData.getMensalidades(ClienteId).then(function (result) {
+                        receitasData.getMensalidades(Cliente.ClienteId).then(function (result) {
                             vm.mensalidades = result.data;
                         });
                         $scope.editId = -1;

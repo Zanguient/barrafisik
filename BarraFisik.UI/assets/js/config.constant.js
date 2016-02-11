@@ -60,6 +60,7 @@ app.constant('JS_REQUIRES', {
         'valoresData' : 'app/factory/valoresData.js',
         'receitasAvaliacaoFisicaData' : 'app/factory/receitasAvaliacaoFisicaData.js',
         'categoriaFinanceiraData': 'app/factory/categoriaFinanceiraData.js',
+        'subCategoriaData': 'app/factory/subCategoriaData.js',
         'receitasData': 'app/factory/receitasData.js',
         'despesasData': 'app/factory/despesasData.js',
         'relatorioFinanceiroData': 'app/factory/relatorioFinanceiroData.js',

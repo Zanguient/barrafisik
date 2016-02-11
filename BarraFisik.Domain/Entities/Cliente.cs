@@ -32,7 +32,7 @@ namespace BarraFisik.Domain.Entities
 
         public virtual Valores Valores { get; set; }
 
-        public virtual ICollection<Mensalidades> Mensalidades { get; set; }
+        //public virtual ICollection<Receitas> Mensalidades { get; set; }
 
         public ValidationResult ResultadoValidacao { get; private set; }
 

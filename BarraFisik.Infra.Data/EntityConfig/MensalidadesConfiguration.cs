@@ -19,9 +19,9 @@ namespace BarraFisik.Infra.Data.EntityConfig
 
             Ignore(m => m.ResultadoValidacao);
 
-            HasRequired(m => m.Cliente)
-                .WithMany(m => m.Mensalidades)
-                .HasForeignKey(m => m.ClienteId);
+            //HasRequired(m => m.Cliente)
+            //    .WithMany(m => m.Mensalidades)
+            //    .HasForeignKey(m => m.ClienteId);
 
             HasRequired(m => m.TipoPagamento).WithMany().HasForeignKey(m => m.TipoPagamentoId);
 

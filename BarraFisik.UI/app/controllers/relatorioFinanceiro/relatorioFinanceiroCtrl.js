@@ -3,16 +3,24 @@
 
     app.controller('relatorioFinanceiroCtrl', relatorioFinanceiroCtrl);
 
-    function relatorioFinanceiroCtrl($scope, ngTableParams, relatorioFinanceiroData, categoriaFinanceiraData, $filter) {
+    function relatorioFinanceiroCtrl($scope, ngTableParams, relatorioFinanceiroData, categoriaFinanceiraData, $filter, subCategoriaData) {
         var vm = this;
         $scope.search = false;
 
-        $scope.filter = {
-            Tipo: null,
-            Categoria: null,
-            DataInicio: null,
-            DataFim: null
+        var filterDefault = {
+            Tipo: undefined,
+            Situacao: "",
+            CategoriaId: null,
+            SubCategoriaId: null,
+            EmissaoInicio: null,
+            EmissaoFim: null,
+            VencimentoInicio: null,
+            VencimentoFim: null,
+            PagamentoInicio: null,
+            PagamentoFim: null
         }
+
+        $scope.filter = angular.copy(filterDefault);
 
         //Campos para impressao
         vm.printTipo = true;
@@ -23,6 +31,11 @@
         vm.printValor = true;
 
         getCategorias('Todos');
+        getSubCategorias(null);
+
+        $scope.filterSubCategorias = function (categoriaId) {
+            getSubCategorias(categoriaId);
+        }
 
         $scope.filterCategorias = function (tipo) {
             getCategorias(tipo);
@@ -40,6 +53,18 @@
             }            
         }
 
+        function getSubCategorias(categoriaId) {
+            if (categoriaId === null || categoriaId === undefined) {
+                subCategoriaData.getAll().then(function (result) {
+                    vm.subCategorias = result.data;
+                })
+            } else {
+                subCategoriaData.getByCategoria(categoriaId).then(function (result) {
+                    vm.subCategorias = result.data;
+                })
+            }
+        }
+
         vm.pesquisar = function (filter) {
             $scope.totalReceitas = 0;
             $scope.totalDespesas = 0;
@@ -50,9 +75,9 @@
 
                 angular.forEach(result.data, function (value, key) {
                     if (value.Tipo === "Receitas") {
-                        $scope.totalReceitas = $scope.totalReceitas + value.Valor;
+                        $scope.totalReceitas = $scope.totalReceitas + value.ValorTotal;
                     } else {
-                        $scope.totalDespesas = $scope.totalDespesas + value.Valor;
+                        $scope.totalDespesas = $scope.totalDespesas + value.ValorTotal;
                     }
                         
                 });
@@ -83,12 +108,7 @@
         }
         
         vm.clear = function() {
-            $scope.filter = {
-                Tipo: null,
-                Categoria: null,
-                DataInicio: null,
-                DataFim: null
-            }
+            $scope.filter = angular.copy(filterDefault);
             vm.printTipo = true;
             vm.printCategoria = true;
             vm.printNome = true;

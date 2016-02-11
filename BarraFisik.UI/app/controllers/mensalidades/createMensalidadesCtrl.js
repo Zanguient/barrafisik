@@ -27,8 +27,9 @@
         }
 
         today = dd + '/' + mm + '/' + yyyy;
-
+        var vencimento = 10 + '/' + mm +'/'+ yyyy;
         $scope.mensalidade = {
+            DataVencimento: vencimento,
             DataPagamento: today,
             AnoReferencia: yyyy,
             MesReferencia: parseInt(mm),
@@ -92,15 +93,12 @@
                     return;
 
                 } else {
-                    // Cadastra mensalidade
-                    if (mensalidade.DataPagamento === today)
-                        mensalidade.DataPagamento = new Date();
-
+                    //// Cadastra mensalidade
                     mensalidade.ClienteId = Cliente.ClienteId;
                     mensalidade.ValorTotal = mensalidade.Valor + mensalidade.ValorPersonal;
                     mensalidade.Situacao = 'Quitado';
-                    receitasData.addMensalidade(mensalidade).success(function () {
-                        $modalInstance.close();
+                    receitasData.addMensalidade(mensalidade).success(function (data) {                        
+                        $modalInstance.close(data);
                     }).error(function (error) {
                         var errors = [];
                         for (var key in error.ModelState) {

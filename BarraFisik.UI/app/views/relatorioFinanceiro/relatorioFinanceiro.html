@@ -6,6 +6,8 @@
 		 margin-top: 35px;
 	 }
 
+    #printMsg { display: none; } 
+
 	@media print {	
     
         * {
@@ -14,14 +16,15 @@
             text-shadow:none !important;
             filter:none !important;
             -ms-filter:none !important;
+            margin-top: 0 !important;
+            padding-top: 0 !important;
           }
  
           body {
-            margin:0;
-            padding:0;
             line-height: 1.4em;
             }	
 
+          #printMsg { display: block; } 
 
 		.footer-inner {
 			display: none !important;
@@ -60,7 +63,7 @@
 
 <div class="hidden-print" ng-include src="'app/views/relatorioFinanceiro/partial/partialSearch.html'"></div>
 
-<div ng-if="search">
+<div ng-if="search" >
     <div ng-show="loading">
         <img src="/assets/images/loading.gif" />Carregando Dados Financeiros...
     </div>
@@ -77,43 +80,54 @@
                     <div class="table-responsive">
                         <table class="table">
                             <thead>
-                                <th ng-click="sort('Tipo')" style="cursor: pointer"><span ng-class="{ 'hidden-print' : !vm.printTipo}">Tipo</span>
+                                <th ng-click="sort('Tipo')" style="cursor: pointer">
+                                    <span ng-class="{ 'hidden-print' : !vm.printTipo}">Tipo</span>
                                     <i ng-class="{'fa fa-chevron-up':isSortUp('Tipo'),'fa fa-chevron-down':isSortDown('Tipo')}"></i>
                                 </th>
                                 <th ng-click="sort('Categoria')" style="cursor: pointer">
                                     <span ng-class="{ 'hidden-print' : !vm.printCategoria}">Categoria</span>
                                     <i ng-class="{'fa fa-chevron-up':isSortUp('Categoria'),'fa fa-chevron-down':isSortDown('Categoria')}"></i>
                                 </th>
-                                <th ng-click="sort('Nome')" style="cursor: pointer">
-                                    <span ng-class="{ 'hidden-print' : !vm.printNome}">Nome</span>
-                                    <i ng-class="{'fa fa-chevron-up':isSortUp('Nome'),'fa fa-chevron-down':isSortDown('Nome')}"></i>
+                                <th ng-click="sort('SubCategoria')" style="cursor: pointer">
+                                    <span ng-class="{ 'hidden-print' : !vm.printNome}">SubCategoria</span>
+                                    <i ng-class="{'fa fa-chevron-up':isSortUp('Nome'),'fa fa-chevron-down':isSortDown('SubCategoria')}"></i>
                                 </th>
-                                <th ng-click="sort('Data')" style="cursor: pointer">
-                                    <span ng-class="{ 'hidden-print' : !vm.printData}">Data</span>
-                                    <i ng-class="{'fa fa-chevron-up':isSortUp('Data'),'fa fa-chevron-down':isSortDown('Data')}"></i>
+                                <th ng-click="sort('DataEmissao')" style="cursor: pointer">
+                                    <span ng-class="{ 'hidden-print' : !vm.printData}">Emissao</span>
+                                    <i ng-class="{'fa fa-chevron-up':isSortUp('DataEmissao'),'fa fa-chevron-down':isSortDown('DataEmissao')}"></i>
                                 </th>
-                                <th ng-click="sort('Observacao')" style="cursor: pointer">
-                                    <span ng-class="{ 'hidden-print' : !vm.printObservacao}">Obs.</span>
-                                    <i ng-class="{'fa fa-chevron-up':isSortUp('Observacao'),'fa fa-chevron-down':isSortDown('Observacao')}"></i>
+                                <th ng-click="sort('DataVencimento')" style="cursor: pointer">
+                                    <span ng-class="{ 'hidden-print' : !vm.printObservacao}">Venc.</span>
+                                    <i ng-class="{'fa fa-chevron-up':isSortUp('DataVencimento'),'fa fa-chevron-down':isSortDown('DataVencimento')}"></i>
                                 </th>
-                                <th ng-click="sort('Valor')" id="Valor" style="cursor: pointer;" class="text-right">
-                                    <span ng-class="{ 'hidden-print' : !vm.printValor}">Valor</span>
-                                    <i ng-class="{'fa fa-chevron-up':isSortUp('Valor'),'fa fa-chevron-down':isSortDown('Valor')}"></i>
+                                <th ng-click="sort('DataPagamento')" style="cursor: pointer">
+                                    <span ng-class="{ 'hidden-print' : !vm.printObservacao}">Pag.</span>
+                                    <i ng-class="{'fa fa-chevron-up':isSortUp('DataPagamento'),'fa fa-chevron-down':isSortDown('DataPagamento')}"></i>
+                                </th>      
+                                <th ng-click="sort('Situacao')" id="Situacao" style="cursor: pointer; ">
+                                    <span ng-class="{ 'hidden-print' : !vm.printValor}">Situção</span>
+                                    <i ng-class="{'fa fa-chevron-up':isSortUp('Situacao'),'fa fa-chevron-down':isSortDown('Situacao')}"></i>
+                                </th>
+                                <th ng-click="sort('ValorTotal')" id="ValorTotal" style="cursor: pointer;" class="text-right">
+                                    <span ng-class="{ 'hidden-print' : !vm.printValor}">Valor Total</span>
+                                    <i ng-class="{'fa fa-chevron-up':isSortUp('ValorTotal'),'fa fa-chevron-down':isSortDown('ValorTotal')}"></i>
                                 </th>
                             </thead>
                             <tbody>
                                 <tr ng-class-odd="'odd'" ng-class-even="'even'" ng-repeat="rf in vm.relatorioFinanceiro  | orderBy:sortField:reverse">
                                     <td class="rowTd"><span ng-class="{ 'hidden-print' : !vm.printTipo}">{{rf.Tipo}}</span></td>
                                     <td class="rowTd"><span ng-class="{ 'hidden-print' : !vm.printCategoria}">{{rf.Categoria}}</span></td>
-                                    <td class="rowTd"><span ng-class="{ 'hidden-print' : !vm.printNome}">{{rf.Nome}}</span></td>
-                                    <td class="rowTd"><span ng-class="{ 'hidden-print' : !vm.printData}">{{rf.Data | date:'dd/MM/yyyy'}}</span></td>
-                                    <td class="rowTd"><span ng-class="{ 'hidden-print' : !vm.printObservacao}">{{rf.Observacao}}</span></td>
-                                    <td class="rowTd text-right text-bold"><span ng-class="{ 'hidden-print' : !vm.printValor, 'text-red': rf.Tipo == 'Despesas', 'text-primary': rf.Tipo == 'Receitas' }">{{rf.Valor | currency}}</span></td>
+                                    <td class="rowTd"><span ng-class="{ 'hidden-print' : !vm.printCategoria}">{{rf.SubCategoria}}</span></td>
+                                    <td class="rowTd"><span ng-class="{ 'hidden-print' : !vm.printData}">{{rf.DataEmissao | date:'dd/MM/yy'}}</span></td>
+                                    <td class="rowTd"><span ng-class="{ 'hidden-print' : !vm.printData}">{{rf.DataVencimento | date:'dd/MM/yy'}}</span></td>
+                                    <td class="rowTd"><span ng-class="{ 'hidden-print' : !vm.printData}" >{{rf.DataPagamento | date:'dd/MM/yy'}}</span></td>
+                                    <td class="rowTd" style="width: 20px;"><span ng-class="{ 'hidden-print' : !vm.printData}"> {{rf.Situacao}}</span></td>
+                                    <td class="rowTd text-right text-bold"><span ng-class="{ 'hidden-print' : !vm.printValor, 'text-red': rf.Tipo == 'Despesas', 'text-primary': rf.Tipo == 'Receitas' }">{{rf.ValorTotal | currency}}</span></td>
                                 </tr>
                             </tbody>
                             <tfoot>
                                 <tr>
-                                    <td colspan="3"></td>
+                                    <td colspan="5"></td>
                                     <td class="text-right"><b>TOTAL: </b></td>
                                     <td class="text-right">
                                         <b ng-show="totalReceitas > 0" class="text-primary">Receitas:
@@ -129,7 +143,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td colspan="4"></td>
+                                    <td colspan="6"></td>
                                     <td class="text-right"><b>Saldo: </b></td>
                                     <td class="text-right">
                                         <b ng-class="{ 'text-primary': totalReceitas > totalDespesas, 'text-red': totalReceitas < totalDespesas }">{{totalReceitas - totalDespesas | currency}}</b>
@@ -142,7 +156,8 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-12 invoice-block">
+            <div class="col-sm-12 invoice-block">   
+                <div class="text-right text-small" id="printMsg"> Documento impresso em {{app.date | date:'dd/MM/yyyy'}} por {{userInfo.nome | uppercase}}. </div>            
                 <br>
                 <a onclick="javascript:window.print();" class="btn btn-lg btn-primary hidden-print">Print <i class="fa fa-print"></i>
                 </a>

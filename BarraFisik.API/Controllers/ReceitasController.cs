@@ -80,7 +80,7 @@ namespace BarraFisik.API.Controllers
             receitasViewModel.SubCategoriaFinanceiraId = new Guid("0d57c87d-3bd9-420b-ab98-123fdb75a269");
             receitasViewModel.CategoriaFinanceiraId = new Guid("1c1278df-f5a5-4407-a0c4-bdbb71c362b1");
             receitasViewModel.DataEmissao = DateTime.Now; 
-            receitasViewModel.DataVencimento = new DateTime(today.Year, today.Month, 10);           
+            receitasViewModel.DataVencimento = new DateTime(today.Year, today.Month, 10);
             if (ModelState.IsValid)
             {
                 var result = _receitasApp.AddMensalidade(receitasViewModel);
@@ -134,9 +134,6 @@ namespace BarraFisik.API.Controllers
         {
             if (ModelState.IsValid)
             {
-                //if (mensalidade.isPersonal == false)
-                //    mensalidade.ValorPersonal = 0;
-
                 var result = _receitasApp.UpdateMensalidade(receita);
 
                 if (!result.IsValid)
