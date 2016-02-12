@@ -13,8 +13,8 @@
                     <input class="form-control" type="text" name="Valor" ng-model="avaliacaofisica.Valor" mask-money>
                     <span class="error text-small block" ng-if="Form.Valor.$dirty && Form.Valor.$invalid">Informe o Valor Pago</span>
                 </td>
-                <td>Tipo de Pagamento: </td>
-                <td>
+                <td colspan="2">Tipo de Pagamento: </td>
+                <td colspan="2">
                     <select name="TiposPag" id="TiposPag" ng-model="avaliacaofisica.TipoPagamentoId">
                         <option value=""><b>Selecione...</b></option>
                         <option ng-repeat="t in tipos" value="{{t.TipoPagamentoId}}">{{t.Sigla}} - {{t.Descricao}}</option>
@@ -23,13 +23,19 @@
             </tr>
 
             <tr>
-                <td>Data Vencimento: <span class="symbol required"></span></td>
+                <td>Dt. Avaliação: <span class="symbol required"></span></td>
+                <td ng-class="{'has-error':Form.DataAvaliacao.$dirty && Form.DataAvaliacao.$invalid, 'has-success':Form.DataAvaliacao.$valid}">
+                    <input class="form-control input-sm" name="DataAvaliacao" type="date" ng-model="avaliacaofisica.DataEmissao" required>
+                    <span class="error text-small block" ng-if="Form.DataAvaliacao.$dirty && Form.DataAvaliacao.$invalid">Informe a Data de Avaliação</span>
+                    <span class="error text-small block" ng-if="Form.DataAvaliacao.$error.date">Data inválida.</span>
+                </td>
+                <td style="min-width: 110px;"> Vencimento: <span class="symbol required"></span></td>
                 <td  ng-class="{'has-error':Form.DataVencimento.$dirty && Form.DataVencimento.$invalid, 'has-success':Form.DataVencimento.$valid}">
                     <input class="form-control input-sm" name="DataVencimento" type="date" ng-model="avaliacaofisica.DataVencimento" required>
                     <span class="error text-small block" ng-if="Form.DataVencimento.$dirty && Form.DataVencimento.$invalid">Informe a Data de Vencimento</span>
                     <span class="error text-small block" ng-if="Form.DataVencimento.$error.date">Data inválida.</span>
                 </td>
-                <td>Data Pagamento:</td>
+                <td>Pagamento:</td>
                 <td ng-class="{'has-error':Form.DataPagamento.$dirty && Form.DataPagamento.$invalid}">
                     <input class="form-control input-sm" name="DataPagamento" type="date" ng-model="avaliacaofisica.DataPagamento">
                     <span class="error text-small block" ng-if="Form.DataPagamento.$error.date">Data inválida.</span>         

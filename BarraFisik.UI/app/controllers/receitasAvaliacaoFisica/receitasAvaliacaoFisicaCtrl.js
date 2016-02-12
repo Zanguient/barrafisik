@@ -92,6 +92,7 @@
 
                     // Cadastra/Atualiza mensalidade
                     avaliacaoFisica.ClienteId = ClienteId;
+                    avaliacaoFisica.ValorTotal = avaliacaoFisica.Valor;
                     receitasData.editReceita(avaliacaoFisica).success(function () {
                         toaster.pop('success', '', 'Dado Atualizado com Sucesso!');
                         receitasData.getAvaliacaoCliente(ClienteId).then(function (result) {

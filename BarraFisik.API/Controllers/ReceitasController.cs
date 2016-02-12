@@ -106,7 +106,7 @@ namespace BarraFisik.API.Controllers
 
             receitasViewModel.SubCategoriaFinanceiraId = new Guid("ecaac024-15bd-4ee0-8422-07d809bb1be9");
             receitasViewModel.CategoriaFinanceiraId = new Guid("1c1278df-f5a5-4407-a0c4-bdbb71c362b1");
-            receitasViewModel.DataEmissao = DateTime.Now;
+            //receitasViewModel.DataEmissao = DateTime.Now;
             if (ModelState.IsValid)
             {
                 _receitasApp.Add(receitasViewModel);

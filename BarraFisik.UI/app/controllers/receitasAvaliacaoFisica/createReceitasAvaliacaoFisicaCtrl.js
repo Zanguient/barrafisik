@@ -20,6 +20,7 @@
 
         $scope.avaliacaofisica = {
             DataPagamento: today,
+            DataEmissao: today,
             DataVencimento: new Date(today.getFullYear(), today.getMonth(), 10)
         }
 
@@ -44,18 +45,18 @@
                     return;
 
                 } else {
-                    // Cadastra
-                    if (avaliacaoFisica.DataPagamento === today)
-                        avaliacaoFisica.DataPagamento = new Date();
+                    //// Cadastra
+                    //if (avaliacaoFisica.DataPagamento === today)
+                    //    avaliacaoFisica.DataPagamento = new Date();
 
                     if (avaliacaoFisica.DataPagamento != null) {
                         avaliacaoFisica.Situacao = "Quitado";
                     } else avaliacaoFisica.Situacao = "Pendente";
 
-                    if (receita.Cliente != null) {
-                        receita.ClienteId = receita.Cliente.ClienteId;
-                        receita.Cliente = null;
-                    }
+                    //if (receita.Cliente != null) {
+                    //    receita.ClienteId = receita.Cliente.ClienteId;
+                    //    receita.Cliente = null;
+                    //}
 
                     avaliacaoFisica.ClienteId = Cliente.ClienteId;
                     avaliacaoFisica.ValorTotal = avaliacaoFisica.Valor;
