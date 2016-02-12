@@ -75,7 +75,6 @@
     <Content Include="app\controllers\horario\horarioClienteCtrl.js" />
     <Content Include="app\controllers\horario\horarioCtrl.js" />
     <Content Include="app\controllers\login\loginCtrl.js" />
-    <Content Include="app\controllers\mensalidades\comprovanteMensalidadesCtrl.js" />
     <Content Include="app\controllers\mensalidades\createMensalidadesCtrl.js" />
     <Content Include="app\controllers\mensalidades\mensalidadesCtrl.js" />
     <Content Include="app\controllers\receitasAvaliacaoFisica\createReceitasAvaliacaoFisicaCtrl.js" />
@@ -158,6 +157,7 @@
     <Content Include="app\views\mensalidades\create.html" />
     <Content Include="app\views\mensalidades\edit.html" />
     <Content Include="app\views\mensalidades\mensalidades.html" />
+    <Content Include="app\views\receitasAvaliacaoFisica\comprovante.html" />
     <Content Include="app\views\receitasAvaliacaoFisica\create.html" />
     <Content Include="app\views\receitasAvaliacaoFisica\edit.html" />
     <Content Include="app\views\receitasAvaliacaoFisica\listaPorCliente.html" />

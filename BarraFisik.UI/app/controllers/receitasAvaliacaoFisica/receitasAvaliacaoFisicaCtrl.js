@@ -3,7 +3,7 @@
 
     app.controller("receitasAvaliacaoFisicaCtrl", receitasAvaliacaoFisicaCtrl);
 
-    function receitasAvaliacaoFisicaCtrl($scope, ClienteId, modalService, $modalInstance, tipoPagamentoData, receitasAvaliacaoFisicaData, ngTableParams, $filter, $timeout, SweetAlert, toaster, receitasData) {
+    function receitasAvaliacaoFisicaCtrl($scope, Cliente, modalService, $modalInstance, tipoPagamentoData, receitasAvaliacaoFisicaData, ngTableParams, $filter, $timeout, SweetAlert, toaster, receitasData) {
         var vm = this;
         vm.avaliacoes = [];
 
@@ -11,7 +11,7 @@
             $modalInstance.dismiss('cancel');
         };
 
-        receitasData.getAvaliacaoCliente(ClienteId).then(function (result) {
+        receitasData.getAvaliacaoCliente(Cliente.ClienteId).then(function (result) {
             vm.avaliacoes = result.data;                        
         });
 
@@ -39,6 +39,16 @@
             $scope.tableParams.reload();
         });
 
+
+        //Comprovante
+        $scope.openComprovante = function (r) {
+            if (r.DataPagamento == null) {
+                toaster.pop('error', '', 'Mensalidade Pendente!');
+            } else {
+                window.open("http://localhost:49000/app/views/receitasAvaliacaoFisica/comprovante.html?valor=" + r.Valor +
+                    "&cliente=" + Cliente.Nome, "Recibo - Avaliação Física", "height=250,width=370");
+            }
+        }
 
         vm.delete = function (id) {
             var modalOptions = {
@@ -91,11 +101,11 @@
                     } else avaliacaoFisica.Situacao = "Pendente";
 
                     // Cadastra/Atualiza mensalidade
-                    avaliacaoFisica.ClienteId = ClienteId;
+                    avaliacaoFisica.ClienteId = Cliente.ClienteId;
                     avaliacaoFisica.ValorTotal = avaliacaoFisica.Valor;
                     receitasData.editReceita(avaliacaoFisica).success(function () {
                         toaster.pop('success', '', 'Dado Atualizado com Sucesso!');
-                        receitasData.getAvaliacaoCliente(ClienteId).then(function (result) {
+                        receitasData.getAvaliacaoCliente(Cliente.ClienteId).then(function (result) {
                             vm.avaliacoes = result.data;
                         });
                         $scope.editId = -1;

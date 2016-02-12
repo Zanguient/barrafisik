@@ -48,7 +48,7 @@
                 window.open("http://localhost:49000/app/views/mensalidades/comprovante.html?mes=" + m.MesReferencia +
                 "&ano=" + m.AnoReferencia + "&valor=" + m.ValorTotal +
                 "&cliente=" + Cliente.Nome,
-                "minhaJanela", "height=250,width=370");
+                "Recibo - Mensalidade", "height=250,width=370");
             }
         }
 

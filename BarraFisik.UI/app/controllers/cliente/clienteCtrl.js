@@ -226,7 +226,9 @@
             vm.modalInstance.result.then(function (mensalidade) {                
                 toaster.pop('success', '', 'Mensalidade Salva com Sucesso!');
                 if(mensalidade.DataPagamento != null)
-                    window.open("http://localhost:49000/app/views/mensalidades/comprovante.html?mes="+mensalidade.MesReferencia+"&ano="+mensalidade.AnoReferencia+"&valor="+mensalidade.ValorTotal+"&cliente="+cliente.Nome, "minhaJanela", "height=250,width=370");
+                    window.open("http://localhost:49000/app/views/mensalidades/comprovante.html?mes=" + mensalidade.MesReferencia +
+                        "&ano=" + mensalidade.AnoReferencia + "&valor=" + mensalidade.ValorTotal +
+                        "&cliente=" + cliente.Nome, "Recibo - Mensalidade", "height=250,width=370");
                 if ($scope.inativos) {
                     clienteData.getClientesAll().then(function (result) {
                         vm.clientes = result.data;
@@ -262,23 +264,22 @@
                 controller: 'createReceitasAvaliacaoFisicaCtrl as vm'
             });
             vm.modalInstance.result.then(function (data) {
-                SweetAlert.swal("Sucesso!", "Avaliação Física paga com sucesso!", "success");
-                //clienteData.getClientes().then(function (result) {
-                //    vm.clientes = result.data;
-                //});
+                toaster.pop('success', '', 'Avaliação Física Salva com Sucesso!');
+                if (data.DataPagamento != null)
+                    window.open("http://localhost:49000/app/views/receitasAvaliacaoFisica/comprovante.html?valor=" + data.Valor + "&cliente=" + cliente.Nome, "Recibo - Avaliação Física", "height=250,width=370");
             }, function () {
                 console.log('Cancelled');
             });
         }
 
         //Avaliacao Fisica
-        $scope.openReceitasAvaliacaoFisica = function (id) {
+        $scope.openReceitasAvaliacaoFisica = function (cliente) {
             vm.modalInstance = $modal.open({
                 templateUrl: 'app/views/receitasAvaliacaoFisica/listaPorCliente.html',
                 size: 'lg',
                 resolve: {
-                    ClienteId: function () {
-                        return id;
+                    Cliente: function () {
+                        return cliente;
                     },
                     deps: [
                         '$ocLazyLoad',

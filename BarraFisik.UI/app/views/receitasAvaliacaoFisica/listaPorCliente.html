@@ -16,6 +16,7 @@
                         <div class="visible-md visible-lg hidden-sm hidden-xs">
                             <a ng-click="setEditId(r.ReceitasId)" class="btn btn-transparent btn-xs" tooltip-placement="top" tooltip="Editar" id="editRowBtn{{r.ReceitasId}}"><i class="fa fa-pencil"></i></a>
                             <a ng-click="vm.delete(r.ReceitasId)" class="btn btn-transparent btn-xs" tooltip-placement="top" tooltip="Excluir"><i class="fa fa-times"></i></a>
+                            <a ng-click="openComprovante(r)" class="btn btn-transparent btn-xs" tooltip-placement="top" tooltip="Comprovante"><i class="fa fa-print"></i></a>
                         </div>
                     </td>
                 </tr>
