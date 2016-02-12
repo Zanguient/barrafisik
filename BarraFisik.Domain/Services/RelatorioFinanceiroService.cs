@@ -25,6 +25,16 @@ namespace BarraFisik.Domain.Services
             return _relatorioFinanceiroRepositoryReadOnly.GetRelatorio(filters);
         }
 
+        public IEnumerable<RelatorioFinanceiro> GetRelatorioReceitas(RelatorioFinanceiroSearch filters)
+        {
+            return _relatorioFinanceiroRepositoryReadOnly.GetRelatorioReceitas(filters);
+        }
+
+        public IEnumerable<RelatorioFinanceiro> GetRelatorioDespesas(RelatorioFinanceiroSearch filters)
+        {
+            return _relatorioFinanceiroRepositoryReadOnly.GetRelatorioDespesas(filters);
+        }
+
         public IEnumerable<RelatorioFinanceiroTotalMeses> GetTotalPorMes()
         {
             return _relatorioFinanceiroRepositoryReadOnly.GetTotalPorMes();

@@ -8,6 +8,7 @@ namespace BarraFisik.Application.ViewModels
         public string CategoriaId { get; set; }
         public string SubCategoriaId { get; set; }
         public string Situacao { get; set; }
+        public string Documento { get; set; }
 
         public DateTime? EmissaoInicio { get; set; }
         public DateTime? EmissaoFim { get; set; }
@@ -17,5 +18,10 @@ namespace BarraFisik.Application.ViewModels
 
         public DateTime? PagamentoInicio { get; set; }
         public DateTime? PagamentoFim { get; set; }
+
+        public string Cliente { get; set; }
+        public string FuncionarioId { get; set; }
+        public string TipoPagamentoId { get; set; }
+        public string FornecedorId{ get; set; }        
     }
 }

@@ -68,7 +68,7 @@
                         confirmButtonColor: "#007AFF"
                     });
 
-                    tipoPagamentoData.deleteTipo(id).then(function () {
+                    tipoPagamentoData.deleteTipo(id).success(function () {
                         SweetAlert.swal("Excluído!", "Dados apgados com sucesso!", "success");
                         $.each(vm.tipos, function (i) {
                             if (vm.tipos[i].TipoPagamentoId === id) {
@@ -77,7 +77,9 @@
                             }
                         });
                         $scope.tableParams.reload();
-                    });
+                    }).error(function (error) {
+                        SweetAlert.swal("Erro!", error.Message, "error");
+                    });;
                 } else {
                     SweetAlert.swal({
                         title: "Cancelado",

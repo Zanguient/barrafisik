@@ -55,9 +55,12 @@
 
         function getSubCategorias(categoriaId) {
             if (categoriaId === null || categoriaId === undefined) {
-                subCategoriaData.getAll().then(function (result) {
-                    vm.subCategorias = result.data;
-                })
+                vm.subCategorias = null;
+                $scope.filter.SubCategoriaId = null;
+                //subCategoriaData.getAll().then(function (result) {
+                    
+                //    vm.subCategorias = result.data;
+                //})
             } else {
                 subCategoriaData.getByCategoria(categoriaId).then(function (result) {
                     vm.subCategorias = result.data;

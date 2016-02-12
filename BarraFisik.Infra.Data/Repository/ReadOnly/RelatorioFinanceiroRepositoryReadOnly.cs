@@ -102,6 +102,103 @@ namespace BarraFisik.Infra.Data.Repository.ReadOnly
             }
         }
 
+        public IEnumerable<RelatorioFinanceiro> GetRelatorioReceitas(RelatorioFinanceiroSearch filters)
+        {
+            using (var cn = Connection)
+            {
+                var dt = new DateTime();
+                var query = @"
+                                select r.*, c.Nome as Cliente, f.Nome as Funcionario, t.Descricao as TipoPagamento, cf.Categoria, sc.SubCategoria, t.Descricao from Receitas r
+                                left join SubCategoriaFinanceira sc on r.SubCategoriaFinanceiraId = sc.SubCategoriaFinanceiraId
+                                left join Cliente c on r.ClienteId = c.ClienteId
+                                left join Funcionarios f on r.FuncionarioId = f.FuncionarioId
+                                left join Tipopagamento t on r.TipoPagamentoId = t.TipoPagamentoId
+                                inner join CategoriaFinanceira cf on r.CategoriaFinanceiraId = cf.CategoriaFinanceiraId
+                                where 1 = 1";
+
+                if (filters.EmissaoInicio != dt)
+                    query = query + " and r.DataEmissao >= '" + filters.EmissaoInicio.ToString("yyyy-MM-dd 00:00:00") + "' ";
+                if (filters.EmissaoFim != dt)
+                    query = query + " and r.DataEmissao <= '" + filters.EmissaoFim.ToString("yyyy-MM-dd 23:59:59") + "' ";
+                if (filters.VencimentoInicio != dt)
+                    query = query + " and r.DataVencimento >= '" + filters.VencimentoInicio.ToString("yyyy-MM-dd 00:00:00") + "' ";
+                if (filters.VencimentoFim != dt)
+                    query = query + " and r.DataVencimento <= '" + filters.VencimentoFim.ToString("yyyy-MM-dd 23:59:59") + "' ";
+                if (filters.PagamentoInicio != dt)
+                    query = query + " and r.DataPagamento >= '" + filters.PagamentoInicio.ToString("yyyy-MM-dd 00:00:00") + "' ";
+                if (filters.PagamentoFim != dt)
+                    query = query + " and r.DataPagamento <= '" + filters.PagamentoFim.ToString("yyyy-MM-dd 23:59:59") + "' ";
+                if (filters.CategoriaId != null)
+                    query = query + " and cf.CategoriaFinanceiraId = '" + filters.CategoriaId + "' ";
+                if (filters.SubCategoriaId != null)
+                    query = query + " and sc.SubCategoriaFinanceiraId = '" + filters.SubCategoriaId + "' ";
+                if (filters.Situacao != "")
+                    query = query + " and r.Situacao = '" + filters.Situacao + "' ";
+                if(filters.Cliente != null)
+                    query = query + " and (c.Nome like '%" + filters.Cliente + "%' or r.Nome like '%"+filters.Cliente+"%')";
+                if(filters.FuncionarioId != null)
+                    query = query + " and f.FuncionarioId = '" + filters.FuncionarioId + "' ";
+                if (filters.TipoPagamentoId != null)
+                    query = query + " and r.TipoPagamentoId = '" + filters.TipoPagamentoId + "' ";
+
+                cn.Open();
+                var relatorio = cn.Query<RelatorioFinanceiro>(query);
+                cn.Close();
+
+                return relatorio;
+            }
+        }
+
+        public IEnumerable<RelatorioFinanceiro> GetRelatorioDespesas(RelatorioFinanceiroSearch filters)
+        {
+            using (var cn = Connection)
+            {
+                var dt = new DateTime();
+                var query = @"
+                                select d.*, f.Nome as Funcionario, fo.Nome as Fornecedor, t.Descricao as TipoPagamento, cf.Categoria, sc.SubCategoria, t.Descricao 
+                                from Despesas d
+                                left join SubCategoriaFinanceira sc on d.SubCategoriaFinanceiraId = sc.SubCategoriaFinanceiraId
+                                left join Funcionarios f on d.FuncionarioId = f.FuncionarioId
+                                left join Fornecedores fo on d.FornecedorId = fo.FornecedorId
+                                left join Tipopagamento t on d.TipoPagamentoId = t.TipoPagamentoId
+                                inner join CategoriaFinanceira cf on d.CategoriaFinanceiraId = cf.CategoriaFinanceiraId
+                                where 1 = 1";
+
+                if (filters.EmissaoInicio != dt)
+                    query = query + " and d.DataEmissao >= '" + filters.EmissaoInicio.ToString("yyyy-MM-dd 00:00:00") + "' ";
+                if (filters.EmissaoFim != dt)
+                    query = query + " and d.DataEmissao <= '" + filters.EmissaoFim.ToString("yyyy-MM-dd 23:59:59") + "' ";
+                if (filters.VencimentoInicio != dt)
+                    query = query + " and d.DataVencimento >= '" + filters.VencimentoInicio.ToString("yyyy-MM-dd 00:00:00") + "' ";
+                if (filters.VencimentoFim != dt)
+                    query = query + " and d.DataVencimento <= '" + filters.VencimentoFim.ToString("yyyy-MM-dd 23:59:59") + "' ";
+                if (filters.PagamentoInicio != dt)
+                    query = query + " and d.DataPagamento >= '" + filters.PagamentoInicio.ToString("yyyy-MM-dd 00:00:00") + "' ";
+                if (filters.PagamentoFim != dt)
+                    query = query + " and d.DataPagamento <= '" + filters.PagamentoFim.ToString("yyyy-MM-dd 23:59:59") + "' ";
+                if (filters.CategoriaId != null)
+                    query = query + " and cf.CategoriaFinanceiraId = '" + filters.CategoriaId + "' ";
+                if (filters.SubCategoriaId != null)
+                    query = query + " and sc.SubCategoriaFinanceiraId = '" + filters.SubCategoriaId + "' ";
+                if (filters.Situacao != "")
+                    query = query + " and d.Situacao = '" + filters.Situacao + "' ";
+                if (filters.FornecedorId != null)
+                    query = query + " and d.FornecedorId = '" + filters.FornecedorId + "' ";
+                if (filters.FuncionarioId != null)
+                    query = query + " and f.FuncionarioId = '" + filters.FuncionarioId + "' ";
+                if (filters.TipoPagamentoId != null)
+                    query = query + " and d.TipoPagamentoId = '" + filters.TipoPagamentoId + "' ";
+                if (filters.Documento != null)
+                    query = query + " and d.Documento like '%" + filters.Documento + "%' ";
+
+                cn.Open();
+                var relatorio = cn.Query<RelatorioFinanceiro>(query);
+                cn.Close();
+
+                return relatorio;
+            }
+        }
+
         public IEnumerable<RelatorioFinanceiroTotalMeses> GetTotalPorMes()
         {
             

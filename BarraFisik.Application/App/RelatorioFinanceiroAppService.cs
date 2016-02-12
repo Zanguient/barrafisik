@@ -26,6 +26,22 @@ namespace BarraFisik.Application.App
                     _relatorioFinanceiroService.GetRelatorio(filtros));
         }
 
+        public IEnumerable<RelatorioFinanceiroViewModel> GetRelatorioReceitas(RelatorioFinanceiroSearchViewModel filters)
+        {
+            var filtros = Mapper.Map<RelatorioFinanceiroSearchViewModel, RelatorioFinanceiroSearch>(filters);
+
+            return Mapper.Map<IEnumerable<RelatorioFinanceiro>, IEnumerable<RelatorioFinanceiroViewModel>>(
+                    _relatorioFinanceiroService.GetRelatorioReceitas(filtros));
+        }
+
+        public IEnumerable<RelatorioFinanceiroViewModel> GetRelatorioDespesas(RelatorioFinanceiroSearchViewModel filters)
+        {
+            var filtros = Mapper.Map<RelatorioFinanceiroSearchViewModel, RelatorioFinanceiroSearch>(filters);
+
+            return Mapper.Map<IEnumerable<RelatorioFinanceiro>, IEnumerable<RelatorioFinanceiroViewModel>>(
+                    _relatorioFinanceiroService.GetRelatorioDespesas(filtros));
+        }
+
         public IEnumerable<RelatorioFinanceiroTotalMesesViewModel> GetTotalPorMes()
         {
             return Mapper.Map<IEnumerable<RelatorioFinanceiroTotalMeses>, IEnumerable<RelatorioFinanceiroTotalMesesViewModel>>(

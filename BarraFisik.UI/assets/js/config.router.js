@@ -199,15 +199,43 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
             ncyBreadcrumb: {
                 label: 'Tipos de Pagamento'
             }
-        }).state('app.financeiro.relatorioFinanceiro', {
+        })
+
+
+        //Relatórios financeiros
+        .state('app.financeiro.relatorioFinanceiro', {
             url: '/relatoriofinanceiro',
             templateUrl: "app/views/relatorioFinanceiro/relatorioFinanceiro.html",
-            title: 'Relatorio Financeiro',
+            title: 'Relatorio Financeiro - Geral',
             icon: 'ti-layout-media-left-alt',
             resolve: loadSequence('relatorioFinanceiroCtrl', 'ngTable', 'relatorioFinanceiroData', 'categoriaFinanceiraData', 'subCategoriaData'),
             controller: "relatorioFinanceiroCtrl as vm",
             ncyBreadcrumb: {
                 label: 'Relatorio Financeiro'
+            }
+        })
+
+        .state('app.financeiro.relatorioFinanceiroReceitas', {
+            url: '/relatoriofinanceiroReceitas',
+            templateUrl: "app/views/relatorioFinanceiro/relatorioFinanceiroReceitas.html",
+            title: 'Relatorio Financeiro - Receitas',
+            icon: 'ti-layout-media-left-alt',
+            resolve: loadSequence('relatorioFinanceiroReceitasCtrl', 'ngTable', 'tipoPagamentoData', 'relatorioFinanceiroData', 'categoriaFinanceiraData', 'subCategoriaData', 'funcionariosData'),
+            controller: "relatorioFinanceiroReceitasCtrl as vm",
+            ncyBreadcrumb: {
+                label: 'Relatorio Financeiro - Receitas'
+            }
+        })
+
+        .state('app.financeiro.relatorioFinanceiroDespesas', {
+            url: '/relatoriofinanceiroDespesas',
+            templateUrl: "app/views/relatorioFinanceiro/relatorioFinanceiroDespesas.html",
+            title: 'Relatorio Financeiro - Despesas',
+            icon: 'ti-layout-media-left-alt',
+            resolve: loadSequence('relatorioFinanceiroDespesasCtrl', 'ngTable', 'tipoPagamentoData', 'relatorioFinanceiroData', 'categoriaFinanceiraData', 'subCategoriaData', 'funcionariosData', 'fornecedoresData'),
+            controller: "relatorioFinanceiroDespesasCtrl as vm",
+            ncyBreadcrumb: {
+                label: 'Relatorio Financeiro - Despesas'
             }
         })
 

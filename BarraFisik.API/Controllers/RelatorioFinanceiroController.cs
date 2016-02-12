@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using BarraFisik.Application.Interfaces;
 using BarraFisik.Application.ViewModels;
+using BarraFisik.API.Filters;
 
 namespace BarraFisik.API.Controllers
 {
@@ -23,7 +24,7 @@ namespace BarraFisik.API.Controllers
 
         [HttpPost]
         [Route("relatoriofinanceiro")]
-        //[GzipCompression]
+        [GzipCompression]
         public async Task<HttpResponseMessage> GetRelatorio(RelatorioFinanceiroSearchViewModel filters)
         {
             //if (filters.DataInicio != null)                
@@ -33,6 +34,32 @@ namespace BarraFisik.API.Controllers
             //    filters.DataFim = new DateTime(filters.DataFim.Value.Year, filters.DataFim.Value.Month, filters.DataFim.Value.Day, 23, 59, 59);
 
             var result = _relatorioFinanceiroApp.GetRelatorio(filters);
+            var response = Request.CreateResponse(HttpStatusCode.OK, result);
+
+            var tsc = new TaskCompletionSource<HttpResponseMessage>();
+            tsc.SetResult(response);
+            return await tsc.Task;
+        }
+
+        [HttpPost]
+        [Route("relatoriofinanceiro/receitas")]
+        [GzipCompression]
+        public async Task<HttpResponseMessage> GetRelatorioReceitas(RelatorioFinanceiroSearchViewModel filters)
+        {
+            var result = _relatorioFinanceiroApp.GetRelatorioReceitas(filters);
+            var response = Request.CreateResponse(HttpStatusCode.OK, result);
+
+            var tsc = new TaskCompletionSource<HttpResponseMessage>();
+            tsc.SetResult(response);
+            return await tsc.Task;
+        }
+
+        [HttpPost]
+        [Route("relatoriofinanceiro/despesas")]
+        [GzipCompression]
+        public async Task<HttpResponseMessage> GetRelatorioDespesas(RelatorioFinanceiroSearchViewModel filters)
+        {
+            var result = _relatorioFinanceiroApp.GetRelatorioDespesas(filters);
             var response = Request.CreateResponse(HttpStatusCode.OK, result);
 
             var tsc = new TaskCompletionSource<HttpResponseMessage>();

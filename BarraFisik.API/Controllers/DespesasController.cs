@@ -85,7 +85,7 @@ namespace BarraFisik.API.Controllers
 
         [HttpPost]
         [Route("despesas/search")]
-        [GzipCompression]
+        //[GzipCompression]
         public async Task<HttpResponseMessage> Search(SearchDespesasViewModel searchViewModel)
         {           
             if (searchViewModel == null)

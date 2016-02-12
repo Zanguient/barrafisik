@@ -109,20 +109,6 @@
             { show: true, title: 'Dias' },
         ];
 
-        //$scope.Ativar = function (id) {
-        //    clienteData.ativarCliente(id).then(function () {
-        //        SweetAlert.swal("Ativado!", "Cliente foi ativado com sucesso!", "success");
-        //        $state.go($state.current, {}, { reload: true }); //second parameter is for $stateParams
-        //    });
-        //}
-
-        //$scope.Desativar = function (id) {
-        //    clienteData.desativarCliente(id).then(function () {
-        //        SweetAlert.swal("Desativado!", "Cliente Desativado com Sucesso!", "success");
-        //        $state.go($state.current, {}, { reload: true });
-        //    });
-        //}
-
         $scope.refresh = function () {
             $window.location.reload();
         }
@@ -239,7 +225,8 @@
             });
             vm.modalInstance.result.then(function (mensalidade) {                
                 toaster.pop('success', '', 'Mensalidade Salva com Sucesso!');
-                window.open("http://localhost:49000/app/views/mensalidades/comprovante.html?mes="+mensalidade.MesReferencia+"&ano="+mensalidade.AnoReferencia+"&valor="+mensalidade.ValorTotal+"&cliente="+cliente.Nome, "minhaJanela", "height=250,width=370");
+                if(mensalidade.DataPagamento != null)
+                    window.open("http://localhost:49000/app/views/mensalidades/comprovante.html?mes="+mensalidade.MesReferencia+"&ano="+mensalidade.AnoReferencia+"&valor="+mensalidade.ValorTotal+"&cliente="+cliente.Nome, "minhaJanela", "height=250,width=370");
                 if ($scope.inativos) {
                     clienteData.getClientesAll().then(function (result) {
                         vm.clientes = result.data;

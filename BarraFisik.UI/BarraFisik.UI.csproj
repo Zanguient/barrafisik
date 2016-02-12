@@ -84,6 +84,8 @@
     <Content Include="app\controllers\receitas\receitasCtrl.js" />
     <Content Include="app\controllers\receitas\receitasEditCtrl.js" />
     <Content Include="app\controllers\receitas\receitasFichaCtrl.js" />
+    <Content Include="app\controllers\relatorioFinanceiro\relatorioFinanceiroReceitasCtrl.js" />
+    <Content Include="app\controllers\relatorioFinanceiro\relatorioFinanceiroDespesasCtrl.js" />
     <Content Include="app\controllers\relatorioFinanceiro\relatorioFinanceiroCtrl.js" />
     <Content Include="app\controllers\subCategoriaFinanceira\subCategoriaCtrl.js" />
     <Content Include="app\controllers\tipoPagamento\tipoPagamentoCtrl.js" />
@@ -164,7 +166,11 @@
     <Content Include="app\views\receitas\receitas.html" />
     <Content Include="app\views\receitas\ficha.html" />
     <Content Include="app\views\receitas\partial\searchReceitas.html" />
+    <Content Include="app\views\relatorioFinanceiro\partial\partialSearchDespesas.html" />
+    <Content Include="app\views\relatorioFinanceiro\partial\partialSearchReceitas.html" />
     <Content Include="app\views\relatorioFinanceiro\partial\partialSearch.html" />
+    <Content Include="app\views\relatorioFinanceiro\relatorioFinanceiroDespesas.html" />
+    <Content Include="app\views\relatorioFinanceiro\relatorioFinanceiroReceitas.html" />
     <Content Include="app\views\relatorioFinanceiro\relatorioFinanceiro.html" />
     <Content Include="app\views\subCategoriaFinanceira\edit.html" />
     <Content Include="app\views\subCategoriaFinanceira\create.html" />

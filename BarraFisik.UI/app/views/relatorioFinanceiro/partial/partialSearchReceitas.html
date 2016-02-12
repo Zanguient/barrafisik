@@ -1,0 +1,153 @@
+﻿<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-white" id="panel1">
+            <div class="panel-heading">
+                <h4 class="panel-title text-primary">Filtros</h4>
+            </div>
+            <div class="panel-wrapper">
+                <div class="panel-body">
+                    <div class="col-md-4">
+                        <div role="form" class="form-horizontal">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="cliente">
+                                    Cliente:
+                                </label>
+                                <div class="col-sm-9">
+                                    <input type="text" ng-model="filter.Cliente" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="categorias">
+                                    Funcionário:
+                                </label>
+                                <div class="col-sm-9">
+                                    <select class="form-control" id="funcionarios" ng-model="filter.FuncionarioId" ng-options="f.FuncionarioId as f.Nome for f in vm.funcionarios">
+                                        <option value="">.:: Selecione ::.</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="categorias">
+                                    Categorias
+                                </label>
+                                <div class="col-sm-9">
+                                    <select class="form-control" id="categorias" ng-change="filterSubCategorias(filter.CategoriaId)" ng-model="filter.CategoriaId" ng-options="c.CategoriaFinanceiraId as c.Categoria for c in vm.categorias">
+                                        <option value="">.:: Todas Categorias ::.</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="subcategorias">
+                                    SubCategorias
+                                </label>
+                                <div class="col-sm-9">
+                                    <select class="form-control" ng-disabled="filter.CategoriaId === null" id="subcategorias" ng-model="filter.SubCategoriaId" ng-options="sc.SubCategoriaFinanceiraId as sc.SubCategoria for sc in vm.subCategorias">
+                                        <option value="">.:: Todas SubCategorias ::.</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div role="form" class="form-horizontal">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="tipo">
+                                    Dt. Emissão:
+                                </label>
+                                <div class="col-sm-9">
+                                    <div class="input-group">
+                                        <div class="input-group">
+                                            <input type="date" class="width-150" ng-model="filter.EmissaoInicio" name="fromEmissao" id="fromEmissao" />
+                                            <span class="input-group-addon"> - </span>
+                                            <input type="date" class="width-150" ng-model="filter.EmissaoFim" name="toEmissao" id="toEmissao" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="tipo">
+                                    Dt. Venc.:
+                                </label>
+                                <div class="col-sm-9">
+                                    <div class="input-group">
+                                        <div class="input-group">
+                                            <input type="date" class="width-150" ng-model=" filter.VencimentoInicio" name="fromVencimento" id="fromVencimento" />
+                                            <span class="input-group-addon"> - </span>
+                                            <input type="date" class="width-150" ng-model=" filter.VencimentoFim" name="toVencimento" id="toVencimento" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="tipo">
+                                    Dt. Pag.:
+                                </label>
+                                <div class="col-sm-9">
+                                    <div class="input-group">
+                                        <div class="input-group">
+                                            <input type="date" class="width-150" ng-model=" filter.PagamentoInicio" name="fromPagamento" id="fromPagamento" />
+                                            <span class="input-group-addon"> - </span>
+                                            <input type="date" class="width-150" ng-model="filter.PagamentoFim" name="toPagamento" id="toPagamento" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 text-center">
+                        <div class="form-group">
+                            <div class="radio clip-radio radio-primary radio-inline">
+                                <input type="radio" id="todos" name="situacao" value="" ng-model="filter.Situacao">
+                                <label for="todos">
+                                    Todos
+                                </label>
+                            </div>
+                            <div class="radio clip-radio radio-primary radio-inline">
+                                <input type="radio" id="quitado" name="situacao" value="Quitado" ng-model="filter.Situacao">
+                                <label for="quitado">
+                                    Quitado
+                                </label>
+                            </div>
+                            <div class="radio clip-radio radio-primary radio-inline">
+                                <input type="radio" id="pendente" name="situacao" value="Pendente" ng-model="filter.Situacao">
+                                <label for="pendente">
+                                    Pendente
+                                </label>
+                            </div>
+                        </div>
+                        <div role="form" class="form-horizontal">
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label" for="tipopagamento">
+                                    tipo Pagto.:
+                                </label>
+                                <div class="col-sm-8">
+                                    <select class="form-control" id="tipopagamento" ng-model="filter.TipoPagamentoId" ng-options="t.TipoPagamentoId as t.Descricao for t in vm.tipopagamento">
+                                        <option value="">.:: Selecione ::.</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 margin-top-15">
+                        <button class="btn btn-warning pull-right margin-left-10" ng-click="vm.clear()"><i class="fa fa-refresh"></i>Limpar</button>
+                        <button class="btn btn-primary pull-right" ng-click="vm.pesquisar(filter)"><i class="fa fa-search"></i>Pesquisar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        $('#fromEmissao, #toEmissao').on('focus', function () {
+            $('#toEmissao').attr('min', $('#fromEmissao').val());
+            $('#fromEmissao').attr('max', $('#toEmissao').val());
+        });
+        $('#fromVencimento, #toVencimento').on('focus', function () {
+            $('#toVencimento').attr('min', $('#fromVencimento').val());
+            $('#fromVencimento').attr('max', $('#toVencimento').val());
+        });
+        $('#fromPagamento, #toPagamento').on('focus', function () {
+            $('#toPagamento').attr('min', $('#fromPagamento').val());
+            $('#fromEmissao').attr('max', $('#toPagamento').val());
+        });
+    </script>
+</div>

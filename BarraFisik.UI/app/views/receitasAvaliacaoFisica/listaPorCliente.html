@@ -6,8 +6,8 @@
         <table ng-table="tableParams" class="table">
             <tbody ng-repeat="r in $data">
                 <tr id="tr{{r.ReceitasId}}" ng-class-odd="'odd'" ng-class-even="'even'">
-                    <td class="rowTd" data-title="'Data Pagamento'"   sortable="'DataPagamento'">{{r.DataPagamento | date:'dd/MM/yyyy'}}</td>
-                    <td class="rowTd" data-title="'Data Vencimento'" sortable="'DataVencimento'">{{r.DataPagamento | date:'dd/MM/yyyy'}}</td>
+                    <td class="rowTd" data-title="'Data Vencimento'" sortable="'DataVencimento'">{{r.DataVencimento | date:'dd/MM/yyyy'}}</td>
+                    <td class="rowTd" data-title="'Data Pagamento'"   sortable="'DataPagamento'">{{r.DataPagamento | date:'dd/MM/yyyy'}}</td>                    
                     <td class="rowTd" data-title="'Valor'"            sortable="'Valor'">{{r.Valor| currency}}</td>
                     <td class="rowTd" data-title="'Tipo Pagamento'"    sortable="'TipoPagamento.Descricao'">({{r.TipoPagamento.Sigla}}) {{r.TipoPagamento.Descricao}}</td>
                     <td class="rowTd" data-title="'Situação'" sortable="'Situacao'">{{r.Situacao}}</td>

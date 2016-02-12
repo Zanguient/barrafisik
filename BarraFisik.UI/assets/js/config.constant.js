@@ -46,6 +46,8 @@ app.constant('JS_REQUIRES', {
         'receitasCtrl': 'app/controllers/receitas/receitasCtrl.js',
         'despesasCtrl': 'app/controllers/despesas/despesasCtrl.js',
         'relatorioFinanceiroCtrl': 'app/controllers/relatorioFinanceiro/relatorioFinanceiroCtrl.js',
+        'relatorioFinanceiroReceitasCtrl': 'app/controllers/relatorioFinanceiro/relatorioFinanceiroReceitasCtrl.js',
+        'relatorioFinanceiroDespesasCtrl': 'app/controllers/relatorioFinanceiro/relatorioFinanceiroDespesasCtrl.js',
         'tipoPagamentoCtrl': 'app/controllers/tipoPagamento/tipoPagamentoCtrl.js',
         'armazemCtrl': 'app/controllers/armazem/armazemCtrl.js',
         'funcionariosCtrl': 'app/controllers/funcionarios/funcionariosCtrl.js',
