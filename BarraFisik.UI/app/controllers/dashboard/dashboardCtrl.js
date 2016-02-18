@@ -9,7 +9,7 @@ app.controller('ClientesPendentesCtrl', ["$scope", "clienteData", "$rootScope", 
     //Atualiza clientes para pendente caso dia do mes for maior que 10 e não tenha mensalidade paga para o mês atual
     var today = new Date();
     if (today.getDate() > 10 && $rootScope.updateClientes === false) {
-        clienteData.updateClientesPendentes(today.getMonth() + 1, today.getFullYear()).then(function(data) {
+        clienteData.updateClientesPendentes(today.getMonth() + 1, today.getFullYear()).then(function (data) {
             //Lista os pendentes quando atualiza os status dos clientes
             $scope.clientesPendentes = [];
             clienteData.getClientesSituacao('Pendente').then(function (result) {
@@ -221,3 +221,75 @@ app.controller('InscritosCtrl', ["$scope", "clienteData", "$rootScope", function
     };
 
 }]);
+app.controller('lastDespesasCtrl', ["$scope", "despesasData", "$rootScope", function ($scope, despesasData, $rootScope) {
+    $scope.despesas = [];
+    $scope.pendentes = 0.00;
+    $scope.quitados = 0.00;
+
+
+    despesasData.getDespesas().then(function (despesas) {
+        $scope.despesas = despesas.data;
+
+        angular.forEach($scope.despesas, function (item) {
+            if (item.Situacao === 'Pendente') {                
+                $scope.pendentes = parseFloat($scope.pendentes) + item.ValorTotal;
+            }
+
+            if (item.Situacao === 'Quitado')
+                $scope.quitados = parseFloat($scope.quitados) + item.ValorTotal;
+        });
+
+        $scope.data = [
+        {
+            value: $scope.pendentes,
+            color: '#F7464A',
+            highlight: '#FF5A5E',
+            label: 'Pend.'
+        },
+        {
+            value: $scope.quitados,
+            color: '#46BFBD',
+            highlight: '#5AD3D1',
+            label: 'Quit.'
+        }
+        ];
+
+        $scope.total = $scope.pendentes + $scope.quitados;
+    });
+
+
+    // Chart.js Options
+    $scope.options = {
+
+        // Sets the chart to be responsive
+        responsive: false,
+
+        //Boolean - Whether we should show a stroke on each segment
+        segmentShowStroke: true,
+
+        //String - The colour of each segment stroke
+        segmentStrokeColor: '#fff',
+
+        //Number - The width of each segment stroke
+        segmentStrokeWidth: 2,
+
+        //Number - The percentage of the chart that we cut out of the middle
+        percentageInnerCutout: 50, // This is 0 for Pie charts
+
+        //Number - Amount of animation steps
+        animationSteps: 100,
+
+        //String - Animation easing effect
+        animationEasing: 'easeOutBounce',
+
+        //Boolean - Whether we animate the rotation of the Doughnut
+        animateRotate: true,
+
+        //Boolean - Whether we animate scaling the Doughnut from the centre
+        animateScale: false,
+
+        //String - A legend template
+        legendTemplate: '<ul class="tc-chart-js-legend"><% for (var i=0; i<segments.length; i++){%><li><span style="background-color:<%=segments[i].fillColor%>"></span><%if(segments[i].label){%><%=segments[i].label%><%}%></li><%}%></ul>'
+    }
+}
+]);

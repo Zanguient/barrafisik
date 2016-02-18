@@ -47,6 +47,10 @@ namespace BarraFisik.Infra.CrossCutting.IoC.Unity
             container.RegisterType<IArmazemAppService, ArmazemAppService>();
             container.RegisterType<IFuncionariosAppService, FuncionariosAppService>();
             container.RegisterType<IFornecedoresAppService, FornecedoresAppService>();
+            container.RegisterType<IProdutosAppService, ProdutosAppService>();
+            container.RegisterType<IProdutosCategoriaAppService, ProdutosCategoriaAppService>();
+            container.RegisterType<IEstoqueAppService, EstoqueAppService>();
+            container.RegisterType<IMovimentacaoEstoqueAppService, MovimentacaoEstoqueAppService>();
 
             //Services
             container.RegisterType(typeof (IServiceBase<>), typeof (ServiceBase<>));
@@ -68,6 +72,10 @@ namespace BarraFisik.Infra.CrossCutting.IoC.Unity
             container.RegisterType<IArmazemService, ArmazemService>();
             container.RegisterType<IFuncionariosService, FuncionariosService>();
             container.RegisterType<IFornecedoresService, FornecedoresService>();
+            container.RegisterType<IProdutosService, ProdutosService>();
+            container.RegisterType<IProdutosCategoriaService, ProdutosCategoriaService>();
+            container.RegisterType<IEstoqueService, EstoqueService>();
+            container.RegisterType<IMovimentacaoEstoqueService, MovimentacaoEstoqueService>();
 
             //Data Repos
             container.RegisterType(typeof (IRepositoryBase<>), typeof (RepositoryBase<,>));
@@ -89,6 +97,10 @@ namespace BarraFisik.Infra.CrossCutting.IoC.Unity
             container.RegisterType<IArmazemRepository, ArmazemRepository>();
             container.RegisterType<IFuncionariosRepository, FuncionariosRepository>();
             container.RegisterType<IFornecedoresRepository, FornecedoresRepository>();
+            container.RegisterType<IProdutosRepository, ProdutosRepository>();
+            container.RegisterType<IProdutosCategoriaRepository, ProdutosCategoriaRepository>();
+            container.RegisterType<IEstoqueRepository, EstoqueRepository>();
+            container.RegisterType<IMovimentacaoEstoqueRepository, MovimentacaoEstoqueRepository>();
 
             //Data Repos Read Only
             container.RegisterType<IClienteRepositoryReadOnly, ClienteRepositoryReadOnly>();
@@ -98,6 +110,7 @@ namespace BarraFisik.Infra.CrossCutting.IoC.Unity
             container.RegisterType<IDespesasRepositoryReadOnly, DespesasRepositoryReadOnly>();
             container.RegisterType<IReceitasRepositoryReadOnly, ReceitasRepositoryReadOnly>();
             container.RegisterType<IRelatorioFinanceiroRepositoryReadOnly, RelatorioFinanceiroRepositoryReadOnly>();
+            container.RegisterType<IEstoqueRepositoryReadOnly, EstoqueRepositoryReadOnly>();
 
             //DataConfig
             container.RegisterType(typeof (IContextManager<>), typeof (ContextManager<>));

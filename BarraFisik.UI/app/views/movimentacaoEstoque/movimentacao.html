@@ -1,0 +1,73 @@
+﻿<!-- start: PAGE TITLE -->
+<section id="page-title">
+    <div class="row">
+        <div class="col-sm-8">
+            <h1 class="mainTitle">Movimentação de Produtos</h1>
+            <span class="mainDescription">Entradas nos estoques </span>
+        </div>
+        <div ncy-breadcrumb></div>
+    </div>
+</section>
+<div ng-show="loading">
+    <img src="/assets/images/loading.gif" />Carregando Movimentações...
+</div>
+<div class="container-fluid container-fullw bg-white" ng-show="!loading">
+    <div class="row">
+        <div class="col-md-6">
+            <button type="button" class="btn btn-primary btn-wide btn-scroll btn-scroll-top ti-plus" ng-click="openCadastrar()">
+                <span>Cadastrar</span>
+            </button><br /><br />
+        </div>
+        <div class="col-md-6">
+            <h5 class="pull-right ">Total: <span class="badge badge-info">{{vm.movimentacao.length}}</span></h5>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12" style="margin-bottom: 15px;">
+            <div class="col-md-9">
+                <span class="input-icon">
+                    <input type="text" ng-model="searchText" class="form-control" placeholder="Pesquisar...">
+                    <i class="ti-search"></i>
+                </span>
+            </div>
+            <div class="col-md-3 text-right form-inline">
+                <div class="form-group ">
+                    <label>Agrupar Por:</label>
+                    <select ng-model="grupo" class="form-control">
+                        <option value="Armazem.Descricao"> Armazém</option>
+                        <option value="Produtos.Nome"> Produtos</option>
+                        <option value="Fornecedores.Nome"> Fornecedor</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12 table-responsive">
+            <div ng-repeat="(key, value) in vm.movimentacao | groupBy: grupo">
+                <table ng-table="tableParams" class="table ">
+                    <tbody ng-repeat="m in value | orderBy: 'DataMovimento'|  filter: searchText">
+                        <h4><span class="ti-direction-alt text-azure"> {{key}} </span></h4>
+                        <tr id="tr{{m.MovimentacaoId}}" ng-class-odd="'odd'" ng-class-even="'even'">
+                            <td class="rowTd" data-title="'Data Movimento'">{{m.DataMovimento | date:'dd/MM/yyyy'}}</td>
+                            <td class="rowTd" data-title="'Fornecedor'">{{m.Fornecedores.Nome}}</td>
+                            <td class="rowTd" data-title="'Armazém'">{{m.Armazem.Descricao}}</td>
+                            <td class="rowTd" data-title="'Produto'">{{m.Produtos.Nome}}</td>
+                            <td class="rowTd" data-title="'Qtd.'">{{m.Quantidade}}</td>
+                            <td class="rowTd" data-title="'Valor Un. Custo'"><span class="text-primary">{{m.ValorUnCusto | currency}} </span></td>
+                            <td class="rowTd" data-title="'Valor Un Venda'"><span class="text-primary">{{m.ValorUnitario | currency}} </span></td>
+                            <td class="rowTd" data-title="'Total Custo'"><span class="text-primary">{{m.ValorTotalCusto | currency}} </span></td>
+                            <td class="text-right">
+                                <div class="visible-md visible-lg hidden-sm hidden-xs">
+                                    <a ng-click="setEditId(m.MovimentacaoId)" class="btn btn-transparent btn-xs" tooltip-placement="top" tooltip="Editar" id="editRowBtn{{m.MovimentacaoId}}"><i class="fa fa-pencil"></i></a>
+                                    <a ng-click="delete(m.MovimentacaoId)" class="btn btn-transparent btn-xs tooltips" tooltip-placement="top" tooltip="Excluir"><i class="fa fa-times"></i></a>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr ng-show="editId===m.MovimentacaoId" ng-if="editId===m.MovimentacaoId">
+                            <td colspan="9" ng-include src="'app/views/movimentacaoEstoque/edit.html'"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

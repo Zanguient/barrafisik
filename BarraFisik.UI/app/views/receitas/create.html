@@ -87,7 +87,7 @@
             <tr>
                 <td>Valor: <span class="symbol required"></span></td>
                 <td ng-class="{'has-error':Form.Valor.$dirty && Form.Valor.$invalid}">
-                    <input class="form-control input-sm" name="Valor" type="text" ng-model="receita.Valor" ng-blur="soma()" mask-money requied>
+                    <input class="form-control input-sm" name="Valor" type="text" ng-model="receita.Valor" mask-money requied>
                     <span class="error text-small block" ng-if="Form.Valor.$dirty && Form.Valor.$invalid">Informe o Valor</span>
                 </td>
                 <td>Juros: </td>

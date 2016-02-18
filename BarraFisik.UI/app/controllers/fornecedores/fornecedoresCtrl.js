@@ -169,7 +169,7 @@
                         });
                         $scope.tableParams.reload();
                     }).error(function (error) {
-                        SweetAlert.swal("Erro!", error.Message, "error");
+                        SweetAlert.swal("Erro!", error.Message);
                     });
                 } else {
                     SweetAlert.swal({

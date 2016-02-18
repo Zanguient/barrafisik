@@ -1,48 +1,49 @@
 ﻿(function () {
     "use strict";
 
-    app.controller('armazemCtrl', armazemCtrl);
+    app.controller('produtosCategoriaCtrl', produtosCategoriaCtrl);
 
-    function armazemCtrl($scope, ngTableParams, armazemData, SweetAlert, $filter, $timeout, $state) {
+    function produtosCategoriaCtrl($scope, ngTableParams, produtosCategoriaData, SweetAlert, $filter) {
         var vm = this;
-        vm.armazem = [];
-        $scope.createArmazem = false;
+        vm.categorias = [];
+        $scope.createCategoria = false;
 
         activate();
 
         function activate() {
             $scope.$emit('LOAD');
 
-            armazemData.getArmazem().then(function (result) {
-                vm.armazem = result.data;
-                $scope.$emit('UNLOAD');
+            produtosCategoriaData.getAll().then(function (result) {
+                vm.categorias = result.data;                
             });
+
+            $scope.$emit('UNLOAD');
         }
 
         $scope.tableParams = new ngTableParams({
             page: 1, // show first page
             count: 40, // count per page
             sorting: {
-                Descricao: 'asc' // initial sorting
+                Nome: 'asc' // initial sorting
             }
         }, {
             counts: [],
-            total: vm.armazem.length, // length of data
+            total: vm.categorias.length, // length of data
             getData: function ($defer, params) {
                 // use build-in angular filter
-                var orderedData = params.sorting() ? $filter('orderBy')(vm.armazem, params.orderBy()) : vm.armazem;
+                var orderedData = params.sorting() ? $filter('orderBy')(vm.categorias, params.orderBy()) : vm.categorias;
                 $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
             }
         });
 
-        $scope.$watch('vm.armazem', function () {
+        $scope.$watch('vm.categorias', function () {
             $scope.tableParams.reload();
         });
 
 
-        $scope.save = function (armazem) {
-            armazemData.editArmazem(armazem).then(function () {
-                SweetAlert.swal("Atualizado!", "Dados salvos com sucesso!", "success");
+        $scope.save = function (categoria) {
+            produtosCategoriaData.edit(categoria).then(function () {
+                SweetAlert.swal("Atualizado!", "Categoria do Produto salva com sucesso!", "success");
                 $scope.editId = -1;
             });
         }
@@ -57,45 +58,39 @@
                 confirmButtonText: "Confirmar",
                 cancelButtonText: "Cancelar",
                 closeOnConfirm: false,
-                closeOnCancel: false
+                closeOnCancel: true
             }, function (isConfirm) {
                 if (isConfirm) {
-                    armazemData.deleteArmazem(id).then(function () {
+                    produtosCategoriaData.remove(id).then(function () {
                         SweetAlert.swal("Excluído!", "Dados apgados com sucesso!", "success");
-                        $.each(vm.armazem, function (i) {
-                            if (vm.armazem[i].ArmazemId === id) {
-                                vm.armazem.splice(i, 1);
+                        $.each(vm.categorias, function (i) {
+                            if (vm.categorias[i].ProdutoCategoriaId === id) {
+                                vm.categorias.splice(i, 1);
                                 return false;
                             }
                         });
                         $scope.tableParams.reload();
                     });
-                } else {
-                    SweetAlert.swal({
-                        title: "Cancelado",
-                        text: "Operação de exclusão cancelada",
-                        type: "error",
-                        confirmButtonColor: "#007AFF"
-                    });
-                }
+                }                 
             });
         }
 
-        $scope.armazem = {
+        var categoriaDefault = {
+            Nome: null,
             Descricao: null,
         };
 
+        $scope.categoria = angular.copy(categoriaDefault);
+
         $scope.cancelCreate = function (form) {
-            $scope.createArmazem = false;
-            $scope.Armazem = {
-                Descricao: null
-            };
+            $scope.createCategoria = false;
+            $scope.categoria = angular.copy(categoriaDefault);
             form.$setPristine(true);
         }
 
         $scope.form = {
 
-            submit: function (form, armazem) {
+            submit: function (form, categoria) {
                 var firstError = null;
                 if (form.$invalid) {
 
@@ -115,15 +110,16 @@
                     return;
 
                 } else {
-                    armazemData.addArmazem(armazem).success(function (armazem) {
+                    produtosCategoriaData.add(categoria).success(function (result) {
+                        SweetAlert.swal("Cadastrado!", "Categoria do Produto cadastrada com sucesso!", "success");
+
                         //Limpa o formulario
                         form.$setPristine(true);
-                        $scope.armazem = {
-                            Descricao: null,
-                        };
-                        SweetAlert.swal("Cadastrado!", "Dados cadastrado com sucesso!", "success");
-                        $scope.createArmazem = false;
-                        vm.armazem.push(armazem);
+                        $scope.categoria = angular.copy(categoriaDefault);                        
+                        $scope.createCategoria = false;
+                        produtosCategoriaData.getAll().then(function (result) {
+                            vm.categorias = result.data;
+                        });
                         $scope.tableParams.reload();
                     }).error(function (error) {
                         var errors = [];
@@ -142,7 +138,7 @@
 
         $scope.formEdit = {
 
-            submit: function (form, armazem) {
+            submit: function (form, categoria) {
                 var firstError = null;
                 if (form.$invalid) {
 
@@ -162,8 +158,8 @@
                     return;
 
                 } else {                    
-                    armazemData.editArmazem(armazem).success(function () {
-                        SweetAlert.swal("Atualizado!", "Dados salvos com sucesso!", "success");
+                    produtosCategoriaData.edit(categoria).success(function () {
+                        SweetAlert.swal("Atualizado!", "Categoria do Produto salva com sucesso!", "success");
                         $scope.editId = -1;
                     }).error(function (error) {
                         var errors = [];

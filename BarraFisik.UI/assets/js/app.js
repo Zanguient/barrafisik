@@ -17,5 +17,6 @@ angular.module("clip-two", [
 	//'pascalprecht.translate',
     'ngCpfCnpj',
     'webcam',
-    'maskMoney'
+    'maskMoney',
+    'angular.filter'
 ]);

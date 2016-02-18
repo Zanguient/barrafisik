@@ -55,7 +55,8 @@
                                             </button>
                                             <ul class="dropdown-menu pull-right bullet" role="menu">
                                                 <li>
-                                                    <a ng-click="inativarSelecionados()">Inativar Selecionados
+                                                    <a ng-click="inativarSelecionados()">
+                                                        Inativar Selecionados
                                                     </a>
                                                 </li>
                                             </ul>
@@ -83,9 +84,9 @@
                                             <td>
                                                 <div class="checkbox clip-check check-primary">
                                                     <input type="checkbox" id="{{cliente.ClienteId}}" value="{{cliente}}"
-                                                        ng-model="cliente.Selected"
-                                                        ng-checked="selection.indexOf(cliente) > -1"
-                                                        ng-click="toggleSelection(cliente)">
+                                                           ng-model="cliente.Selected"
+                                                           ng-checked="selection.indexOf(cliente) > -1"
+                                                           ng-click="toggleSelection(cliente)">
                                                     <label for="{{cliente.ClienteId}}"></label>
                                                 </div>
                                             </td>
@@ -102,6 +103,78 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+
+
+        <div class="container-fluid container-fullw bg-white" ng-controller="lastDespesasCtrl">
+            <div class="row">
+                <div class="col-sm-8" >
+                    <div class="panel panel-white no-radius">
+                        <div class="panel-body">
+                            <div class="partition-light-grey padding-15 text-center margin-bottom-20">
+                                <h4 class="no-margin">Despesas</h4>
+                                <span class="text-light">despesas pendentes com vencimento neste mês</span>
+                            </div>
+                            <table class="table margin-bottom-0">
+                                <thead>
+                                <tr>
+                                    <th>Categoria</th>
+                                    <th>SubCategoria</th>
+                                    <th>Dt. Vencimento</th>
+                                    <th>Valor</th>
+                                    <th>Situação</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="d in despesas | filter: {Situacao: 'Pendente'}">
+                                        <td>{{d.CategoriaFinanceira.Categoria}}</td>    
+                                        <td>{{d.SubCategoriaFinanceira.SubCategoria}}</td>    
+                                        <td>{{d.DataVencimento | date:'dd/MM/yyyy'}}</td>    
+                                        <td><span class="text-danger">{{d.ValorTotal | currency}} </span></td>    
+                                        <td>{{d.Situacao}}</td>    
+                                    </tr>                                    
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4" >
+                    <div class="panel panel-white no-radius">
+                        <div class="panel-heading border-bottom">
+                            <h4 class="panel-title">Despesas Pendentes</h4>
+                        </div>
+                        <div class="panel-body">
+                            <div class="text-center">
+                                <span class="mini-pie width-200"> <canvas class="tc-chart" tc-chartjs-doughnut chart-options="options" chart-data="data" chart-legend="chart3" width="150"></canvas> <span></span> </span>
+                                <span class="inline text-large no-wrap">{{total | currency}}</span>
+                            </div>
+                            <div class="margin-top-20 text-center legend-xs">
+                                <div tc-chartjs-legend chart-legend="chart3" class="inline"></div>
+                            </div>
+                        </div>
+                        <!--<div class="panel-footer">
+                            <div class="clearfix padding-5 space5">
+                                <div class="col-xs-4 text-center no-padding">
+                                    <div class="border-right border-dark">
+                                        <span class="text-bold block text-extra-large">90%</span>
+                                        <span class="text-light">Satisfied</span>
+                                    </div>
+                                </div>
+                                <div class="col-xs-4 text-center no-padding">
+                                    <div class="border-right border-dark">
+                                        <span class="text-bold block text-extra-large">2%</span>
+                                        <span class="text-light">Unsatisfied</span>
+                                    </div>
+                                </div>
+                                <div class="col-xs-4 text-center no-padding">
+                                    <span class="text-bold block text-extra-large">8%</span>
+                                    <span class="text-light">NA</span>
+                                </div>
+                            </div>
+                        </div>-->
+                    </div>
+                </div>   
             </div>
         </div>
     </div>

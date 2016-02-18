@@ -1,0 +1,30 @@
+﻿<form name="FormEdit" id="formEdit" novalidate ng-submit="formEdit.submit(FormEdit, p)">
+    <table class="table no-bg">
+        <tr>
+            <td>Categoria: </td>
+            <td ng-class="{'has-error':FormEdit.Categoria.$dirty && FormEdit.Categoria.$invalid, 'has-success':FormEdit.Categoria.$valid}">
+                <select name="Categoria" ng-model="p.ProdutoCategoriaId" class="text-bold" required>
+                    <option value="">Selecione...</option>
+                    <option ng-selected="p.ProdutoCategoriaId == c.ProdutoCategoriaId" ng-repeat="c in vm.categorias | orderBy: 'Nome'" value="{{c.ProdutoCategoriaId}}">{{c.Nome}}</option>
+                </select>
+                <span class="error text-small block" ng-if="FormEdit.Categoria.$dirty && FormEdit.Categoria.$invalid">Informe a Categoria</span>
+            </td>
+            <td>Produto: </td>
+            <td ng-class="{'has-error':FormEdit.Nome.$dirty && FormEdit.Nome.$invalid, 'has-success':FormEdit.Nome.$valid}">
+                <input class="form-control" type="text" name="Nome" ng-model="p.Nome" required>
+                <span class="error text-small block" ng-if="FormEdit.Nome.$dirty && FormEdit.Nome.$invalid">Informe o Produto</span>
+            </td>
+            <td>Descrição: </td>
+            <td>
+                <input class="form-control" type="text" name="Descricao" ng-model="p.Descricao">
+            </td>
+            <td colspan="2">
+                <div class="pull-right">
+                    <input type="submit" class="btn btn-primary btn-sm margin-right-15" value="Salvar">
+                    <input type="button" class="btn btn-primary btn-sm margin-right-15" value="Cancelar" ng-click="setEditId(-1)">
+                </div>
+            </td>
+        </tr>     
+    </table>
+    <!--  class="editRowTd" -->
+</form>

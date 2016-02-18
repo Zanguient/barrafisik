@@ -58,6 +58,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App\AppServiceBase.cs" />
+    <Compile Include="App\MovimentacaoEstoqueAppService.cs" />
+    <Compile Include="App\EstoqueAppService.cs" />
+    <Compile Include="App\ProdutosCategoriaAppService.cs" />
+    <Compile Include="App\ProdutosAppService.cs" />
     <Compile Include="App\SubCategoriaFinanceiraAppService.cs" />
     <Compile Include="App\FornecedoresAppService.cs" />
     <Compile Include="App\FuncionariosAppService.cs" />
@@ -78,6 +82,10 @@
     <Compile Include="AutoMapper\DomainToViewModelMappingProfile.cs" />
     <Compile Include="AutoMapper\ViewModelToDomainMappingProfile.cs" />
     <Compile Include="Interfaces\IAppServiceBase.cs" />
+    <Compile Include="Interfaces\IMovimentacaoEstoqueAppService.cs" />
+    <Compile Include="Interfaces\IEstoqueAppService.cs" />
+    <Compile Include="Interfaces\IProdutosCategoriaAppService.cs" />
+    <Compile Include="Interfaces\IProdutosAppService.cs" />
     <Compile Include="Interfaces\ISubCategoriaFinanceiraAppService.cs" />
     <Compile Include="Interfaces\IFornecedoresAppService.cs" />
     <Compile Include="Interfaces\IFuncionariosAppService.cs" />
@@ -97,6 +105,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Validation\ValidationAppError.cs" />
     <Compile Include="Validation\ValidationAppResult.cs" />
+    <Compile Include="ViewModels\MovimentacaoEstoqueViewModel.cs" />
+    <Compile Include="ViewModels\EstoqueViewModel.cs" />
+    <Compile Include="ViewModels\ProdutosCategoriaViewModel.cs" />
+    <Compile Include="ViewModels\ProdutosViewModel.cs" />
     <Compile Include="ViewModels\ArmazemViewModel.cs" />
     <Compile Include="ViewModels\SubCategoriaFinanceiraViewModel.cs" />
     <Compile Include="ViewModels\ClienteHorarioViewModel.cs" />

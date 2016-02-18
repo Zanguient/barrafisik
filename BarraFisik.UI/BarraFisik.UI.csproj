@@ -50,6 +50,13 @@
   <ItemGroup>
     <Content Include="app\controllers\accounts\accountCtrl.js" />
     <Content Include="app\controllers\accounts\alterarSenhaCtrl.js" />
+    <Content Include="app\controllers\estoque\estoqueMovimentacaoCtrl.js" />
+    <Content Include="app\controllers\estoque\estoqueEntradaCtrl.js" />
+    <Content Include="app\controllers\estoque\estoqueCreateCtrl.js" />
+    <Content Include="app\controllers\estoque\estoqueCtrl.js" />
+    <Content Include="app\controllers\movimentacaoEstoque\movimentacaoCtrl.js" />
+    <Content Include="app\controllers\produtos\produtosCtrl.js" />
+    <Content Include="app\controllers\produtosCategoria\produtosCategoriaCtrl.js" />
     <Content Include="app\controllers\armazem\armazemCtrl.js" />
     <Content Include="app\controllers\categoriaFinanceira\categoriaFinanceiraCtrl.js" />
     <Content Include="app\controllers\cliente\clienteAniversariantesCtrl.js" />
@@ -93,6 +100,10 @@
     <Content Include="app\directives\exportTable.js" />
     <Content Include="app\directives\fixedTableHeaders.js" />
     <Content Include="app\directives\xngFocus.js" />
+    <Content Include="app\factory\estoqueData.js" />
+    <Content Include="app\factory\movimentacaoData.js" />
+    <Content Include="app\factory\produtosData.js" />
+    <Content Include="app\factory\produtosCategoriaData.js" />
     <Content Include="app\factory\subCategoriaData.js" />
     <Content Include="app\factory\fornecedoresData.js" />
     <Content Include="app\factory\funcionariosData.js" />
@@ -119,6 +130,16 @@
     <Content Include="app\views\accounts\alterarSenha.html" />
     <Content Include="app\views\accounts\edit.html" />
     <Content Include="app\views\accounts\listaAccounts.html" />
+    <Content Include="app\views\estoque\movimentacoes.html" />
+    <Content Include="app\views\estoque\entrada.html" />
+    <Content Include="app\views\movimentacaoEstoque\edit.html" />
+    <Content Include="app\views\movimentacaoEstoque\movimentacao.html" />
+    <Content Include="app\views\produtos\create.html" />
+    <Content Include="app\views\produtos\edit.html" />
+    <Content Include="app\views\produtos\produtos.html" />
+    <Content Include="app\views\produtosCategoria\produtosCategoria.html" />
+    <Content Include="app\views\produtosCategoria\create.html" />
+    <Content Include="app\views\produtosCategoria\edit.html" />
     <Content Include="app\views\armazem\armazem.html" />
     <Content Include="app\views\armazem\create.html" />
     <Content Include="app\views\armazem\edit.html" />
@@ -157,6 +178,9 @@
     <Content Include="app\views\mensalidades\create.html" />
     <Content Include="app\views\mensalidades\edit.html" />
     <Content Include="app\views\mensalidades\mensalidades.html" />
+    <Content Include="app\views\estoque\create.html" />
+    <Content Include="app\views\estoque\edit.html" />
+    <Content Include="app\views\estoque\estoque.html" />
     <Content Include="app\views\receitasAvaliacaoFisica\comprovante.html" />
     <Content Include="app\views\receitasAvaliacaoFisica\create.html" />
     <Content Include="app\views\receitasAvaliacaoFisica\edit.html" />
@@ -417,6 +441,7 @@
     <Content Include="bower_components\angular-file-upload\src\intro.js" />
     <Content Include="bower_components\angular-file-upload\src\module.js" />
     <Content Include="bower_components\angular-file-upload\src\outro.js" />
+    <Content Include="bower_components\angular-filter\angular-filter.min.js" />
     <Content Include="bower_components\angular-ladda\dist\angular-ladda.js" />
     <Content Include="bower_components\angular-ladda\dist\angular-ladda.min.js" />
     <Content Include="bower_components\angular-ladda\src\angular-ladda.js" />

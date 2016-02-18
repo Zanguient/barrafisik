@@ -1,0 +1,56 @@
+﻿<form name="FormEdit" id="formEdit" novalidate ng-submit="formEdit.submit(FormEdit, m)">
+    <table class="table no-bg">
+        <tr>
+            <td colspan="2">Armazém: {{m.Armazem.Descricao}}</td>
+            <td colspan="2">Produto: {{m.Produtos.Nome}}</td>
+            <td>Dt. Movimento: </td>
+            <td ng-class="{'has-error':FormEdit.DataVencimento.$dirty && FormEdit.DataVencimento.$invalid, 'has-success':FormEdit.DataVencimento.$valid}">
+                <div class="form-horizontal width-150">
+                    <p class="input-group  margin-top-10">
+                        <input type="text" name="DataMovimento" disabled class="form-control" datepicker-popup="dd/MM/yyyy" ng-model="m.DataMovimento"
+                               is-open="opened[$index]" datepicker-options="dateOptions"
+                               ng-required="true" close-text="Fechar"/>
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="open($event, $index)">
+                                <i class="glyphicon glyphicon-calendar"></i>
+                            </button>
+                        </span>
+                    </p>
+                </div>
+                <span class="error text-small block" ng-if="FormEdit.DataMovimento.$dirty && FormEdit.DataMovimento.$invalid">(*) Dt. Movimento</span>
+            </td>
+            <td>Fornecedor: </td>
+            <td colspan="2">
+                <select name="Fornecedores" ng-model="m.FornecedorId" class="text-bold">
+                    <option ng-selected="m.FornecedorId == null" value=""><b>Selecione...</b></option>
+                    <option ng-selected="m.FornecedorId == fo.FornecedorId" ng-repeat="fo in fornecedores" value="{{fo.FornecedorId}}">{{fo.Nome}}</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td> <b>Qtde.:</b> </td>
+            <td ng-class="{'has-error':FormEdit.qtde.$dirty && FormEdit.qtde.$invalid, 'has-success':FormEdit.qtde.$valid}">
+                <input type="text" name="qtde" class="form-control width-100" ng-model="m.Quantidade" required />
+                <span class="error text-small block" ng-if="FormEdit.qtde.$dirty && FormEdit.qtde.$invalid">Informe a Qtde.</span>
+            </td>
+            <td> <b>Valor Un. Custo: </b></td>
+            <td ng-class="{'has-error':FormEdit.ValorUnCusto.$dirty && FormEdit.ValorUnCusto.$invalid, 'has-success':FormEdit.ValorUnCusto.$valid}">
+                <input type="text" class="form-control width-100" name="ValorUnCusto" ng-model="m.ValorUnCusto" mask-money required />
+                <span class="error text-small block" ng-if="FormEdit.ValorUnCusto.$dirty && FormEdit.ValorUnCusto.$invalid">Valor Un. Custo</span>
+            </td>
+            <td> <b>Valor Un. Venda: </b></td>
+            <td ng-class="{'has-error':FormEdit.ValorUnitario.$dirty && FormEdit.ValorUnitario.$invalid, 'has-success':FormEdit.ValorUnitario.$valid}">
+                <input type="text" class="form-control width-100" name="ValorUnitario" ng-model="m.ValorUnitario" mask-money required />
+                <span class="error text-small block" ng-if="FormEdit.ValorUnitario.$dirty && FormEdit.ValorUnitario.$invalid">Valor Un. Venda</span>
+            </td>
+            <td> <b>Total:</b> </td>
+            <td> <span class="text-primary text-bold">  {{m.ValorTotalCusto = m.Quantidade * m.ValorUnCusto | currency}} </span> </td>
+            <td>
+                <div class="pull-right">
+                    <input type="submit" class="btn btn-primary btn-sm margin-right-15" value="Salvar">
+                    <input type="button" class="btn btn-primary btn-sm margin-right-15" value="Cancelar" ng-click="setEditId(-1)">
+                </div>
+            </td>
+        </tr>
+    </table>
+</form>

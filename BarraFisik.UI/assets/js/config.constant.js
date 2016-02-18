@@ -52,6 +52,10 @@ app.constant('JS_REQUIRES', {
         'armazemCtrl': 'app/controllers/armazem/armazemCtrl.js',
         'funcionariosCtrl': 'app/controllers/funcionarios/funcionariosCtrl.js',
         'fornecedoresCtrl': 'app/controllers/fornecedores/fornecedoresCtrl.js',
+        'produtosCategoriaCtrl': 'app/controllers/produtosCategoria/produtosCategoriaCtrl.js',
+        'produtosCtrl': 'app/controllers/produtos/produtosCtrl.js',
+        'movimentacaoCtrl': 'app/controllers/movimentacaoEstoque/movimentacaoCtrl.js',
+        'estoqueCtrl': 'app/controllers/estoque/estoqueCtrl.js',
 
         //*** Factories
         'clienteData' : 'app/factory/clienteData.js',
@@ -70,6 +74,10 @@ app.constant('JS_REQUIRES', {
         'armazemData': 'app/factory/armazemData.js',
         'funcionariosData': 'app/factory/funcionariosData.js',
         'fornecedoresData': 'app/factory/fornecedoresData.js',
+        'produtosCategoriaData': 'app/factory/produtosCategoriaData.js',
+        'produtosData': 'app/factory/produtosData.js',
+        'movimentacaoData': 'app/factory/movimentacaoData.js',
+        'estoqueData': 'app/factory/estoqueData.js',
 
         //*** Controllers
         //'dashboardCtrl': 'assets/js/controllers/dashboardCtrl.js',

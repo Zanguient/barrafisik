@@ -30,6 +30,10 @@ namespace BarraFisik.Infra.Data.Context
         public IDbSet<Armazem> Armazem { get; set; }
         public IDbSet<Funcionarios> Funcionarios { get; set; }
         public IDbSet<Fornecedores> Fornecedores { get; set; }
+        public IDbSet<Produtos> Produtos { get; set; }
+        public IDbSet<ProdutosCategoria> ProdutosCategoria { get; set; }
+        public IDbSet<Estoque> Estoque { get; set; }
+        public IDbSet<MovimentacaoEstoque> MovimentacaoEstoque { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -63,6 +67,10 @@ namespace BarraFisik.Infra.Data.Context
             modelBuilder.Configurations.Add(new ArmazemConfiguration());
             modelBuilder.Configurations.Add(new FuncionariosConfiguration());
             modelBuilder.Configurations.Add(new FornecedoresConfiguration());
+            modelBuilder.Configurations.Add(new ProdutosConfiguration());
+            modelBuilder.Configurations.Add(new ProdutosCategoriaConfiguration());
+            modelBuilder.Configurations.Add(new EstoqueConfiguration());
+            modelBuilder.Configurations.Add(new MovimentacaoEstoqueConfiguration());
 
             base.OnModelCreating(modelBuilder);
         }

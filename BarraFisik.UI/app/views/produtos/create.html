@@ -1,0 +1,29 @@
+﻿<form name="Form" id="form" novalidate ng-submit="form.submit(Form, produto)">
+    <table class="table no-bg">
+        <tr>
+            <td>Categoria: <span class="symbol required"></span></td>
+            <td ng-class="{'has-error':Form.Categoria.$dirty && Form.Categoria.$invalid, 'has-success':Form.Categoria.$valid}">
+                <select name="Categoria" ng-model="produto.ProdutoCategoriaId" class="text-bold" required>
+                    <option value="">Selecione...</option>
+                    <option ng-repeat="c in vm.categorias" value="{{c.ProdutoCategoriaId}}">{{c.Nome}}</option>
+                </select>
+                <span class="error text-small block" ng-if="Form.Categoria.$dirty && Form.Categoria.$invalid">Informe a Categoria</span>
+            </td>
+            <td>Produto: <span class="symbol required"></span></td>
+            <td ng-class="{'has-error':Form.Nome.$dirty && Form.Nome.$invalid, 'has-success':Form.Nome.$valid}">
+                <input class="form-control" type="text" name="Nome" ng-model="produto.Nome" required>
+                <span class="error text-small block" ng-if="Form.Nome.$dirty && Form.Nome.$invalid">Informe o Produto</span>
+            </td>
+            <td>Descrição: </td>
+            <td>
+                <input class="form-control" type="text" name="Descricao" ng-model="produto.Descricao">
+            </td>
+            <td colspan="2">
+                <div class="pull-right">
+                    <input type="submit" class="btn btn-primary btn-sm margin-right-15" value="Cadastrar">
+                    <input type="button" class="btn btn-primary btn-sm margin-right-15" value="Cancelar" ng-click="cancelCreate(Form)">
+                </div>
+            </td>
+        </tr>   
+    </table>
+</form>

@@ -37,7 +37,7 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
     }).state('app.dashboard', {
         url: "/dashboard",
         templateUrl: "app/views/dashboard/dashboard.html",
-        resolve: loadSequence('jquery-sparkline', 'dashboardCtrl', 'clienteData', 'ngTable', 'clienteFilters'),
+        resolve: loadSequence('jquery-sparkline', 'dashboardCtrl', 'clienteData', 'ngTable', 'clienteFilters', 'despesasData'),
         title: 'Dashboard',
         ncyBreadcrumb: {
             label: 'Dashboard'
@@ -274,6 +274,50 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
             controller: 'fornecedoresCtrl as vm'
         })
 
+
+        //ESTOQUE
+        //Categoria dos Produtos        
+        .state('app.produtosCategoria', {
+            url: "/produtosCategoria",
+            templateUrl: "app/views/produtosCategoria/produtosCategoria.html",
+            resolve: loadSequence('produtosCategoriaCtrl', 'produtosCategoriaData', 'ngTable'),
+            title: 'Categoria dos Produtos',
+            ncyBreadcrumb: {
+                label: 'Categoria dos Produtos'
+            },
+            controller: 'produtosCategoriaCtrl as vm'
+        })
+        .state('app.produtos', {
+            url: "/produtos",
+            templateUrl: "app/views/produtos/produtos.html",
+            resolve: loadSequence('produtosCtrl', 'produtosData', 'produtosCategoriaData', 'fornecedoresData', 'ngTable'),
+            title: 'Produtos',
+            ncyBreadcrumb: {
+                label: 'Produtos'
+            },
+            controller: 'produtosCtrl as vm'
+        })
+        .state('app.estoque', {
+            url: "/estoque",
+            templateUrl: "app/views/estoque/estoque.html",
+            resolve: loadSequence('estoqueCtrl', 'estoqueData', 'movimentacaoData', 'ngTable'),
+            title: 'Estoque',
+            ncyBreadcrumb: {
+                label: 'Estoque'
+            },
+            controller: 'estoqueCtrl as vm'
+        })
+        .state('app.movimentacao', {
+            url: "/movimentacao",
+            templateUrl: "app/views/movimentacaoEstoque/movimentacao.html",
+            resolve: loadSequence('movimentacaoCtrl', 'movimentacaoData', 'fornecedoresData', 'ngTable'),
+            title: 'Movimentacao Estoque',
+            ncyBreadcrumb: {
+                label: 'Movimentacao Estoque'
+            },
+            controller: 'movimentacaoCtrl as vm'
+        })
+
         //Valores
      .state('app.valores', {
          url: "/valores",
@@ -285,6 +329,7 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
          },
          controller: 'valoresCtrl as vm'
      });
+
 
 
 
