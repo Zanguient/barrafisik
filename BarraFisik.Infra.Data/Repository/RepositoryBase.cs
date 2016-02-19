@@ -30,7 +30,7 @@ namespace BarraFisik.Infra.Data.Repository
             DbSet.AddOrUpdate(obj);
         }
 
-        public TEntity GetById(Guid id)
+        public virtual TEntity GetById(Guid id)
         {
             var entry = DbSet.Find(id);
             if (entry != null)

@@ -50,6 +50,8 @@
   <ItemGroup>
     <Content Include="app\controllers\accounts\accountCtrl.js" />
     <Content Include="app\controllers\accounts\alterarSenhaCtrl.js" />
+    <Content Include="app\controllers\vendas\vendasCreateCtrl.js" />
+    <Content Include="app\controllers\vendas\vendasCtrl.js" />
     <Content Include="app\controllers\estoque\estoqueMovimentacaoCtrl.js" />
     <Content Include="app\controllers\estoque\estoqueEntradaCtrl.js" />
     <Content Include="app\controllers\estoque\estoqueCreateCtrl.js" />
@@ -100,6 +102,7 @@
     <Content Include="app\directives\exportTable.js" />
     <Content Include="app\directives\fixedTableHeaders.js" />
     <Content Include="app\directives\xngFocus.js" />
+    <Content Include="app\factory\vendasData.js" />
     <Content Include="app\factory\estoqueData.js" />
     <Content Include="app\factory\movimentacaoData.js" />
     <Content Include="app\factory\produtosData.js" />
@@ -205,6 +208,9 @@
     <Content Include="app\views\valores\create.html" />
     <Content Include="app\views\valores\edit.html" />
     <Content Include="app\views\valores\valores.html" />
+    <Content Include="app\views\vendas\create.html" />
+    <Content Include="app\views\vendas\vendasTeste.html" />
+    <Content Include="app\views\vendas\vendas.html" />
     <Content Include="assets\api\groups.js" />
     <Content Include="assets\css\bundleCss.css" />
     <Content Include="assets\css\fonts.css" />

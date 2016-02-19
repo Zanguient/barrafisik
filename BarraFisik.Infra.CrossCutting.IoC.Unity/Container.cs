@@ -51,6 +51,7 @@ namespace BarraFisik.Infra.CrossCutting.IoC.Unity
             container.RegisterType<IProdutosCategoriaAppService, ProdutosCategoriaAppService>();
             container.RegisterType<IEstoqueAppService, EstoqueAppService>();
             container.RegisterType<IMovimentacaoEstoqueAppService, MovimentacaoEstoqueAppService>();
+            container.RegisterType<IVendasAppService, VendasAppService>();
 
             //Services
             container.RegisterType(typeof (IServiceBase<>), typeof (ServiceBase<>));
@@ -76,6 +77,7 @@ namespace BarraFisik.Infra.CrossCutting.IoC.Unity
             container.RegisterType<IProdutosCategoriaService, ProdutosCategoriaService>();
             container.RegisterType<IEstoqueService, EstoqueService>();
             container.RegisterType<IMovimentacaoEstoqueService, MovimentacaoEstoqueService>();
+            container.RegisterType<IVendasService, VendasService>();
 
             //Data Repos
             container.RegisterType(typeof (IRepositoryBase<>), typeof (RepositoryBase<,>));
@@ -101,6 +103,7 @@ namespace BarraFisik.Infra.CrossCutting.IoC.Unity
             container.RegisterType<IProdutosCategoriaRepository, ProdutosCategoriaRepository>();
             container.RegisterType<IEstoqueRepository, EstoqueRepository>();
             container.RegisterType<IMovimentacaoEstoqueRepository, MovimentacaoEstoqueRepository>();
+            container.RegisterType<IVendasRepository, VendasRepository>();
 
             //Data Repos Read Only
             container.RegisterType<IClienteRepositoryReadOnly, ClienteRepositoryReadOnly>();

@@ -58,6 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App\AppServiceBase.cs" />
+    <Compile Include="App\VendasAppService.cs" />
     <Compile Include="App\MovimentacaoEstoqueAppService.cs" />
     <Compile Include="App\EstoqueAppService.cs" />
     <Compile Include="App\ProdutosCategoriaAppService.cs" />
@@ -82,6 +83,7 @@
     <Compile Include="AutoMapper\DomainToViewModelMappingProfile.cs" />
     <Compile Include="AutoMapper\ViewModelToDomainMappingProfile.cs" />
     <Compile Include="Interfaces\IAppServiceBase.cs" />
+    <Compile Include="Interfaces\IVendasAppService.cs" />
     <Compile Include="Interfaces\IMovimentacaoEstoqueAppService.cs" />
     <Compile Include="Interfaces\IEstoqueAppService.cs" />
     <Compile Include="Interfaces\IProdutosCategoriaAppService.cs" />
@@ -105,6 +107,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Validation\ValidationAppError.cs" />
     <Compile Include="Validation\ValidationAppResult.cs" />
+    <Compile Include="ViewModels\VendasViewModel.cs" />
     <Compile Include="ViewModels\MovimentacaoEstoqueViewModel.cs" />
     <Compile Include="ViewModels\EstoqueViewModel.cs" />
     <Compile Include="ViewModels\ProdutosCategoriaViewModel.cs" />

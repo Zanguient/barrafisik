@@ -150,6 +150,28 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
             controller: 'accountCtrl as vm'
         })
 
+        .state('app.vendas', {
+            url: "/vendas",
+            templateUrl: "app/views/vendas/vendas.html",
+            resolve: loadSequence('vendasCtrl', 'vendasData', 'ngTable', 'ui.mask'),
+            title: 'Vendas',
+            ncyBreadcrumb: {
+                label: 'Vendas'
+            },
+            controller: 'vendasCtrl as vm'
+        })
+
+        .state('app.teste', {
+            url: "/teste",
+            templateUrl: "app/views/vendas/vendasTeste.html",
+            resolve: loadSequence('vendasCtrl', 'vendasData', 'ngTable', 'ui.mask'),
+            title: 'Vendas',
+            ncyBreadcrumb: {
+                label: 'Vendas'
+            },
+            controller: 'vendasCtrl as vm'
+        })
+
 
          //Financeiro
         .state('app.financeiro', {

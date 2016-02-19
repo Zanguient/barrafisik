@@ -56,6 +56,7 @@ app.constant('JS_REQUIRES', {
         'produtosCtrl': 'app/controllers/produtos/produtosCtrl.js',
         'movimentacaoCtrl': 'app/controllers/movimentacaoEstoque/movimentacaoCtrl.js',
         'estoqueCtrl': 'app/controllers/estoque/estoqueCtrl.js',
+        'vendasCtrl': 'app/controllers/vendas/vendasCtrl.js',
 
         //*** Factories
         'clienteData' : 'app/factory/clienteData.js',
@@ -78,6 +79,7 @@ app.constant('JS_REQUIRES', {
         'produtosData': 'app/factory/produtosData.js',
         'movimentacaoData': 'app/factory/movimentacaoData.js',
         'estoqueData': 'app/factory/estoqueData.js',
+        'vendasData': 'app/factory/vendasData.js',
 
         //*** Controllers
         //'dashboardCtrl': 'assets/js/controllers/dashboardCtrl.js',
