@@ -44,8 +44,8 @@
                         <td class="rowTd" data-title="'Situacao'" sortable="'Situacao'">{{r.Situacao}}</td>
                         <td class="text-right" id="icons">
                             <div class="visible-md visible-lg hidden-sm hidden-xs">
-                                <a ng-click="openEditar(r)" class="btn btn-xs" tooltip-placement="top" tooltip="Editar"><i class="fa fa-pencil"></i></a>
-                                <a ng-click="delete(r)" class="btn btn-xs" tooltip-placement="top" tooltip="Excluir"><i class="fa fa-times"></i></a>
+                                <a ng-click="openEditar(r)" ng-disabled="r.SubCategoriaFinanceiraId == '090b2553-c505-44a5-8a95-552aec30eee2'" class="btn btn-xs" tooltip-placement="top" tooltip="Editar"><i class="fa fa-pencil"></i></a>
+                                <a ng-click="delete(r)" ng-disabled="r.SubCategoriaFinanceiraId == '090b2553-c505-44a5-8a95-552aec30eee2'" class="btn btn-xs" tooltip-placement="top" tooltip="Excluir"><i class="fa fa-times"></i></a>
                             </div>
                         </td>
                     </tr>

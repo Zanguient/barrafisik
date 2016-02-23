@@ -153,7 +153,7 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         .state('app.vendas', {
             url: "/vendas",
             templateUrl: "app/views/vendas/vendas.html",
-            resolve: loadSequence('vendasCtrl', 'vendasData', 'ngTable', 'ui.mask'),
+            resolve: loadSequence('vendasCtrl', 'vendasData', 'vendasProdutosData', 'tipoPagamentoData', 'ngTable', 'ui.mask'),
             title: 'Vendas',
             ncyBreadcrumb: {
                 label: 'Vendas'

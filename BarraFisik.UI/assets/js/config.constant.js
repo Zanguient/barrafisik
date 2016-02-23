@@ -80,6 +80,7 @@ app.constant('JS_REQUIRES', {
         'movimentacaoData': 'app/factory/movimentacaoData.js',
         'estoqueData': 'app/factory/estoqueData.js',
         'vendasData': 'app/factory/vendasData.js',
+        'vendasProdutosData': 'app/factory/vendasProdutosData.js',
 
         //*** Controllers
         //'dashboardCtrl': 'assets/js/controllers/dashboardCtrl.js',

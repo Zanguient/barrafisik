@@ -37,11 +37,13 @@ namespace BarraFisik.Application.AutoMapper
             Mapper.CreateMap<Fornecedores, FornecedoresViewModel>();
             Mapper.CreateMap<SearchDespesa, SearchDespesasViewModel>();
             Mapper.CreateMap<SearchReceita, SearchReceitasViewModel>();
+            Mapper.CreateMap<SearchVendas, SearchVendasViewModel>();
             Mapper.CreateMap<Produtos, ProdutosViewModel>();
             Mapper.CreateMap<ProdutosCategoria, ProdutosCategoriaViewModel>();
             Mapper.CreateMap<Estoque, EstoqueViewModel>();
             Mapper.CreateMap<MovimentacaoEstoque, MovimentacaoEstoqueViewModel>();
             Mapper.CreateMap<Vendas, VendasViewModel>();
+            Mapper.CreateMap<VendasProdutos, VendasProdutosViewModel>();
         }
     }
 }

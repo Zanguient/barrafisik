@@ -3,47 +3,55 @@
     <div class="row">
         <div class="col-sm-8">
             <h1 class="mainTitle">Vendas</h1>
-            <span class="mainDescription">
-            </span>
+            <span class="mainDescription">Por padrão é listado as vendas do mês atual em ordem da Data de Venda</span>
         </div>
         <div ncy-breadcrumb></div>
     </div>
 </section>
 <div ng-show="loading"><img src="/assets/images/loading.gif" />Carregando vendas...</div>
 <div class="container-fluid container-fullw bg-white" ng-show="!loading">
+    <div ng-include src="'app/views/vendas/partial/searchVendas.html'"></div>
     <div class="row">
         <div class="col-md-6">
             <button type="button" ng-disabled="createTipo" class="btn btn-primary btn-wide btn-scroll btn-scroll-top ti-plus" ng-click="openCadastrar()">
-                <span>Cadastrar</span>
+                <span>Nova Venda</span>
             </button>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div ng-repeat="(key, value) in vm.vendas | groupBy: 'Estoque.Produtos.Nome'">
-                <h4><span class="ti-shopping-cart text-azure"> {{key}} </span></h4>
-                <div class="table-responsive">
-                    <table ng-table="tableParams" class="table">
-                        <tbody ng-repeat="v in value">
-                            <tr ng-class-odd="'odd'" ng-class-even="'even'">
-                                <td class="rowTd" data-title="'Qtde.'">{{v.Quantidade}}</td>
-                                <td class="rowTd" data-title="'Valor Pago'">{{v.ValorPago | currency}}</td>
-                                <td class="rowTd" data-title="'Cliente'">{{v.Cliente.Nome}}</td>
-                                <td class="rowTd" data-title="'Tipo Pag.'">{{v.TipoPagamento.Descricao}}</td>
-                                <td class="rowTd" data-title="'Armazem'">{{v.Estoque.Armazem.Descricao}}</td>
-                                <td class="rowTd" data-title="'Produto'">{{v.Estoque.Produtos.Nome}}</td>
-                                <td class="text-right">
-                                    <div class="visible-md visible-lg hidden-sm hidden-xs">
-                                        <a ng-click="setEditId(a.ArmazemId)" class="btn btn-transparent btn-xs" tooltip-placement="top" tooltip="Editar" id="editRowBtn{{a.ArmazemId}}"><i class="fa fa-pencil"></i></a>
-                                        <a ng-click="delete(a.ArmazemId)" class="btn btn-transparent btn-xs tooltips" tooltip-placement="top" tooltip="Excluir"><i class="fa fa-times"></i></a>
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+        <div class="col-md-6">
+            <h5 class="pull-right ">Total: <span class="badge badge-info">{{total}}</span></h5>
         </div>
+    </div><br/>
+    <div class="row">
+        <table ng-table="tableParams" class="table">
+            <tbody ng-repeat="v in vm.vendas">
+            <tr id="tr{{v.VendaId}}" ng-class-odd="'odd'" ng-class-even="'even'">
+                <td class="rowTd" data-title="'Cliente'"><span ng-show="v.ClienteId != null">{{v.Cliente.Nome}}</span><span ng-show="v.Descricao != null">{{v.Descricao}}</span></td>
+                <td class="rowTd" data-title="'Data Venda'">{{v.DataVenda | date:'dd/MM/yyyy'}}</td>
+                <td class="rowTd" data-title="'Data Venc.'">{{v.DataVencimento | date:'dd/MM/yyyy'}}</td>
+                <td class="rowTd" data-title="'Data Pag.'">{{v.DataPagamento | date:'dd/MM/yyyy'}}</td>
+                <td class="rowTd" data-title="'Tipo Pag.'">{{v.TipoPagamento.Descricao}}</td>
+                <td class="rowTd" data-title="'Valor Total'">{{v.ValorTotal | currency}}</td>
+                <td class="text-right">
+                    <div class="visible-md visible-lg hidden-sm hidden-xs">
+                        <a ng-click="openProdutos(v.VendaId)" class="btn btn-transparent btn-xs tooltips" tooltip-placement="top" tooltip="Produtos"><i class="fa fa-list-ul"></i></a>
+                        <a ng-click="setEditId(v.VendaId)" class="btn btn-xs" tooltip-placement="top" tooltip="Editar" id="editRowBtn{{v.VendaId}}"><i class="fa fa-pencil"></i></a>
+                        <a ng-click="delete(v.VendaId)" class="btn btn-transparent btn-xs tooltips" tooltip-placement="top" tooltip="Excluir"><i class="fa fa-times"></i></a>
+                    </div>
+                </td>
+            </tr>
+            <tr ng-show="editId===v.VendaId" ng-if="editId===v.VendaId">
+                <td colspan="7" ng-include src="'app/views/vendas/edit.html'"></td>
+            </tr>
+            </tbody>
+            <tfoot>
+            <tr>
+                <td colspan="5"></td>
+                <td colspan="2" class="text-bold">
+                    <div class="text-primary">Total:{{totalVendas | currency:' R$ '}}</div>
+                </td>
+            </tr>
+            </tfoot>
+        </table>
     </div>
 </div>
 

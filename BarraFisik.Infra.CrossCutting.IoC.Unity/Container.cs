@@ -52,6 +52,7 @@ namespace BarraFisik.Infra.CrossCutting.IoC.Unity
             container.RegisterType<IEstoqueAppService, EstoqueAppService>();
             container.RegisterType<IMovimentacaoEstoqueAppService, MovimentacaoEstoqueAppService>();
             container.RegisterType<IVendasAppService, VendasAppService>();
+            container.RegisterType<IVendasProdutosAppService, VendasProdutosAppService>();
 
             //Services
             container.RegisterType(typeof (IServiceBase<>), typeof (ServiceBase<>));
@@ -78,6 +79,7 @@ namespace BarraFisik.Infra.CrossCutting.IoC.Unity
             container.RegisterType<IEstoqueService, EstoqueService>();
             container.RegisterType<IMovimentacaoEstoqueService, MovimentacaoEstoqueService>();
             container.RegisterType<IVendasService, VendasService>();
+            container.RegisterType<IVendasProdutosService, VendasProdutosService>();
 
             //Data Repos
             container.RegisterType(typeof (IRepositoryBase<>), typeof (RepositoryBase<,>));
@@ -104,6 +106,7 @@ namespace BarraFisik.Infra.CrossCutting.IoC.Unity
             container.RegisterType<IEstoqueRepository, EstoqueRepository>();
             container.RegisterType<IMovimentacaoEstoqueRepository, MovimentacaoEstoqueRepository>();
             container.RegisterType<IVendasRepository, VendasRepository>();
+            container.RegisterType<IVendasProdutosRepository, VendasProdutosRepository>();
 
             //Data Repos Read Only
             container.RegisterType<IClienteRepositoryReadOnly, ClienteRepositoryReadOnly>();
@@ -114,6 +117,7 @@ namespace BarraFisik.Infra.CrossCutting.IoC.Unity
             container.RegisterType<IReceitasRepositoryReadOnly, ReceitasRepositoryReadOnly>();
             container.RegisterType<IRelatorioFinanceiroRepositoryReadOnly, RelatorioFinanceiroRepositoryReadOnly>();
             container.RegisterType<IEstoqueRepositoryReadOnly, EstoqueRepositoryReadOnly>();
+            container.RegisterType<IVendasRepositoryReadOnly, VendasRepositoryReadOnly>();
 
             //DataConfig
             container.RegisterType(typeof (IContextManager<>), typeof (ContextManager<>));

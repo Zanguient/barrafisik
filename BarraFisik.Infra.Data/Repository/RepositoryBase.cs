@@ -38,7 +38,7 @@ namespace BarraFisik.Infra.Data.Repository
             return entry;
         }
 
-        public IEnumerable<TEntity> GetAll()
+        public virtual IEnumerable<TEntity> GetAll()
         {
             return DbSet.ToList();
         }

@@ -59,7 +59,9 @@
     <Compile Include="Entities\TipoPagamento.cs" />
     <Compile Include="Entities\Valores.cs" />
     <Compile Include="Entities\Vendas.cs" />
+    <Compile Include="Entities\VendasProdutos.cs" />
     <Compile Include="Exceptions\CustomException.cs" />
+    <Compile Include="Interfaces\Repository\IVendasProdutosRepository.cs" />
     <Compile Include="Interfaces\Repository\IVendasRepository.cs" />
     <Compile Include="Interfaces\Repository\IMovimentacaoEstoqueRepository.cs" />
     <Compile Include="Interfaces\Repository\IProdutosCategoriaRepository.cs" />
@@ -85,6 +87,7 @@
     <Compile Include="Interfaces\Repository\IHorarioRepository.cs" />
     <Compile Include="Interfaces\Repository\IRepositoryBase.cs" />
     <Compile Include="Interfaces\Repository\ReadOnly\IEstoqueRepositoryReadOnly.cs" />
+    <Compile Include="Interfaces\Repository\ReadOnly\IVendasRepositoryReadOnly.cs" />
     <Compile Include="Interfaces\Repository\ReadOnly\IRelatorioFinanceiroRepositoryReadOnly.cs" />
     <Compile Include="Interfaces\Repository\ReadOnly\IReceitasRepositoryReadOnly.cs" />
     <Compile Include="Interfaces\Repository\ReadOnly\IDespesasRepositoryReadOnly.cs" />
@@ -92,6 +95,7 @@
     <Compile Include="Interfaces\Repository\ReadOnly\IClienteRepositoryReadOnly.cs" />
     <Compile Include="Interfaces\Repository\ReadOnly\IHorarioRepositoryReadOnly.cs" />
     <Compile Include="Interfaces\Repository\ReadOnly\IValoresRepositoryReadOnly.cs" />
+    <Compile Include="Interfaces\Services\IVendasProdutosService.cs" />
     <Compile Include="Interfaces\Services\IVendasService.cs" />
     <Compile Include="Interfaces\Services\IMovimentacaoEstoqueService.cs" />
     <Compile Include="Interfaces\Services\IProdutosCategoriaService.cs" />
@@ -121,6 +125,7 @@
     <Compile Include="Interfaces\Validation\IRegra.cs" />
     <Compile Include="Interfaces\Validation\ISelfValidation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\VendasProdutosService.cs" />
     <Compile Include="Services\VendasService.cs" />
     <Compile Include="Services\MovimentacaoEstoqueService.cs" />
     <Compile Include="Services\EstoqueService.cs" />
@@ -158,6 +163,7 @@
     <Compile Include="ValueObjects\RelatorioFinanceiro.cs" />
     <Compile Include="ValueObjects\RelatorioFinanceiroSearch.cs" />
     <Compile Include="ValueObjects\RelatorioFinanceiroTotalMeses.cs" />
+    <Compile Include="ValueObjects\SearchVenda.cs" />
     <Compile Include="ValueObjects\SearchReceita.cs" />
     <Compile Include="ValueObjects\SearchDespesa.cs" />
     <Compile Include="ValueObjects\TotalHorario.cs" />

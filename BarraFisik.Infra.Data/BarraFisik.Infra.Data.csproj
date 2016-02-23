@@ -62,6 +62,7 @@
     <Compile Include="Context\BarraFisikContext.cs" />
     <Compile Include="Context\BaseContext.cs" />
     <Compile Include="Context\ContextManager.cs" />
+    <Compile Include="EntityConfig\VendasProdutosConfiguration.cs" />
     <Compile Include="EntityConfig\VendasConfiguration.cs" />
     <Compile Include="EntityConfig\MovimentacaoEstoqueConfiguration.cs" />
     <Compile Include="EntityConfig\EstoqueConfiguration.cs" />
@@ -203,8 +204,18 @@
     <Compile Include="Migrations\201602182017243_Add_Vendas.Designer.cs">
       <DependentUpon>201602182017243_Add_Vendas.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201602191759168_Update_Vendas.cs" />
+    <Compile Include="Migrations\201602191759168_Update_Vendas.Designer.cs">
+      <DependentUpon>201602191759168_Update_Vendas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201602231149024_Update_Vendas_Datas.cs" />
+    <Compile Include="Migrations\201602231149024_Update_Vendas_Datas.Designer.cs">
+      <DependentUpon>201602231149024_Update_Vendas_Datas.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\ReadOnly\VendasRepositoryReadOnly.cs" />
+    <Compile Include="Repository\VendasProdutosRepository.cs" />
     <Compile Include="Repository\VendasRepository.cs" />
     <Compile Include="Repository\MovimentacaoEstoqueRepository.cs" />
     <Compile Include="Repository\ProdutosCategoriaRepository.cs" />
@@ -337,6 +348,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201602182017243_Add_Vendas.resx">
       <DependentUpon>201602182017243_Add_Vendas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602191759168_Update_Vendas.resx">
+      <DependentUpon>201602191759168_Update_Vendas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602231149024_Update_Vendas_Datas.resx">
+      <DependentUpon>201602231149024_Update_Vendas_Datas.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

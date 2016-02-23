@@ -194,6 +194,7 @@
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountsController.cs" />
+    <Compile Include="Controllers\VendasProdutosController.cs" />
     <Compile Include="Controllers\VendasController.cs" />
     <Compile Include="Controllers\MovimentacaoEstoqueController.cs" />
     <Compile Include="Controllers\EstoqueController.cs" />

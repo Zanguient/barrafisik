@@ -35,6 +35,7 @@ namespace BarraFisik.Infra.Data.Context
         public IDbSet<Estoque> Estoque { get; set; }
         public IDbSet<MovimentacaoEstoque> MovimentacaoEstoque { get; set; }
         public IDbSet<Vendas> Vendas { get; set; }
+        public IDbSet<VendasProdutos> VendasProdutos { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -73,6 +74,7 @@ namespace BarraFisik.Infra.Data.Context
             modelBuilder.Configurations.Add(new EstoqueConfiguration());
             modelBuilder.Configurations.Add(new MovimentacaoEstoqueConfiguration());
             modelBuilder.Configurations.Add(new VendasConfiguration());
+            modelBuilder.Configurations.Add(new VendasProdutosConfiguration());
 
             base.OnModelCreating(modelBuilder);
         }

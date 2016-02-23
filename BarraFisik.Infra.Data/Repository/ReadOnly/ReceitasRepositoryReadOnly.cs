@@ -215,7 +215,7 @@ namespace BarraFisik.Infra.Data.Repository.ReadOnly
                         r.TipoPagamento = tp;
                         r.SubCategoriaFinanceira = sc;
                         return r;
-                    }, splitOn: "DespesasId, CategoriaFinanceiraId, TipoPagamentoId, SubCategoriaFinanceiraId");
+                    }, splitOn: "ReceitasId, CategoriaFinanceiraId, TipoPagamentoId, SubCategoriaFinanceiraId");
 
 
                 cn.Close();
