@@ -93,7 +93,10 @@
                     return;
 
                 } else {
-                    //// Cadastra mensalidade
+                    //Cadastra mensalidade
+                    if (mensalidade.DataPagamento === today)
+                        mensalidade.DataPagamento = new Date();
+
                     mensalidade.ClienteId = Cliente.ClienteId;
                     mensalidade.ValorTotal = mensalidade.Valor + mensalidade.ValorPersonal;
                     mensalidade.Situacao = 'Quitado';

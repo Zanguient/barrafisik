@@ -9,7 +9,7 @@
             </td>
             <td>Valor: </td>
             <td ng-class="{'has-error':FormEdit.Valor.$dirty && FormEdit.Valor.$invalid, 'has-success':FormEdit.Valor.$valid}">
-                <input class="form-control" type="number" step="any" style="min-width: 100px" name="Valor" ng-model="p.Valor" required>
+                <input class="form-control" type="text" style="min-width: 100px" mask-money name="Valor" ng-model="p.Valor" required>
                 <span class="error text-small block" ng-if="FormEdit.Valor.$dirty && FormEdit.Valor.$error.required">Informe o Valor</span>
             </td>
             <td>Horário Início:</td>

@@ -17,6 +17,10 @@
             return $http.get(apiUrl + "api/categoriaFinanceira/" + tipo);
         }
 
+        function teste() {
+            return $http.get(apiUrl + "api/categoriaFinanceira/teste");
+        }
+
         function addCategoria(categoria) {
             return $http.post(apiUrl + 'api/categoriaFinanceira', categoria);
         }
@@ -34,7 +38,9 @@
             getCategoriaByTipo: getCategoriaByTipo,
             addCategoria: addCategoria,
             editCategoria: editCategoria,
+            teste: teste,
             deleteCategoria: deleteCategoria
+
         };
 
         return service;

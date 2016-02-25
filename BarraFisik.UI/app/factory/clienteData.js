@@ -9,8 +9,8 @@
     function clienteData($http, apiUrl) {
 
 
-        function getClientes(skip, take) {
-            return $http.get(apiUrl+'api/clientes?skip='+skip+'&take='+take);
+        function getClientes() {
+            return $http.get(apiUrl+'api/clientes');
         }
 
         function getCliente(idCliente) {

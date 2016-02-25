@@ -17,6 +17,12 @@
             }]
         };
 
+        $scope.teste = function() {
+            categoriaFinanceiraData.teste().then(function() {
+                alert('Invalidado');
+            });
+        }
+
         activate();
 
         function activate() {

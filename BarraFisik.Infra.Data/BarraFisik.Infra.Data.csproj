@@ -212,6 +212,10 @@
     <Compile Include="Migrations\201602231149024_Update_Vendas_Datas.Designer.cs">
       <DependentUpon>201602231149024_Update_Vendas_Datas.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201602251929263_Update_Estoque_TotalVendido.cs" />
+    <Compile Include="Migrations\201602251929263_Update_Estoque_TotalVendido.Designer.cs">
+      <DependentUpon>201602251929263_Update_Estoque_TotalVendido.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\ReadOnly\VendasRepositoryReadOnly.cs" />
@@ -354,6 +358,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201602231149024_Update_Vendas_Datas.resx">
       <DependentUpon>201602231149024_Update_Vendas_Datas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602251929263_Update_Estoque_TotalVendido.resx">
+      <DependentUpon>201602251929263_Update_Estoque_TotalVendido.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

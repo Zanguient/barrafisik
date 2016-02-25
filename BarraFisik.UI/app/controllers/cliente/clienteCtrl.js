@@ -22,7 +22,7 @@
 
         function activate() {
             $scope.$emit('LOAD');
-            clienteData.getClientes(0, 10).then(function (result) {
+            clienteData.getClientes().then(function (result) {
                 vm.clientes = result.data;
                 $scope.$emit('UNLOAD');
             });
@@ -128,7 +128,9 @@
                 if (isConfirm) {
                     SweetAlert.swal("Sucesso", "Os valores foram atualizados!", "success");
                     clienteData.atualizaValores().then(function () {                       
-                        $scope.tableParams.reload();
+                        clienteData.getClientes().then(function (result) {
+                            vm.clientes = result.data;
+                        });
                     });
                 } else {
                     SweetAlert.swal({

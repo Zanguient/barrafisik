@@ -6,6 +6,7 @@ using System.Web.Http;
 using BarraFisik.Application.Interfaces;
 using BarraFisik.Application.ViewModels;
 using BarraFisik.API.Filters;
+using WebApi.OutputCache.V2;
 
 namespace BarraFisik.API.Controllers
 {
@@ -48,6 +49,7 @@ namespace BarraFisik.API.Controllers
 
         [HttpPost]
         [Route("mensalidades")]
+        [InvalidateCacheOutput("GetClientes", typeof(ClienteController))]
         public HttpResponseMessage Post(MensalidadesViewModel mensalidade)
         {
             mensalidade.SubCategoriaFinanceiraId = new Guid("0d57c87d-3bd9-420b-ab98-123fdb75a269");
@@ -71,8 +73,12 @@ namespace BarraFisik.API.Controllers
 
         [HttpPut]
         [Route("mensalidades")]
+        //[InvalidateCacheOutput("GetClientes", typeof(ClienteController))]
         public HttpResponseMessage Put(MensalidadesViewModel mensalidade)
         {
+            var cache = Configuration.CacheOutputConfiguration().GetCacheOutputProvider(Request);
+            cache.RemoveStartsWith(Configuration.CacheOutputConfiguration().MakeBaseCachekey((ClienteController c) => c.GetClientes()));
+
             if (ModelState.IsValid)
             {
                 if (mensalidade.isPersonal == false)
@@ -95,6 +101,7 @@ namespace BarraFisik.API.Controllers
 
         [HttpDelete]
         [Route("mensalidades/{id:Guid}")]
+        [InvalidateCacheOutput("GetClientes", typeof(ClienteController))]
         public HttpResponseMessage Remove(Guid id)
         {
             _mensalidadesApp.Remove(id);

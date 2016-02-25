@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using BarraFisik.Application.Interfaces;
 using BarraFisik.Application.ViewModels;
+using WebApi.OutputCache.V2;
 
 namespace BarraFisik.API.Controllers
 {
@@ -73,8 +74,12 @@ namespace BarraFisik.API.Controllers
 
         [HttpPost]
         [Route("receitas/mensalidade")]
+        [InvalidateCacheOutput("GetClientes", typeof(ClienteController))]
         public HttpResponseMessage PostMensalidade(ReceitasViewModel receitasViewModel)
         {
+            var cache = Configuration.CacheOutputConfiguration().GetCacheOutputProvider(Request);
+            cache.RemoveStartsWith(Configuration.CacheOutputConfiguration().MakeBaseCachekey((ClienteController c) => c.GetClientes()));
+
             DateTime today = DateTime.Today;
 
             receitasViewModel.SubCategoriaFinanceiraId = new Guid("0d57c87d-3bd9-420b-ab98-123fdb75a269");
@@ -127,8 +132,12 @@ namespace BarraFisik.API.Controllers
 
         [HttpPut]
         [Route("receitas/mensalidade")]
+        [InvalidateCacheOutput("GetClientes", typeof(ClienteController))]
         public HttpResponseMessage PutMensalidade(ReceitasViewModel receita)
         {
+            var cache = Configuration.CacheOutputConfiguration().GetCacheOutputProvider(Request);
+            cache.RemoveStartsWith(Configuration.CacheOutputConfiguration().MakeBaseCachekey((ClienteController c) => c.GetClientes()));
+
             if (ModelState.IsValid)
             {
                 var result = _receitasApp.UpdateMensalidade(receita);
@@ -171,8 +180,12 @@ namespace BarraFisik.API.Controllers
 
         [HttpDelete]
         [Route("receitas/mensalidade/{id:Guid}")]
+        [InvalidateCacheOutput("GetClientes", typeof(ClienteController))]
         public HttpResponseMessage RemoveMensalidade(Guid id)
         {
+            var cache = Configuration.CacheOutputConfiguration().GetCacheOutputProvider(Request);
+            cache.RemoveStartsWith(Configuration.CacheOutputConfiguration().MakeBaseCachekey((ClienteController c) => c.GetClientes()));
+
             _receitasApp.RemoveMensalidade(id);
 
             return Request.CreateResponse(HttpStatusCode.OK, "Dado excluído com sucesso!");

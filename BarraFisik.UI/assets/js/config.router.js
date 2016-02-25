@@ -37,7 +37,7 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
     }).state('app.dashboard', {
         url: "/dashboard",
         templateUrl: "app/views/dashboard/dashboard.html",
-        resolve: loadSequence('jquery-sparkline', 'dashboardCtrl', 'clienteData', 'ngTable', 'clienteFilters', 'despesasData'),
+        resolve: loadSequence('jquery-sparkline', 'dashboardCtrl', 'clienteData', 'ngTable', 'clienteFilters', 'despesasData', 'vendasData'),
         title: 'Dashboard',
         ncyBreadcrumb: {
             label: 'Dashboard'

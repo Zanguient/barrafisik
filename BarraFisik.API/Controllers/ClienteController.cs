@@ -29,6 +29,7 @@ namespace BarraFisik.API.Controllers
         [HttpGet]
         [Route("clientes")]
         [GzipCompression]
+        [CacheOutput(ClientTimeSpan = 0, ServerTimeSpan = 28800)]
         public async Task<HttpResponseMessage> GetClientes()
         {
             var result = _clienteApp.GetAll();
@@ -37,6 +38,14 @@ namespace BarraFisik.API.Controllers
             var tsc = new TaskCompletionSource<HttpResponseMessage>();
             tsc.SetResult(response);
             return await tsc.Task;
+        }
+
+        [HttpGet]
+        [InvalidateCacheOutput("GetClientes")]
+        [Route("clientes/teste")]
+        public HttpResponseMessage Teste()
+        {
+            return Request.CreateResponse(HttpStatusCode.OK, "Invalida Cache");
         }
 
         [HttpGet]
@@ -52,7 +61,7 @@ namespace BarraFisik.API.Controllers
         }
 
         [HttpGet]
-        [Route("clientes/all")]
+        [Route("clientes/all")]        
         [GzipCompression]
         public async Task<HttpResponseMessage> GetClientesAll()
         {
@@ -92,7 +101,7 @@ namespace BarraFisik.API.Controllers
 
         [HttpPost]
         [Route("atualizaValores")]
-        //[GzipCompression]
+        [InvalidateCacheOutput("GetClientes")]
         public async Task<HttpResponseMessage> AtualizaValores()
         {
             _clienteApp.AtualizaValores();
@@ -105,6 +114,7 @@ namespace BarraFisik.API.Controllers
 
         [HttpPost]
         [Route("clientes")]
+        [InvalidateCacheOutput("GetClientes")]
         public HttpResponseMessage Post(ClienteHorarioViewModel clienteHorario)
         {
             if (ModelState.IsValid)
@@ -148,6 +158,7 @@ namespace BarraFisik.API.Controllers
 
         [HttpPut]
         [Route("clienteUpdate")]
+        [InvalidateCacheOutput("GetClientes")]
         public HttpResponseMessage ClienteUpdate(ClienteHorarioViewModel clienteHorario)
         {
             if (ModelState.IsValid)
@@ -214,6 +225,7 @@ namespace BarraFisik.API.Controllers
         }
 
         [HttpGet]
+        [InvalidateCacheOutput("GetClientes")]
         [Route("clientes/updateClientesPendentes/{mes:int}/{ano:int}")]
         public HttpResponseMessage UpdateClientesPendentes(int mes, int ano)
         {
@@ -224,6 +236,7 @@ namespace BarraFisik.API.Controllers
 
         [HttpPost]
         [Route("clientes/inativarClientes")]
+        [InvalidateCacheOutput("GetClientes")]
         public HttpResponseMessage InativarClientes(IEnumerable<ClienteViewModel> listClientes)
         {
             _clienteApp.InativarClientes(listClientes);

@@ -4,6 +4,7 @@ using System.Data.Entity;
 using System.Linq;
 using BarraFisik.Domain.Entities;
 using BarraFisik.Domain.Interfaces.Repository;
+using BarraFisik.Domain.ValueObjects;
 using BarraFisik.Infra.Data.Context;
 
 namespace BarraFisik.Infra.Data.Repository
@@ -32,7 +33,7 @@ namespace BarraFisik.Infra.Data.Repository
 
         public Cliente GetByIdMensalidade(Guid? id)
         {
-            return DbSet.Where(c => c.ClienteId == id).FirstOrDefault();
+            return DbSet.FirstOrDefault(c => c.ClienteId == id);
         }
     }
 }

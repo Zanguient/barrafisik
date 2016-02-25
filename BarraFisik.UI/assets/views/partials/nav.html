@@ -68,33 +68,6 @@
             </div>
         </a>
     </li>
-
-    <li ui-sref-active="active">
-        <a ui-sref="app.teste">
-            <div class="item-content">
-                <div class="item-media">
-                    <i class="ti-list"></i>
-                </div>
-                <div class="item-inner">
-                    <span class="title"> VendasTeste </span>
-                </div>
-            </div>
-        </a>
-    </li>
-
-
-    <li ui-sref-active="active" ng-if="userInfo.isAdmin">
-        <a ui-sref="app.accounts">
-            <div class="item-content">
-                <div class="item-media">
-                    <i class="ti-lock"></i>
-                </div>
-                <div class="item-inner">
-                    <span class="title"> Acessos ao sistema</span>
-                </div>
-            </div>
-        </a>
-    </li>
     <li ui-sref-active="active" ng-if="userInfo.isAdmin">
         <a ui-sref="app.vendas">
             <div class="item-content">
@@ -107,6 +80,19 @@
             </div>
         </a>
     </li>
+    <li ui-sref-active="active" ng-if="userInfo.isAdmin">
+        <a ui-sref="app.accounts">
+            <div class="item-content">
+                <div class="item-media">
+                    <i class="ti-lock"></i>
+                </div>
+                <div class="item-inner">
+                    <span class="title"> Acessos ao sistema</span>
+                </div>
+            </div>
+        </a>
+    </li>
+    
     <li ng-class="{'active open':$state.includes('app.financeiro')}" ng-if="userInfo.isAdmin">
         <a href="javascript:void(0)">
             <div class="item-content">

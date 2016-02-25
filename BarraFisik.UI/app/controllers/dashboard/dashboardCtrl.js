@@ -231,7 +231,7 @@ app.controller('lastDespesasCtrl', ["$scope", "despesasData", "$rootScope", func
         $scope.despesas = despesas.data;
 
         angular.forEach($scope.despesas, function (item) {
-            if (item.Situacao === 'Pendente') {                
+            if (item.Situacao === 'Pendente') {
                 $scope.pendentes = parseFloat($scope.pendentes) + item.ValorTotal;
             }
 
@@ -290,6 +290,88 @@ app.controller('lastDespesasCtrl', ["$scope", "despesasData", "$rootScope", func
 
         //String - A legend template
         legendTemplate: '<ul class="tc-chart-js-legend"><% for (var i=0; i<segments.length; i++){%><li><span style="background-color:<%=segments[i].fillColor%>"></span><%if(segments[i].label){%><%=segments[i].label%><%}%></li><%}%></ul>'
+    }
+}
+]);
+app.controller('vendasPendentesCtrl', ["$scope", "vendasData", "$rootScope", function ($scope, vendasData, $rootScope) {
+    var vm = this;
+    vm.vendas = [];
+
+    var today = new Date();
+    $scope.mesAtual = today.getMonth() + 1;
+    $scope.anoAtual = today.getFullYear();
+    $scope.anoReferencia = today.getFullYear();
+
+
+    vendasData.getPendentes(today.getMonth() + 1, today.getFullYear()).then(function (result) {
+        vm.vendas = result.data;
+    });
+
+    $scope.getPendentes = function () {
+        vendasData.getPendentes($scope.mesAtual, $scope.anoAtual).then(function (result) {
+            vm.vendas = result.data;
+        });
+    }
+
+    active();
+
+    function active() {
+        vendasData.getVendasAnual($scope.anoReferencia).then(function (result) {
+            // Chart.js Data
+            $scope.data = {
+                labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+                datasets: [
+                {
+                    label: 'Total Vendido',
+                    fillColor: 'rgba(220,220,220,0.5)',
+                    strokeColor: 'rgba(220,220,220,0.8)',
+                    highlightFill: 'rgba(220,220,220,0.75)',
+                    highlightStroke: 'rgba(220,220,220,1)',
+                    data: result.data
+                }
+                ]
+            };
+        });
+    }
+
+    $scope.getVendasAnuais = function() {
+        active();
+    }
+
+    // Chart.js Options
+    $scope.options = {
+        maintainAspectRatio: true,
+
+        // Sets the chart to be responsive
+        responsive: true,
+
+        //Boolean - Whether the scale should start at zero, or an order of magnitude down from the lowest value
+        scaleBeginAtZero: true,
+
+        //Boolean - Whether grid lines are shown across the chart
+        scaleShowGridLines: true,
+
+        //String - Colour of the grid lines
+        scaleGridLineColor: "rgba(0,0,0,.05)",
+
+        //Number - Width of the grid lines
+        scaleGridLineWidth: 1,
+
+        //Boolean - If there is a stroke on each bar
+        barShowStroke: true,
+
+        //Number - Pixel width of the bar stroke
+        barStrokeWidth: 2,
+
+        //Number - Spacing between each of the X value sets
+        barValueSpacing: 5,
+
+        //Number - Spacing between data sets within X values
+        barDatasetSpacing: 1,
+
+        //String - A legend template
+        legendTemplate: '<ul class="tc-chart-js-legend"><% for (var i=0; i<datasets.length; i++){%><li><span style="background-color:<%=datasets[i].fillColor%>"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>'
+
     }
 }
 ]);

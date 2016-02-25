@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using BarraFisik.Domain.Entities;
+using BarraFisik.Domain.ValueObjects;
 
 namespace BarraFisik.Domain.Interfaces.Repository
 {

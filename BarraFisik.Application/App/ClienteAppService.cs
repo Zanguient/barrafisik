@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using AutoMapper;
 using BarraFisik.Application.Interfaces;
 using BarraFisik.Application.Validation;
 using BarraFisik.Application.ViewModels;
+using BarraFisik.API.Models;
 using BarraFisik.Domain.Entities;
 using BarraFisik.Domain.Interfaces.Services;
 using BarraFisik.Domain.ValueObjects;

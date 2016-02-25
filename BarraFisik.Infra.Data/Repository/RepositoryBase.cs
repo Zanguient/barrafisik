@@ -51,7 +51,7 @@ namespace BarraFisik.Infra.Data.Repository
             //Context.SaveChanges();
         }
 
-        public void Remove(TEntity obj)
+        public virtual void Remove(TEntity obj)
         {
             var entry = Context.Entry(obj);
             if (entry.State == EntityState.Detached)

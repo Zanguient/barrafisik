@@ -160,6 +160,7 @@
     <Compile Include="Validation\Mensalidades\MensalidadeUnica.cs" />
     <Compile Include="Validation\Regra.cs" />
     <Compile Include="ValueObjects\ClienteHorario.cs" />
+    <Compile Include="ValueObjects\PagedResult.cs" />
     <Compile Include="ValueObjects\RelatorioFinanceiro.cs" />
     <Compile Include="ValueObjects\RelatorioFinanceiroSearch.cs" />
     <Compile Include="ValueObjects\RelatorioFinanceiroTotalMeses.cs" />

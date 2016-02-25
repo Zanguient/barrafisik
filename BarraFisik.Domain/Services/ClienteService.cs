@@ -4,7 +4,6 @@ using BarraFisik.Domain.Entities;
 using BarraFisik.Domain.Interfaces.Repository;
 using BarraFisik.Domain.Interfaces.Repository.ReadOnly;
 using BarraFisik.Domain.Interfaces.Services;
-using BarraFisik.Domain.Specification.Clientes;
 using BarraFisik.Domain.Validation.Clientes;
 using BarraFisik.Domain.ValueObjects;
 
@@ -17,7 +16,8 @@ namespace BarraFisik.Domain.Services
         private readonly IHorarioRepository _horarioRepository;
         private readonly IValoresRepository _valoresRepository;
 
-        public ClienteService(IClienteRepository clienteRepository, IClienteRepositoryReadOnly clienteRepositoryReadOnly, IHorarioRepository horarioRepository, IValoresRepository valoresRepository) : base(clienteRepository)
+        public ClienteService(IClienteRepository clienteRepository, IClienteRepositoryReadOnly clienteRepositoryReadOnly,
+            IHorarioRepository horarioRepository, IValoresRepository valoresRepository) : base(clienteRepository)
         {
             _clienteRepository = clienteRepository;
             _clienteRepositoryReadOnly = clienteRepositoryReadOnly;
@@ -42,7 +42,7 @@ namespace BarraFisik.Domain.Services
                 return resultado;
             }
 
-            base.Add(cliente);
+            Add(cliente);
             return resultado;
         }
 
@@ -63,7 +63,7 @@ namespace BarraFisik.Domain.Services
                 return resultado;
             }
 
-            base.Update(cliente);
+            Update(cliente);
             return resultado;
         }
 
@@ -118,17 +118,17 @@ namespace BarraFisik.Domain.Services
         }
 
         public void InativarClientes(IEnumerable<Cliente> listClientes)
-        {            
+        {
             foreach (var cliente in listClientes)
             {
                 //Delete horario do cliente
                 var horario = _horarioRepository.GetHorarioCliente(cliente.ClienteId);
-                if(horario != null)
+                if (horario != null)
                     _horarioRepository.Remove(horario);
 
                 cliente.Situacao = "Inativo";
                 cliente.IsAtivo = false;
-                base.Update(cliente);
+                Update(cliente);
             }
         }
 
@@ -145,7 +145,5 @@ namespace BarraFisik.Domain.Services
 
             return result;
         }
-
-        
     }
 }

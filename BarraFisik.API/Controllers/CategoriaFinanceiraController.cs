@@ -7,6 +7,7 @@ using BarraFisik.Application.Interfaces;
 using BarraFisik.Application.ViewModels;
 using BarraFisik.API.Filters;
 using System.Data.Entity.Infrastructure;
+using WebApi.OutputCache.V2;
 
 namespace BarraFisik.API.Controllers
 {
@@ -24,6 +25,7 @@ namespace BarraFisik.API.Controllers
         [HttpGet]
         [Route("categoriafinanceira")]
         [GzipCompression]
+        [CacheOutput(ClientTimeSpan = 0, ServerTimeSpan = 28800)]
         public async Task<HttpResponseMessage> Get()
         {
             var result = _categoriaFinanceiraApp.GetAll();
@@ -32,6 +34,14 @@ namespace BarraFisik.API.Controllers
             var tsc = new TaskCompletionSource<HttpResponseMessage>();
             tsc.SetResult(response);
             return await tsc.Task;
+        }
+
+        [HttpGet]
+        [InvalidateCacheOutput("Get")]
+        [Route("categoriafinanceira/teste")]
+        public HttpResponseMessage Teste()
+        {
+            return Request.CreateResponse(HttpStatusCode.OK, "Invalida Cache");
         }
 
         [HttpGet]
@@ -47,6 +57,7 @@ namespace BarraFisik.API.Controllers
         }
 
         [HttpPost]
+        [InvalidateCacheOutput("Get")]
         [Route("categoriafinanceira")]
         public HttpResponseMessage Post(CategoriaFinanceiraViewModel categoriaFinanceiraViewModel)
         {
@@ -60,6 +71,7 @@ namespace BarraFisik.API.Controllers
         }
 
         [HttpPut]
+        [InvalidateCacheOutput("Get")]
         [Route("categoriafinanceira")]
         public HttpResponseMessage Put(CategoriaFinanceiraViewModel categoriaFinanceiraViewModel)
         {
@@ -87,6 +99,7 @@ namespace BarraFisik.API.Controllers
         }
 
         [HttpDelete]
+        [InvalidateCacheOutput("Get")]
         [Route("categoriafinanceira/{id:Guid}")]
         public HttpResponseMessage Remove(Guid id)
         {
