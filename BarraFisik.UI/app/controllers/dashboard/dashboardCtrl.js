@@ -221,11 +221,14 @@ app.controller('InscritosCtrl', ["$scope", "clienteData", "$rootScope", function
     };
 
 }]);
-app.controller('lastDespesasCtrl', ["$scope", "despesasData", "$rootScope", function ($scope, despesasData, $rootScope) {
+app.controller('lastDespesasCtrl', ["$scope", "despesasData", "$state", function ($scope, despesasData, $state) {
     $scope.despesas = [];
     $scope.pendentes = 0.00;
     $scope.quitados = 0.00;
 
+    $scope.verDespesas = function () {
+        $state.go('app.financeiro.despesas');
+    }
 
     despesasData.getDespesas().then(function (despesas) {
         $scope.despesas = despesas.data;
@@ -293,9 +296,13 @@ app.controller('lastDespesasCtrl', ["$scope", "despesasData", "$rootScope", func
     }
 }
 ]);
-app.controller('vendasPendentesCtrl', ["$scope", "vendasData", "$rootScope", function ($scope, vendasData, $rootScope) {
+app.controller('vendasPendentesCtrl', ["$scope", "vendasData", "$state", function ($scope, vendasData, $state) {
     var vm = this;
     vm.vendas = [];
+
+    $scope.verVendas = function () {
+        $state.go('app.vendas');
+    }
 
     var today = new Date();
     $scope.mesAtual = today.getMonth() + 1;

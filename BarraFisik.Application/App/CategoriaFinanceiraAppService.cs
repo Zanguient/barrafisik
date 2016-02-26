@@ -12,12 +12,14 @@ namespace BarraFisik.Application.App
     public class CategoriaFinanceiraAppService : AppServiceBase<BarraFisikContext>, ICategoriaFinanceiraAppService
     {
         private readonly ICategoriaFinanceiraService _categoriaFinanceiraService;
+        private readonly ISubCategoriaFinanceiraService _subCategoriaFinanceiraService;
         private readonly ILogSistemaService _logSistemaService;
 
-        public CategoriaFinanceiraAppService(ICategoriaFinanceiraService categoriaFinanceiraService, ILogSistemaService logSistemaService)
+        public CategoriaFinanceiraAppService(ICategoriaFinanceiraService categoriaFinanceiraService, ILogSistemaService logSistemaService, ISubCategoriaFinanceiraService subCategoriaFinanceiraService)
         {
             _categoriaFinanceiraService = categoriaFinanceiraService;
             _logSistemaService = logSistemaService;
+            _subCategoriaFinanceiraService = subCategoriaFinanceiraService;
         }
 
 
@@ -64,6 +66,12 @@ namespace BarraFisik.Application.App
 
             BeginTransaction();
             _categoriaFinanceiraService.Remove(categoria);
+
+            //Remove todas subCategorias
+            foreach (var item in _subCategoriaFinanceiraService.GetByCategoria(categoria.CategoriaFinanceiraId))
+            {
+                _subCategoriaFinanceiraService.Remove(item);
+            }
 
             _logSistemaService.AddLog("CategoriaFinanceira", id, "Delete", "Categoria: "+categoria.Categoria);
             Commit();

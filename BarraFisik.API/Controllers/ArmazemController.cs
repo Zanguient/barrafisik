@@ -1,6 +1,7 @@
 ﻿using BarraFisik.Application.Interfaces;
 using BarraFisik.Application.ViewModels;
 using System;
+using System.Data.Entity.Infrastructure;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -75,7 +76,15 @@ namespace BarraFisik.API.Controllers
         [Route("armazem/{id:Guid}")]
         public HttpResponseMessage Remove(Guid id)
         {
-            _armazemApp.Remove(id);
+            try
+            {
+                _armazemApp.Remove(id);
+            }
+            catch (DbUpdateException ex)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "Este registro não pode ser removido.");
+            }
+            
 
             return Request.CreateResponse(HttpStatusCode.OK, "Dado excluído com sucesso!");
         }

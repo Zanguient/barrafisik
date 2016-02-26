@@ -26,26 +26,26 @@
                         <td colspan="12" ng-include src="'app/views/produtos/create.html'"></td>
                     </tr>
                 </table>
-                <table ng-table="tableParams" class="table">
-
-                    <tbody ng-repeat="p in $data">
-                    <tr id="tr{{p.ProdutoId}}" ng-class-odd="'odd'" ng-class-even="'even'">
-                        <td class="rowTd" data-title="'Categoria'" sortable="'Categoria.Nome'">{{p.ProdutosCategoria.Nome}}</td>
-                        <td class="rowTd" data-title="'Nome'" sortable="'Nome'">{{p.Nome}}</td>
-                        <td class="rowTd" data-title="'Descricao'" sortable="'Descricao'">{{p.Descricao}}</td>
-                        <td class="text-right">
-                            <div class="visible-md visible-lg hidden-sm hidden-xs">
-                                <a ng-click="setEditId(p.ProdutoId)" class="btn btn-transparent btn-xs" tooltip-placement="top" tooltip="Editar" id="editRowBtn{{p.ProdutoId}}"><i class="fa fa-pencil"></i></a>
-                                <a ng-click="delete(p.ProdutoId)" class="btn btn-transparent btn-xs tooltips" tooltip-placement="top" tooltip="Excluir"><i class="fa fa-times"></i></a>
-                            </div>
-                        </td>
-                    </tr>
+                <div ng-repeat="(key, value) in vm.produtos | groupBy: 'ProdutosCategoria.Nome'">
+                    <h4><span class="ti-bag text-azure"> {{key}} </span></h4>
+                    <table ng-table="tableParams" class="table table-responsive" id="table">
+                        <tbody ng-repeat="p in value | orderBy: 'Nome'">
+                        <tr id="tr{{p.ProdutoId}}" ng-class-odd="'odd'" ng-class-even="'even'">
+                            <td class="rowTd" style="width: 45%" data-title="'Produto'">{{p.Nome}}</td>
+                            <td class="rowTd" style="width: 45%" data-title="'Descricao'">{{p.Descricao}}</td>
+                            <td class="text-right" style="width: 10%">
+                                <div class="visible-md visible-lg hidden-sm hidden-xs">
+                                    <a ng-click="setEditId(p.ProdutoId)" class="btn btn-transparent btn-xs" tooltip-placement="top" tooltip="Editar" id="editRowBtn{{p.ProdutoId}}"><i class="fa fa-pencil"></i></a>
+                                    <a ng-click="delete(p.ProdutoId)" class="btn btn-transparent btn-xs tooltips" tooltip-placement="top" tooltip="Excluir"><i class="fa fa-times"></i></a>
+                                </div>
+                            </td>
+                        </tr>
                         <tr ng-show="editId===p.ProdutoId" ng-if="editId===p.ProdutoId">
                             <td colspan="4" ng-include src="'app/views/produtos/edit.html'"></td>
                         </tr>
-                    </tbody>
-                </table>
-            </div>
+                        </tbody>
+                    </table>
+                </div>
         </div>
     </div>
 </div>

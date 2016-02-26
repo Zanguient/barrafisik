@@ -9,6 +9,7 @@
             <td colspan="2">Tipo de Pagamento: </td>
             <td colspan="2">
                 <select class="form-control" ng-model="r.TipoPagamentoId">
+                    <option ng-selected="r.TipoPagamentoId == null" value="">Selecione...</option>
                     <option ng-selected="r.TipoPagamentoId == item.TipoPagamentoId" ng-repeat="item in tipos" ng-value="item.TipoPagamentoId">{{item.Descricao}}</option>
                 </select>                
             </td>

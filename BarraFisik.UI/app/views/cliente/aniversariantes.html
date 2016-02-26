@@ -1,39 +1,52 @@
 ﻿<style>
-    @media print {
-        @page {
-            margin: 0;
-            padding: 0;
-        }
+    @page {
+		 orphans:3; widows:3;
+		 margin: 0;
+         padding-bottom: 30px;
+		 margin-top: 0px;
+	 }
 
-        .body {
-            margin: 0;
-            padding: 0;
-        }
+     @media print {
+    
+         * {
+             background:transparent !important;
+             color:#000 !important;
+             text-shadow:none !important;
+             filter:none !important;
+             -ms-filter:none !important;
+             margin-top: 5px !important;
+             padding-top: 0 !important;
+         }
 
-        .footer-inner {
-            display: none !important;
-        }
+         .body {
+             margin: 0;
+             padding: 0;
+         }
 
-        .main-navigation-menu {
-            display: none !important;
-        }
+         .footer-inner {
+             display: none !important;
+         }
 
-        .navbar-title {
-            display: none !important;
-        }
+         .main-navigation-menu {
+             display: none !important;
+         }
 
-        #page-title {
-            display: none !important;
-        }
+         .navbar-title {
+             display: none !important;
+         }
 
-        #nav, #sidebar {
-            display: none !important;
-        }
+         #page-title {
+             display: none !important;
+         }
 
-        #selectMes {
-            display: none !important;
-        }
-    }
+         #nav, #sidebar {
+             display: none !important;
+         }
+
+         #selectMes {
+             display: none !important;
+         }
+     }
 </style>
 
 <!-- start: PAGE TITLE -->
@@ -80,7 +93,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="a in aniversariantes">
+                            <tr ng-repeat="a in aniversariantes" >
                                 <td>{{a.Nome}}</td>
                                 <td class="text-right">{{a.DtNascimento | date:'dd'}}</td>
                             </tr>

@@ -97,7 +97,7 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
             url: '/perfil/{id}',
             templateUrl: "app/views/cliente/clientePerfil.html",
             title: 'Perfil Cliente',
-            resolve: loadSequence('clientePerfilCtrl', 'ngTable', 'clienteData', 'horarioData', 'clienteFilters', 'receitasData'),
+            resolve: loadSequence('clientePerfilCtrl', 'ngTable', 'clienteData', 'horarioData', 'clienteFilters', 'receitasData', 'vendasData'),
             ncyBreadcrumb: {
                 label: 'Perfil do Cliente'
             },

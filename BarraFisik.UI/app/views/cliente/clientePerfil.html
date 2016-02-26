@@ -16,210 +16,216 @@
             <div>
                 <!-- start: USER TABSET -->
                 <tabset class="tabbable">
-					<!-- start: TAB OVERVIEW -->
-					<tab heading="Visão Geral">
-						<div class="row">
-							<div class="col-md-4">
-								<div class="user-left">
-									<div class="center">
-										<h4>{{vm.cliente.Nome}} </h4>
-										<div>
-											<div class="user-image">
-												<div class="thumbnail">
-													<img ng-if="vm.cliente.Path !== null" ng-src="{{p.Path}}" class="img-rounded" width="90" height="80"/>
-		                                            <img ng-if="vm.cliente.Path == null" ng-src="/assets/images/default-user.png" class="img-rounded" width="70" height="60"/>					
-												</div>												
-											</div>
-										</div>
-										<hr>
-									</div>
-									<table class="table table-condensed">
-										<thead>
-											<tr>
-												<th colspan="3">Informação de Contato</th>
-											</tr>
-										</thead>
-										<tbody>
-											<tr>
-												<td>E-mail</td>
-												<td>
-												<a href="#">
-													{{vm.cliente.Email}}
-												</a></td>
-											</tr>
-											<tr>
-												<td>Telefone:</td>
-												<td>{{vm.cliente.Telefone | telefone}}</td>
-											</tr>
-											<tr>
-												<td>Celular:</td>
-												<td>{{vm.cliente.Celular | celular}}</td>
-											</tr><tr>
-												<td>Endereço:</td>
-												<td>{{vm.cliente.Endereco}}</td>
-											</tr>
-										</tbody>
-									</table>
-									<table class="table table-condensed">
-										<thead>
-											<tr>
-												<th colspan="3">Informações Gerais</th>
-											</tr>
-										</thead>
-										<tbody>
-											<tr>
-												<td>CPF</td>
-												<td>{{vm.cliente.Cpf |cpf }}</td>
-											</tr>
-											<tr>
-												<td>Dt. Nascimento</td>
-												<td>{{vm.cliente.DtNascimento | date:'dd/MM/yyyy'}}</td>
-											</tr>
-										    <tr>
-											    <td>Dt. Inscrição</td>
-											    <td>{{vm.cliente.DtInscricao | date:'dd/MM/yyyy'}}</td>
-										    </tr>
-										    <tr>
-											    <td>RG</td>
-											    <td>{{vm.cliente.Rg}}</td>
-										    </tr>
+                    <!-- start: TAB OVERVIEW -->
+                    <tab heading="Visão Geral">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="user-left">
+                                    <div class="center">
+                                        <h4>{{vm.cliente.Nome}} </h4>
+                                        <div>
+                                            <div class="user-image">
+                                                <div class="thumbnail">
+                                                    <img ng-if="vm.cliente.Path !== null" ng-src="{{p.Path}}" class="img-rounded" width="90" height="80" />
+                                                    <img ng-if="vm.cliente.Path == null" ng-src="/assets/images/default-user.png" class="img-rounded" width="70" height="60" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                    </div>
+                                    <table class="table table-condensed">
+                                        <thead>
                                             <tr>
-												<td>Filhos</td>
-												<td>{{vm.cliente.QtdFilhos}}</td>
-											</tr>
-											<tr>
-												<td>Status</td>
-												<td><span class="label" ng-class="{'label-warning': vm.cliente.Situacao == 'Pendente', 'label-success': vm.cliente.Situacao == 'Regular', 'label-inverse': vm.cliente.Situacao == 'Inativo'}"> {{vm.cliente.Situacao}}</span></td>
-											</tr>
-										</tbody>
-									</table>
-                                    
-								</div>
-							</div>
-							<div class="col-md-8">
-								<div class="row space20">
-									<div class="col-sm-3">
-										<button class="btn btn-icon margin-bottom-5 margin-bottom-5 btn-block" ng-click="mensalidadesActive = true">
-											<i class="ti-money block text-primary text-extra-large margin-bottom-10"></i>
-											Mensalidades
-										</button>
-									</div>
-									<div class="col-sm-3">
-										<button class="btn btn-icon margin-bottom-5 btn-block" ng-click="avaliacoesActive = true">
-											<i class="ti-layers block text-primary text-extra-large margin-bottom-10"></i>
-											Avaliações Físicas
-										</button>
-									</div>
-								</div>
-								<div class="panel panel-white" id="activities">
-									<div class="panel-heading border-light">
-										<h4 class="panel-title text-primary">Horário de Treino</h4>
-										<paneltool class="panel-tools" tool-collapse="tool-collapse" tool-refresh="load1" tool-dismiss="tool-dismiss"></paneltool>
-									</div>
-									<div collapse="activities" ng-init="activities=false" class="panel-wrapper">
-										<div class="panel-body">
-											<ul class="timeline-xs">
-												<li class="timeline-item success" ng-show="vm.cliente.Segunda">
-													<div class="margin-left-15">
-														<div class=" text-small">
-														    {{vm.cliente.HSegunda|number}}:00 - {{ parseFloat(vm.cliente.HSegunda) + 1}}:00
-														</div>
-                                                        <p>
-															Segunda-Feira 
-														</p>
-													</div>
-												</li>
-												<li class="timeline-item info" ng-show="vm.cliente.Terca">
-													<div class="margin-left-15">
-														<div class="text-small">
-															{{vm.cliente.HTerca|number}}:00 -  {{ parseFloat(vm.cliente.HTerca) + 1}}:00
-														</div>
-														<p>
-															Terça-Feira
-														</p>
-													</div>
-												</li>
-												<li class="timeline-item warning" ng-show="vm.cliente.Quarta">
-													<div class="margin-left-15">
-														<div class="text-small">
-															{{vm.cliente.HQuarta|number}}:00 - {{ parseFloat(vm.cliente.HQuarta) + 1}}:00
-														</div>
-														<p>
-															Quarta-Feira
-														</p>
-													</div>
-												</li>
-												<li class="timeline-item danger" ng-show="vm.cliente.Quinta">
-													<div class="margin-left-15">
-														<div class="text-small">
-															{{vm.cliente.HQuinta|number}}:00 - {{ parseFloat(vm.cliente.HQuinta) + 1}}:00
-														</div>
-														<p>
-															Quinta-Feira
-														</p>
-													</div>
-												</li>
-                                                <li class="timeline-item info" ng-show="vm.cliente.Sexta">
-													<div class="margin-left-15">
-														<div class="text-small">
-														    {{vm.cliente.HSexta|number}}:00 - {{ parseFloat(vm.cliente.HSexta) + 1}}:00
-														</div>
-                                                        <p>
-															Sexta-Feira 
-														</p>
-													</div>
-												</li>
-											</ul>
-										</div>
-									</div>
-								</div>
-                                <div class="text-left">
-								    <a ui-sref="app.clientes.editar({id: vm.cliente.ClienteId})" class="btn btn-primary btn-o btn-wide">
-								    	Editar Cliente
-								    </a>
-								    <a ui-sref="app.clientes.listar()" class="btn btn-warning btn-o btn-wide">
-								    	Voltar
-								    </a>
-								</div>
-							</div>
-						</div>
-					</tab>
-					<!-- end: TAB OVERVIEW -->
+                                                <th colspan="3">Informação de Contato</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>E-mail</td>
+                                                <td>
+                                                    <a href="#">
+                                                        {{vm.cliente.Email}}
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Telefone:</td>
+                                                <td>{{vm.cliente.Telefone | telefone}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Celular:</td>
+                                                <td>{{vm.cliente.Celular | celular}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Endereço:</td>
+                                                <td>{{vm.cliente.Endereco}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <table class="table table-condensed">
+                                        <thead>
+                                            <tr>
+                                                <th colspan="3">Informações Gerais</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>CPF</td>
+                                                <td>{{vm.cliente.Cpf |cpf }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Dt. Nascimento</td>
+                                                <td>{{vm.cliente.DtNascimento | date:'dd/MM/yyyy'}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Dt. Inscrição</td>
+                                                <td>{{vm.cliente.DtInscricao | date:'dd/MM/yyyy'}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>RG</td>
+                                                <td>{{vm.cliente.Rg}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Filhos</td>
+                                                <td>{{vm.cliente.QtdFilhos}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Status</td>
+                                                <td><span class="label" ng-class="{'label-warning': vm.cliente.Situacao == 'Pendente', 'label-success': vm.cliente.Situacao == 'Regular', 'label-inverse': vm.cliente.Situacao == 'Inativo'}"> {{vm.cliente.Situacao}}</span></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
 
-					<!-- start: TAB MENSALIDADES -->
-					<tab heading="Mensalidades" active="mensalidadesActive">                                            
-						<table class="table" id="mensalidadesTab">
-							<thead>
-								<tr>
-									<th>Referência</th>
-									<th>Data Emissão</th>
+                                </div>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="row space20">
+                                    <div class="col-sm-3">
+                                        <button class="btn btn-icon margin-bottom-5 margin-bottom-5 btn-block" ng-click="mensalidadesActive = true">
+                                            <i class="ti-money block text-primary text-extra-large margin-bottom-10"></i>
+                                            Mensalidades
+                                        </button>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <button class="btn btn-icon margin-bottom-5 btn-block" ng-click="avaliacoesActive = true">
+                                            <i class="ti-layers block text-primary text-extra-large margin-bottom-10"></i>
+                                            Avaliações Físicas
+                                        </button>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <button class="btn btn-icon margin-bottom-5 btn-block" ng-click="vendas = true">
+                                            <i class="ti-shopping-cart block text-primary text-extra-large margin-bottom-10"></i>
+                                            Vendas
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="panel panel-white" id="activities">
+                                    <div class="panel-heading border-light">
+                                        <h4 class="panel-title text-primary">Horário de Treino</h4>
+                                        <paneltool class="panel-tools" tool-collapse="tool-collapse" tool-refresh="load1" tool-dismiss="tool-dismiss"></paneltool>
+                                    </div>
+                                    <div collapse="activities" ng-init="activities=false" class="panel-wrapper">
+                                        <div class="panel-body">
+                                            <ul class="timeline-xs">
+                                                <li class="timeline-item success" ng-show="vm.cliente.Segunda">
+                                                    <div class="margin-left-15">
+                                                        <div class=" text-small">
+                                                            {{vm.cliente.HSegunda|number}}:00 - {{ parseFloat(vm.cliente.HSegunda) + 1}}:00
+                                                        </div>
+                                                        <p>
+                                                            Segunda-Feira
+                                                        </p>
+                                                    </div>
+                                                </li>
+                                                <li class="timeline-item info" ng-show="vm.cliente.Terca">
+                                                    <div class="margin-left-15">
+                                                        <div class="text-small">
+                                                            {{vm.cliente.HTerca|number}}:00 -  {{ parseFloat(vm.cliente.HTerca) + 1}}:00
+                                                        </div>
+                                                        <p>
+                                                            Terça-Feira
+                                                        </p>
+                                                    </div>
+                                                </li>
+                                                <li class="timeline-item warning" ng-show="vm.cliente.Quarta">
+                                                    <div class="margin-left-15">
+                                                        <div class="text-small">
+                                                            {{vm.cliente.HQuarta|number}}:00 - {{ parseFloat(vm.cliente.HQuarta) + 1}}:00
+                                                        </div>
+                                                        <p>
+                                                            Quarta-Feira
+                                                        </p>
+                                                    </div>
+                                                </li>
+                                                <li class="timeline-item danger" ng-show="vm.cliente.Quinta">
+                                                    <div class="margin-left-15">
+                                                        <div class="text-small">
+                                                            {{vm.cliente.HQuinta|number}}:00 - {{ parseFloat(vm.cliente.HQuinta) + 1}}:00
+                                                        </div>
+                                                        <p>
+                                                            Quinta-Feira
+                                                        </p>
+                                                    </div>
+                                                </li>
+                                                <li class="timeline-item info" ng-show="vm.cliente.Sexta">
+                                                    <div class="margin-left-15">
+                                                        <div class="text-small">
+                                                            {{vm.cliente.HSexta|number}}:00 - {{ parseFloat(vm.cliente.HSexta) + 1}}:00
+                                                        </div>
+                                                        <p>
+                                                            Sexta-Feira
+                                                        </p>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="text-left">
+                                    <a ui-sref="app.clientes.editar({id: vm.cliente.ClienteId})" class="btn btn-primary btn-o btn-wide">
+                                        Editar Cliente
+                                    </a>
+                                    <a ui-sref="app.clientes.listar()" class="btn btn-warning btn-o btn-wide">
+                                        Voltar
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </tab>
+                    <!-- end: TAB OVERVIEW -->
+                    <!-- start: TAB MENSALIDADES -->
+                    <tab heading="Mensalidades" active="mensalidadesActive">
+                        <table class="table" id="mensalidadesTab">
+                            <thead>
+                                <tr>
+                                    <th>Referência</th>
+                                    <th>Data Emissão</th>
                                     <th>Data Pag.</th>
                                     <th>Personal</th>
                                     <th>Valor Mensalidade</th>
                                     <th>Tipo Pag.</th>
                                     <th>Valor Total</th>
                                     <th>Status</th>
-								</tr>
-							</thead>
-							<tbody>
-							<tr ng-repeat="c in vm.mensalidades | orderBy: ['MesReferencia', 'AnoReferencia']">
-								<td>{{c.MesReferencia}}/{{c.AnoReferencia}}</td>
-								<td>{{c.DataEmissao | date: 'dd/MM/yyyy'}}</td> 
-                                <td>{{c.DataPagamento | date: 'dd/MM/yyyy'}}</td>                                
-                                <td><span ng-show="c.isPersonal" class="text-primary">{{c.ValorPersonal | currency: 'R$ '}}</span><span  ng-show="!c.isPersonal"> -</span></td>
-                                <td><span class="text-primary">{{c.Valor | currency}}</span></td>
-                                <td>{{c.TipoPagamento.Sigla}} - {{c.TipoPagamento.Descricao}}</td>  
-                                <td><span ng-class="{'text-primary': c.Situacao == 'Quitado', 'text-danger': c.Situacao == 'Pendente'}">{{c.ValorTotal | currency}} </span></td>
-                                <td><span ng-class="{'text-green': c.Situacao == 'Quitado', 'text-danger': c.Situacao == 'Pendente'}">{{c.Situacao}} </span></td>
-							</tr>
-							</tbody>
-						</table>
-					</tab>
-					<!-- end: TAB MENSALIDADES -->
-
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="c in vm.mensalidades | orderBy: ['MesReferencia', 'AnoReferencia']">
+                                    <td>{{c.MesReferencia}}/{{c.AnoReferencia}}</td>
+                                    <td>{{c.DataEmissao | date: 'dd/MM/yyyy'}}</td>
+                                    <td>{{c.DataPagamento | date: 'dd/MM/yyyy'}}</td>
+                                    <td><span ng-show="c.isPersonal" class="text-primary">{{c.ValorPersonal | currency: 'R$ '}}</span><span ng-show="!c.isPersonal"> -</span></td>
+                                    <td><span class="text-primary">{{c.Valor | currency}}</span></td>
+                                    <td>{{c.TipoPagamento.Sigla}} - {{c.TipoPagamento.Descricao}}</td>
+                                    <td><span ng-class="{'text-primary': c.Situacao == 'Quitado', 'text-danger': c.Situacao == 'Pendente'}">{{c.ValorTotal | currency}} </span></td>
+                                    <td><span ng-class="{'text-green': c.Situacao == 'Quitado', 'text-danger': c.Situacao == 'Pendente'}">{{c.Situacao}} </span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </tab>
+                    <!-- end: TAB MENSALIDADES -->
                     <!-- start: TAB AVALIACOES -->
-					<tab heading="Avaliações Físicas" active="avaliacoesActive">
-						<table class="table" id="avaliacoesTab">
+                    <tab heading="Avaliações Físicas" active="avaliacoesActive">
+                        <table class="table" id="avaliacoesTab">
                             <thead>
                                 <tr>
                                     <th>Data Emissão.</th>
@@ -234,19 +240,43 @@
                                 <tr ng-repeat="c in vm.avaliacoesFisicas | orderBy: ['DataPagamento']">
                                     <td>{{c.DataEmissao | date: 'dd/MM/yyyy'}}</td>
                                     <td>{{c.DataVencimento | date: 'dd/MM/yyyy'}}</td>
-                                    <td>{{c.DataPagamento | date: 'dd/MM/yyyy'}}</td>     
-                                    <td>{{c.TipoPagamento.Sigla}} - {{c.TipoPagamento.Descricao}}</td>                               
+                                    <td>{{c.DataPagamento | date: 'dd/MM/yyyy'}}</td>
+                                    <td>{{c.TipoPagamento.Sigla}} - {{c.TipoPagamento.Descricao}}</td>
                                     <td><span ng-class="{'text-primary': c.Situacao == 'Quitado', 'text-danger': c.Situacao == 'Pendente'}">{{c.ValorTotal | currency}} </span></td>
                                     <td><span ng-class="{'text-green': c.Situacao == 'Quitado', 'text-danger': c.Situacao == 'Pendente'}">{{c.Situacao}} </span></td>
                                 </tr>
-</table>
-					</tab>
-					<!-- end: TAB AVALIACOES -->
-				</tabset>
+                        </table>
+                    </tab>
+                    <!-- end: TAB AVALIACOES -->
+                    <!-- start: TAB AVALIACOES -->
+                    <tab heading="Vendas" active="vendas">
+                        <table class="table" id="vendasTab">
+                            <thead>
+                                <tr>
+                                    <th>Data Venda</th>
+                                    <th>Data Venc.</th>
+                                    <th>Data Pag.</th>
+                                    <th>Tipo Pag.</th>
+                                    <th>Valor Total</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="v in vm.vendas | orderBy: ['DataVenda']">
+                                    <td>{{v.DataVenda | date: 'dd/MM/yyyy'}}</td>
+                                    <td>{{v.DataVencimento | date: 'dd/MM/yyyy'}}</td>
+                                    <td>{{v.DataPagamento | date: 'dd/MM/yyyy'}}</td>
+                                    <td>{{v.TipoPagamento.Sigla}} - {{v.TipoPagamento.Descricao}}</td>
+                                    <td><span ng-class="{'text-primary': v.Receitas.Situacao == 'Quitado', 'text-danger': v.Receitas.Situacao == 'Pendente'}">{{v.ValorTotal | currency}} </span></td>
+                                    <td><span ng-class="{'text-green': v.Receitas.Situacao == 'Quitado', 'text-danger': v.Receitas.Situacao == 'Pendente'}">{{v.Receitas.Situacao}} </span></td>
+                                </tr>
+                        </table>
+                    </tab>
+                    <!-- end: TAB AVALIACOES -->
+                </tabset>
                 <!-- end: USER TABSET -->
             </div>
         </div>
     </div>
 </div>
 <!-- end: USER PROFILE -->
-

@@ -146,7 +146,7 @@
             };
 
             modalService.showModal({}, modalOptions).then(function () {
-                subCategoriaData.remove(id).then(function () {
+                subCategoriaData.remove(id).success(function () {
                     toaster.pop('success', '', 'SubCategoria Excluída com Sucesso!');
                     $.each(vm.subCategorias, function (i) {
                         if (vm.subCategorias[i].SubCategoriaFinanceiraId === id) {
@@ -155,9 +155,9 @@
                         }
                     });
                     $scope.tableParams.reload();
-                }), function (data) {
-
-                };
+                }).error(function (error) {
+                    toaster.pop("error", error.Message, "");
+                });
             });
         }
         

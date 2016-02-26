@@ -57,10 +57,10 @@
                 confirmButtonText: "Confirmar",
                 cancelButtonText: "Cancelar",
                 closeOnConfirm: false,
-                closeOnCancel: false
+                closeOnCancel: true
             }, function (isConfirm) {
                 if (isConfirm) {
-                    armazemData.deleteArmazem(id).then(function () {
+                    armazemData.deleteArmazem(id).success(function () {
                         SweetAlert.swal("Excluído!", "Dados apgados com sucesso!", "success");
                         $.each(vm.armazem, function (i) {
                             if (vm.armazem[i].ArmazemId === id) {
@@ -69,15 +69,10 @@
                             }
                         });
                         $scope.tableParams.reload();
+                    }).error(function (error) {
+                        SweetAlert.swal("Erro!", error.Message, "error");
                     });
-                } else {
-                    SweetAlert.swal({
-                        title: "Cancelado",
-                        text: "Operação de exclusão cancelada",
-                        type: "error",
-                        confirmButtonColor: "#007AFF"
-                    });
-                }
+                } 
             });
         }
 

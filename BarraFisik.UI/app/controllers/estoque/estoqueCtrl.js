@@ -32,6 +32,8 @@
                 // use build-in angular filter
                 var orderedData = params.sorting() ? $filter('orderBy')(vm.estoques, params.orderBy()) : vm.estoques;
                 $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+
+                $scope.total = orderedData.length;
             }
         });
 
@@ -166,7 +168,7 @@
                 closeOnCancel: true
             }, function (isConfirm) {
                 if (isConfirm) {
-                    estoqueData.remove(id).then(function () {
+                    estoqueData.remove(id).success(function () {
                         SweetAlert.swal("Excluído!", "Dados apgados com sucesso!", "success");
                         $.each(vm.estoques, function (i) {
                             if (vm.estoques[i].EstoqueId === id) {
@@ -175,6 +177,8 @@
                             }
                         });
                         $scope.tableParams.reload();
+                    }).error(function (error) {
+                        SweetAlert.swal("Erro!", error.Message, "error");
                     });
                 }
             });

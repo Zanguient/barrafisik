@@ -106,7 +106,7 @@
             </div>
         </div>
 
-
+        <!-- Despesas -->
         <div class="container-fluid container-fullw bg-white" ng-controller="lastDespesasCtrl">
             <div class="row">
                 <div class="col-sm-8">
@@ -135,6 +135,12 @@
                                     <td>{{d.Situacao}}</td>
                                 </tr>
                                 </tbody>
+                                <tfoot>
+                                <tr>
+                                    <td colspan="3"></td>
+                                    <td colspan="2" class="text-right"><a ng-click="verDespesas()">Todas as Despesas</a></td>
+                                </tr>
+                                </tfoot>
                             </table>
                         </div>
                     </div>
@@ -158,11 +164,13 @@
             </div>
         </div>
     </div>
+    <!-- Usuário sem permissão de admin -->
     <div class="container-fluid container-fullw" ng-if="!userInfo.isAdmin">
         <h3>Bem Vindo, {{userInfo.nome}}</h3>
     </div>
 </div>
 
+<!-- Vendas Pendentes -->
 <div class="container-fluid container-fullw bg-white" ng-controller="vendasPendentesCtrl as vm">
     <div class="row">
         <div class="col-sm-5">
@@ -229,6 +237,12 @@
                             <td><span class="text-danger">{{v.ValorTotal | currency}} </span></td>
                         </tr>
                         </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="3"></td>
+                                <td colspan="2" class="text-right"><a ng-click="verVendas()">Todas as Vendas</a></td>
+                            </tr>
+                        </tfoot>
                     </table>
                 </div>
             </div>

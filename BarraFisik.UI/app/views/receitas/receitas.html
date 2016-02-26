@@ -35,6 +35,7 @@
                         <td class="rowTd" id="ficha" style="max-width: 25px;"><a ng-click="openFicha(r)" class="btn" tooltip-placement="top" tooltip="Ficha"><i class="ti-id-badge"></i></a></td>
                         <td class="rowTd" data-title="'Categoria'" sortable="'CategoriaFinanceira.Categoria'">{{r.CategoriaFinanceira.Categoria}}  </td>
                         <td class="rowTd" data-title="'SubCategoria'" sortable="'SubCategoriaFinanceira.SubCategoria'">{{r.SubCategoriaFinanceira.SubCategoria}}</td>
+                        <td class="rowTd" data-title="'Cliente'" sortable="'Cliente.Nome'">{{r.Cliente.Nome}}</td>
                         <td class="rowTd" data-title="'Tipo Pag.'" sortable="'TipoPagamento.Descricao'">({{r.TipoPagamento.Sigla}}) {{r.TipoPagamento.Descricao}}</td>
                         <td class="rowTd" data-title="'Dt. Emissão'" sortable="'DataEmissao'">{{r.DataEmissao | date:'dd/MM/yyyy'}}</td>
                         <td class="rowTd" data-title="'Dt. Vencimento'" sortable="'DataVencimento'">{{r.DataVencimento | date:'dd/MM/yyyy'}}</td>
@@ -52,7 +53,7 @@
                     </tbody>
                     <tfoot>
                     <tr height="70px">
-                        <td colspan="7" class="text-primary">Quitado: <b class="text-primary"> {{totalQuitado | currency:' R$ '}}  | </b> Pendente: <b class="text-danger">{{totalPendente | currency:' R$ '}}</b></td>
+                        <td colspan="8" class="text-primary">Quitado: <b class="text-primary"> {{totalQuitado | currency:' R$ '}}  | </b> Pendente: <b class="text-danger">{{totalPendente | currency:' R$ '}}</b></td>
                         <td colspan="3" class="text-bold">
                             <div class="text-primary">Total:{{totalQuitado + totalPendente + totalVencido | currency:' R$ '}}</div></td>
                     </tr>

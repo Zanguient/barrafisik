@@ -3,10 +3,11 @@
 
     app.controller('clientePerfilCtrl', clientePerfilCtrl);
 
-    function clientePerfilCtrl($scope, clienteData, horarioData, SweetAlert, $stateParams, $state, receitasData) {
+    function clientePerfilCtrl($scope, clienteData, horarioData, SweetAlert, $stateParams, $state, receitasData, vendasData) {
         var vm = this;
         vm.TotalPago = 0;
         vm.avaliacoesFisicas = [];
+        vm.vendas = [];
 
         $scope.parseFloat = parseFloat;
 
@@ -21,9 +22,14 @@
                 vm.mensalidades = mensalidades.data;
             });
 
-            receitasData.getAvaliacaoCliente($stateParams.id).then(function (avaliacoes) {
+            receitasData.getAvaliacaoCliente($stateParams.id).then(function(avaliacoes) {
                 vm.avaliacoesFisicas = avaliacoes.data;
-            })
+            });
+
+            vendasData.getVendasByCliente($stateParams.id).then(function(vendas) {
+                vm.vendas = vendas.data;
+            });
+
             //clienteData.getClientePerfil($stateParams.id).then(function (cliente) {
             //    vm.cliente = cliente.data;
 
@@ -33,7 +39,7 @@
             //            vm.TotalPago = vm.TotalPago + value.ValorPago;
             //        });
             //    }
-                
+
             //    receitasAvaliacaoFisicaData.getByCliente($stateParams.id).then(function (avaliacoes) {
             //        vm.avaliacoesFisicas = avaliacoes.data;
             //    })

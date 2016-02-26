@@ -21,6 +21,7 @@
                 <td>Tipo Pag.: </td>
                 <td>
                     <select name="TiposPag" id="TiposPag" ng-model="mensalidade.TipoPagamentoId">
+                        <option value="">Selecione...</option>
                         <option ng-repeat="t in tipos" value="{{t.TipoPagamentoId}}">{{t.Sigla}} - {{t.Descricao}}</option>
                     </select>
                 </td>

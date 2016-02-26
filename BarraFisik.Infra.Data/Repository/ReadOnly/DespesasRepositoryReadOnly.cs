@@ -17,20 +17,22 @@ namespace BarraFisik.Infra.Data.Repository.ReadOnly
 
                 var sql = @"select * from Despesas d 
                                 inner join CategoriaFinanceira cf on d.CategoriaFinanceiraId = cf.CategoriaFinanceiraId
+                                left join Fornecedores f on d.FornecedorId = f.FornecedorId
                                 left join TipoPagamento tp on d.TipoPagamentoId = tp.TipoPagamentoId
                                 left join SubCategoriaFinanceira sc on d.SubCategoriaFinanceiraId = sc.SubCategoriaFinanceiraId
                                 where Month(d.DataVencimento) = Month(GetDate()) and YEAR(d.DataVencimento) = YEAR(getDate())";
 
-                var despesas = cn.Query<Despesas, CategoriaFinanceira, TipoPagamento, SubCategoriaFinanceira, Despesas>(
+                var despesas = cn.Query<Despesas, CategoriaFinanceira, Fornecedores, TipoPagamento, SubCategoriaFinanceira, Despesas>(
                     sql,
-                    (d, cf, tp, sc) =>
+                    (d, cf, f, tp, sc) =>
                     {
                         d.CategoriaFinanceiraId = cf.CategoriaFinanceiraId;
+                        d.Fornecedores = f;
                         d.CategoriaFinanceira = cf;
                         d.TipoPagamento = tp;
                         d.SubCategoriaFinanceira = sc;
                         return d;
-                    }, splitOn: "DespesasId, CategoriaFinanceiraId, TipoPagamentoId, SubCategoriaFinanceiraId");
+                    }, splitOn: "DespesasId, CategoriaFinanceiraId, FornecedorId, TipoPagamentoId, SubCategoriaFinanceiraId");
 
 
                 cn.Close();
@@ -46,6 +48,7 @@ namespace BarraFisik.Infra.Data.Repository.ReadOnly
                 bool hasData = false;
                 var sql = @"select * from Despesas d 
                                 inner join CategoriaFinanceira cf on d.CategoriaFinanceiraId = cf.CategoriaFinanceiraId
+                                left join Fornecedores f on d.FornecedorId = f.FornecedorId
                                 left join TipoPagamento tp on d.TipoPagamentoId = tp.TipoPagamentoId
                                 left join SubCategoriaFinanceira sc on d.SubCategoriaFinanceiraId = sc.SubCategoriaFinanceiraId
                                 where 1 = 1";
@@ -93,16 +96,17 @@ namespace BarraFisik.Infra.Data.Repository.ReadOnly
                 if (!hasData)
                     sql = sql + " AND Month(d.DataVencimento) = Month(GetDate()) and YEAR(d.DataVencimento) = YEAR(getDate())";
 
-                var despesas = cn.Query<Despesas, CategoriaFinanceira, TipoPagamento, SubCategoriaFinanceira, Despesas >(
+                var despesas = cn.Query<Despesas, CategoriaFinanceira, Fornecedores, TipoPagamento, SubCategoriaFinanceira, Despesas >(
                     sql,
-                    (d, cf, tp, sc) =>
+                    (d, cf, f, tp, sc) =>
                     {
                         d.CategoriaFinanceiraId = cf.CategoriaFinanceiraId;
+                        d.Fornecedores = f;
                         d.CategoriaFinanceira = cf;
                         d.TipoPagamento = tp;
                         d.SubCategoriaFinanceira = sc;
                         return d;
-                    }, splitOn: "DespesasId, CategoriaFinanceiraId, TipoPagamentoId, SubCategoriaFinanceiraId");
+                    }, splitOn: "DespesasId, CategoriaFinanceiraId, FornecedorId, TipoPagamentoId, SubCategoriaFinanceiraId");
 
 
                 cn.Close();

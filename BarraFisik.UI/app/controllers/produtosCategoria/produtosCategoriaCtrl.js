@@ -61,15 +61,17 @@
                 closeOnCancel: true
             }, function (isConfirm) {
                 if (isConfirm) {
-                    produtosCategoriaData.remove(id).then(function () {
+                    produtosCategoriaData.remove(id).success(function () {
                         SweetAlert.swal("Excluído!", "Dados apgados com sucesso!", "success");
-                        $.each(vm.categorias, function (i) {
+                        $.each(vm.categorias, function(i) {
                             if (vm.categorias[i].ProdutoCategoriaId === id) {
                                 vm.categorias.splice(i, 1);
                                 return false;
                             }
+                            $scope.tableParams.reload();
                         });
-                        $scope.tableParams.reload();
+                    }).error(function (error) {
+                        SweetAlert.swal("Erro!", error.Message, "error");
                     });
                 }                 
             });
