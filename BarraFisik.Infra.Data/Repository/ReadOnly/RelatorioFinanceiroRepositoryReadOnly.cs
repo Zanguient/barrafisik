@@ -89,9 +89,9 @@ namespace BarraFisik.Infra.Data.Repository.ReadOnly
                                 if (filters.PagamentoFim != dt)
                                     query = query + " and d.DataPagamento <= '" + filters.PagamentoFim.ToString("yyyy-MM-dd 23:59:59") + "' ";
                                 if (filters.CategoriaId != null)
-                                    query = query + " and cf.Categoria = '" + filters.CategoriaId + "' ";
+                                    query = query + " and cf.CategoriaFinanceiraId = '" + filters.CategoriaId + "' ";
                                 if (filters.SubCategoriaId != null)
-                                    query = query + " and sc.SubCategoria = '" + filters.SubCategoriaId + "' ";
+                                    query = query + " and sc.SubCategoriaFinanceiraId = '" + filters.SubCategoriaId + "' ";
                                 if (filters.Situacao != "")
                                     query = query + " and d.Situacao = '" + filters.Situacao + "' ";
                 cn.Open();

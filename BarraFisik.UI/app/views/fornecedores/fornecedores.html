@@ -34,7 +34,7 @@
                     <table ng-table="tableParams" class="table">
                         <tbody ng-repeat="f in $data">
                         <tr ng-class-odd="'odd'" ng-class-even="'even'">
-                            <td class="rowTd" style="max-width: 25px;"><a ng-click="openFicha(f)" class="btn" tooltip-placement="top" tooltip="Ficha"><i class="ti-id-badge"></i></a></td>
+                            <td class="rowTd" style="width: 25px;"><a ng-click="openFicha(f)" class="btn" tooltip-placement="top" tooltip="Ficha"><i class="ti-id-badge"></i></a></td>
                             <td class="rowTd" data-title="'Nome'" sortable="'Nome'">{{f.Nome}}</td>
                             <td class="rowTd" data-title="'Telefone'" sortable="'Telefone'">{{f.Telefone1 | telefone}}</td>
                             <td class="rowTd" data-title="'Telefone 2'" sortable="'Telefone2'">{{f.Telefone2 | telefone}}</td>

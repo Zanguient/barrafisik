@@ -32,7 +32,7 @@
                 <table ng-table="tableParams" class="table" id="table">
                     <tbody ng-repeat="r in $data">
                     <tr ng-class-odd="'odd'" ng-class-even="'even'">
-                        <td class="rowTd" id="ficha" style="max-width: 25px;"><a ng-click="openFicha(r)" class="btn" tooltip-placement="top" tooltip="Ficha"><i class="ti-id-badge"></i></a></td>
+                        <td class="rowTd" id="ficha" style="max-width: 30px;"><a ng-click="openFicha(r)" class="btn" tooltip-placement="top" tooltip="Ficha"><i class="ti-id-badge"></i></a></td>
                         <td class="rowTd" data-title="'Categoria'" sortable="'CategoriaFinanceira.Categoria'">{{r.CategoriaFinanceira.Categoria}}  </td>
                         <td class="rowTd" data-title="'SubCategoria'" sortable="'SubCategoriaFinanceira.SubCategoria'">{{r.SubCategoriaFinanceira.SubCategoria}}</td>
                         <td class="rowTd" data-title="'Cliente'" sortable="'Cliente.Nome'">{{r.Cliente.Nome}}</td>

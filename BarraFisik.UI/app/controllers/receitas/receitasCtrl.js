@@ -7,6 +7,7 @@
         var vm = this;
         vm.receitas = [];
         vm.categorias = [];
+        $scope.search = {};
 
         activate();
 
@@ -88,7 +89,7 @@
             });
             vm.modalInstance.result.then(function (data) {
                 SweetAlert.swal("Sucesso!", "Receita cadastrada com sucesso!", "success");
-                receitasData.getReceitas().then(function (result) {
+                receitasData.searchReceitas($scope.search).then(function (result) {
                     vm.receitas = result.data;
                 });
             }, function () {
@@ -116,10 +117,9 @@
             });
             vm.modalInstance.result.then(function (data) {
                 SweetAlert.swal("Sucesso!", "Receita salva com sucesso!", "success");
-                receitasData.getReceitas().then(function (result) {
+                receitasData.searchReceitas($scope.search).then(function (result) {
                     vm.receitas = result.data;
                 });
-                atualizaValores(vm.receitas);
             }, function () {
                 console.log('Cancelled');
             });

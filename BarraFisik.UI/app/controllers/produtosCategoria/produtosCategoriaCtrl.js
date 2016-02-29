@@ -67,9 +67,9 @@
                             if (vm.categorias[i].ProdutoCategoriaId === id) {
                                 vm.categorias.splice(i, 1);
                                 return false;
-                            }
-                            $scope.tableParams.reload();
+                            }                            
                         });
+                        $scope.tableParams.reload();
                     }).error(function (error) {
                         SweetAlert.swal("Erro!", error.Message, "error");
                     });

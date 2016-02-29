@@ -7,6 +7,7 @@
         var vm = this;
         vm.despesas = [];
         vm.categorias = [];
+        $scope.search = {};
 
         activate();
 
@@ -78,7 +79,7 @@
             });
             vm.modalInstance.result.then(function (result) {
                 SweetAlert.swal("Sucesso!", "Despesa cadastrada com sucesso!", "success");
-                despesasData.getDespesas().then(function (result) {
+                despesasData.searchDespesas($scope.search).then(function (result) {
                     vm.despesas = result.data;
                 });
             }, function () {
@@ -106,7 +107,7 @@
             });
             vm.modalInstance.result.then(function (data) {
                 SweetAlert.swal("Sucesso!", "Despesa salva com sucesso!", "success");
-                despesasData.getDespesas().then(function (result) {
+                despesasData.searchDespesas($scope.search).then(function (result) {
                     vm.despesas = result.data;
                 });
             }, function () {

@@ -24,7 +24,7 @@
             page: 1, // show first page
             count: 40, // count per page
             sorting: {
-                Descricao: 'asc' // initial sorting
+                Nome: 'asc' // initial sorting
             }
         }, {
             counts: [],

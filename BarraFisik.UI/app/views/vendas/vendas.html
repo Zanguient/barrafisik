@@ -36,7 +36,7 @@
                         <td class="rowTd" data-title="'Data Pag.'">{{v.DataPagamento | date:'dd/MM/yyyy'}}</td>
                         <td class="rowTd" data-title="'Tipo Pag.'">{{v.TipoPagamento.Descricao}}</td>
                         <td class="rowTd" data-title="'Situação'">{{v.Receitas.Situacao}}</td>
-                        <td class="rowTd" data-title="'Valor Total'">{{v.ValorTotal | currency}}</td>
+                        <td class="rowTd" data-title="'Valor Total'"><span class="text-primary">{{v.ValorTotal | currency}}</span></td>
                         <td class="text-right">
                             <div class="visible-md visible-lg hidden-sm hidden-xs">
                                 <a ng-click="openProdutos(v.VendaId)" class="btn btn-transparent btn-xs tooltips" tooltip-placement="top" tooltip="Produtos"><i class="fa fa-list-ul"></i></a>

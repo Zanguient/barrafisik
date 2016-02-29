@@ -12,7 +12,7 @@
 
 
         $scope.add = function (produto) {
-            produto.Valor = produto.Valor * produto.Quantidade;
+            //produto.Valor = produto.Valor * produto.Quantidade;
             $scope.totalProdutos = $scope.totalProdutos + (produto.Valor * produto.Quantidade);
             $scope.produtos.push(produto);
             $scope.produto = {}

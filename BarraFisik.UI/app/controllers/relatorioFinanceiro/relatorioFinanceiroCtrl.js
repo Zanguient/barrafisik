@@ -6,6 +6,7 @@
     function relatorioFinanceiroCtrl($scope, ngTableParams, relatorioFinanceiroData, categoriaFinanceiraData, $filter, subCategoriaData) {
         var vm = this;
         $scope.search = false;
+        $scope.filter = {};
 
         var filterDefault = {
             Tipo: undefined,
