@@ -1,0 +1,42 @@
+﻿<fieldset>
+    <legend> Pesquisar </legend>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="DataEmissao">
+                        Data Venda
+                    </label>
+                    <div class="form-inline">
+                        <input type="date" class="form-control input-sm" id="DataEmissao" ng-model="search.VendaInicio" data-date-format="YYYY-MM-DD">
+                        <input type="date" class="form-control input-sm" ng-model="search.VendaFim">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="DataVencimento">
+                        Data Vencimento
+                    </label>
+                    <div class="form-inline">
+                        <input type="date" class="form-control input-sm" id="DataVencimento" ng-model="search.VencimentoInicio">
+                        <input type="date" class="form-control input-sm" ng-model="search.VencimentoFim">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="DataPagamento">
+                        Data Pagamento
+                    </label>
+                    <div class="form-inline">
+                        <input type="date" class="form-control input-sm" id="DataPagamento" ng-model="search.PagamentoInicio">
+                        <input type="date" class="form-control input-sm" ng-model="search.PagamentoFim">
+                    </div>
+                    <button type="button" class="btn btn-blue btn-sm pull-right" tooltip-placement="top" tooltip="Pesquisar" ng-click="pesquisar(search)"><i class="fa fa-search" /></button>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</fieldset>

@@ -1,0 +1,36 @@
+﻿<form name="FormEdit" id="formEdit" novalidate ng-submit="formEdit.submit(FormEdit, e)">
+    <table class="table no-bg">
+        <tr>
+            <td> <b>Armazém: </b> </td>
+            <td>
+                {{e.Armazem.Descricao}}
+            </td>
+            <td> <b>Produto:</b> </td>
+            <td>
+                {{e.Produtos.Nome}}
+            </td>
+            <td> <b>Qtde.:</b> </td>
+            <!--<td ng-class="{'has-error':FormEdit.qtde.$dirty && FormEdit.qtde.$invalid, 'has-success':FormEdit.qtde.$valid}">
+                <input type="text" name="qtde" class="form-control width-100" ng-model="e.Quantidade" required/>
+                <span class="error text-small block" ng-if="FormEdit.qtde.$dirty && FormEdit.qtde.$invalid">Informe a Qtde.</span>
+            </td>-->
+            <td>{{e.Quantidade}}</td>
+            <td> <b>Valor Un.: </b></td>
+            <td ng-class="{'has-error':FormEdit.ValorUnitario.$dirty && FormEdit.ValorUnitario.$invalid, 'has-success':FormEdit.ValorUnitario.$valid}">
+                <input type="text" class="form-control width-100" name="ValorUnitario" ng-model="e.ValorUnitario" mask-money required/>
+                <span class="error text-small block" ng-if="FormEdit.ValorUnitario.$dirty && FormEdit.ValorUnitario.$invalid">Informe o Valor</span>
+            </td>
+            <td> <b>Total:</b> </td>
+            <td>
+                {{e.ValorTotal = e.Quantidade * e.ValorUnitario | currency}}
+            </td>
+            <td>
+                <div class="pull-right">
+                    <input type="submit" class="btn btn-primary btn-sm margin-right-15" value="Salvar">
+                    <input type="button" class="btn btn-primary btn-sm margin-right-15" value="Cancelar" ng-click="setEditId(-1)">
+                </div>
+            </td>
+        </tr>
+    </table>
+    <!--  class="editRowTd" -->
+</form>

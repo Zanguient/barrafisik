@@ -1,0 +1,125 @@
+﻿<div class="modal-header">
+    <h3 class="modal-title">Nova Venda</h3>
+</div>
+<form name="Form" id="form" novalidate ng-submit="form.submit(Form, venda)">
+    <div class="modal-body col-md-12">
+        <div class="row">
+            <div class="col-md-12">
+
+                <table class="table no-bg">
+                    <tr>
+                        <td class="form-inline" style="min-width: 130px">
+                            <a ng-click="isCliente=true" ng-class="{'text-light':!isCliente, 'text-dark': isCliente}"> Cliente </a> / <a ng-click="isCliente=false" ng-class="{'text-light':isCliente, 'text-dark': !isCliente}"> Outro: </a>
+                        </td>
+                        <td colspan="2" ng-if="isCliente">
+                            <input type="text" class="form-control input-sm" placeholder="Selecione..."
+                                   ng-model="venda.Cliente"
+                                   typeahead="c as c.Nome for c in clientes | filter:{Nome:$viewValue}" typeahead-show-hint="true" typeahead-min-length="2">
+                        </td>
+                        <td ng-if="!isCliente" colspan="2" class="form-inline">
+                            <div class="form-group">
+                                <input type="text" placeholder="Descricao" class="form-control input-sm" ng-model="venda.Descricao">
+                            </div>
+                        </td>
+                        <td>Aramzém: <span class="symbol required"></span></td>
+                        <td colspan="2">
+                            <select name="Armazem" ng-model="venda.ArmazemId" class="text-bold" style="min-width: 150px;" ng-change="carregarEstoques()">
+                                <option value=""><b>Selecione...</b></option>
+                                <option ng-repeat="a in armazem | orderBy: 'Descricao'" value="{{a.ArmazemId}}">{{a.Descricao}}</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Produto: </td>
+                        <td colspan="2">
+                            <select name="Produtos" ng-model="produto.EstoqueId" ng-disabled="venda.ArmazemId == null || estoques.length == 0" ng-change="carregarPreco(this)" class="text-bold">
+                                <option value=""><b>Selecione...</b></option>
+                                <option ng-repeat="e in estoques | orderBy: 'Produtos.Nome'" value="{{e.EstoqueId}}">{{e.Produtos.Nome}}</option>
+                            </select>
+                        </td>
+                        <td>Qtde.: </td>
+                        <td>
+                            <input class="form-control input-sm width-100" type="number" min="1" max="{{estoque.Quantidade}}" name="Quantidade" ng-model="produto.Quantidade">
+                            <span class="error text-small block" ng-if="Form.Quantidade.$dirty && Form.Quantidade.$error.max">Estoque Insuficiente</span>
+                        </td>
+                        <td><input type="button" class="btn btn-primary btn-o" value="Add" ng-click="add(produto)" ng-disabled="produto.Quantidade == null || produto.EstoqueId == null"/></td>
+                    </tr>
+                    <tr ng-if="produto.EstoqueId != null">
+                        <td>Estoque</td>
+                        <td> Qtde.: <span class="text-bold text-azure">{{estoque.Quantidade}}</span> </td>
+                        <td> Preço: <span class="text-bold text-azure text-extra-large">{{estoque.ValorUnitario | currency}}</span> </td>
+                        <td>SubTotal: </td>
+                        <td> <span class="text-bold text-azure text-extra-large">{{produto.Quantidade * estoque.ValorUnitario | currency}} </span></td>
+                    </tr>
+                    <tr>
+                        <td>Data Vencimento: <span class="symbol required"></span></td>
+                        <td ng-class="{'has-error':Form.DataVencimento.$dirty && Form.DataVencimento.$invalid, 'has-success':Form.DataVencimento.$valid}">
+                            <input class="form-control input-sm" name="DataVencimento" type="date" ng-model="venda.DataVencimento" required>
+                            <span class="error text-small block" ng-if="Form.DataVencimento.$error.date">Data de Vencimento inválida.</span>
+                            <span class="error text-small block" ng-if="Form.DataVencimento.$dirty && Form.DataVencimento.$invalid">Informe a Data de Vencimento</span>
+                        </td>
+                        <td>Dt Pagamento: </td>
+                        <td>
+                            <input class="form-control input-sm width-150" name="DataPagamento" type="date" ng-model="venda.DataPagamento">
+                            <span class="error text-small block" ng-if="Form.DataPagamento.$error.date">Data de Pagamento inválida.</span>
+                        </td>
+                        <td colspan="2">
+                            <select name="TiposPag" ng-model="venda.TipoPagamentoId" class="text-bold">
+                                <option value="">Tipo Pagamento... </option>
+                                <option ng-repeat="t in tiposPagamento" value="{{t.TipoPagamentoId}}">{{t.Sigla}} - {{t.Descricao}}</option>
+                            </select>
+                        </td>
+                    </tr>
+                </table>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-8">
+                <h4><span ng-show="produtos.length !=0" class="ti-shopping-cart-full"></span><span ng-show="produtos.length ==0" class="ti-shopping-cart"></span> Produtos</h4>
+                <table ng-table="tableParams" class="table">
+                    <tbody ng-repeat="p in produtos">
+                    <tr ng-class-odd="'odd'" ng-class-even="'even'">
+                        <td class="rowTd" data-title="'Produto'">{{p.Nome}}</td>
+                        <td class="rowTd" data-title="'Qtde.'">{{p.Quantidade}}</td>
+                        <td class="rowTd" data-title="'Valor'"> {{p.Valor | currency}}</td>
+                        <td class="rowTd" data-title="'Total'">{{p.Quantidade * p.Valor | currency}}</td>
+                        <td class="center">
+                            <div class="visible-md visible-lg hidden-sm hidden-xs">
+                                <a ng-click="remove($index, p)" class="btn btn-transparent btn-xs" tooltip-placement="top" tooltip="Excluir"><i class="fa fa-trash"></i></a>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <td colspan="2"></td>
+                        <td> <span class="text-bold text-extra-large"> Total: </span></td>
+                        <td colspan="2"> <span class="text-bold text-danger text-extra-large">{{totalProdutos | currency}} </span></td>
+                    </tr>
+                    </tfoot>
+                </table>
+            </div>
+            <div class="col-md-4">
+                <h4> <span class="ti-money"></span>Valor Pago</h4>
+                <table class="table no-bg">
+                    <tr>
+                        <td class="width-100">R$ Recebido:</td>
+                        <td><input class="form-control width-100" type="text" mask-money name="pago" ng-model="ValorRecebido"></td>
+                    </tr>
+                    <tr>
+                        <td> Troco: </td>
+                        <td>
+                            <b class="text-danger text-extra-large">{{ ValorRecebido - totalProdutos | currency}}</b>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-primary btn-o">Finalizar Compra</button>
+        <button type="button" class="btn btn-primary btn-o" ng-click="vm.cancel()">Fechar</button>
+    </div>
+</form>

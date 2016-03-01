@@ -1,0 +1,66 @@
+﻿<div class="modal-header">
+    <h3 class="modal-title">Funcionários</h3>
+</div>
+<div class="modal-body">
+    <ul>
+        <li ng-repeat="error in vm.errors" class="text-danger">{{error}}</li>
+    </ul>
+    <form name="FormEdit" novalidate ng-submit="formEdit.submit(FormEdit, funcionario)">
+        <table class="table no-bg">
+            <tr>
+                <td>Nome: <span class="symbol required"></span></td>
+                <td ng-class="{'has-error':FormEdit.Nome.$dirty && FormEdit.Nome.$invalid, 'has-success':FormEdit.Nome.$valid}">
+                    <input class="form-control" type="text" name="Nome" ng-model="funcionario.Nome" required>
+                    <span class="error text-small block" ng-if="FormEdit.Nome.$dirty && FormEdit.Nome.$invalid">Informe o Nome</span>
+                </td>
+                <td>CPF: </td>
+                <td ng-class="{'has-error':FormEdit.cpf.$dirty && FormEdit.cpf.$invalid, 'has-success':FormEdit.cpf.$valid}">
+                    <input class="form-control" type="text" name="cpf" ng-cpf ng-model="funcionario.Cpf" ui-mask="999.999.999-99">
+                    <span class="error text-small block" ng-if="FormEdit.cpf.$dirty && FormEdit.cpf.$invalid">Informe um CPF válido</span>
+                </td>
+            </tr>
+            <tr>
+                <td>Telefone: </td>
+                <td>
+                    <input class="form-control" type="text" ng-model="funcionario.Telefone" ui-mask="?(99) 9999-9999">
+                </td>
+                <td>Celular: </td>
+                <td>
+                    <input class="form-control" type="text" ng-model="funcionario.Celular" ui-mask="?(99) 99999-9999">
+                </td>
+            </tr>
+            <tr>
+                <td>Endereço: </td>
+                <td>
+                    <input class="form-control" type="text" ng-model="funcionario.Endereco">
+                </td>
+                <td>Bairro: </td>
+                <td>
+                    <input class="form-control" type="text" ng-model="funcionario.Bairro">
+                </td>
+            </tr>
+            <tr>
+                <td>E-mail: </td>
+                <td>
+                    <input class="form-control" type="text" ng-model="funcionario.Email">
+                </td>
+                <td>Data Nascimento: </td>
+                <td ng-class="{'has-error':Form.DataNascimento.$dirty && Form.DataNascimento.$invalid, 'has-success':Form.DataNascimento.$valid}">
+                    <input class="form-control" name="DataNascimento" type="date" ng-model="funcionario.DataNascimento">
+                    <span class="error text-small block" ng-if="Form.DataNascimento.$error.date">Data de Nascimento inválida.</span>
+                </td>
+            </tr>
+        </table>
+        <!-- class="editRowTd" -->
+        <div class="modal-footer">
+            <div class="pull-left">
+                <div class="checkbox text-left" id="isAtivo">
+                    <switch ng-model="funcionario.isAtivo" on="Ativo" off="Inativo" class="green"></switch>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary btn-o">Salvar</button>
+            <button type="button" class="btn btn-primary btn-o" ng-click="vm.cancel()">Fechar</button>
+        </div>
+    </form>
+</div>
+                

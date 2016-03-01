@@ -1,0 +1,162 @@
+﻿<style>
+    @page {
+        orphans: 3;
+        widows: 3;
+        margin: 0;
+        padding-bottom: 30px;
+        margin-top: 35px;
+    }
+
+    #printMsg {
+        display: none;
+    }
+
+    @media print {
+
+        * {
+            background: transparent !important;
+            color: #000 !important;
+            text-shadow: none !important;
+            filter: none !important;
+            -ms-filter: none !important;
+            margin-top: 0 !important;
+            padding-top: 0 !important;
+        }
+
+        body {
+            line-height: 1.4em;
+        }
+
+        #printMsg {
+            display: block;
+        }
+
+        .footer-inner {
+            display: none !important;
+        }
+
+        .main-navigation-menu {
+            display: none !important;
+        }
+
+        .navbar-title {
+            display: none !important;
+        }
+
+        #nav, #sidebar {
+            display: none !important;
+        }
+
+        #Valor {
+            min-width: 120px;
+        }
+    }
+</style>
+
+<!-- start: PAGE TITLE -->
+<section id="page-title" class="hidden-print">
+    <div class="row">
+        <div class="col-sm-8">
+            <h1 class="mainTitle">Relat&oacute;rio Financeiro - Receitas</h1>
+            <span class="mainDescription"></span>
+        </div>
+        <div ncy-breadcrumb></div>
+    </div>
+</section>
+<br />
+<br />
+
+<div class="hidden-print" ng-include src="'app/views/relatorioFinanceiro/partial/partialSearchDespesas.html'"></div>
+
+<div ng-if="search">
+    <div ng-show="loading">
+        <img src="/assets/images/loading.gif" />Carregando Dados Financeiros...
+    </div>
+    <div class="container-fluid container-fullw" ng-show="!loading">
+        <div class="row">
+            <div class="col-md-6">
+                <h5 class="pull-left ">Total: <span class="badge badge-info">{{total}}</span></h5>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="print">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                            <th ng-click="sort('Categoria')" style="cursor: pointer">
+                                Categoria
+                                <i ng-class="{'fa fa-chevron-up':isSortUp('Categoria'),'fa fa-chevron-down':isSortDown('Categoria')}"></i>
+                            </th>
+                            <th ng-click="sort('SubCategoria')" style="cursor: pointer">
+                                SubCategoria
+                                <i ng-class="{'fa fa-chevron-up':isSortUp('Nome'),'fa fa-chevron-down':isSortDown('SubCategoria')}"></i>
+                            </th>
+                            <th ng-click="sort('DataEmissao')" style="cursor: pointer">
+                                Emissao
+                                <i ng-class="{'fa fa-chevron-up':isSortUp('DataEmissao'),'fa fa-chevron-down':isSortDown('DataEmissao')}"></i>
+                            </th>
+                            <th ng-click="sort('DataVencimento')" style="cursor: pointer">
+                                Venc.
+                                <i ng-class="{'fa fa-chevron-up':isSortUp('DataVencimento'),'fa fa-chevron-down':isSortDown('DataVencimento')}"></i>
+                            </th>
+                            <th ng-click="sort('DataPagamento')" style="cursor: pointer">
+                                Pag.
+                                <i ng-class="{'fa fa-chevron-up':isSortUp('DataPagamento'),'fa fa-chevron-down':isSortDown('DataPagamento')}"></i>
+                            </th>
+                            <th ng-click="sort('Situacao')" id="Situacao" style="cursor: pointer; ">
+                                Situção
+                                <i ng-class="{'fa fa-chevron-up':isSortUp('Situacao'),'fa fa-chevron-down':isSortDown('Situacao')}"></i>
+                            </th>
+                            <th ng-click="sort('ValorTotal')" id="ValorTotal" style="cursor: pointer;" class="text-right">
+                                Valor Total
+                                <i ng-class="{'fa fa-chevron-up':isSortUp('ValorTotal'),'fa fa-chevron-down':isSortDown('ValorTotal')}"></i>
+                            </th>
+                            </thead>
+                            <tbody ng-repeat="rf in vm.relatorioFinanceiroReceitas  | orderBy:sortField:reverse">
+                                <tr ng-class-odd="'odd'" ng-class-even="'even'">
+                                    <td class="rowTd">{{rf.Categoria}} </td>
+                                    <td class="rowTd">{{rf.SubCategoria}}</td>
+                                    <td class="rowTd">{{rf.DataEmissao | date:'dd/MM/yy'}}</td>
+                                    <td class="rowTd">{{rf.DataVencimento | date:'dd/MM/yy'}}</td>
+                                    <td class="rowTd">{{rf.DataPagamento | date:'dd/MM/yy'}}</td>
+                                    <td class="rowTd" style="width: 20px;"> {{rf.Situacao}}</td>
+                                    <td class="rowTd text-right text-bold"><span ng-class="{'text-warning': rf.Situacao == 'Pendente', 'text-primary': rf.Situacao == 'Quitado' }">{{rf.ValorTotal | currency}}</span></td>
+                                </tr>
+                                <tr ng-class-odd="'odd'" ng-class-even="'even'">
+                                    <td> &nbsp;<i class="fa fa-caret-right"></i><b> &nbsp;Documento:</b> {{rf.Documento}} </td>
+                                    <td colspan="2"><b>Fornecedor:</b> {{rf.Fornecedor}}</td>
+                                    <td colspan="4"> <b >Funcionário:</b> {{rf.Funcionario}}</td>
+                                    
+                                </tr>
+                                <tr ng-class-odd="'odd'" ng-class-even="'even'">                                    
+                                    <td colspan="4">&nbsp;<i class="fa fa-caret-right"></i> <b>&nbsp;Tipo Pagto.:</b> {{rf.TipoPagamento}}</td>
+                                    <td colspan="3" class="text-right">Juros / Multa: {{rf.Juros | currency}} / {{rf.Multa | currency}}</td>                                         
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="5"></td>
+                                    <td class="text-right"><b>TOTAL: </b></td>
+                                    <td class="text-right">
+                                        <b ng-show="totalReceitas > 0" class="text-primary">{{totalReceitas | currency}}</b>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12 invoice-block">
+                <div class="text-right text-small" id="printMsg"> Documento impresso em {{app.date | date:'dd/MM/yyyy'}} por {{userInfo.nome | uppercase}}. </div>
+                <br>
+                <a onclick="javascript:window.print();" class="btn btn-lg btn-primary hidden-print">
+                    Print <i class="fa fa-print"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,19 @@
+﻿<div class="modal-header">
+    <h3 class="modal-title">Movimentacções Estoque</h3>
+</div>
+<div class="modal-body">
+    <table ng-table="tableParams" class="table ">
+        <tbody ng-repeat="m in $data">
+        <tr ng-class-odd="'odd'" ng-class-even="'even'">
+            <td class="rowTd" data-title="'Data Movimento'" sortable="'DataMovimento'">{{m.DataMovimento | date:'dd/MM/yyyy'}}</td>
+            <td class="rowTd" data-title="'Fornecedor'" sortable="'Fornecedores.Nome'">{{m.Fornecedores.Nome}}</td>
+            <td class="rowTd" data-title="'Qtd.'" sortable="'Quantidade'">{{m.Quantidade}}</td>
+            <td class="rowTd" data-title="'Valor Un. Custo'" sortable="'ValorUnCusto'"><span class="text-primary">{{m.ValorUnCusto | currency}} </span></td>
+            <td class="rowTd" data-title="'Total Custo'" sortable="'ValorTotalCusto'"><span class="text-primary">{{m.ValorTotalCusto | currency}} </span></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary btn-o" ng-click="vm.cancel()">Fechar</button>
+</div>

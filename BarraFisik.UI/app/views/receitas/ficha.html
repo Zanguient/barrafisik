@@ -1,0 +1,63 @@
+﻿<div class="modal-header">
+    <h3 class="modal-title">Receita</h3>   
+</div>
+<div class="modal-body">
+        <table class="table no-bg">
+            <tr>
+                <td class="text-bold">Documento: </td>
+                <td> {{receita.Documento}} </td>
+                <td class="text-bold">Categoria: </td>
+                <td> {{receita.CategoriaFinanceira.Categoria}} </td>
+                <td colspan="2" class="text-bold">SubCategoria:</td>
+                <td> {{receita.SubCategoriaFinanceira.SubCategoria}}</td>
+            </tr>
+            <tr ng-if="receita.SubCategoriaFinanceiraId == '0d57c87d-3bd9-420b-ab98-123fdb75a269'">
+                <td class="text-bold">Referência:</td>
+                <td>{{receita.MesReferencia}} / {{receita.AnoReferencia}}</td>
+                <td class="text-bold">Personal:</td>
+                <td> <div ng-show="receita.isPersonal == true"> Sim </div> <div ng-show="receita.isPersonal == false"> Não </div> </td>
+                <td class="text-bold">Valor Personal:</td>
+                <td>{{receita.ValorPersonal | currency: 'R$ '}}</td>
+            </tr>
+            <tr>
+                <td class="text-bold" ng-if="receita.Cliente != null">Cliente: </td>
+                <td class="text-bold" ng-if="receita.Nome != null">Outro: </td>
+                <td colspan="3" ng-if="receita.Cliente != null"> {{receita.Cliente.Nome}} </td>
+                <td colspan="3" ng-if="receita.Nome != null"> {{receita.Nome}} / {{receita.CpfCnpj}} </td>
+                <td class="text-bold">Funcionário: </td>
+                <td colspan="2"> {{receita.Funcionarios.Nome}} </td>
+            </tr>
+            <tr>
+                <td class="text-bold">Valor: </td>
+                <td> {{receita.Valor | currency: 'R$ '}} </td>
+                <td class="text-bold">Juros: </td>
+                <td> {{receita.Juros | currency: 'R$ '}} </td>
+                <td class="text-bold">Multa: </td>
+                <td> {{receita.Multa | currency: 'R$ '}} </td>
+                <td class="text-bold "> <div class="text-primary">Total: {{receita.ValorTotal | currency: 'R$ '}}</div> </td>
+            </tr>
+            <tr>
+                <td class="text-bold">Emissão: </td>
+                <td> {{receita.DataEmissao | date:'dd/MM/yyyy'}} </td>
+                <td class="text-bold">Vencimento: </td>
+                <td> {{receita.DataVencimento | date:'dd/MM/yyyy'}} </td>
+                <td class="text-bold">Pagamento: </td>
+                <td> {{receita.DataPagamento | date:'dd/MM/yyyy'}} </td>
+            </tr>
+            <tr>
+                <td class="text-bold">Tipo Pagamento: </td>
+                <td > {{receita.TipoPagamento.Descricao}} </td>
+                <td class="text-bold">Observação: </td>
+                <td colspan="4"> {{receita.Observacao}} </td>
+            </tr>
+        </table>
+    <div class="modal-footer">
+        <div class="pull-left">
+            <span ng-if="receita.Situacao == 'Quitado'" class="label label-sm label-success">Quitado</span>
+            <span ng-if="receita.Situacao == 'Vencido'" class="label label-sm label-danger">Vencido</span>
+            <span ng-if="receita.Situacao == 'Pendente'" class="label label-sm label-warning">Pendente</span>
+        </div>
+        <button type="button" class="btn btn-primary btn-o" ng-click="vm.cancel()">Fechar</button>
+    </div>
+</div>
+                

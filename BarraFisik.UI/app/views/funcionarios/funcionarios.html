@@ -1,0 +1,63 @@
+﻿<section id="page-title">
+    <div class="row">
+        <div class="col-sm-8">
+            <h1 class="mainTitle">Funcionários</h1>
+            <span class="mainDescription">Nossos Colaboradores</span>
+        </div>
+        <div ncy-breadcrumb></div>
+    </div>
+</section>
+<div ng-show="loading"><img src="/assets/images/loading.gif" />Carregando Funcionários...</div>
+<!-- start: INLINE EDIT EXAMPLE -->
+<div class="container-fluid container-fullw" ng-show="!loading">
+    <div class="row">
+        <div class="col-md-12">
+            <div>
+                <div class="row margin-bottom-10">
+                    <div class="col-md-12">
+                        <h5 class="pull-left ">Total: <span class="badge badge-info">{{total}}</span></h5>
+
+                        <div class="button-group pull-right margin-right-10">
+                            <div class="checkbox clip-check check-primary check-md">
+                                <input type="checkbox" id="exibirInativos" ng-click="exibirTodos(ativo)">
+                                <label for="exibirInativos">
+                                    Exibir Intivos
+                                </label>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+                <button type="button" class="btn btn-primary btn-wide btn-scroll btn-scroll-top ti-plus" ng-click="openCadastrar()">
+                    <span>Cadastrar</span>
+                </button><br /><br />
+                <div class="table-responsive">
+                    <table ng-table="tableParams" class="table">
+                        <tbody ng-repeat="f in $data">
+                        <tr ng-class-odd="'odd'" ng-class-even="'even'">
+                            <td class="rowTd" style="max-width: 25px;"><a ng-click="openFicha(f)" class="btn" tooltip-placement="top" tooltip="Ficha"><i class="ti ti-id-badge"></i></a></td>
+                            <td class="rowTd" data-title="'Nome'" sortable="'Nome'">{{f.Nome}}</td>                            
+                            <td class="rowTd" data-title="'Telefone'" sortable="'Telefone'">{{f.Telefone | telefone}}</td>
+                            <td class="rowTd" data-title="'Celular'" sortable="'Celular'">{{f.Celular | celular}}</td>
+                            <td class="rowTd" data-title="'Endereço'" sortable="'Endereco'">{{f.Endereco}}</td>
+                            <td class="rowTd" data-title="'Bairro'" sortable="'Bairro'">{{f.Bairro}}</td>
+                            <td class="rowTd" data-title="'E-mail'" sortable="'Email'">{{f.Email}}</td>
+                            <td class="rowTd" data-title="'Ativo'" sortable="'isAtivo'">
+                                <span ng-if="f.isAtivo" class="label label-sm label-success">Ativo</span>
+                                <span ng-if="!f.isAtivo" class="label label-sm label-inverse">Inativo</span>
+                            </td>
+                            <td class="text-right" ng-if="userInfo.isAdmin">
+                                <div class="visible-md visible-lg hidden-sm hidden-xs">
+                                    <a ng-click="openEditar(f)" class="btn btn-xs" tooltip-placement="top" tooltip="Editar"><i class="fa fa-pencil"></i></a>
+                                    <a ng-click="vm.delete(f.FuncionarioId)" class="btn btn-xs" tooltip-placement="top" tooltip="Excluir"><i class="fa fa-times"></i></a>
+                                </div>
+                            </td>
+                        </tr>                            
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end: INLINE EDIT EXAMPLE -->

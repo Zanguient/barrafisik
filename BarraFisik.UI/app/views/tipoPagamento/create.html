@@ -1,0 +1,23 @@
+﻿<form name="Form" id="form" novalidate ng-submit="form.submit(Form, tipo)">
+    <table class="table no-bg">
+        <tr>            
+            <td>Sigla: <span class="symbol required"></span></td>
+            <td ng-class="{'has-error':Form.Sigla.$dirty && Form.Sigla.$invalid, 'has-success':Form.Sigla.$valid}">
+                <input class="form-control" type="text" name="Sigla" ng-model="tipo.Sigla" required>
+                <span class="error text-small block" ng-if="Form.Sigla.$dirty && Form.Sigla.$invalid">Informe a Sigla</span>
+            </td>
+            <td>Descrição: <span class="symbol required"></span></td>
+            <td ng-class="{'has-error':Form.Descricao.$dirty && Form.Descricao.$invalid, 'has-success':Form.Descricao.$valid}">
+                <input class="form-control" type="text" name="Descricao" ng-model="tipo.Descricao" required>
+                <span class="error text-small block" ng-if="Form.Descricao.$dirty && Form.Descricao.$invalid">Informe a Descrição</span>
+            </td>
+            <td colspan="2">
+                <div class="pull-right">
+                    <input type="submit" class="btn btn-primary btn-sm margin-right-15" value="Cadastrar">
+                    <input type="button" class="btn btn-primary btn-sm margin-right-15" value="Cancelar" ng-click="cancelCreate(Form)">
+                </div>
+            </td>   
+        </tr>   
+    </table>
+    <!-- class="editRowTd" -->
+</form>

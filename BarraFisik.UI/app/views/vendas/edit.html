@@ -1,0 +1,62 @@
+﻿<style>
+    .hackyhack {
+        position: relative;
+    }
+
+        .hackyhack .dropdown-menu {
+            top: auto !important;
+            bottom: 35px;
+        }
+</style>
+
+
+<form name="FormEdit" id="formEdit" novalidate ng-submit="formEdit.submit(FormEdit, v)">
+    <table class="table no-bg">
+        <tr>
+            <td>Data Vencimento: <span class="symbol required"></span></td>
+            <td ng-class="{'has-error':FormEdit.DataVencimento.$dirty && FormEdit.DataVencimento.$invalid, 'has-success':FormEdit.DataVencimento.$valid}">
+                <div class="form-horizontal width-150 hackyhack">
+                    <p class="input-group  margin-top-10">
+                        <input type="text" name="DataVencimento" disabled class="form-control" datepicker-popup="dd/MM/yyyy" ng-model="v.DataVencimento"
+                               is-open="opened[$index]" datepicker-options="dateOptions"
+                               ng-required="true" close-text="Fechar" />
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="open($event, $index)">
+                                <i class="glyphicon glyphicon-calendar"></i>
+                            </button>
+                        </span>
+                    </p>
+                </div>
+                <span class="error text-small block" ng-if="FormEdit.DataVencimento.$dirty && FormEdit.DataVencimento.$invalid">informe a dt. Vencimento</span>
+            </td>
+            <td>Data Pagamento: </td>
+            <td>
+                <div class="form-horizontal width-150 hackyhack">
+                    <p class="input-group  margin-top-10">
+                        <input type="text" id="DataPagamento" name="DataPagamento" disabled class="form-control" datepicker-popup="dd/MM/yyyy" ng-model="v.DataPagamento"
+                               is-open="opened[$index+1]" datepicker-options="dateOptions"
+                               ng-required="false" close-text="Fechar" />
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="open($event, $index+1)">
+                                <i class="glyphicon glyphicon-calendar"></i>
+                            </button>
+                        </span>
+                    </p>
+                </div>
+            </td>
+            <td colspan="2">
+                <select name="TiposPag" ng-model="v.TipoPagamentoId" class="text-bold">
+                    <option value="">Tipo Pagamento... </option>
+                    <option ng-selected="v.TipoPagamentoId == t.TipoPagamentoId" ng-repeat="t in tiposPagamento" value="{{t.TipoPagamentoId}}">{{t.Sigla}} - {{t.Descricao}}</option>
+                </select>
+            </td>
+            <td>
+                <div class="pull-right">
+                    <input type="submit" class="btn btn-primary btn-sm margin-right-15" value="Salvar">
+                    <input type="button" class="btn btn-primary btn-sm margin-right-15" value="Cancelar" ng-click="setEditId(-1)">
+                </div>
+            </td>
+        </tr>
+    </table>
+    <!--  class="editRowTd" -->
+</form>

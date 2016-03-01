@@ -1,0 +1,32 @@
+﻿<form name="Form" id="form" novalidate ng-submit="form.submit(Form, produto)">
+    <table class="table no-bg">
+        <tr>
+            <td>Aramzém: <span class="symbol required"></span></td>
+            <td colspan="2">
+                <select name="Armazem" ng-model="venda.ArmazemId" class="text-bold" style="min-width: 150px;" ng-change="carregarEstoques()">
+                    <option value=""><b>Selecione...</b></option>
+                    <option ng-repeat="a in armazem | orderBy: 'Descricao'" value="{{a.ArmazemId}}">{{a.Descricao}}</option>
+                </select>
+            </td>
+            <td>Produto: </td>
+            <td colspan="2">
+                <select name="Produtos" ng-model="produto.EstoqueId" ng-disabled="venda.ArmazemId == null || estoques.length == 0" ng-change="carregarPreco(this)" class="text-bold">
+                    <option value=""><b>Selecione...</b></option>
+                    <option ng-repeat="e in estoques | orderBy: 'Produtos.Nome'" value="{{e.EstoqueId}}">{{e.Produtos.Nome}}</option>
+                </select>
+            </td>
+            <td>Qtde.: </td>
+            <td>
+                <input class="form-control input-sm width-100" type="number" min="1" max="{{estoque.Quantidade}}" name="Quantidade" ng-model="produto.Quantidade">
+                <span class="error text-small block" ng-if="Form.Quantidade.$dirty && Form.Quantidade.$error.max">Estoque Insuficiente</span>
+            </td>
+            <td><input type="submit" class="btn btn-primary btn-o" value="Add" ng-disabled="produto.Quantidade == null || produto.EstoqueId == null"/></td>
+        </tr>
+        <tr ng-if="produto.EstoqueId != null">
+            <td> Estoque</td>
+            <td> Qtde.: <span class="text-bold text-azure">{{estoque.Quantidade}}</span> </td>
+            <td> Preço: <span class="text-bold text-azure text-extra-large">{{estoque.ValorUnitario | currency}}</span> </td>
+            <td colspan="2"> SubTotal: <span class="text-bold text-azure text-extra-large">{{produto.Quantidade * estoque.ValorUnitario | currency}}</span></td>
+        </tr>
+    </table>
+</form>

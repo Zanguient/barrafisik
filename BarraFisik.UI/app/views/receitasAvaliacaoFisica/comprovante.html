@@ -1,0 +1,68 @@
+﻿<style>
+    @media print {
+        .hidden-print{
+            display: none !important;
+        }
+
+        @page {
+            size: auto;   /* auto is the initial value */
+            margin: 0.5px;  /* this affects the margin in the printer settings */
+        }
+    }
+</style>
+<table style="width: 355px;">
+    <tr>
+        <td><img src="/assets/images/logo.jpg" width="150" /></td>
+        <td style="font-size: 18px; text-align: left">RECIBO</td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            <p style="text-align: justify">
+                Recebemos  do (a) Sr.(a) <b style="text-decoration: underline" id="cliente"></b> a importância
+                de <b id="valor"></b>, referente ao pagamento da Avaliação Física
+            <p style="text-align: center"><span id="data"></span> </p>
+            <p style="text-align: center">_______________________________</p>
+            <p style="font-size: 10px;">Rua Aymoré, 457 - Renato Gonçalves - Barreiras/BA. Tel.: 99979-5381 / 3612-0537</p>
+        </td>
+    </tr>
+</table>
+<button onclick="javascript:window.print();" class="hidden-print">
+    Imprimir <i class="fa fa-print"></i>
+</button>
+<script>
+    var parametrosDaUrl = window.location.search.split("?")[1];
+    var listaDeParametros = parametrosDaUrl.split("&");
+
+    var hash = {}
+    for (var i = 0; i < listaDeParametros.length; i++) {
+        var parametro = listaDeParametros[i].split("=");
+        var chave = parametro[0];
+        var valor = parametro[1];
+        hash[chave] = valor;
+    }
+
+    if (hash.mes < 10) {
+        hash.mes = '0' + hash.mes;
+    }
+
+    document.querySelector('#cliente').innerHTML = hash.cliente.replace(/%20/g, ' ');
+    document.querySelector('#valor').innerHTML = 'R$ ' + parseFloat(hash.valor).toFixed(2);
+
+    var arrayMes = new Array();
+    arrayMes[1] = "Janeiro";
+    arrayMes[2] = "Fevereiro";
+    arrayMes[3] = "Março";
+    arrayMes[4] = "Abril";
+    arrayMes[5] = "Maio";
+    arrayMes[6] = "Junho";
+    arrayMes[7] = "Julho";
+    arrayMes[8] = "Agosto";
+    arrayMes[9] = "Setembro";
+    arrayMes[10] = "Outubro";
+    arrayMes[11] = "Novembro";
+    arrayMes[12] = "Dezembro";
+    
+    var today = new Date();
+    document.querySelector('#data').innerHTML = 'Barreiras, ' + today.getDate() + ' de ' + arrayMes[today.getMonth() + 1] + ' de ' + today.getFullYear();
+    
+</script>

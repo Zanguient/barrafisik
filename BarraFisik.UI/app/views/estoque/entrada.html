@@ -1,0 +1,71 @@
+﻿<div class="modal-header">
+    <h3 class="modal-title">Entrada em Estoque</h3>
+</div>
+<div class="modal-body">
+    <ul>
+        <li ng-repeat="error in vm.errors" class="text-danger">{{error}}</li>
+    </ul>
+    <form name="Form" id="form" novalidate ng-submit="form.submit(Form, entrada)">
+        <div class="checkbox clip-check check-primary check-md">
+        </div>
+        <table class="table no-bg">
+            <tr>
+                <td> Armazém:</td>
+                <td> <b> {{estoque.Armazem.Descricao}}</b></td>
+                <td> Produto:</td>
+                <td> <b> {{estoque.Produtos.Nome}}</b></td>
+            </tr>
+            <tr>
+                <td>Estoque Atual:</td>
+                <td>Qtde.: <b> {{estoque.Quantidade}} </b></td>
+                <td>Valor Unitário: <b class="text-primary text-right"> {{estoque.ValorUnitario | currency}} </b></td>
+                <td>Valor Total: <b class="text-primary text-right">{{estoque.ValorTotal | currency}} </b></td>
+            </tr>
+            <tr>
+                <td>Fornecedor: </td>
+                <td colspan="2">
+                    <select name="Fornecedores" ng-model="entrada.FornecedorId" class="text-bold">
+                        <option value=""><b>Selecione...</b></option>
+                        <option ng-repeat="fo in fornecedores" value="{{fo.FornecedorId}}">{{fo.Nome}}</option>
+                    </select>
+                </td>                
+            </tr>
+            <tr>
+                <td>Qtde.: <span class="symbol required"></span></td>
+                <td ng-class="{'has-error':Form.Quantidade.$dirty && Form.Quantidade.$invalid, 'has-success':Form.Quantidade.$valid}">
+                    <input class="form-control width-150" type="number" name="Quantidade" ng-model="entrada.Quantidade" required>
+                    <span class="error text-small block" ng-if="Form.Quantidade.$dirty && Form.Quantidade.$invalid">Informe a Qtde.</span>
+                </td>
+                <td>Valor Un: <span class="symbol required"></span></td>
+                <td ng-class="{'has-error':Form.ValorUnVenda.$dirty && Form.ValorUnVenda.$invalid, 'has-success':Form.ValorUnVenda.$valid}">
+                    <input class="form-control width-150" type="text" mask-money name="ValorUnVenda" ng-model="entrada.ValorUnitario" required>
+                    <span class="error text-small block" ng-if="Form.ValorUnVenda.$dirty && Form.ValorUnVenda.$invalid">Informe o Valor Un. Venda</span>
+                </td>
+                <td> Total: </td>
+                <td> <b class="text-primary text-right">{{entrada.ValorTotal = entrada.Quantidade * entrada.ValorUnitario | currency}}</b></td>
+            </tr>
+            <tr>
+                <td>Valor Un. Custo: <span class="symbol required"></span></td>
+                <td ng-class="{'has-error':Form.ValorUnCusto.$dirty && Form.ValorUnCusto.$invalid, 'has-success':Form.ValorUnCusto.$valid}">
+                    <input class="form-control width-150" type="text" mask-money name="ValorUnCusto" ng-model="entrada.ValorUnCusto" required>
+                    <span class="error text-small block" ng-if="Form.ValorUnCusto.$dirty && Form.ValorUnCusto.$invalid">Informe o Un. Custo</span>
+                </td>
+
+                <td>Data Movimento: <span class="symbol required"></span></td>
+                <td ng-class="{'has-error':Form.DataMovimento.$dirty && Form.DataMovimento.$invalid, 'has-success':Form.DataMovimento.$valid}">
+                    <input class="form-control input-sm" name="DataMovimento" type="date" ng-model="entrada.DataMovimento" required>
+                    <span class="error text-small block" ng-if="Form.DataMovimento.$error.date">Data de Movimento inválida.</span>
+                    <span class="error text-small block" ng-if="Form.DataMovimento.$dirty && Form.DataMovimento.$invalid">Informe a Data de Movimento</span>
+                </td>
+                <td> Total Custo: </td>
+                <td><b class="text-danger text-right"> {{entrada.ValorTotalCusto = entrada.Quantidade * entrada.ValorUnCusto | currency}} </b> </td>
+            </tr>
+        </table>
+
+        <!-- class="editRowTd" -->
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-primary btn-o">Cadastrar</button>
+            <button type="button" class="btn btn-primary btn-o" ng-click="vm.cancel()">Fechar</button>
+        </div>
+    </form>
+</div>
