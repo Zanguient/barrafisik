@@ -3,18 +3,24 @@
 
     app.controller('vendasCtrl', vendasCtrl);
 
-    function vendasCtrl($scope, ngTableParams, vendasData, tipoPagamentoData, SweetAlert, $filter, $state, $modal, $timeout) {
+    function vendasCtrl($scope, ngTableParams, vendasData, tipoPagamentoData, clienteData, SweetAlert, $filter, $state, $modal, $timeout) {
         var vm = this;
         vm.vendas = [];
         $scope.search = {};
+        $scope.clientes = [];
+        $scope.isCliente = true;
+
+        //List Clientes
+        clienteData.getClientes().then(function (clientesList) {
+            $scope.clientes = clientesList.data;
+        });
 
         activate();
 
         function activate() {
             $scope.$emit('LOAD');
             vendasData.getAll().then(function (result) {
-                vm.vendas = result.data;
-                atualizaValores(vm.vendas);
+                vm.vendas = result.data;                
             });
 
             $scope.$emit('UNLOAD');
@@ -57,7 +63,7 @@
         });
 
         //Search
-        $scope.pesquisar = function (search) {
+        $scope.pesquisar = function (search) {            
             vendasData.searchVendas(search).then(function (result) {
                 vm.vendas = result.data;
             });
@@ -134,7 +140,14 @@
                     angular.element('.ng-invalid[name=' + firstError + ']').focus();
                     return;
 
-                } else {
+                } else {                    
+                    if (venda.Cliente != null) {
+                        venda.ClienteId = venda.Cliente.ClienteId;
+                        venda.Cliente = null;
+                    } else {
+                        venda.ClienteId = null;
+                    }
+
                     vendasData.edit(venda).success(function () {
                         SweetAlert.swal("Atualizado!", "Dados salvos com sucesso!", "success");
                         $scope.editId = -1;

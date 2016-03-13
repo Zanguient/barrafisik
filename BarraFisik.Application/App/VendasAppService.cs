@@ -96,21 +96,21 @@ namespace BarraFisik.Application.App
             var venda = Mapper.Map<VendasViewModel, Vendas>(GetById(id));
 
             BeginTransaction();
+
             _vendasService.Remove(venda);
 
             //Atualiza o estoque e Deleta a VendaProduto
             foreach (var item in _vendasProdutosService.GetByVenda(id))
-            {
+            {               
                 var e = _estoqueService.GetById(item.EstoqueId);
                 e.Quantidade = e.Quantidade + item.Quantidade;
-                e.SaldoVenda = e.SaldoVenda - (item.Quantidade * e.ValorUnitario);
+                e.SaldoVenda =  e.SaldoVenda - (item.Quantidade * e.ValorUnitario);
                 e.TotalVendido = e.TotalVendido - item.Quantidade;
 
-                _estoqueService.Add(e);
+                _estoqueService.AtualizaProdutos(e);
 
                 _vendasProdutosService.Remove(item);
             }
-            
 
             //Delete Receita Financeira
             _receitasService.Remove(_receitasService.GetById(venda.ReceitasId));

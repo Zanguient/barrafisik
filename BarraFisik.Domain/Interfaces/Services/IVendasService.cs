@@ -12,5 +12,6 @@ namespace BarraFisik.Domain.Interfaces.Services
         IEnumerable<Vendas> SearchVendas(SearchVendas sv);
         List<int> GetVendasAnual(int ano);
         IEnumerable<Vendas> GetVendasByCliente(Guid idCliente);
+        void DeleteVenda(Vendas venda);
     }
 }

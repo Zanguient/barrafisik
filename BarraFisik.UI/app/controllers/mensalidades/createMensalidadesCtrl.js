@@ -52,7 +52,9 @@
 
 
         $scope.clear = function () {
+            alert('Teste');
             $scope.DataPagamento = null;
+            $scope.mensalidade.TipoPagamentoId = null;
         };
 
         $scope.toggleMin = function () {
@@ -99,7 +101,9 @@
 
                     mensalidade.ClienteId = Cliente.ClienteId;
                     mensalidade.ValorTotal = mensalidade.Valor + mensalidade.ValorPersonal;
-                    mensalidade.Situacao = 'Quitado';
+                    if (mensalidade.DataPagamento != null)
+                        mensalidade.Situacao = 'Quitado';
+                    else mensalidade.Situacao = 'Pendente';
                     receitasData.addMensalidade(mensalidade).success(function (data) {                        
                         $modalInstance.close(data);
                     }).error(function (error) {

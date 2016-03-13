@@ -98,6 +98,10 @@
                 } else {
                     // Cadastra/Atualiza mensalidade
                     mensalidade.ClienteId = Cliente.ClienteId;
+                    if (mensalidade.DataPagamento != null)
+                        mensalidade.Situacao = 'Quitado';
+                    else mensalidade.Situacao = 'Pendente';
+
                     receitasData.editMensalidade(mensalidade).success(function () {
                         toaster.pop('success', '', 'Mensalidade Atualizada com Sucesso!');
                         receitasData.getMensalidades(Cliente.ClienteId).then(function (result) {

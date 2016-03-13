@@ -37,7 +37,7 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
     }).state('app.dashboard', {
         url: "/dashboard",
         templateUrl: "app/views/dashboard/dashboard.html",
-        resolve: loadSequence('jquery-sparkline', 'dashboardCtrl', 'clienteData', 'ngTable', 'clienteFilters', 'despesasData', 'vendasData'),
+        resolve: loadSequence('jquery-sparkline', 'dashboardCtrl', 'clienteData', 'ngTable', 'clienteFilters', 'despesasData', 'vendasData', 'receitasData'),
         title: 'Dashboard',
         ncyBreadcrumb: {
             label: 'Dashboard'
@@ -153,7 +153,7 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         .state('app.vendas', {
             url: "/vendas",
             templateUrl: "app/views/vendas/vendas.html",
-            resolve: loadSequence('vendasCtrl', 'vendasData', 'vendasProdutosData', 'tipoPagamentoData', 'ngTable', 'ui.mask'),
+            resolve: loadSequence('vendasCtrl', 'vendasData', 'vendasProdutosData', 'tipoPagamentoData', 'clienteData', 'ngTable', 'ui.mask'),
             title: 'Vendas',
             ncyBreadcrumb: {
                 label: 'Vendas'

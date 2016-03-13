@@ -8,5 +8,6 @@ namespace BarraFisik.Domain.Interfaces.Repository.ReadOnly
     {
         IEnumerable<Vendas> SearchVendas(SearchVendas sv);
         List<int> GetVendasAnual(int ano);
+        void DeleteVenda(Vendas venda);
     }
 }

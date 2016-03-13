@@ -59,15 +59,11 @@
             };
 
             modalService.showModal({}, modalOptions).then(function () {
-                receitasAvaliacaoFisicaData.deleteReceitaAvaliacao(id).then(function () {
+                receitasData.deleteReceita(id).then(function () {
                     toaster.pop('success', '', 'Dado Excluído com Sucesso!');
-                    $.each(vm.avaliacoes, function (i) {
-                        if (vm.avaliacoes[i].ReceitasAvaliacaoFisicaId === id) {
-                            vm.avaliacoes.splice(i, 1);
-                            return false;
-                        }
+                    receitasData.getAvaliacaoCliente(Cliente.ClienteId).then(function (result) {
+                        vm.avaliacoes = result.data;
                     });
-                    $scope.tableParams.reload();
                 }), function (data) {
 
                 };

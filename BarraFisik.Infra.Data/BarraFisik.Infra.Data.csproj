@@ -218,6 +218,7 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\ReadOnly\VendasProdutosRepositoryReadOnly.cs" />
     <Compile Include="Repository\ReadOnly\VendasRepositoryReadOnly.cs" />
     <Compile Include="Repository\VendasProdutosRepository.cs" />
     <Compile Include="Repository\VendasRepository.cs" />

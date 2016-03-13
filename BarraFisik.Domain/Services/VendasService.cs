@@ -43,5 +43,10 @@ namespace BarraFisik.Domain.Services
         {
             return _vendasRepository.GetVendasByCliente(idCliente);
         }
+
+        public void DeleteVenda(Vendas venda)
+        {
+            _vendasRepositoryReadOnly.DeleteVenda(venda);
+        }
     }
 }

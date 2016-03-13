@@ -119,15 +119,17 @@
                             <table class="table margin-bottom-0">
                                 <thead>
                                 <tr>
-                                    <th>Categoria</th>
-                                    <th>SubCategoria</th>
-                                    <th>Dt. Vencimento</th>
+                                    <th>Fornecedor</th>
+                                    <th>Cat.</th>
+                                    <th>SubCat.</th>
+                                    <th>Dt. Venc.</th>
                                     <th>Valor</th>
                                     <th>Situação</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <tr ng-repeat="d in despesas | filter: {Situacao: 'Pendente'}">
+                                    <td>{{d.Fornecedores.Nome}}</td> 
                                     <td>{{d.CategoriaFinanceira.Categoria}}</td>
                                     <td>{{d.SubCategoriaFinanceira.SubCategoria}}</td>
                                     <td>{{d.DataVencimento | date:'dd/MM/yyyy'}}</td>
@@ -137,7 +139,7 @@
                                 </tbody>
                                 <tfoot>
                                 <tr>
-                                    <td colspan="3"></td>
+                                    <td colspan="4"></td>
                                     <td colspan="2" class="text-right"><a ng-click="verDespesas()">Todas as Despesas</a></td>
                                 </tr>
                                 </tfoot>
@@ -149,6 +151,71 @@
                     <div class="panel panel-white no-radius">
                         <div class="panel-heading border-bottom">
                             <h4 class="panel-title">Despesas Pendentes</h4>
+                        </div>
+                        <div class="panel-body">
+                            <div class="text-center">
+                                <span class="mini-pie width-200"> <canvas class="tc-chart" tc-chartjs-doughnut chart-options="options" chart-data="data" chart-legend="chart3" width="150"></canvas> <span></span> </span>
+                                <span class="inline text-large no-wrap">{{total | currency}}</span>
+                            </div>
+                            <div class="margin-top-20 text-center legend-xs">
+                                <div tc-chartjs-legend chart-legend="chart3" class="inline"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Receitas -->
+        <div class="container-fluid container-fullw bg-white" ng-controller="lastReceitasCtrl">
+            <div class="row">
+                <div class="col-sm-8">
+                    <div class="panel panel-white no-radius">
+                        <div class="panel-body">
+                            <div class="partition-light-grey padding-15 text-center margin-bottom-20">
+                                <h4 class="no-margin">Receitas</h4>
+                                <span class="text-light">Receitas pendentes com vencimento neste mês</span>
+                            </div>
+                            <table class="table margin-bottom-0">
+                                <thead>
+                                <tr>
+                                    <th>Cliente</th>
+                                    <th>Func.</th>
+                                    <th>Cat</th>
+                                    <th>SubCat.</th>
+                                    <th>Dt. Venc</th>
+                                    <th>Valor</th>
+                                    <th>Situação</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="d in receitas | filter: {Situacao: 'Pendente'}">
+                                        <td>
+                                            <span ng-if="d.Cliente != null">{{d.Cliente.Nome}}</span>
+                                            <span ng-if="d.Nome != null">{{d.Nome}}</span>
+                                        </td>
+                                        <td>{{d.Funcionarios.Nome}}</td>
+                                        <td>{{d.CategoriaFinanceira.Categoria}}</td>
+                                        <td>{{d.SubCategoriaFinanceira.SubCategoria}}</td>
+                                        <td>{{d.DataVencimento | date:'dd/MM/yyyy'}}</td>
+                                        <td><span class="text-danger">{{d.ValorTotal | currency}} </span></td>
+                                        <td>{{d.Situacao}}</td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="5"></td>
+                                        <td colspan="2" class="text-right"><a ng-click="verDespesas()">Todas as Despesas</a></td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="panel panel-white no-radius">
+                        <div class="panel-heading border-bottom">
+                            <h4 class="panel-title">Receitas Pendentes</h4>
                         </div>
                         <div class="panel-body">
                             <div class="text-center">
@@ -178,7 +245,7 @@
 
                 <div class="panel-heading border-bottom">
                     <div class="col-md-6">
-                        <h4 class="panel-title">Despesas Pendentes</h4>
+                        <h4 class="panel-title">Vendas </h4>
                     </div>
                     <div class="col-md-6">
                         <div class="pull-right">

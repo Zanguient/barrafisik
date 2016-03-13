@@ -80,7 +80,8 @@ namespace BarraFisik.Infra.Data.Repository.ReadOnly
                                         (
                                             select * from Receitas r 
                                                 where r.MesReferencia >= "+mes+ "and "+ 
-                                                "r.AnoReferencia = "+ano+" and "+  
+                                                "r.AnoReferencia = "+ano+" and "+
+                                                "r.DataPagamento is not null and " +
                                                 "c.ClienteId = r.ClienteId" +
                                         ") and c.IsAtivo = 1 and c.Situacao != 'Pendente'";
 

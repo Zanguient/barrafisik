@@ -118,6 +118,7 @@ namespace BarraFisik.Infra.CrossCutting.IoC.Unity
             container.RegisterType<IRelatorioFinanceiroRepositoryReadOnly, RelatorioFinanceiroRepositoryReadOnly>();
             container.RegisterType<IEstoqueRepositoryReadOnly, EstoqueRepositoryReadOnly>();
             container.RegisterType<IVendasRepositoryReadOnly, VendasRepositoryReadOnly>();
+            container.RegisterType<IVendasProdutosRepositoryReadOnly, VendasProdutosRepositoryReadOnly>();
 
             //DataConfig
             container.RegisterType(typeof (IContextManager<>), typeof (ContextManager<>));

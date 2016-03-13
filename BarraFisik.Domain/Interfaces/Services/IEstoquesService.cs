@@ -9,5 +9,6 @@ namespace BarraFisik.Domain.Interfaces.Services
         IEnumerable<Estoque> GetEstoques();
         IEnumerable<Estoque> GetByArmazem(Guid id);
         bool ExisteEstoque(Guid armazemId, Guid produtoId);
+        void AtualizaProdutos(Estoque estoque);
     }
 }

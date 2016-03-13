@@ -55,7 +55,7 @@
 
                 <div class="table-responsive">
                     <table id="tableClientes" ng-table="tableParams" class="table table-striped export-table">
-                        <tr ng-repeat="p in $data">
+                        <tr ng-repeat="p in $data" style="font-size: 12px;">
 	                        <td class="rowTd" title="vm.cols[0].title" ng-show="vm.cols[0].show">
 		                        <img ng-if="p.Path !== null" ng-src="{{p.Path}}" class="img-rounded" width="70" height="60"/>
 		                        <img ng-if="p.Path == null" ng-src="/assets/images/default-user.png" class="img-rounded" width="70" height="60"/>

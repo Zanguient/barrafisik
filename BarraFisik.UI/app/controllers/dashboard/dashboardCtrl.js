@@ -296,6 +296,81 @@ app.controller('lastDespesasCtrl', ["$scope", "despesasData", "$state", function
     }
 }
 ]);
+app.controller('lastReceitasCtrl', ["$scope", "receitasData", "$state", function ($scope, receitasData, $state) {
+    $scope.despesas = [];
+    $scope.pendentes = 0.00;
+    $scope.quitados = 0.00;
+
+    $scope.verDespesas = function () {
+        $state.go('app.financeiro.receitas');
+    }
+
+    receitasData.getReceitas().then(function (receitas) {
+        $scope.receitas = receitas.data;
+
+        angular.forEach($scope.receitas, function (item) {
+            if (item.Situacao === 'Pendente') {
+                $scope.pendentes = parseFloat($scope.pendentes) + item.ValorTotal;
+            }
+
+            if (item.Situacao === 'Quitado')
+                $scope.quitados = parseFloat($scope.quitados) + item.ValorTotal;
+        });
+
+        $scope.data = [
+        {
+            value: $scope.pendentes,
+            color: '#F7464A',
+            highlight: '#FF5A5E',
+            label: 'Pend.'
+        },
+        {
+            value: $scope.quitados,
+            color: '#46BFBD',
+            highlight: '#5AD3D1',
+            label: 'Quit.'
+        }
+        ];
+
+        $scope.total = $scope.pendentes + $scope.quitados;
+    });
+
+
+    // Chart.js Options
+    $scope.options = {
+
+        // Sets the chart to be responsive
+        responsive: false,
+
+        //Boolean - Whether we should show a stroke on each segment
+        segmentShowStroke: true,
+
+        //String - The colour of each segment stroke
+        segmentStrokeColor: '#fff',
+
+        //Number - The width of each segment stroke
+        segmentStrokeWidth: 2,
+
+        //Number - The percentage of the chart that we cut out of the middle
+        percentageInnerCutout: 50, // This is 0 for Pie charts
+
+        //Number - Amount of animation steps
+        animationSteps: 100,
+
+        //String - Animation easing effect
+        animationEasing: 'easeOutBounce',
+
+        //Boolean - Whether we animate the rotation of the Doughnut
+        animateRotate: true,
+
+        //Boolean - Whether we animate scaling the Doughnut from the centre
+        animateScale: false,
+
+        //String - A legend template
+        legendTemplate: '<ul class="tc-chart-js-legend"><% for (var i=0; i<segments.length; i++){%><li><span style="background-color:<%=segments[i].fillColor%>"></span><%if(segments[i].label){%><%=segments[i].label%><%}%></li><%}%></ul>'
+    }
+}
+]);
 app.controller('vendasPendentesCtrl', ["$scope", "vendasData", "$state", function ($scope, vendasData, $state) {
     var vm = this;
     vm.vendas = [];

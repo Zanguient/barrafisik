@@ -8,5 +8,6 @@ namespace BarraFisik.Domain.Interfaces.Services
     {
         void AddVendasProdutos(IEnumerable<VendasProdutos> vendasProdutosList, Guid idVenda);
         IEnumerable<VendasProdutos> GetByVenda(Guid vendaId);
+        void DeleteVendaProduto(VendasProdutos produto);
     }
 }

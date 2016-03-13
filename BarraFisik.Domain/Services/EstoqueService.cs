@@ -32,5 +32,10 @@ namespace BarraFisik.Domain.Services
         {
             return _estoqueRepositoryReadOnly.ExisteEstoque(armazemId, produtoId);
         }
+
+        public void AtualizaProdutos(Estoque estoque)
+        {
+            _estoqueRepositoryReadOnly.AtualizaProdutos(estoque);
+        }
     }
 }

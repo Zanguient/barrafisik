@@ -6,6 +6,6 @@ namespace BarraFisik.Domain.Interfaces.Repository
 {
     public interface IVendasProdutosRepository : IRepositoryBase<VendasProdutos>
     {
-        IEnumerable<VendasProdutos> GetByVenda(Guid vendaId);
+        IEnumerable<VendasProdutos> GetByVenda(Guid vendaId);        
     }
 }

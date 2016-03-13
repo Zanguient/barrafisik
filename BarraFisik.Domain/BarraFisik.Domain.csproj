@@ -87,6 +87,7 @@
     <Compile Include="Interfaces\Repository\IHorarioRepository.cs" />
     <Compile Include="Interfaces\Repository\IRepositoryBase.cs" />
     <Compile Include="Interfaces\Repository\ReadOnly\IEstoqueRepositoryReadOnly.cs" />
+    <Compile Include="Interfaces\Repository\ReadOnly\IVendasProdutosRepositoryReadOnly.cs" />
     <Compile Include="Interfaces\Repository\ReadOnly\IVendasRepositoryReadOnly.cs" />
     <Compile Include="Interfaces\Repository\ReadOnly\IRelatorioFinanceiroRepositoryReadOnly.cs" />
     <Compile Include="Interfaces\Repository\ReadOnly\IReceitasRepositoryReadOnly.cs" />

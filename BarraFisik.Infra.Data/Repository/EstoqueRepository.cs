@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using BarraFisik.Domain.Entities;
 using BarraFisik.Domain.Interfaces.Repository;
@@ -23,6 +24,12 @@ namespace BarraFisik.Infra.Data.Repository
         public override Estoque GetById(Guid id)
         {
             return DbSet.Include("Produtos").Include("Armazem").AsNoTracking().FirstOrDefault(c => c.EstoqueId == id);            
+        }
+
+        public override void Update(Estoque obj)
+        {
+            DbSet.AddOrUpdate(obj);
+            base.Save();
         }
     }
 }

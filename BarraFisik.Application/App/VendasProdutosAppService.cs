@@ -55,7 +55,7 @@ namespace BarraFisik.Application.App
                 e.Quantidade = e.Quantidade - item.Quantidade;
                 e.SaldoVenda = e.SaldoVenda + (item.Quantidade * e.ValorUnitario);
                 e.TotalVendido = e.TotalVendido + item.Quantidade;
-                _estoqueService.Add(e);
+                _estoqueService.AtualizaProdutos(e);
             }
 
             Commit();

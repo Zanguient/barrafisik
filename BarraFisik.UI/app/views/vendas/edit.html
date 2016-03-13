@@ -13,7 +13,26 @@
 <form name="FormEdit" id="formEdit" novalidate ng-submit="formEdit.submit(FormEdit, v)">
     <table class="table no-bg">
         <tr>
-            <td>Data Vencimento: <span class="symbol required"></span></td>
+            <td> <a ng-click="v.Descricao = null; isCliente = true"> Cliente :</a></td>
+            <td colspan="2">
+                <input type="text" class="form-control input-sm" placeholder="Selecione..."
+                       ng-model="v.Cliente" ng-disabled="!isCliente"
+                       typeahead="c as c.Nome for c in clientes | filter:{Nome:$viewValue}" typeahead-show-hint="true" typeahead-min-length="3">
+            </td>
+            <td><a ng-click="v.Cliente = null; isCliente = false"> Outro :</a> </td>
+            <td colspan="2">
+                <input type="text" placeholder="Descricao" class="form-control input-sm" ng-model="v.Descricao" ng-disabled="isCliente">
+            </td>
+            <td>Tipo Pgto.:</td>
+            <td colspan="2">
+                <select name="TiposPag" ng-model="v.TipoPagamentoId" class="text-bold">
+                    <option value="">Tipo Pagamento... </option>
+                    <option ng-selected="v.TipoPagamentoId == t.TipoPagamentoId" ng-repeat="t in tiposPagamento" value="{{t.TipoPagamentoId}}">{{t.Sigla}} - {{t.Descricao}}</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">Data Vencimento: <span class="symbol required"></span></td>
             <td ng-class="{'has-error':FormEdit.DataVencimento.$dirty && FormEdit.DataVencimento.$invalid, 'has-success':FormEdit.DataVencimento.$valid}">
                 <div class="form-horizontal width-150 hackyhack">
                     <p class="input-group  margin-top-10">
@@ -29,7 +48,7 @@
                 </div>
                 <span class="error text-small block" ng-if="FormEdit.DataVencimento.$dirty && FormEdit.DataVencimento.$invalid">informe a dt. Vencimento</span>
             </td>
-            <td>Data Pagamento: </td>
+            <td colspan="2">Data Pagamento: </td>
             <td>
                 <div class="form-horizontal width-150 hackyhack">
                     <p class="input-group  margin-top-10">
@@ -44,13 +63,8 @@
                     </p>
                 </div>
             </td>
+
             <td colspan="2">
-                <select name="TiposPag" ng-model="v.TipoPagamentoId" class="text-bold">
-                    <option value="">Tipo Pagamento... </option>
-                    <option ng-selected="v.TipoPagamentoId == t.TipoPagamentoId" ng-repeat="t in tiposPagamento" value="{{t.TipoPagamentoId}}">{{t.Sigla}} - {{t.Descricao}}</option>
-                </select>
-            </td>
-            <td>
                 <div class="pull-right">
                     <input type="submit" class="btn btn-primary btn-sm margin-right-15" value="Salvar">
                     <input type="button" class="btn btn-primary btn-sm margin-right-15" value="Cancelar" ng-click="setEditId(-1)">

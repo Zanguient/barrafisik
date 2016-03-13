@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using BarraFisik.Domain.Entities;
 using BarraFisik.Domain.Interfaces.Repository.ReadOnly;
 using Dapper;
 
@@ -26,6 +27,18 @@ namespace BarraFisik.Infra.Data.Repository.ReadOnly
                     return true;
                 }
                 return false;
+            }
+        }
+
+        public void AtualizaProdutos(Estoque estoque)
+        {
+            using (var cn = Connection)
+            {
+                var query = @"  update Estoque set Quantidade = "+estoque.Quantidade+ " , SaldoVenda = Replace('"+ estoque.SaldoVenda + "', ',', '.'), TotalVendido = "+estoque.TotalVendido+" where EstoqueId = '"+estoque.EstoqueId+"'";
+
+                cn.Open();
+                var valido = cn.Query(query);
+                cn.Close();               
             }
         }
     }

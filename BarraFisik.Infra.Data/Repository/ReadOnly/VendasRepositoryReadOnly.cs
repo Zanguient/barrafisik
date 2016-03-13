@@ -11,6 +11,17 @@ namespace BarraFisik.Infra.Data.Repository.ReadOnly
     public class VendasRepositoryReadOnly : RepositoryBaseReadOnly, IVendasRepositoryReadOnly
     {
 
+        public void DeleteVenda(Vendas venda)
+        {
+            using (var cn = Connection)
+            {
+                cn.Open();
+                var sql = @"delete from Vendas where VendaId = '" + venda.VendaId + "'";
+                cn.Query(sql);
+                cn.Close();
+            }
+        }
+
         public IEnumerable<Vendas> SearchVendas(SearchVendas sv)
         {
             using (var cn = Connection)
@@ -20,7 +31,7 @@ namespace BarraFisik.Infra.Data.Repository.ReadOnly
                 var sql = @"select * from Vendas v 
                                 inner join Receitas r on v.ReceitasId = r.ReceitasId
                                 left join Cliente cliente on v.ClienteId = cliente.ClienteId
-                                left join TipoPagamento tp on v.TipoPagamentoId = tp.TipoPagamentoId                                
+                                left join TipoPagamento tp on v.TipoPagamentoId = tp.TipoPagamentoId
                                 where 1 = 1";
 
                 var dt = new DateTime();
@@ -138,5 +149,7 @@ namespace BarraFisik.Infra.Data.Repository.ReadOnly
                 return x;
             }
         }
+
+        
     }
 }

@@ -69,7 +69,7 @@
         $scope.tableParams = new ngTableParams({
 
             page: 1, // show first page
-            count: 10, // count per page
+            count: 20, // count per page
             sorting: {
                 Nome: 'asc' // initial sorting
             },
@@ -97,8 +97,8 @@
             { show: false, title: "Foto" },
             { show: true, title: "Nome" },
             { show: true, title: "Endereço" },
-            { show: true, title: "CPF" },
-            { show: true, title: "E-mail" },
+            { show: false, title: "CPF" },
+            { show: false, title: "E-mail" },
             { show: true, title: "Telefone" },
             { show: true, title: "Celular" },
             { show: false, title: "Dt. Nascimento" },
@@ -234,6 +234,7 @@
                 if ($scope.inativos) {
                     clienteData.getClientesAll().then(function (result) {
                         vm.clientes = result.data;
+                        toaster.pop('success', '', 'Mensalidade Cadastrada com Sucesso!');
                         $scope.tableParams.reload();
                     });
                 } else {

@@ -43,7 +43,7 @@ namespace BarraFisik.Infra.Data.Repository
             return DbSet.ToList();
         }
 
-        public void Update(TEntity obj)
+        public virtual void Update(TEntity obj)
         {
             var entry = Context.Entry(obj);
             DbSet.Attach(obj);
@@ -67,6 +67,11 @@ namespace BarraFisik.Infra.Data.Repository
         public IEnumerable<TEntity> GetAll(int skip, int take)
         {
             return DbSet.ToList();
+        }
+
+        public void Save()
+        {
+            Context.SaveChanges();
         }
 
         public void Dispose()
