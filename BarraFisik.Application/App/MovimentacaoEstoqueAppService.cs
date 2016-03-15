@@ -79,7 +79,9 @@ namespace BarraFisik.Application.App
                         e.Quantidade = e.Quantidade - (movimentacaoBase.Quantidade - movimentacao.Quantidade);
                 }
             }
-                           
+
+            e.ValorTotal = e.Quantidade*e.ValorUnitario;
+                       
             //Atualiza Movimentacao
             _movimentacaoService.Add(movimentacao);
 

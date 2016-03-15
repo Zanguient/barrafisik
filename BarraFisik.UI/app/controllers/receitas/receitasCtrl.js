@@ -137,7 +137,7 @@
                     deps: [
                         '$ocLazyLoad',
                         function ($ocLazyLoad) {
-                            return $ocLazyLoad.load(['app/controllers/receitas/receitasFichaCtrl.js', 'app/factory/funcionariosData.js', 'app/factory/clienteData.js', 'app/factory/subCategoriaData.js']);
+                            return $ocLazyLoad.load(['app/controllers/receitas/receitasFichaCtrl.js', 'app/factory/subCategoriaData.js']);
                         }
                     ]
                 },
