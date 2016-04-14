@@ -3,7 +3,7 @@
 
     app.controller('vendasCreateCtrl', vendasCreateCtrl);
 
-    function vendasCreateCtrl($scope, $modalInstance, estoqueData, vendasData, clienteData, tipoPagamentoData, vendasProdutosData, armazemData, receitasData, toaster) {
+    function vendasCreateCtrl($scope, $modalInstance, estoqueData, vendasData, clienteData, tipoPagamentoData, vendasProdutosData, armazemData, receitasData, funcionariosData, toaster) {
         var vm = this;
         $scope.isCliente = true;
         $scope.totalProdutos = 0;
@@ -35,6 +35,11 @@
         //List Clientes
         clienteData.getClientes().then(function (clientesList) {
             $scope.clientes = clientesList.data;
+        });
+
+        //List Funcionarios
+        funcionariosData.getAll().then(function (funcionariosList) {
+            $scope.funcionarios = funcionariosList.data;
         });
 
         //List Armazem

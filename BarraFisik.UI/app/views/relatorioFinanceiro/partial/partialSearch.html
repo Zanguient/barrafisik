@@ -109,7 +109,18 @@
                                 Pendente
                             </label>
                         </div>
-
+                        <div role="form" class="form-horizontal">
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label" for="tipopagamento">
+                                    tipo Pagto.:
+                                </label>
+                                <div class="col-sm-8">
+                                    <select class="form-control" id="tipopagamento" ng-model="filter.TipoPagamentoId" ng-options="t.TipoPagamentoId as t.Descricao for t in vm.tipopagamento">
+                                        <option value="">.:: Selecione ::.</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="col-md-12 margin-top-15">
                         <button class="btn btn-warning pull-right margin-left-10" ng-click="vm.clear()"><i class="fa fa-refresh"></i>Limpar</button>

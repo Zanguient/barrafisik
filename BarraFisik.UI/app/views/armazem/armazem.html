@@ -32,7 +32,7 @@
                         <tr id="tr{{a.ArmazemId}}" ng-class-odd="'odd'" ng-class-even="'even'">
                             <td class="rowTd" data-title="'Descricao'" sortable="'Descricao'">{{a.Descricao}}</td>                            
                             <td class="text-right">
-                                <div class="visible-md visible-lg hidden-sm hidden-xs">
+                                <div ng-if="userInfo.isAdmin">
                                     <a ng-click="setEditId(a.ArmazemId)" class="btn btn-transparent btn-xs" tooltip-placement="top" tooltip="Editar" id="editRowBtn{{a.ArmazemId}}"><i class="fa fa-pencil"></i></a>
                                     <a ng-click="delete(a.ArmazemId)" class="btn btn-transparent btn-xs tooltips" tooltip-placement="top" tooltip="Excluir"><i class="fa fa-times"></i></a>                                   
                                 </div>

@@ -32,6 +32,7 @@ namespace BarraFisik.Infra.Data.Repository.ReadOnly
                                 inner join Receitas r on v.ReceitasId = r.ReceitasId
                                 left join Cliente cliente on v.ClienteId = cliente.ClienteId
                                 left join TipoPagamento tp on v.TipoPagamentoId = tp.TipoPagamentoId
+                                left join Funcionarios f on v.FuncionarioId = f.FuncionarioId
                                 where 1 = 1";
 
                 var dt = new DateTime();
@@ -78,15 +79,16 @@ namespace BarraFisik.Infra.Data.Repository.ReadOnly
                     sql = sql + " AND Month(v.DataVenda) = Month(GetDate()) and YEAR(v.DataVenda) = YEAR(getDate())";
 
 
-                var vendas = cn.Query<Vendas, Receitas, Cliente, TipoPagamento, Vendas>
+                var vendas = cn.Query<Vendas, Receitas, Cliente, TipoPagamento, Funcionarios, Vendas>
                     (sql,
-                    (v, r, c, tp) =>
+                    (v, r, c, tp, f) =>
                     {
                         v.Receitas = r;
                         v.Cliente = c;
                         v.TipoPagamento = tp;
+                        v.Funcionarios = f;
                         return v;
-                    }, splitOn: "VendaId, ReceitasId, ClienteId, TipoPagamentoId");
+                    }, splitOn: "VendaId, ReceitasId, ClienteId, TipoPagamentoId, FuncionarioId");
 
                 cn.Close();
                 return vendas;

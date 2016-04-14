@@ -182,7 +182,7 @@
                                     </div>
                                 </div>
                                 <div class="text-left">
-                                    <a ui-sref="app.clientes.editar({id: vm.cliente.ClienteId})" class="btn btn-primary btn-o btn-wide">
+                                    <a ng-if="userInfo.isAdmin" ui-sref="app.clientes.editar({id: vm.cliente.ClienteId})" class="btn btn-primary btn-o btn-wide">
                                         Editar Cliente
                                     </a>
                                     <a ui-sref="app.clientes.listar()" class="btn btn-warning btn-o btn-wide">
@@ -259,17 +259,34 @@
                                     <th>Tipo Pag.</th>
                                     <th>Valor Total</th>
                                     <th>Status</th>
+                                    <th></th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr ng-repeat="v in vm.vendas | orderBy: ['DataVenda']">
+                            <tbody ng-repeat="v in vm.vendas | orderBy: ['DataVenda']">
+                                <tr id="tr{{v.VendaId}}" ng-class-odd="'odd'" ng-class-even="'even'">
                                     <td>{{v.DataVenda | date: 'dd/MM/yyyy'}}</td>
                                     <td>{{v.DataVencimento | date: 'dd/MM/yyyy'}}</td>
                                     <td>{{v.DataPagamento | date: 'dd/MM/yyyy'}}</td>
                                     <td>{{v.TipoPagamento.Sigla}} - {{v.TipoPagamento.Descricao}}</td>
                                     <td><span ng-class="{'text-primary': v.Receitas.Situacao == 'Quitado', 'text-danger': v.Receitas.Situacao == 'Pendente'}">{{v.ValorTotal | currency}} </span></td>
                                     <td><span ng-class="{'text-green': v.Receitas.Situacao == 'Quitado', 'text-danger': v.Receitas.Situacao == 'Pendente'}">{{v.Receitas.Situacao}} </span></td>
+                                    <td><a ng-click="setEditId(v.VendaId)" ng-show="v.Receitas.Situacao == 'Pendente'" class="btn btn-green btn-sm" href="#" tooltip-placement="top" tooltip="Baixar Venda"><i class="fa fa-check-circle"></i></a></td>
                                 </tr>
+                                <tr ng-show="editId===v.VendaId" ng-if="editId===v.VendaId">
+                                    <td colspan="8" style="text-align: right">
+                                        Tipo Pagamento:
+                                        <select name="TiposPag" ng-model="baixa.TipoPagamentoId" class="text-bold">
+                                            <option value="">Selecione... </option>
+                                            <option ng-selected="receita.TipoPagamentoId == t.TipoPagamentoId" ng-repeat="t in tiposPagamento" value="{{t.TipoPagamentoId}}">{{t.Sigla}} - {{t.Descricao}}</option>
+                                        </select>
+                                        |
+                                        Data Pagamento: <span class="symbol required"></span>
+                                        <input type="date" ng-model="baixa.DataPagamento" />
+                                        <button type="button" ng-click="baixaVenda(v)" class="btn btn-success btn-small" ng-disabled="baixa.DataPagamento == undefined || baixa.TipoPagamentoId == null" tooltip-placement="top" tooltip="Pagar"><i class="fa fa-check-circle"></i> </button>
+                                        <button type="button" ng-click="setEditId(-1); clearBaixa()" class="btn btn-grey btn-small" tooltip-placement="top" tooltip="Cancelar"><i class="fa fa-times"></i>  </button>
+                                    </td>
+                                </tr>
+                            </tbody>
                         </table>
                     </tab>
                     <!-- end: TAB AVALIACOES -->

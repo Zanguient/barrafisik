@@ -26,10 +26,12 @@ namespace BarraFisik.Infra.Data.Repository.ReadOnly
 	                                r.Situacao,
 	                                cf.Categoria,
 	                                sc.SubCategoria,
+                                    tp.Descricao as TipoPagamento,
                                     r.Observacao
                                 from Receitas r
                                 left join SubCategoriaFinanceira sc on r.SubCategoriaFinanceiraId = sc.SubCategoriaFinanceiraId
                                 inner join CategoriaFinanceira cf on r.CategoriaFinanceiraId = cf.CategoriaFinanceiraId
+                                left join TipoPagamento tp on r.TipoPagamentoId = tp.TipoPagamentoId
                                 where 1 = 1";
 
 
@@ -53,6 +55,8 @@ namespace BarraFisik.Infra.Data.Repository.ReadOnly
                                     query = query + " and sc.SubCategoriaFinanceiraId = '" + filters.SubCategoriaId + "' ";
                                 if (filters.Situacao != "")
                                     query = query + " and r.Situacao = '" + filters.Situacao + "' ";
+                                if (filters.TipoPagamentoId != null)
+                                    query = query + " and tp.TipoPagamentoId = '" + filters.TipoPagamentoId + "' ";
 
 
                                 query = query + 
@@ -68,9 +72,11 @@ namespace BarraFisik.Infra.Data.Repository.ReadOnly
 	                            "       d.Situacao,                                                                                   "+
 	                            "       cf.Categoria,                                                                                 "+
 	                            "       sc.SubCategoria,                                                                              "+
+                                "       tp.Descricao as TipoPagamento,                                                                                 "+
                                 "       d.Observacao                                                                                  "+
                                 "   from Despesas d                                                                                   "+
                                 "   left join SubCategoriaFinanceira sc on d.SubCategoriaFinanceiraId = sc.SubCategoriaFinanceiraId   "+
+                                "   left join TipoPagamento tp on d.TipoPagamentoId = tp.TipoPagamentoId                              "+
                                 "   inner join CategoriaFinanceira cf on d.CategoriaFinanceiraId = cf.CategoriaFinanceiraId           "+
                                 "   where 1 = 1                                                                                       ";
 
@@ -94,6 +100,8 @@ namespace BarraFisik.Infra.Data.Repository.ReadOnly
                                     query = query + " and sc.SubCategoriaFinanceiraId = '" + filters.SubCategoriaId + "' ";
                                 if (filters.Situacao != "")
                                     query = query + " and d.Situacao = '" + filters.Situacao + "' ";
+                                if (filters.TipoPagamentoId != null)
+                                    query = query + " and tp.TipoPagamentoId = '" + filters.TipoPagamentoId + "' ";
                 cn.Open();
                 var relatorio = cn.Query<RelatorioFinanceiro>(query);
                 cn.Close();

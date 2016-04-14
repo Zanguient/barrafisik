@@ -34,7 +34,7 @@
                             <td class="rowTd" style="width: 45%" data-title="'Produto'">{{p.Nome}}</td>
                             <td class="rowTd" style="width: 45%" data-title="'Descricao'">{{p.Descricao}}</td>
                             <td class="text-right" style="width: 10%">
-                                <div class="visible-md visible-lg hidden-sm hidden-xs">
+                                <div ng-if="userInfo.isAdmin">
                                     <a ng-click="setEditId(p.ProdutoId)" class="btn btn-transparent btn-xs" tooltip-placement="top" tooltip="Editar" id="editRowBtn{{p.ProdutoId}}"><i class="fa fa-pencil"></i></a>
                                     <a ng-click="delete(p.ProdutoId)" class="btn btn-transparent btn-xs tooltips" tooltip-placement="top" tooltip="Excluir"><i class="fa fa-times"></i></a>
                                 </div>

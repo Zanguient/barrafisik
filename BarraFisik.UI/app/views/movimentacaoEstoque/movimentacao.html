@@ -53,7 +53,7 @@
                             <td class="rowTd" data-title="'Valor Un Venda'"><span class="text-primary">{{m.ValorUnitario | currency}} </span></td>
                             <td class="rowTd" data-title="'Total Custo'"><span class="text-primary">{{m.ValorTotalCusto | currency}} </span></td>
                             <td class="text-right">
-                                <div class="visible-md visible-lg hidden-sm hidden-xs">
+                                <div ng-if="userInfo.isAdmin">
                                     <a ng-click="setEditId(m.MovimentacaoId)" class="btn btn-transparent btn-xs" tooltip-placement="top" tooltip="Editar" id="editRowBtn{{m.MovimentacaoId}}"><i class="fa fa-pencil"></i></a>
                                     <a ng-click="delete(m.MovimentacaoId)" class="btn btn-transparent btn-xs tooltips" tooltip-placement="top" tooltip="Excluir"><i class="fa fa-times"></i></a>
                                 </div>

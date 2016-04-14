@@ -3,30 +3,13 @@
 </div>
 <div class="modal-body col-md-12">
     <div class="row">
-        <div class="col-md-6">
-            <button type="button" class="btn btn-primary btn-wide btn-scroll btn-scroll-top ti-plus" ng-click="addProduto = !addProduto">
-                <span>Adicionar Novo Produto</span>
-            </button>
-        </div>
-    </div>
-    <div class="row">
         <div class="col-md-12">
-            <table class="table">
-                <tr ng-show="addProduto">
-                    <td colspan="12" ng-include src="'app/views/vendas/addProduto.html'"></td>
-                </tr>
-            </table>
             <table ng-table="tableParams" class="table">
                 <tbody ng-repeat="p in vm.produtos">
                 <tr ng-class-odd="'odd'" ng-class-even="'even'">
                     <td class="rowTd" data-title="'Produto'">{{p.Estoque.Produtos.Nome}}</td>
                     <td class="rowTd" data-title="'Qtde.'">{{p.Quantidade}}</td>
                     <td class="rowTd" data-title="'Valor'"><span class="text-primary"> {{p.Estoque.ValorUnitario | currency}} </span></td>
-                    <td class="center">
-                        <div class="visible-md visible-lg hidden-sm hidden-xs">
-                            <a ng-click="delete(p.VendasProdutosId)" class="btn btn-transparent btn-xs" tooltip-placement="top" tooltip="Excluir"><i class="fa fa-trash"></i></a>
-                        </div>
-                    </td>
                 </tr>
                 </tbody>
                 <tfoot>

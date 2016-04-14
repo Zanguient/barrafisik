@@ -75,6 +75,7 @@
             },
             filter: $scope.filter
         }, {
+            counts: [10, 20, 30, 50, 100, 200, 300, 400],
             total: vm.clientes.length, // length of data
             getData: function ($defer, params) {
                 // use build-in angular filter                   

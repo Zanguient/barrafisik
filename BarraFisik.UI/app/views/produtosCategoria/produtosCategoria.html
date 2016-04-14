@@ -33,7 +33,7 @@
                         <td class="rowTd" data-title="'Nome'" sortable="'Nome'">{{c.Nome}}</td>  
                         <td class="rowTd" data-title="'Descricao'" sortable="'Descricao'">{{c.Descricao}}</td>
                         <td class="text-right">
-                            <div class="visible-md visible-lg hidden-sm hidden-xs">
+                            <div ng-if="userInfo.isAdmin">
                                 <a ng-click="setEditId(c.ProdutoCategoriaId)" class="btn btn-transparent btn-xs" tooltip-placement="top" tooltip="Editar" id="editRowBtn{{c.ProdutoCategoriaId}}"><i class="fa fa-pencil"></i></a>
                                 <a ng-click="delete(c.ProdutoCategoriaId)" class="btn btn-transparent btn-xs tooltips" tooltip-placement="top" tooltip="Excluir"><i class="fa fa-times"></i></a>
                             </div>

@@ -371,9 +371,34 @@ app.controller('lastReceitasCtrl', ["$scope", "receitasData", "$state", function
     }
 }
 ]);
-app.controller('vendasPendentesCtrl', ["$scope", "vendasData", "$state", function ($scope, vendasData, $state) {
+app.controller('vendasPendentesCtrl', ["$scope", "vendasData", "$state", "tipoPagamentoData", "toaster", function ($scope, vendasData, $state, tipoPagamentoData, toaster) {
     var vm = this;
     vm.vendas = [];
+    $scope.baixa = {};
+
+    $scope.baixaId = -1;
+
+    $scope.setBaixaId = function (pid) {
+        $scope.baixaId = pid;
+    };
+
+    //List Tipos de Pagamento
+    tipoPagamentoData.getTipos().then(function (tipos) {
+        $scope.tiposPagamento = tipos.data;
+    });
+
+    $scope.baixaVenda = function (venda) {
+        venda.DataPagamento = $scope.baixa.DataPagamento;
+        venda.TipoPagamentoId = $scope.baixa.TipoPagamentoId;
+        vendasData.edit(venda).then(function () {
+            toaster.pop('success', 'Venda baixada com sucesso!', '');
+            $scope.baixa = {};
+            $scope.baixaId = -1;
+            vendasData.getPendentes($scope.mesAtual, $scope.anoAtual).then(function (result) {
+                vm.vendas = result.data;
+            });
+        });
+    }
 
     $scope.verVendas = function () {
         $state.go('app.vendas');

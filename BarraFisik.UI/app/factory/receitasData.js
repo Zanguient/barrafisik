@@ -30,6 +30,10 @@
             return $http.get(apiUrl + "api/receitas/avaliacaofisica/" + idCliente);
         }
 
+        function getReceitaId(id) {
+            return $http.get(apiUrl + "api/receitas/" + id);
+        }
+
         function editReceita(receita) {
             return $http.put(apiUrl + "api/receitas", receita);
         }
@@ -54,6 +58,7 @@
             getReceitas: getReceitas,
             getMensalidades: getMensalidades,
             getAvaliacaoCliente: getAvaliacaoCliente,
+            getReceitaId: getReceitaId,
             addReceita: addReceita,
             addMensalidade: addMensalidade,
             addAvaliacaoFisica: addAvaliacaoFisica,

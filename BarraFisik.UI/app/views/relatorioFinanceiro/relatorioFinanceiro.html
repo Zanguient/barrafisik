@@ -103,15 +103,20 @@
                                 <th ng-click="sort('DataPagamento')" style="cursor: pointer">
                                     <span ng-class="{ 'hidden-print' : !vm.printObservacao}">Pag.</span>
                                     <i ng-class="{'fa fa-chevron-up':isSortUp('DataPagamento'),'fa fa-chevron-down':isSortDown('DataPagamento')}"></i>
-                                </th>      
-                                <th ng-click="sort('Situacao')" id="Situacao" style="cursor: pointer; ">
+                                </th>
+                                <th ng-click="sort('TipoPagamento')" id="TipoPagamento" style="cursor: pointer;">
+                                    <span ng-class="{ 'hidden-print' : !vm.printValor}">Tp. Pagto.</span>
+                                    <i ng-class="{'fa fa-chevron-up':isSortUp('TipoPagamento'),'fa fa-chevron-down':isSortDown('TipoPagamento')}"></i>
+                                </th>
+                                <th ng-click="sort('Situacao')" id="Situacao" style="cursor: pointer;">
                                     <span ng-class="{ 'hidden-print' : !vm.printValor}">Situção</span>
                                     <i ng-class="{'fa fa-chevron-up':isSortUp('Situacao'),'fa fa-chevron-down':isSortDown('Situacao')}"></i>
                                 </th>
+                                
                                 <th ng-click="sort('ValorTotal')" id="ValorTotal" style="cursor: pointer;" class="text-right">
                                     <span ng-class="{ 'hidden-print' : !vm.printValor}">Valor Total</span>
                                     <i ng-class="{'fa fa-chevron-up':isSortUp('ValorTotal'),'fa fa-chevron-down':isSortDown('ValorTotal')}"></i>
-                                </th>
+                                </th>                                
                             </thead>
                             <tbody>
                                 <tr ng-class-odd="'odd'" ng-class-even="'even'" ng-repeat="rf in vm.relatorioFinanceiro  | orderBy:sortField:reverse">
@@ -121,13 +126,14 @@
                                     <td class="rowTd"><span ng-class="{ 'hidden-print' : !vm.printData}">{{rf.DataEmissao | date:'dd/MM/yy'}}</span></td>
                                     <td class="rowTd"><span ng-class="{ 'hidden-print' : !vm.printData}">{{rf.DataVencimento | date:'dd/MM/yy'}}</span></td>
                                     <td class="rowTd"><span ng-class="{ 'hidden-print' : !vm.printData}" >{{rf.DataPagamento | date:'dd/MM/yy'}}</span></td>
-                                    <td class="rowTd" style="width: 20px;"><span ng-class="{ 'hidden-print' : !vm.printData}"> {{rf.Situacao}}</span></td>
-                                    <td class="rowTd text-right text-bold"><span ng-class="{ 'hidden-print' : !vm.printValor, 'text-red': rf.Tipo == 'Despesas', 'text-primary': rf.Tipo == 'Receitas' }">{{rf.ValorTotal | currency}}</span></td>
+                                    <td class="rowTd"><span ng-class="{ 'hidden-print' : !vm.printData}"> {{rf.TipoPagamento}}</span></td>
+                                    <td class="rowTd" style="width: 20px;"><span ng-class="{ 'hidden-print' : !vm.printData}"> {{rf.Situacao}}</span></td>                                    
+                                    <td class="rowTd text-right text-bold"><span ng-class="{ 'hidden-print' : !vm.printValor, 'text-red': rf.Tipo == 'Despesas', 'text-primary': rf.Tipo == 'Receitas' }">{{rf.ValorTotal | currency}}</span></td>                                    
                                 </tr>
                             </tbody>
                             <tfoot>
                                 <tr>
-                                    <td colspan="5"></td>
+                                    <td colspan="6"></td>
                                     <td class="text-right"><b>TOTAL: </b></td>
                                     <td class="text-right">
                                         <b ng-show="totalReceitas > 0" class="text-primary">Receitas:
@@ -143,7 +149,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td colspan="6"></td>
+                                    <td colspan="7"></td>
                                     <td class="text-right"><b>Saldo: </b></td>
                                     <td class="text-right">
                                         <b ng-class="{ 'text-primary': totalReceitas > totalDespesas, 'text-red': totalReceitas < totalDespesas }">{{totalReceitas - totalDespesas | currency}}</b>

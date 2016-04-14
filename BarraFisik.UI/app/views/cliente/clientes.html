@@ -79,7 +79,7 @@
                             <td class="rowTd" style="width:2px; border-left: 1px gray solid; border-right: 1px gray solid" ng-show="vm.cols[12].show" data-title="'S'"><div ng-if="p.Sexta" class="text-green">X</div></td>
 
                             <td class="text-right">
-                                <a ui-sref="app.clientes.editar({id: p.ClienteId})" class="btn btn-transparent btn-xs" tooltip-placement="top" tooltip="Editar"><i class="fa fa-pencil"></i></a>
+                                <a ng-if="userInfo.isAdmin" ui-sref="app.clientes.editar({id: p.ClienteId})" class="btn btn-transparent btn-xs" tooltip-placement="top" tooltip="Editar"><i class="fa fa-pencil"></i></a>
                                 <a ng-click="openHorarios(p)" class="btn btn-transparent btn-xs" tooltip-placement="top" tooltip="Horários"><i class="fa fa-clock-o"></i></a>
                                 
                                 <span class="dropdown" dropdown>
@@ -91,7 +91,7 @@
                                 </span>
                                 
                                 <!--<a ng-click="createMensalidade(p)" class="btn btn-transparent btn-xs tooltips" tooltip-placement="top" tooltip="Pagamento"><i class="fa fa-dollar"></i></a>-->
-                                <span class="dropdown" dropdown ng-if="userInfo.isAdmin">
+                                <span class="dropdown" dropdown>
                                     <a class="btn btn-transparent btn-xs tooltips" dropdown-toggle tooltip-placement="top" tooltip="Pagar"><i class="fa fa-dollar"></i></a>
                                     <ul class="dropdown-menu pull-right">
                                         <li><a ng-click="createMensalidade(p)"> Mensalidade</a></li>

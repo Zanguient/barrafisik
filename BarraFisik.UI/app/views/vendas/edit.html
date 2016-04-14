@@ -23,13 +23,13 @@
             <td colspan="2">
                 <input type="text" placeholder="Descricao" class="form-control input-sm" ng-model="v.Descricao" ng-disabled="isCliente">
             </td>
-            <td>Tipo Pgto.:</td>
-            <td colspan="2">
-                <select name="TiposPag" ng-model="v.TipoPagamentoId" class="text-bold">
-                    <option value="">Tipo Pagamento... </option>
-                    <option ng-selected="v.TipoPagamentoId == t.TipoPagamentoId" ng-repeat="t in tiposPagamento" value="{{t.TipoPagamentoId}}">{{t.Sigla}} - {{t.Descricao}}</option>
+            <td>Funcionário: </td>
+            <td colspan="3">
+                <select name="Funcionaio" ng-model="v.FuncionarioId" class="text-bold">
+                    <option value=""><b>Selecione...</b></option>
+                    <option ng-selected="v.FuncionarioId == f.FuncionarioId" ng-repeat="f in funcionarios" value="{{f.FuncionarioId}}">{{f.Nome}}</option>
                 </select>
-            </td>
+            </td>            
         </tr>
         <tr>
             <td colspan="2">Data Vencimento: <span class="symbol required"></span></td>
@@ -54,7 +54,7 @@
                     <p class="input-group  margin-top-10">
                         <input type="text" id="DataPagamento" name="DataPagamento" disabled class="form-control" datepicker-popup="dd/MM/yyyy" ng-model="v.DataPagamento"
                                is-open="opened[$index+1]" datepicker-options="dateOptions"
-                               ng-required="false" close-text="Fechar" />
+                               ng-required="false" close-text="Fechar"/>
                         <span class="input-group-btn">
                             <button type="button" class="btn btn-default" ng-click="open($event, $index+1)">
                                 <i class="glyphicon glyphicon-calendar"></i>
@@ -63,8 +63,15 @@
                     </p>
                 </div>
             </td>
-
+            <td>Tipo Pgto.:</td>
             <td colspan="2">
+                <select name="TiposPag" ng-model="v.TipoPagamentoId" class="text-bold">
+                    <option value="">Tipo Pagamento... </option>
+                    <option ng-selected="v.TipoPagamentoId == t.TipoPagamentoId" ng-repeat="t in tiposPagamento" value="{{t.TipoPagamentoId}}">{{t.Sigla}} - {{t.Descricao}}</option>
+                </select>
+            </td>
+
+            <td>
                 <div class="pull-right">
                     <input type="submit" class="btn btn-primary btn-sm margin-right-15" value="Salvar">
                     <input type="button" class="btn btn-primary btn-sm margin-right-15" value="Cancelar" ng-click="setEditId(-1)">

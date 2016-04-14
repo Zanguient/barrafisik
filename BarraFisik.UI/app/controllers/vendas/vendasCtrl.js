@@ -3,16 +3,22 @@
 
     app.controller('vendasCtrl', vendasCtrl);
 
-    function vendasCtrl($scope, ngTableParams, vendasData, tipoPagamentoData, clienteData, SweetAlert, $filter, $state, $modal, $timeout) {
+    function vendasCtrl($scope, ngTableParams, vendasData, tipoPagamentoData, clienteData, funcionariosData, SweetAlert, $filter, $state, $modal, $timeout, receitasData, toaster) {
         var vm = this;
         vm.vendas = [];
         $scope.search = {};
         $scope.clientes = [];
         $scope.isCliente = true;
+        $scope.baixa = {};
 
         //List Clientes
         clienteData.getClientes().then(function (clientesList) {
             $scope.clientes = clientesList.data;
+        });
+
+        //List Funcionarios
+        funcionariosData.getAll().then(function (funcionariosList) {
+            $scope.funcionarios = funcionariosList.data;
         });
 
         activate();
@@ -119,6 +125,31 @@
             });
         }
 
+        //Show Produtos
+        $scope.showProdutos = function (vendaId) {
+            vm.modalInstance = $modal.open({
+                templateUrl: 'app/views/vendas/produtosList.html',
+                size: 'lg',
+                resolve: {
+                    vendaId: function () { return vendaId; },
+                    total: function () { return $scope.totalVendas },
+                    deps: [
+                        '$ocLazyLoad',
+                        function ($ocLazyLoad) {
+                            return $ocLazyLoad.load(['app/controllers/vendas/vendasProdutosCtrl.js', 'app/factory/fornecedoresData.js', 'app/factory/armazemData.js', 'app/factory/estoqueData.js']);
+                        }
+                    ]
+                },
+                controller: 'vendasProdutosCtrl as vm'
+            });
+            vm.modalInstance.result.then(function (data) {
+            }, function () {
+                vendasData.searchVendas($scope.search).then(function (result) {
+                    vm.vendas = result.data;
+                });
+            });
+        }
+
         $scope.formEdit = {
 
             submit: function (form, venda) {
@@ -204,10 +235,32 @@
             $scope.tableParams.reload();
         }
 
+        $scope.clearBaixa = function () {
+            $scope.baixa = {};
+        }
+
+        $scope.baixaVenda = function (venda) {
+            venda.DataPagamento = $scope.baixa.DataPagamento;
+            venda.TipoPagamentoId = $scope.baixa.TipoPagamentoId;
+            vendasData.edit(venda).then(function() {
+                toaster.pop('success', 'Venda baixada com sucesso!', '');
+                $scope.baixa = {};
+                $scope.baixaId = -1;
+                vendasData.searchVendas($scope.search).then(function (result) {
+                    vm.vendas = result.data;
+                });
+            });            
+        }
+
         $scope.editId = -1;
+        $scope.baixaId = -1;
 
         $scope.setEditId = function (pid) {
             $scope.editId = pid;
+        };
+
+        $scope.setBaixaId = function (pid) {
+            $scope.baixaId = pid;
         };
 
         $scope.opened = [];

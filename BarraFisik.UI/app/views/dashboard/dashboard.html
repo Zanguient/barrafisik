@@ -118,30 +118,30 @@
                             </div>
                             <table class="table margin-bottom-0">
                                 <thead>
-                                <tr>
-                                    <th>Fornecedor</th>
-                                    <th>Cat.</th>
-                                    <th>SubCat.</th>
-                                    <th>Dt. Venc.</th>
-                                    <th>Valor</th>
-                                    <th>Situação</th>
-                                </tr>
+                                    <tr>
+                                        <th>Fornecedor</th>
+                                        <th>Cat.</th>
+                                        <th>SubCat.</th>
+                                        <th>Dt. Venc.</th>
+                                        <th>Valor</th>
+                                        <th>Situação</th>
+                                    </tr>
                                 </thead>
                                 <tbody>
-                                <tr ng-repeat="d in despesas | filter: {Situacao: 'Pendente'}">
-                                    <td>{{d.Fornecedores.Nome}}</td> 
-                                    <td>{{d.CategoriaFinanceira.Categoria}}</td>
-                                    <td>{{d.SubCategoriaFinanceira.SubCategoria}}</td>
-                                    <td>{{d.DataVencimento | date:'dd/MM/yyyy'}}</td>
-                                    <td><span class="text-danger">{{d.ValorTotal | currency}} </span></td>
-                                    <td>{{d.Situacao}}</td>
-                                </tr>
+                                    <tr ng-repeat="d in despesas | filter: {Situacao: 'Pendente'}">
+                                        <td>{{d.Fornecedores.Nome}}</td>
+                                        <td>{{d.CategoriaFinanceira.Categoria}}</td>
+                                        <td>{{d.SubCategoriaFinanceira.SubCategoria}}</td>
+                                        <td>{{d.DataVencimento | date:'dd/MM/yyyy'}}</td>
+                                        <td><span class="text-danger">{{d.ValorTotal | currency}} </span></td>
+                                        <td>{{d.Situacao}}</td>
+                                    </tr>
                                 </tbody>
                                 <tfoot>
-                                <tr>
-                                    <td colspan="4"></td>
-                                    <td colspan="2" class="text-right"><a ng-click="verDespesas()">Todas as Despesas</a></td>
-                                </tr>
+                                    <tr>
+                                        <td colspan="4"></td>
+                                        <td colspan="2" class="text-right"><a ng-click="verDespesas()">Todas as Despesas</a></td>
+                                    </tr>
                                 </tfoot>
                             </table>
                         </div>
@@ -178,15 +178,15 @@
                             </div>
                             <table class="table margin-bottom-0">
                                 <thead>
-                                <tr>
-                                    <th>Cliente</th>
-                                    <th>Func.</th>
-                                    <th>Cat</th>
-                                    <th>SubCat.</th>
-                                    <th>Dt. Venc</th>
-                                    <th>Valor</th>
-                                    <th>Situação</th>
-                                </tr>
+                                    <tr>
+                                        <th>Cliente</th>
+                                        <th>Func.</th>
+                                        <th>Cat</th>
+                                        <th>SubCat.</th>
+                                        <th>Dt. Venc</th>
+                                        <th>Valor</th>
+                                        <th>Situação</th>
+                                    </tr>
                                 </thead>
                                 <tbody>
                                     <tr ng-repeat="d in receitas | filter: {Situacao: 'Pendente'}">
@@ -230,90 +230,172 @@
                 </div>
             </div>
         </div>
+        <!-- Vendas Pendentes -->
+        <div class="container-fluid container-fullw bg-white" ng-controller="vendasPendentesCtrl as vm">
+            <div class="row">
+                <div class="col-sm-5">
+                    <div class="panel panel-white no-radius">
+
+                        <div class="panel-heading border-bottom">
+                            <div class="col-md-6">
+                                <h4 class="panel-title">Vendas </h4>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="pull-right">
+                                    <form role="form" class="form-inline">
+                                        <div class="form-group">
+                                            <input class="form input input-sm " type="number" id="ano" min="1900" max="9999" step="1" ng-model="anoReferencia" />
+                                        </div>
+                                        <button ng-click="getVendasAnuais()" class="btn">Filtrar</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="panel-body">
+                            <canvas class="tc-chart" tc-chartjs-bar chart-options="options" chart-data="data" chart-legend="chart2"></canvas>
+                            <div tc-chartjs-legend chart-legend="chart2" class="inline pull-left legend-xs"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-7">
+                    <div class="panel panel-white no-radius">
+                        <div class="panel-body">
+                            <div class="partition-light-grey padding-15 text-center margin-bottom-20">
+                                <div class="col-md-8">
+                                    <h4 class="no-margin">Vendas Pendentes</h4>
+                                    <span class="text-light">Vendas pendentes com vencimento neste mês</span>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="pull-right">
+                                        <form role="form" class="form-inline">
+                                            <div class="form-group">
+                                                <input class="form input input-sm" type="number" min="1" max="12" id="mes" step="1" ng-model="mesAtual" />
+                                            </div> /
+                                            <div class="form-group">
+                                                <input class="form input input-sm " type="number" id="ano" min="1900" max="9999" step="1" ng-model="anoAtual" />
+                                            </div>
+                                            <button ng-click="getPendentes()" class="btn">Filtrar</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <table class="table margin-bottom-0">
+                                <thead>
+                                    <tr>
+                                        <th>Comprador</th>
+                                        <th>Dt. Venda</th>
+                                        <th>Dt. Venc.</th>
+                                        <th>Valor</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody ng-repeat="v in vm.vendas ">
+                                    <tr id="tr{{v.VendaId}}" ng-class-odd="'odd'" ng-class-even="'even'">
+                                        <td>
+                                            <span ng-show="v.ClienteId != null" class="text-green">(C) {{v.Cliente.Nome}} </span>
+                                            <span ng-show="v.Descricao != null" class="text-green">(O) {{v.Descricao}}</span>
+                                            <span ng-show="v.FuncionarioId != null" class="text-info">(F) {{v.Funcionarios.Nome}} </span>
+                                        </td>
+                                        <td>{{v.DataVenda | date:'dd/MM/yyyy'}}</td>
+                                        <td>{{v.DataVencimento | date:'dd/MM/yyyy'}}</td>
+                                        <td><span class="text-danger">{{v.ValorTotal | currency}} </span></td>
+                                        <td><a ng-click="setBaixaId(v.VendaId)" ng-show="v.Receitas.Situacao == 'Pendente'" class="btn btn-xs" tooltip-placement="top" tooltip="Baixar Venda" id="baixaRowBtn{{v.VendaId}}"><i class="fa fa-check-circle"></i></a></td>
+                                    </tr>
+                                    <tr ng-show="baixaId===v.VendaId" ng-if="baixaId===v.VendaId">
+                                        <td colspan="10" style="text-align: right">
+                                            Tipo Pagamento:
+                                            <select name="TiposPag" ng-model="baixa.TipoPagamentoId" class="text-bold">
+                                                <option value="">Selecione... </option>
+                                                <option ng-repeat="t in tiposPagamento" value="{{t.TipoPagamentoId}}">{{t.Sigla}} - {{t.Descricao}}</option>
+                                            </select>
+                                            |
+                                            Data Pagamento:
+                                            <span class="symbol required"></span>
+                                            <input type="date" ng-model="baixa.DataPagamento" />
+                                            <button type="button" ng-click="baixaVenda(v)" class="btn btn-success btn-small" ng-disabled="baixa.DataPagamento == undefined || baixa.TipoPagamentoId == null" tooltip-placement="top" tooltip="Pagar"><i class="fa fa-check-circle"></i> </button>
+                                            <button type="button" ng-click="setBaixaId(-1); clearBaixa()" class="btn btn-grey btn-small" tooltip-placement="top" tooltip="Cancelar"><i class="fa fa-times"></i> </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="3"><span class="text-dark text-small">(C) Cliente | (O) Outro | (F) Funcionário</span></td>
+                                        <td colspan="2" class="text-right"><a ng-click="verVendas()">Todas as Vendas</a></td>
+                                    </tr>
+
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
     </div>
+
     <!-- Usuário sem permissão de admin -->
     <div class="container-fluid container-fullw" ng-if="!userInfo.isAdmin">
         <h3>Bem Vindo, {{userInfo.nome}}</h3>
-    </div>
-</div>
-
-<!-- Vendas Pendentes -->
-<div class="container-fluid container-fullw bg-white" ng-controller="vendasPendentesCtrl as vm">
-    <div class="row">
-        <div class="col-sm-5">
-            <div class="panel panel-white no-radius">
-
-                <div class="panel-heading border-bottom">
-                    <div class="col-md-6">
-                        <h4 class="panel-title">Vendas </h4>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="pull-right">
-                            <form role="form" class="form-inline">
-                                <div class="form-group">
-                                    <input class="form input input-sm " type="number" id="ano" min="1900" max="9999" step="1" ng-model="anoReferencia" />
+        <!-- Vendas Pendentes -->
+        <div class="container-fluid container-fullw bg-white" ng-controller="vendasPendentesCtrl as vm">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="panel panel-white no-radius">
+                        <div class="panel-body">
+                            <div class="partition-light-grey padding-15 text-center margin-bottom-20">
+                                <div class="col-md-8">
+                                    <h4 class="no-margin">Vendas Pendentes</h4>
+                                    <span class="text-light">Vendas pendentes com vencimento neste mês</span>
                                 </div>
-                                <button ng-click="getVendasAnuais()" class="btn">Filtrar</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="panel-body">
-                    <canvas class="tc-chart" tc-chartjs-bar chart-options="options" chart-data="data" chart-legend="chart2"></canvas>
-                    <div tc-chartjs-legend chart-legend="chart2" class="inline pull-left legend-xs"></div>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-7">
-            <div class="panel panel-white no-radius">
-                <div class="panel-body">
-                    <div class="partition-light-grey padding-15 text-center margin-bottom-20">
-                        <div class="col-md-8">
-                            <h4 class="no-margin">Vendas Pendentes</h4>
-                            <span class="text-light">Vendas pendentes com vencimento neste mês</span>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="pull-right">
-                                <form role="form" class="form-inline">
-                                    <div class="form-group">
-                                        <input class="form input input-sm" type="number" min="1" max="12" id="mes" step="1" ng-model="mesAtual"/>
-                                    </div> /
-                                    <div class="form-group">
-                                        <input class="form input input-sm " type="number" id="ano" min="1900" max="9999" step="1" ng-model="anoAtual"/>
+                                <div class="col-md-4">
+                                    <div class="pull-right">
+                                        <form role="form" class="form-inline">
+                                            <div class="form-group">
+                                                <input class="form input input-sm" type="number" min="1" max="12" id="mes" step="1" ng-model="mesAtual" />
+                                            </div> /
+                                            <div class="form-group">
+                                                <input class="form input input-sm " type="number" id="ano" min="1900" max="9999" step="1" ng-model="anoAtual" />
+                                            </div>
+                                            <button ng-click="getPendentes()" class="btn">Filtrar</button>
+                                        </form>
                                     </div>
-                                    <button ng-click="getPendentes()" class="btn">Filtrar</button>
-                                </form>
+                                </div>
                             </div>
+                            <table class="table margin-bottom-0">
+                                <thead>
+                                    <tr>
+                                        <th>Comprador</th>
+                                        <th>Dt. Venda</th>
+                                        <th>Dt. Venc.</th>
+                                        <th>Valor</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="v in vm.vendas ">
+                                        <td>
+                                            <span ng-show="v.ClienteId != null" class="text-green">(C) {{v.Cliente.Nome}} </span>
+                                            <span ng-show="v.Descricao != null" class="text-green">(O) {{v.Descricao}}</span>
+                                            <span ng-show="v.FuncionarioId != null" class="text-info">(F) {{v.Funcionarios.Nome}} </span>
+                                        </td>
+                                        <td>{{v.DataVenda | date:'dd/MM/yyyy'}}</td>
+                                        <td>{{v.DataVencimento | date:'dd/MM/yyyy'}}</td>
+                                        <td><span class="text-danger">{{v.ValorTotal | currency}} </span></td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="3"><span class="text-dark text-small">(C) Cliente | (O) Outro | (F) Funcionário</span></td>
+                                        <td colspan="2" class="text-right"><a ng-click="verVendas()">Todas as Vendas</a></td>
+                                    </tr>
+                                </tfoot>
+                            </table>
                         </div>
                     </div>
-                    <table class="table margin-bottom-0">
-                        <thead>
-                        <tr>
-                            <th>Cliente</th>
-                            <th>Dt. Venda</th>
-                            <th>Dt. Venc.</th>
-                            <th>Valor</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr ng-repeat="v in vm.vendas ">
-                            <td> <span ng-show="v.ClienteId != null">{{v.Cliente.Nome}}</span><span ng-show="v.Descricao != null">{{v.Descricao}}</span></td>
-                            <td>{{v.DataVenda | date:'dd/MM/yyyy'}}</td>
-                            <td>{{v.DataVencimento | date:'dd/MM/yyyy'}}</td>
-                            <td><span class="text-danger">{{v.ValorTotal | currency}} </span></td>
-                        </tr>
-                        </tbody>
-                        <tfoot>
-                            <tr>
-                                <td colspan="3"></td>
-                                <td colspan="2" class="text-right"><a ng-click="verVendas()">Todas as Vendas</a></td>
-                            </tr>
-                        </tfoot>
-                    </table>
                 </div>
+
             </div>
         </div>
-
     </div>
 </div>
+

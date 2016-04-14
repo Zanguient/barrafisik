@@ -30,7 +30,11 @@
             <table ng-table="tableParams" class="table">
                 <tbody ng-repeat="v in $data">
                     <tr id="tr{{v.VendaId}}" ng-class-odd="'odd'" ng-class-even="'even'">
-                        <td class="rowTd" data-title="'Cliente'"><span ng-show="v.ClienteId != null">{{v.Cliente.Nome}}</span><span ng-show="v.Descricao != null">{{v.Descricao}}</span></td>
+                        <td class="rowTd" data-title="'Cliente'">
+                            <span ng-show="v.ClienteId != null">{{v.Cliente.Nome}}</span>
+                            <span ng-show="v.Descricao != null">{{v.Descricao}}</span>
+                        </td>
+                        <td class="rowTd" data-title="'Func.'">{{v.Funcionarios.Nome}}</td>
                         <td class="rowTd" data-title="'Data Venda'">{{v.DataVenda | date:'dd/MM/yyyy'}}</td>
                         <td class="rowTd" data-title="'Data Venc.'">{{v.DataVencimento | date:'dd/MM/yyyy'}}</td>
                         <td class="rowTd" data-title="'Data Pag.'">{{v.DataPagamento | date:'dd/MM/yyyy'}}</td>
@@ -38,20 +42,37 @@
                         <td class="rowTd" data-title="'Situação'">{{v.Receitas.Situacao}}</td>
                         <td class="rowTd" data-title="'Valor Total'"><span class="text-primary">{{v.ValorTotal | currency}}</span></td>
                         <td class="text-right">
-                            <div class="visible-md visible-lg hidden-sm hidden-xs">
-                                <a ng-click="openProdutos(v.VendaId)" class="btn btn-transparent btn-xs tooltips" tooltip-placement="top" tooltip="Produtos"><i class="fa fa-list-ul"></i></a>
+                            <div ng-if="userInfo.isAdmin">
+                                <a ng-click="setBaixaId(v.VendaId)"  ng-show="v.Receitas.Situacao == 'Pendente'" class="btn btn-xs" tooltip-placement="top" tooltip="Baixar Venda" id="baixaRowBtn{{v.VendaId}}"><i class="fa fa-check-circle"></i></a>
+                                <a ng-click="openProdutos(v.VendaId)" ng-if="v.Receitas.Situacao == 'Pendente'" class="btn btn-transparent btn-xs tooltips" tooltip-placement="top" tooltip="Produtos"><i class="fa fa-list-ul"></i></a>
+                                <a ng-click="showProdutos(v.VendaId)" ng-if="v.Receitas.Situacao != 'Pendente'" class="btn btn-transparent btn-xs tooltips" tooltip-placement="top" tooltip="Produtos"><i class="fa fa-list-ul"></i></a>
                                 <a ng-click="setEditId(v.VendaId)" class="btn btn-xs" tooltip-placement="top" tooltip="Editar" id="editRowBtn{{v.VendaId}}"><i class="fa fa-pencil"></i></a>
                                 <a ng-click="delete(v.VendaId)" class="btn btn-transparent btn-xs tooltips" tooltip-placement="top" tooltip="Excluir"><i class="fa fa-times"></i></a>
                             </div>
                         </td>
                     </tr>
                     <tr ng-show="editId===v.VendaId" ng-if="editId===v.VendaId">
-                        <td colspan="8" ng-include src="'app/views/vendas/edit.html'"></td>
+                        <td colspan="9" ng-include src="'app/views/vendas/edit.html'"></td>
+                    </tr>
+                    <tr ng-show="baixaId===v.VendaId" ng-if="baixaId===v.VendaId">
+                        <td colspan="9" style="text-align: right">
+                            Tipo Pagamento:
+                            <select name="TiposPag" ng-model="baixa.TipoPagamentoId" class="text-bold">
+                                <option value="">Selecione... </option>
+                                <option ng-repeat="t in tiposPagamento" value="{{t.TipoPagamentoId}}">{{t.Sigla}} - {{t.Descricao}}</option>
+                            </select>
+                            |
+                            Data Pagamento:
+                            <span class="symbol required"></span>
+                            <input type="date" ng-model="baixa.DataPagamento" />
+                            <button type="button" ng-click="baixaVenda(v)" class="btn btn-success btn-small" ng-disabled="baixa.DataPagamento == undefined || baixa.TipoPagamentoId == null" tooltip-placement="top" tooltip="Pagar"><i class="fa fa-check-circle"></i> </button>
+                            <button type="button" ng-click="setBaixaId(-1); clearBaixa()" class="btn btn-grey btn-small" tooltip-placement="top" tooltip="Cancelar"><i class="fa fa-times"></i> </button>
+                        </td>
                     </tr>
                 </tbody>
                 <tfoot>
                     <tr>
-                        <td colspan="6"></td>
+                        <td colspan="7"></td>
                         <td colspan="2" class="text-bold">
                             <div class="text-primary">Total:{{totalVendas | currency:' R$ '}}</div>
                         </td>

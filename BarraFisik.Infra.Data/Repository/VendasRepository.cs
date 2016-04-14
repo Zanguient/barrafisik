@@ -17,6 +17,7 @@ namespace BarraFisik.Infra.Data.Repository
                 DbSet.Include("Cliente")
                     .Include("TipoPagamento")
                     .Include("Receitas")
+                    .Include("Funcionarios")
                     .Where(c => c.DataVenda.Month == today.Month)
                     .Where(c => c.DataVenda.Year == today.Year)
                     .ToList();           
@@ -26,6 +27,8 @@ namespace BarraFisik.Infra.Data.Repository
         {
             return
                 DbSet.Include("Cliente")
+                    .Include("Funcionarios")
+                    .Include("Receitas")
                     .Where(c => c.Receitas.Situacao == "Pendente")
                     .Where(c => c.DataVencimento.Month == mes)
                     .Where(c => c.DataVencimento.Year == ano)

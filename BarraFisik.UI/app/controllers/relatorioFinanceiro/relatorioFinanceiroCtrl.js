@@ -3,7 +3,7 @@
 
     app.controller('relatorioFinanceiroCtrl', relatorioFinanceiroCtrl);
 
-    function relatorioFinanceiroCtrl($scope, ngTableParams, relatorioFinanceiroData, categoriaFinanceiraData, $filter, subCategoriaData) {
+    function relatorioFinanceiroCtrl($scope, ngTableParams, relatorioFinanceiroData, categoriaFinanceiraData, $filter, subCategoriaData, tipoPagamentoData) {
         var vm = this;
         $scope.search = false;
         $scope.filter = {};
@@ -41,6 +41,10 @@
         $scope.filterCategorias = function (tipo) {
             getCategorias(tipo);
         }
+
+        tipoPagamentoData.getTipos().then(function(result) {
+            vm.tipopagamento = result.data;
+        });
 
         function getCategorias(tipo) {
             if (tipo === 'Todos') {
@@ -83,7 +87,10 @@
                     } else {
                         $scope.totalDespesas = $scope.totalDespesas + value.ValorTotal;
                     }
-                        
+
+                    //if (value.TipoPagamento === "Dinheiro")
+                    //    alert("Dinheiro");
+
                 });
                 $scope.total = result.data.length;
             });

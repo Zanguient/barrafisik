@@ -37,7 +37,7 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
     }).state('app.dashboard', {
         url: "/dashboard",
         templateUrl: "app/views/dashboard/dashboard.html",
-        resolve: loadSequence('jquery-sparkline', 'dashboardCtrl', 'clienteData', 'ngTable', 'clienteFilters', 'despesasData', 'vendasData', 'receitasData'),
+        resolve: loadSequence('jquery-sparkline', 'dashboardCtrl', 'clienteData', 'ngTable', 'clienteFilters', 'despesasData', 'vendasData', 'receitasData', 'tipoPagamentoData'),
         title: 'Dashboard',
         ncyBreadcrumb: {
             label: 'Dashboard'
@@ -97,7 +97,7 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
             url: '/perfil/{id}',
             templateUrl: "app/views/cliente/clientePerfil.html",
             title: 'Perfil Cliente',
-            resolve: loadSequence('clientePerfilCtrl', 'ngTable', 'clienteData', 'horarioData', 'clienteFilters', 'receitasData', 'vendasData'),
+            resolve: loadSequence('clientePerfilCtrl', 'ngTable', 'clienteData', 'horarioData', 'clienteFilters', 'receitasData', 'vendasData', 'tipoPagamentoData'),
             ncyBreadcrumb: {
                 label: 'Perfil do Cliente'
             },
@@ -153,7 +153,7 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         .state('app.vendas', {
             url: "/vendas",
             templateUrl: "app/views/vendas/vendas.html",
-            resolve: loadSequence('vendasCtrl', 'vendasData', 'vendasProdutosData', 'tipoPagamentoData', 'clienteData', 'ngTable', 'ui.mask'),
+            resolve: loadSequence('vendasCtrl', 'vendasData', 'vendasProdutosData', 'tipoPagamentoData', 'clienteData', 'ngTable', 'funcionariosData', 'ui.mask', 'receitasData'),
             title: 'Vendas',
             ncyBreadcrumb: {
                 label: 'Vendas'
@@ -230,7 +230,7 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
             templateUrl: "app/views/relatorioFinanceiro/relatorioFinanceiro.html",
             title: 'Relatorio Financeiro - Geral',
             icon: 'ti-layout-media-left-alt',
-            resolve: loadSequence('relatorioFinanceiroCtrl', 'ngTable', 'relatorioFinanceiroData', 'categoriaFinanceiraData', 'subCategoriaData'),
+            resolve: loadSequence('relatorioFinanceiroCtrl', 'ngTable', 'relatorioFinanceiroData', 'categoriaFinanceiraData', 'subCategoriaData', 'tipoPagamentoData'),
             controller: "relatorioFinanceiroCtrl as vm",
             ncyBreadcrumb: {
                 label: 'Relatorio Financeiro'

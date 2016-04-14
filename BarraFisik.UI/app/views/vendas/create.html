@@ -21,17 +21,24 @@
                                 <input type="text" placeholder="Descricao" class="form-control input-sm" ng-model="venda.Descricao">
                             </div>
                         </td>
-                        <td>Aramzém: <span class="symbol required"></span></td>
-                        <td colspan="2">
+                        <td>Funcionário: </td>
+                        <td colspan="3">
+                            <select name="Funcionaio" ng-model="venda.FuncionarioId" class="text-bold" style="min-width: 150px;">
+                                <option value=""><b>Selecione...</b></option>
+                                <option ng-repeat="f in funcionarios | orderBy: 'Descricao'" value="{{f.FuncionarioId}}">{{f.Nome}}</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Armazém: <span class="symbol required"></span></td>
+                        <td>
                             <select name="Armazem" ng-model="venda.ArmazemId" class="text-bold" style="min-width: 150px;" ng-change="carregarEstoques()">
                                 <option value=""><b>Selecione...</b></option>
                                 <option ng-repeat="a in armazem | orderBy: 'Descricao'" value="{{a.ArmazemId}}">{{a.Descricao}}</option>
                             </select>
                         </td>
-                    </tr>
-                    <tr>
                         <td>Produto: </td>
-                        <td colspan="2">
+                        <td>
                             <select name="Produtos" ng-model="produto.EstoqueId" ng-disabled="venda.ArmazemId == null || estoques.length == 0" ng-change="carregarPreco(this)" class="text-bold">
                                 <option value=""><b>Selecione...</b></option>
                                 <option ng-repeat="e in estoques | orderBy: 'Produtos.Nome'" value="{{e.EstoqueId}}">{{e.Produtos.Nome}}</option>
@@ -39,10 +46,10 @@
                         </td>
                         <td>Qtde.: </td>
                         <td>
-                            <input class="form-control input-sm width-100" type="number" min="1" max="{{estoque.Quantidade}}" name="Quantidade" ng-model="produto.Quantidade">
+                            <input class="form-control input-sm" style="max-width: 50px" type="number" min="1" max="{{estoque.Quantidade}}" name="Quantidade" ng-model="produto.Quantidade">                            
                             <span class="error text-small block" ng-if="Form.Quantidade.$dirty && Form.Quantidade.$error.max">Estoque Insuficiente</span>
                         </td>
-                        <td><input type="button" class="btn btn-primary btn-o" value="Add" ng-click="add(produto)" ng-disabled="produto.Quantidade == null || produto.EstoqueId == null"/></td>
+                        <td><input type="button" class="btn btn-primary btn-o" value="Add" ng-click="add(produto)" ng-disabled="produto.Quantidade == null || produto.EstoqueId == null" /></td>
                     </tr>
                     <tr ng-if="produto.EstoqueId != null">
                         <td>Estoque</td>

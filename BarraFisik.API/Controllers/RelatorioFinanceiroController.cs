@@ -40,6 +40,7 @@ namespace BarraFisik.API.Controllers
             tsc.SetResult(response);
             return await tsc.Task;
         }
+         
 
         [HttpPost]
         [Route("relatoriofinanceiro/receitas")]

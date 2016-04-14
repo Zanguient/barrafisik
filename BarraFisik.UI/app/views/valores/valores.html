@@ -35,7 +35,7 @@
                             <td class="rowTd" data-title="'Horário Início'" sortable="'HorarioInicio'">{{p.HorarioInicio}}h</td>
                             <td class="rowTd" data-title="'Horário Fim'" sortable="'HorarioFim'">{{p.HorarioFim}}h</td>                            
                             <td class="text-right">
-                                <div class="visible-md visible-lg hidden-sm hidden-xs">
+                                <div ng-if="userInfo.isAdmin">
                                     <a ng-click="setEditId(p.ValoresId)" class="btn btn-transparent btn-xs" tooltip-placement="top" tooltip="Editar" id="editRowBtn{{p.ValoresId}}"><i class="fa fa-pencil"></i></a>
                                     <a ng-click="delete(p.ValoresId)" class="btn btn-transparent btn-xs tooltips" tooltip-placement="top" tooltip="Excluir"><i class="fa fa-times"></i></a>                                    
                                 </div>

@@ -214,6 +214,7 @@
     <Content Include="app\views\vendas\addProduto.html" />
     <Content Include="app\views\vendas\edit.html" />
     <Content Include="app\views\vendas\partial\searchVendas.html" />
+    <Content Include="app\views\vendas\produtosList.html" />
     <Content Include="app\views\vendas\produtos.html" />
     <Content Include="app\views\vendas\create.html" />
     <Content Include="app\views\vendas\vendas.html" />
