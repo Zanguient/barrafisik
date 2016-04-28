@@ -9,5 +9,6 @@ namespace BarraFisik.Domain.Interfaces.Services
         IEnumerable<RelatorioFinanceiro> GetRelatorioReceitas(RelatorioFinanceiroSearch filters);
         IEnumerable<RelatorioFinanceiro> GetRelatorioDespesas(RelatorioFinanceiroSearch filters);
         IEnumerable<RelatorioFinanceiroTotalMeses> GetTotalPorMes();
+        decimal GetTotalByTipoPagamento(int idTipoPagamento);
     }
 }

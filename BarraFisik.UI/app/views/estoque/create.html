@@ -1,11 +1,11 @@
 ﻿<div class="modal-header">
     <h3 class="modal-title">Novo Estoque</h3>
 </div>
-<div class="modal-body">
-    <ul>
-        <li ng-repeat="error in vm.errors" class="text-danger">{{error}}</li>
-    </ul>
+<div class="modal-body">    
     <form name="Form" id="form" novalidate ng-submit="form.submit(Form, estoque)">
+        <ul>
+            <li ng-repeat="error in vm.errors" class="text-danger">{{error}}</li>
+        </ul>
         <div class="checkbox clip-check check-primary check-md">
         </div>
         <table class="table no-bg">

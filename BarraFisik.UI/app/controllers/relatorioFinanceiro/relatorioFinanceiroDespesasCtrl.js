@@ -67,9 +67,10 @@
             $scope.search = true;
             $scope.$emit('LOAD');
             relatorioFinanceiroData.getRelatorioDespesas(filter).then(function (result) {
-                vm.relatorioFinanceiroReceitas = result.data;
+                vm.relatorioFinanceiroDespesas = result.data.ListRelatorio;
+                vm.total = result.data.TotalByTipoPagamento;
 
-                angular.forEach(result.data, function (value, key) {
+                angular.forEach(result.data.ListRelatorio, function (value, key) {
                     $scope.totalReceitas = $scope.totalReceitas + value.ValorTotal;
                 });
                 $scope.total = result.data.length;

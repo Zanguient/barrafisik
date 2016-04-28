@@ -4,11 +4,27 @@ using BarraFisik.Domain.Interfaces.Repository.ReadOnly;
 using BarraFisik.Domain.ValueObjects;
 using Dapper;
 using System;
+using System.CodeDom;
+using System.Linq;
 
 namespace BarraFisik.Infra.Data.Repository.ReadOnly
 {
     public class RelatorioFinanceiroRepositoryReadOnly : RepositoryBaseReadOnly, IRelatorioFinanceiroRepositoryReadOnly
     {
+        public decimal GetTotalByTipoPagamento(int idTipoPagamento)
+        {
+            using (var cn = Connection)
+            {
+                cn.Open();
+                var sql = @"SELECT (SELECT ISNULL(SUM(ValorTotal), 0.0) FROM Receitas where TipoPagamentoId = " + idTipoPagamento + ")" +
+                            "+ (SELECT ISNULL(SUM(ValorTotal), 0.0) from Despesas where TipoPagamentoId =" + idTipoPagamento + ") as Total";
+                var total = cn.Query<decimal>(sql).FirstOrDefault();
+                cn.Close();
+
+                return total;
+            }
+        }
+
         public IEnumerable<RelatorioFinanceiro> GetRelatorio(RelatorioFinanceiroSearch filters)
         {
             using (var cn = Connection)

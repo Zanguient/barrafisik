@@ -48,6 +48,11 @@ namespace BarraFisik.Application.App
                     _relatorioFinanceiroService.GetTotalPorMes());
         }
 
+        public decimal GetTotalByTipoPagamento(int idTipoPagamento)
+        {
+            return _relatorioFinanceiroService.GetTotalByTipoPagamento(idTipoPagamento);
+        }
+
         public void Dispose()
         {
             _relatorioFinanceiroService.Dispose();

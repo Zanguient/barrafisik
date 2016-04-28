@@ -137,7 +137,11 @@
                             </tbody>
                             <tfoot>
                                 <tr>
-                                    <td colspan="5"></td>
+                                    <td colspan="5">
+                                        <div ng-repeat="(key, data) in vm.total">
+                                            <b class="text-info">{{key}}: </b> <b class="text-azure">{{data | currency}}</b>
+                                        </div>
+                                    </td>
                                     <td class="text-right"><b>TOTAL: </b></td>
                                     <td class="text-right">
                                         <b ng-show="totalReceitas > 0" class="text-primary">{{totalReceitas | currency}}</b>

@@ -7,6 +7,7 @@
         var vm = this;
         $scope.search = false;
         $scope.filter = {};
+        vm.total = {};
 
         var filterDefault = {
             Tipo: undefined,
@@ -79,9 +80,9 @@
             $scope.search = true;
             $scope.$emit('LOAD');
             relatorioFinanceiroData.getRelatorio(filter).then(function(result) {
-                vm.relatorioFinanceiro = result.data;
-
-                angular.forEach(result.data, function (value, key) {
+                vm.relatorioFinanceiro = result.data.ListRelatorio;
+                vm.total = result.data.TotalByTipoPagamento;
+                angular.forEach(result.data.ListRelatorio, function (value, key) {
                     if (value.Tipo === "Receitas") {
                         $scope.totalReceitas = $scope.totalReceitas + value.ValorTotal;
                     } else {

@@ -39,5 +39,10 @@ namespace BarraFisik.Domain.Services
         {
             return _relatorioFinanceiroRepositoryReadOnly.GetTotalPorMes();
         }
+
+        public decimal GetTotalByTipoPagamento(int idTipoPagamento)
+        {
+            return _relatorioFinanceiroRepositoryReadOnly.GetTotalByTipoPagamento(idTipoPagamento);
+        }
     }
 }

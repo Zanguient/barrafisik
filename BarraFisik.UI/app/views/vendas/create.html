@@ -1,6 +1,9 @@
 ﻿<div class="modal-header">
     <h3 class="modal-title">Nova Venda</h3>
 </div>
+<ul>
+    <li ng-repeat="error in vm.errors" class="text-danger">{{error}}</li>
+</ul>
 <form name="Form" id="form" novalidate ng-submit="form.submit(Form, venda)">
     <div class="modal-body col-md-12">
         <div class="row">

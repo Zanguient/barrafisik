@@ -117,8 +117,10 @@
                         }).error(function (error) {
                             var errors = [];
                             for (var key in error.ModelState) {
-                                for (var i = 0; i < error.ModelState[key].length; i++) {
-                                    errors.push(error.ModelState[key][i]);
+                                if (error.ModelState.hasOwnProperty(key)) {
+                                    for (var i = 0; i < error.ModelState[key].length; i++) {
+                                        errors.push(error.ModelState[key][i]);
+                                    }
                                 }
                             }
                             vm.errors = errors;
