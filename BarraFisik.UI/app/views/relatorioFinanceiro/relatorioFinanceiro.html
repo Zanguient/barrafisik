@@ -118,8 +118,8 @@
                                     <i ng-class="{'fa fa-chevron-up':isSortUp('ValorTotal'),'fa fa-chevron-down':isSortDown('ValorTotal')}"></i>
                                 </th>                                
                             </thead>
-                            <tbody>
-                                <tr ng-class-odd="'odd'" ng-class-even="'even'" ng-repeat="rf in vm.relatorioFinanceiro  | orderBy:sortField:reverse">
+                            <tbody ng-class-odd="'odd'" ng-class-even="'even'" ng-repeat="rf in vm.relatorioFinanceiro | orderBy:sortField:reverse">
+                                <tr>
                                     <td class="rowTd"><span ng-class="{ 'hidden-print' : !vm.printTipo}">{{rf.Tipo}}</span></td>
                                     <td class="rowTd"><span ng-class="{ 'hidden-print' : !vm.printCategoria}">{{rf.Categoria}}</span></td>
                                     <td class="rowTd"><span ng-class="{ 'hidden-print' : !vm.printCategoria}">{{rf.SubCategoria}}</span></td>

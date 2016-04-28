@@ -87,10 +87,6 @@
                     } else {
                         $scope.totalDespesas = $scope.totalDespesas + value.ValorTotal;
                     }
-
-                    //if (value.TipoPagamento === "Dinheiro")
-                    //    alert("Dinheiro");
-
                 });
                 $scope.total = result.data.length;
             });

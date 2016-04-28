@@ -72,7 +72,7 @@ namespace BarraFisik.Infra.Data.Repository.ReadOnly
 	                            "       d.Situacao,                                                                                   "+
 	                            "       cf.Categoria,                                                                                 "+
 	                            "       sc.SubCategoria,                                                                              "+
-                                "       tp.Descricao as TipoPagamento,                                                                                 "+
+                                "       tp.Descricao as TipoPagamento,                                                                "+
                                 "       d.Observacao                                                                                  "+
                                 "   from Despesas d                                                                                   "+
                                 "   left join SubCategoriaFinanceira sc on d.SubCategoriaFinanceiraId = sc.SubCategoriaFinanceiraId   "+
